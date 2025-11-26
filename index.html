@@ -3,34 +3,42 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>iTechie</title>
+  <meta name="description" content="Message Mate — iMessage portal">
+  <title>iTechie — iMessage</title>
   <style>
-    :root {
-      color-scheme: light dark;
-    }
+    :root{--bg:#f2f2f7;--card:#ffffff;--muted:#6b6b6b;--accent:#0a84ff}
+    @media (prefers-color-scheme:dark){:root{--bg:#000;--card:#0a0a0a;--muted:#9b9b9b;--accent:#0a84ff}}
     html,body{height:100%;margin:0}
-    body{
-      display:flex;align-items:center;justify-content:center;
-      background:light-dark(#fff,#000);
-      color:light-dark(#000,#fff);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      text-align:center;padding:2rem
-    }
-    a{color:inherit;text-decoration:underline;font-weight:600}
-    h1{font-size:clamp(2rem,6vw,4rem);margin:0 0 1rem}
-    p{margin:0.4rem 0;font-size:1.1rem}
-    #fact{font-size:0.9rem;opacity:0.8;margin-top:1rem}
+    body{display:grid;place-items:center;background:var(--bg);font-family:-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial;color:var(--muted);padding:24px}
+    .phone{width:360px;max-width:92vw;border-radius:36px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.3));box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:18px}
+    @media (prefers-color-scheme:dark){.phone{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(0,0,0,0.6)}}
+    header{display:flex;align-items:center;gap:12px}
+    .dot{width:6px;height:6px;border-radius:50%;background:#34c759;box-shadow:0 0 6px rgba(52,199,89,0.6)}
+    h1{font-size:18px;color:var(--muted);margin:6px 0 12px;font-weight:600}
+    .card{background:var(--card);border-radius:16px;padding:18px;color:inherit}
+    .title{font-size:16px;margin:0 0 6px;color:inherit}
+    .bubble{display:block;padding:12px;border-radius:14px;background:linear-gradient(180deg,var(--accent),#0b7be6);color:#fff;text-decoration:none;font-weight:600;text-align:center;box-shadow:0 6px 16px rgba(10,132,255,0.28);margin-bottom:12px}
+    .bubble:active{transform:translateY(1px)}
+    .meta{font-size:12px;color:var(--muted)}
+    .meta a{color:inherit;text-decoration:underline}
+    #fact{font-size:12px;opacity:0.9;margin-top:10px}
   </style>
 </head>
 <body>
-  <main>
-    <h1>Find me online</h1>
-    <p><a href="https://x.com/matecurkovic" target="_blank">X: @matecurkovic</a></p>
-    <p><a href="https://instagram.com/matecurkovic" target="_blank">Instagram: @matecurkovic</a></p>
-    <p><a href="https://github.com/curkovic" target="_blank">GitHub: curkovic</a></p>
-    <p><a href="mailto:m@iTechie.eu">m@iTechie.eu</a></p>
-    <p><a href="imessage:m@iTechie.eu">iMessage</a></p>
-    <p id="fact">The venom of the inland taipan, an Australian snake, is potent enough to kill up to 100 fully grown men with a single bite.</p>
-  </main>
+  <div class="phone" role="main">
+    <header>
+      <div class="dot" aria-hidden></div>
+      <div>
+        <h1>iMessage Mate</h1>
+      </div>
+    </header>
+
+    <div class="card" style="margin-top:14px">
+      <p class="title">Mate Ćurković</p>
+      <a class="bubble" href="imessage:m@iTechie.eu">Send iMessage</a>
+      <p class="meta">No iMessage? <a href="mailto:m@iTechie.eu">Email me</a></p>
+      <p id="fact">The venom of the male platypus contains defensins, which are small proteins that can disrupt the cell membranes of other animals.</p>
+    </div>
+  </div>
 </body>
 </html>
