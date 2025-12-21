@@ -50,7 +50,7 @@
         <div id="start-screen" class="text-center space-y-6">
             <div class="bg-white dark:bg-zinc-800 p-10 rounded-[3rem] bubble-shadow border-4 border-pink-200 dark:border-pink-900/30">
                 <h2 class="text-5xl font-bold mb-4 text-pink-500">Ready to Play?</h2>
-                <p class="text-xl opacity-70 mb-8">10 Random Tech Questions</p>
+                <p class="text-xl opacity-70 mb-8">10 Random Questions</p>
                 <button onclick="startQuiz()" class="bg-pink-400 hover:bg-pink-500 text-white text-2xl px-12 py-4 rounded-full font-bold transition-all active-btn bubble-shadow">
                     Start Game!
                 </button>
@@ -100,6 +100,7 @@
 
     <script>
         const QUIZ_DATA = [
+            // original tech
             { q: "What does HTML stand for?", a: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlink Text Mode"], c: 0 },
             { q: "Which is the main language for styling?", a: ["Python", "CSS", "C++", "SASS"], c: 1 },
             { q: "JS stands for?", a: ["JustStyle", "JavaSecure", "JavaScript"], c: 2 },
@@ -111,7 +112,43 @@
             { q: "Which is a NoSQL database?", a: ["MySQL", "PostgreSQL", "MongoDB"], c: 2 },
             { q: "Who created Linux?", a: ["Linus Torvalds", "Bill Gates", "Steve Jobs"], c: 0 },
             { q: "Binary for decimal 5?", a: ["101", "110", "011"], c: 0 },
-            { q: "React is a library for?", a: ["Python", "Java", "JavaScript"], c: 2 }
+            { q: "React is a library for?", a: ["Python", "Java", "JavaScript"], c: 2 },
+
+            // Biology
+            { q: "What is known as the 'Powerhouse of the cell'?", a: ["Nucleus", "Ribosome", "Mitochondria"], c: 2 },
+            { q: "Which pigment gives plants their green color?", a: ["Chlorophyll", "Melanin", "Carotene"], c: 0 },
+            { q: "How many bones are in the adult human body?", a: ["186", "206", "216"], c: 1 },
+            { q: "What is the largest organ in the human body?", a: ["Liver", "Brain", "Skin"], c: 2 },
+            { q: "Human DNA is shaped like a...?", a: ["Double Helix", "Single Strand", "Triple Loop"], c: 0 },
+            { q: "Which blood type is the universal donor?", a: ["A+", "AB-", "O-"], c: 2 },
+            { q: "What part of the brain controls balance?", a: ["Cerebrum", "Cerebellum", "Brainstem"], c: 1 },
+            { q: "How many chambers does the human heart have?", a: ["2", "3", "4"], c: 2 },
+            { q: "What is the primary gas we breathe out?", a: ["Oxygen", "Carbon Dioxide", "Nitrogen"], c: 1 },
+            { q: "Which acid is found in the human stomach?", a: ["Sulfuric", "Citric", "Hydrochloric"], c: 2 },
+
+            // Physics
+            { q: "What is the speed of light approx?", a: ["300,000 km/s", "150,000 km/s", "1,000,000 km/s"], c: 0 },
+            { q: "Who developed the theory of General Relativity?", a: ["Newton", "Einstein", "Hawking"], c: 1 },
+            { q: "What is the unit of electrical resistance?", a: ["Volt", "Ampere", "Ohm"], c: 2 },
+            { q: "What force keeps planets in orbit?", a: ["Magnetism", "Gravity", "Friction"], c: 1 },
+            { q: "Which state of matter has a fixed volume but no fixed shape?", a: ["Solid", "Liquid", "Gas"], c: 1 },
+            { q: "What is the boiling point of water in Celsius?", a: ["90°C", "100°C", "110°C"], c: 1 },
+            { q: "Sound travels fastest through which medium?", a: ["Air", "Water", "Steel"], c: 2 },
+            { q: "What particle has a negative charge?", a: ["Proton", "Neutron", "Electron"], c: 2 },
+            { q: "E=mc² - what does the 'c' stand for?", a: ["Constant", "Speed of Light", "Charge"], c: 1 },
+            { q: "Which color has the shortest wavelength?", a: ["Red", "Green", "Violet"], c: 2 },
+
+            // General Science
+            { q: "What is the chemical symbol for Gold?", a: ["Ag", "Au", "Fe"], c: 1 },
+            { q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Saturn"], c: 1 },
+            { q: "What is the most abundant gas in Earth's atmosphere?", a: ["Oxygen", "Nitrogen", "Argon"], c: 1 },
+            { q: "What is the chemical formula for table salt?", a: ["H2O", "CO2", "NaCl"], c: 2 },
+            { q: "Which layer of the atmosphere contains the Ozone layer?", a: ["Troposphere", "Stratosphere", "Mesosphere"], c: 1 },
+            { q: "Diamond is a solid form of which element?", a: ["Carbon", "Silicon", "Coal"], c: 0 },
+            { q: "What is the center of an atom called?", a: ["Electron", "Nucleus", "Orbit"], c: 1 },
+            { q: "How many planets are in our solar system?", a: ["7", "8", "9"], c: 1 },
+            { q: "What is the pH of pure water?", a: ["5", "7", "9"], c: 1 },
+            { q: "Which scale measures earthquake intensity?", a: ["Richter", "Celsius", "Kelvin"], c: 0 }
         ];
 
         let gameQuestions = [];
@@ -119,6 +156,7 @@
         let score = 0;
 
         function startQuiz() {
+            // Randomly pick 10 questions from the total pool
             gameQuestions = [...QUIZ_DATA].sort(() => 0.5 - Math.random()).slice(0, 10);
             currentIdx = 0;
             score = 0;
