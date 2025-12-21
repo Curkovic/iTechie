@@ -29,7 +29,6 @@
         body { transition: background-color 0.4s, color 0.4s; }
         .bubble-shadow { box-shadow: 0 8px 0 rgba(0,0,0,0.05); }
         .active-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.05); }
-        /* Ensuring feedback colors override dark mode defaults */
         .is-correct { background-color: #4ade80 !important; color: white !important; border-color: #4ade80 !important; }
         .is-wrong { background-color: #f87171 !important; color: white !important; border-color: #f87171 !important; }
     </style>
@@ -68,6 +67,11 @@
             </div>
             
             <div class="bg-white dark:bg-zinc-800 p-8 rounded-[3rem] bubble-shadow border-4 border-pink-100 dark:border-pink-900/20">
+                <!-- Category Tag -->
+                <div id="category-tag" class="inline-block px-4 py-1 rounded-full bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-300 text-sm font-bold mb-4 uppercase tracking-wider">
+                    CATEGORY
+                </div>
+                
                 <h3 id="question-text" class="text-2xl md:text-3xl font-bold mb-8 leading-tight">Question text goes here?</h3>
                 <div id="options-grid" class="grid gap-4">
                     <!-- Options injected here -->
@@ -103,55 +107,55 @@
 
     <script>
         const QUIZ_DATA = [
-            // original tech
-            { q: "What does HTML stand for?", a: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlink Text Mode"], c: 0 },
-            { q: "Which is the main language for styling?", a: ["Python", "CSS", "C++", "SASS"], c: 1 },
-            { q: "JS stands for?", a: ["JustStyle", "JavaSecure", "JavaScript"], c: 2 },
-            { q: "Which company owns Instagram?", a: ["Google", "Meta", "Twitter"], c: 1 },
-            { q: "Default port for HTTPS?", a: ["80", "443", "21"], c: 1 },
-            { q: "First iPhone year?", a: ["2005", "2007", "2009"], c: 1 },
-            { q: "CPU stands for?", a: ["Central Process Unit", "Core Power Unit", "Central Peripheral Unit"], c: 0 },
-            { q: "What is 2 + '2' in JS?", a: ["4", "22", "Error"], c: 1 },
-            { q: "Which is a NoSQL database?", a: ["MySQL", "PostgreSQL", "MongoDB"], c: 2 },
-            { q: "Who created Linux?", a: ["Linus Torvalds", "Bill Gates", "Steve Jobs"], c: 0 },
-            { q: "Binary for decimal 5?", a: ["101", "110", "011"], c: 0 },
-            { q: "React is a library for?", a: ["Python", "Java", "JavaScript"], c: 2 },
+            // Tech
+            { cat: "Technology", q: "What does HTML stand for?", a: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlink Text Mode"], c: 0 },
+            { cat: "Technology", q: "Which is the main language for styling?", a: ["Python", "CSS", "C++", "SASS"], c: 1 },
+            { cat: "Technology", q: "JS stands for?", a: ["JustStyle", "JavaSecure", "JavaScript"], c: 2 },
+            { cat: "Technology", q: "Which company owns Instagram?", a: ["Google", "Meta", "Twitter"], c: 1 },
+            { cat: "Technology", q: "Default port for HTTPS?", a: ["80", "443", "21"], c: 1 },
+            { cat: "Technology", q: "First iPhone year?", a: ["2005", "2007", "2009"], c: 1 },
+            { cat: "Technology", q: "CPU stands for?", a: ["Central Process Unit", "Core Power Unit", "Central Peripheral Unit"], c: 0 },
+            { cat: "Technology", q: "What is 2 + '2' in JS?", a: ["4", "22", "Error"], c: 1 },
+            { cat: "Technology", q: "Which is a NoSQL database?", a: ["MySQL", "PostgreSQL", "MongoDB"], c: 2 },
+            { cat: "Technology", q: "Who created Linux?", a: ["Linus Torvalds", "Bill Gates", "Steve Jobs"], c: 0 },
+            { cat: "Technology", q: "Binary for decimal 5?", a: ["101", "110", "011"], c: 0 },
+            { cat: "Technology", q: "React is a library for?", a: ["Python", "Java", "JavaScript"], c: 2 },
 
             // Biology
-            { q: "What is known as the 'Powerhouse of the cell'?", a: ["Nucleus", "Ribosome", "Mitochondria"], c: 2 },
-            { q: "Which pigment gives plants their green color?", a: ["Chlorophyll", "Melanin", "Carotene"], c: 0 },
-            { q: "How many bones are in the adult human body?", a: ["186", "206", "216"], c: 1 },
-            { q: "What is the largest organ in the human body?", a: ["Liver", "Brain", "Skin"], c: 2 },
-            { q: "Human DNA is shaped like a...?", a: ["Double Helix", "Single Strand", "Triple Loop"], c: 0 },
-            { q: "Which blood type is the universal donor?", a: ["A+", "AB-", "O-"], c: 2 },
-            { q: "What part of the brain controls balance?", a: ["Cerebrum", "Cerebellum", "Brainstem"], c: 1 },
-            { q: "How many chambers does the human heart have?", a: ["2", "3", "4"], c: 2 },
-            { q: "What is the primary gas we breathe out?", a: ["Oxygen", "Carbon Dioxide", "Nitrogen"], c: 1 },
-            { q: "Which acid is found in the human stomach?", a: ["Sulfuric", "Citric", "Hydrochloric"], c: 2 },
+            { cat: "Biology", q: "What is known as the 'Powerhouse of the cell'?", a: ["Nucleus", "Ribosome", "Mitochondria"], c: 2 },
+            { cat: "Biology", q: "Which pigment gives plants their green color?", a: ["Chlorophyll", "Melanin", "Carotene"], c: 0 },
+            { cat: "Biology", q: "How many bones are in the adult human body?", a: ["186", "206", "216"], c: 1 },
+            { cat: "Biology", q: "What is the largest organ in the human body?", a: ["Liver", "Brain", "Skin"], c: 2 },
+            { cat: "Biology", q: "Human DNA is shaped like a...?", a: ["Double Helix", "Single Strand", "Triple Loop"], c: 0 },
+            { cat: "Biology", q: "Which blood type is the universal donor?", a: ["A+", "AB-", "O-"], c: 2 },
+            { cat: "Biology", q: "What part of the brain controls balance?", a: ["Cerebrum", "Cerebellum", "Brainstem"], c: 1 },
+            { cat: "Biology", q: "How many chambers does the human heart have?", a: ["2", "3", "4"], c: 2 },
+            { cat: "Biology", q: "What is the primary gas we breathe out?", a: ["Oxygen", "Carbon Dioxide", "Nitrogen"], c: 1 },
+            { cat: "Biology", q: "Which acid is found in the human stomach?", a: ["Sulfuric", "Citric", "Hydrochloric"], c: 2 },
 
             // Physics
-            { q: "What is the speed of light approx?", a: ["300,000 km/s", "150,000 km/s", "1,000,000 km/s"], c: 0 },
-            { q: "Who developed the theory of General Relativity?", a: ["Newton", "Einstein", "Hawking"], c: 1 },
-            { q: "What is the unit of electrical resistance?", a: ["Volt", "Ampere", "Ohm"], c: 2 },
-            { q: "What force keeps planets in orbit?", a: ["Magnetism", "Gravity", "Friction"], c: 1 },
-            { q: "Which state of matter has a fixed volume but no fixed shape?", a: ["Solid", "Liquid", "Gas"], c: 1 },
-            { q: "What is the boiling point of water in Celsius?", a: ["90°C", "100°C", "110°C"], c: 1 },
-            { q: "Sound travels fastest through which medium?", a: ["Air", "Water", "Steel"], c: 2 },
-            { q: "What particle has a negative charge?", a: ["Proton", "Neutron", "Electron"], c: 2 },
-            { q: "E=mc² - what does the 'c' stand for?", a: ["Constant", "Speed of Light", "Charge"], c: 1 },
-            { q: "Which color has the shortest wavelength?", a: ["Red", "Green", "Violet"], c: 2 },
+            { cat: "Physics", q: "What is the speed of light approx?", a: ["300,000 km/s", "150,000 km/s", "1,000,000 km/s"], c: 0 },
+            { cat: "Physics", q: "Who developed the theory of General Relativity?", a: ["Newton", "Einstein", "Hawking"], c: 1 },
+            { cat: "Physics", q: "What is the unit of electrical resistance?", a: ["Volt", "Ampere", "Ohm"], c: 2 },
+            { cat: "Physics", q: "What force keeps planets in orbit?", a: ["Magnetism", "Gravity", "Friction"], c: 1 },
+            { cat: "Physics", q: "Which state of matter has a fixed volume but no fixed shape?", a: ["Solid", "Liquid", "Gas"], c: 1 },
+            { cat: "Physics", q: "What is the boiling point of water in Celsius?", a: ["90°C", "100°C", "110°C"], c: 1 },
+            { cat: "Physics", q: "Sound travels fastest through which medium?", a: ["Air", "Water", "Steel"], c: 2 },
+            { cat: "Physics", q: "What particle has a negative charge?", a: ["Proton", "Neutron", "Electron"], c: 2 },
+            { cat: "Physics", q: "E=mc² - what does the 'c' stand for?", a: ["Constant", "Speed of Light", "Charge"], c: 1 },
+            { cat: "Physics", q: "Which color has the shortest wavelength?", a: ["Red", "Green", "Violet"], c: 2 },
 
             // General Science
-            { q: "What is the chemical symbol for Gold?", a: ["Ag", "Au", "Fe"], c: 1 },
-            { q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Saturn"], c: 1 },
-            { q: "What is the most abundant gas in Earth's atmosphere?", a: ["Oxygen", "Nitrogen", "Argon"], c: 1 },
-            { q: "What is the chemical formula for table salt?", a: ["H2O", "CO2", "NaCl"], c: 2 },
-            { q: "Which layer of the atmosphere contains the Ozone layer?", a: ["Troposphere", "Stratosphere", "Mesosphere"], c: 1 },
-            { q: "Diamond is a solid form of which element?", a: ["Carbon", "Silicon", "Coal"], c: 0 },
-            { q: "What is the center of an atom called?", a: ["Electron", "Nucleus", "Orbit"], c: 1 },
-            { q: "How many planets are in our solar system?", a: ["7", "8", "9"], c: 1 },
-            { q: "What is the pH of pure water?", a: ["5", "7", "9"], c: 1 },
-            { q: "Which scale measures earthquake intensity?", a: ["Richter", "Celsius", "Kelvin"], c: 0 }
+            { cat: "General Science", q: "What is the chemical symbol for Gold?", a: ["Ag", "Au", "Fe"], c: 1 },
+            { cat: "General Science", q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Saturn"], c: 1 },
+            { cat: "General Science", q: "What is the most abundant gas in Earth's atmosphere?", a: ["Oxygen", "Nitrogen", "Argon"], c: 1 },
+            { cat: "General Science", q: "What is the chemical formula for table salt?", a: ["H2O", "CO2", "NaCl"], c: 2 },
+            { cat: "General Science", q: "Which layer of the atmosphere contains the Ozone layer?", a: ["Troposphere", "Stratosphere", "Mesosphere"], c: 1 },
+            { cat: "General Science", q: "Diamond is a solid form of which element?", a: ["Carbon", "Silicon", "Coal"], c: 0 },
+            { cat: "General Science", q: "What is the center of an atom called?", a: ["Electron", "Nucleus", "Orbit"], c: 1 },
+            { cat: "General Science", q: "How many planets are in our solar system?", a: ["7", "8", "9"], c: 1 },
+            { cat: "General Science", q: "What is the pH of pure water?", a: ["5", "7", "9"], c: 1 },
+            { cat: "General Science", q: "Which scale measures earthquake intensity?", a: ["Richter", "Celsius", "Kelvin"], c: 0 }
         ];
 
         let gameQuestions = [];
@@ -177,6 +181,7 @@
             const data = gameQuestions[currentIdx];
             document.getElementById('progress-text').innerText = `${currentIdx + 1} of 10`;
             document.getElementById('score-text').innerText = `Score: ${score}`;
+            document.getElementById('category-tag').innerText = data.cat || "General";
             document.getElementById('question-text').innerText = data.q;
             document.getElementById('next-btn').classList.add('hidden');
 
@@ -227,7 +232,6 @@
             document.getElementById(id).classList.remove('hidden');
         }
 
-        // Theme Toggle
         const themeBtn = document.getElementById('theme-toggle');
         themeBtn.onclick = () => document.documentElement.classList.toggle('dark');
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
