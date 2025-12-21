@@ -1,44 +1,189 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Message Mate — iMessage portal">
-  <title>iTechie — iMessage</title>
-  <style>
-    :root{--bg:#f2f2f7;--card:#ffffff;--muted:#6b6b6b;--accent:#0a84ff}
-    @media (prefers-color-scheme:dark){:root{--bg:#000;--card:#0a0a0a;--muted:#9b9b9b;--accent:#0a84ff}}
-    html,body{height:100%;margin:0}
-    body{display:grid;place-items:center;background:var(--bg);font-family:-apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial;color:var(--muted);padding:0}
-    .phone{width:360px;max-width:92vw;border-radius:36px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.3));box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:18px;margin:0 auto}
-    @media (prefers-color-scheme:dark){.phone{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(0,0,0,0.6)}}
-    header{display:flex;align-items:center;gap:12px}
-    .dot{width:6px;height:6px;border-radius:50%;background:#34c759;box-shadow:0 0 6px rgba(52,199,89,0.6)}
-    h1{font-size:18px;color:var(--muted);margin:6px 0 12px;font-weight:600}
-    .card{background:var(--card);border-radius:16px;padding:18px;color:inherit}
-    .title{font-size:16px;margin:0 0 6px;color:inherit}
-    .bubble{display:block;padding:12px;border-radius:14px;background:linear-gradient(180deg,var(--accent),#0b7be6);color:#fff;text-decoration:none;font-weight:600;text-align:center;box-shadow:0 6px 16px rgba(10,132,255,0.28);margin-bottom:12px}
-    .bubble:active{transform:translateY(1px)}
-    .meta{font-size:12px;color:var(--muted)}
-    .meta a{color:inherit;text-decoration:underline}
-    #fact{font-size:12px;opacity:0.9;margin-top:10px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iTechie Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#FFD1DC',
+                        pastelBlue: '#AEC6CF',
+                        pastelGreen: '#77DD77',
+                        pastelPurple: '#C3B1E1',
+                        darkBg: '#1a1012',
+                    },
+                    fontFamily: {
+                        sans: ['Fredoka', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { transition: background-color 0.4s, color 0.4s; }
+        .bubble-shadow { box-shadow: 0 8px 0 rgba(0,0,0,0.05); }
+        .active-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.05); }
+    </style>
 </head>
-<body>
-  <div class="phone" role="main">
-    <header>
-      <div class="dot" aria-hidden></div>
-      <div>
-        <h1>iMessage Mate</h1>
-      </div>
+<body class="bg-[#FFF0F3] text-zinc-800 dark:bg-darkBg dark:text-pink-100 min-h-screen font-sans flex flex-col">
+
+    <!-- Header -->
+    <header class="p-6 flex justify-between items-center max-w-4xl mx-auto w-full">
+        <h1 class="text-3xl font-bold text-pink-500 dark:text-pink-400 flex items-center gap-2">
+            iTechie 🦄
+        </h1>
+        <button id="theme-toggle" class="p-3 rounded-full bg-white dark:bg-zinc-800 bubble-shadow hover:scale-110 transition-transform">
+            <span class="dark:hidden text-xl">🌙</span>
+            <span class="hidden dark:inline text-xl">☀️</span>
+        </button>
     </header>
 
-    <div class="card" style="margin-top:14px">
-      <p class="title">Mate Ćurković</p>
-      <a class="bubble" href="imessage:m@iTechie.eu">Send iMessage</a>
-      <p class="meta">No iMessage? <a href="mailto:m@iTechie.eu">Email me</a></p>
-      <p id="fact">The mantis shrimp has the most complex eyes in the animal kingdom, possessing 12-16 photoreceptors compared to humans' three.</p>
-    </div>
-  </div>
+    <main class="max-w-2xl mx-auto p-4 flex flex-col items-center justify-center flex-grow">
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="text-center space-y-6">
+            <div class="bg-white dark:bg-zinc-800 p-10 rounded-[3rem] bubble-shadow border-4 border-pink-200 dark:border-pink-900/30">
+                <h2 class="text-5xl font-bold mb-4 text-pink-500">Ready to Play?</h2>
+                <p class="text-xl opacity-70 mb-8">10 Random Tech Questions</p>
+                <button onclick="startQuiz()" class="bg-pink-400 hover:bg-pink-500 text-white text-2xl px-12 py-4 rounded-full font-bold transition-all active-btn bubble-shadow">
+                    Start Game!
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden w-full space-y-6">
+            <div class="flex justify-between items-center px-4 font-bold text-pink-500">
+                <span id="progress-text">1 of 10</span>
+                <span id="score-text" class="bg-pink-100 dark:bg-pink-900/30 px-4 py-1 rounded-full">Score: 0</span>
+            </div>
+            
+            <div class="bg-white dark:bg-zinc-800 p-8 rounded-[3rem] bubble-shadow border-4 border-pink-100 dark:border-pink-900/20">
+                <h3 id="question-text" class="text-2xl md:text-3xl font-bold mb-8 leading-tight">Question text goes here?</h3>
+                <div id="options-grid" class="grid gap-4">
+                    <!-- Options injected here -->
+                </div>
+            </div>
+
+            <button id="next-btn" onclick="nextQuestion()" class="hidden w-full bg-purple-400 hover:bg-purple-500 text-white text-xl py-4 rounded-3xl font-bold transition-all active-btn">
+                Next Question ✨
+            </button>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden text-center space-y-6">
+            <div class="bg-white dark:bg-zinc-800 p-12 rounded-[3rem] bubble-shadow border-4 border-pink-200">
+                <h2 class="text-6xl mb-2">🎉</h2>
+                <h2 class="text-4xl font-bold text-pink-500 mb-2">Finished!</h2>
+                <p id="final-score" class="text-3xl font-bold mb-8">You got 0/10</p>
+                <button onclick="startQuiz()" class="bg-blue-400 hover:bg-blue-500 text-white text-xl px-10 py-4 rounded-full font-bold active-btn">
+                    Play Again
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-8 text-center opacity-60 text-xs">
+        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
+            <span>Hosted at <a href="https://github.com/Curkovic/iTechie" class="underline font-bold">Github</a></span>
+            <a href="mailto:m@itechie.eu" class="hover:text-pink-500 transition-colors">Email: m@itechie.eu</a>
+            <a href="imessage://m@itechie.eu" class="hover:text-pink-500 transition-colors">iMessage</a>
+        </div>
+    </footer>
+
+    <script>
+        const QUIZ_DATA = [
+            { q: "What does HTML stand for?", a: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlink Text Mode"], c: 0 },
+            { q: "Which is the main language for styling?", a: ["Python", "CSS", "C++", "SASS"], c: 1 },
+            { q: "JS stands for?", a: ["JustStyle", "JavaSecure", "JavaScript"], c: 2 },
+            { q: "Which company owns Instagram?", a: ["Google", "Meta", "Twitter"], c: 1 },
+            { q: "Default port for HTTPS?", a: ["80", "443", "21"], c: 1 },
+            { q: "First iPhone year?", a: ["2005", "2007", "2009"], c: 1 },
+            { q: "CPU stands for?", a: ["Central Process Unit", "Core Power Unit", "Central Peripheral Unit"], c: 0 },
+            { q: "What is 2 + '2' in JS?", a: ["4", "22", "Error"], c: 1 },
+            { q: "Which is a NoSQL database?", a: ["MySQL", "PostgreSQL", "MongoDB"], c: 2 },
+            { q: "Who created Linux?", a: ["Linus Torvalds", "Bill Gates", "Steve Jobs"], c: 0 },
+            { q: "Binary for decimal 5?", a: ["101", "110", "011"], c: 0 },
+            { q: "React is a library for?", a: ["Python", "Java", "JavaScript"], c: 2 }
+        ];
+
+        let gameQuestions = [];
+        let currentIdx = 0;
+        let score = 0;
+
+        function startQuiz() {
+            gameQuestions = [...QUIZ_DATA].sort(() => 0.5 - Math.random()).slice(0, 10);
+            currentIdx = 0;
+            score = 0;
+            showView('quiz-screen');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const data = gameQuestions[currentIdx];
+            document.getElementById('progress-text').innerText = `${currentIdx + 1} of 10`;
+            document.getElementById('score-text').innerText = `Score: ${score}`;
+            document.getElementById('question-text').innerText = data.q;
+            document.getElementById('next-btn').classList.add('hidden');
+
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+            
+            data.a.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = "text-left p-5 text-lg rounded-2xl border-2 border-pink-50 dark:border-zinc-700 bg-pink-50/30 dark:bg-zinc-900/50 hover:border-pink-300 transition-all font-medium active-btn";
+                btn.innerText = opt;
+                btn.onclick = () => selectOption(i, btn);
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectOption(index, btn) {
+            const data = gameQuestions[currentIdx];
+            const allBtns = document.getElementById('options-grid').querySelectorAll('button');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (index === data.c) {
+                score++;
+                btn.classList.add('bg-green-400', 'text-white', 'border-green-400');
+            } else {
+                btn.classList.add('bg-red-400', 'text-white', 'border-red-400');
+                allBtns[data.c].classList.add('bg-green-400', 'text-white', 'border-green-400');
+            }
+
+            document.getElementById('score-text').innerText = `Score: ${score}`;
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < 10) renderQuestion();
+            else finish();
+        }
+
+        function finish() {
+            showView('result-screen');
+            document.getElementById('final-score').innerText = `You got ${score}/10`;
+        }
+
+        function showView(id) {
+            ['start-screen', 'quiz-screen', 'result-screen'].forEach(v => {
+                document.getElementById(v).classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.onclick = () => document.documentElement.classList.toggle('dark');
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+    </script>
 </body>
 </html>
