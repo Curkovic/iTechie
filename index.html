@@ -3,298 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iTechie</title>
+    <title>Neo-Agrarian Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        pastelPink: '#FFD1DC',
-                        pastelBlue: '#AEC6CF',
-                        pastelGreen: '#77DD77',
-                        pastelPurple: '#C3B1E1',
-                        darkBg: '#1a1012',
-                    },
-                    fontFamily: {
-                        sans: ['Fredoka', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        body { transition: background-color 0.4s, color 0.4s; }
-        .bubble-shadow { box-shadow: 0 8px 0 rgba(0,0,0,0.05); }
-        .active-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,0.05); }
-        .is-correct { background-color: #4ade80 !important; color: white !important; border-color: #4ade80 !important; }
-        .is-wrong { background-color: #f87171 !important; color: white !important; border-color: #f87171 !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+        :root {
+            --neon-pink: #ff0055;
+            --neon-blue: #00f2ff;
+            --neon-green: #39ff14;
+            --dark-bg: #050505;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+        }
+
+        .cyber-font { font-family: 'Orbitron', sans-serif; }
+
+        /* Glitch Animation */
+        .glitch {
+            position: relative;
+            text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue);
+            animation: glitch 1.5s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); transform: translate(0); }
+            20% { text-shadow: -0.05em -0.025em 0 var(--neon-pink), 0.025em 0.025em 0 var(--neon-blue); transform: translate(-2px, 2px); }
+            40% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); transform: translate(2px, -2px); }
+            60% { text-shadow: -0.05em -0.025em 0 var(--neon-pink), 0.025em 0.025em 0 var(--neon-blue); transform: translate(-2px, -2px); }
+            100% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); transform: translate(0); }
+        }
+
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark-bg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bar-container {
+            width: 260px;
+            height: 2px;
+            background: #111;
+            margin-top: 20px;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Main Content */
+        .main-container {
+            opacity: 0;
+            filter: blur(10px);
+            transition: all 1s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        .cyber-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            position: relative;
+        }
+
+        .cyber-card::before {
+            content: "";
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 10px; height: 10px;
+            border-top: 2px solid var(--neon-pink);
+            border-left: 2px solid var(--neon-pink);
+        }
+
+        .btn-link {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-link:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
     </style>
 </head>
-<body class="bg-[#FFF0F3] text-zinc-800 dark:bg-darkBg dark:text-pink-100 min-h-screen font-sans flex flex-col">
+<body class="bg-black flex items-center justify-center min-h-screen p-4">
+    <div class="scanlines"></div>
 
-    <!-- Header -->
-    <header class="p-6 flex justify-between items-center max-w-4xl mx-auto w-full">
-        <h1 onclick="goHome()" class="text-3xl font-bold text-pink-500 dark:text-pink-400 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-            iTechie 🦄
-        </h1>
-        <button id="theme-toggle" class="p-3 rounded-full bg-white dark:bg-zinc-800 bubble-shadow hover:scale-110 transition-transform">
-            <span class="dark:hidden text-xl">🌙</span>
-            <span class="hidden dark:inline text-xl">☀️</span>
-        </button>
-    </header>
-
-    <main class="max-w-2xl mx-auto p-4 flex flex-col items-center justify-center flex-grow">
-        
-        <!-- Start Screen -->
-        <div id="start-screen" class="text-center space-y-6">
-            <div class="bg-white dark:bg-zinc-800 p-10 rounded-[3rem] bubble-shadow border-4 border-pink-200 dark:border-pink-900/30">
-                <h2 class="text-5xl font-bold mb-4 text-pink-500">Ready to Play?</h2>
-                <p class="text-xl opacity-70 mb-8">10 Questions</p>
-                <button onclick="startQuiz()" class="bg-pink-400 hover:bg-pink-500 text-white text-2xl px-12 py-4 rounded-full font-bold transition-all active-btn bubble-shadow">
-                    Start Game!
-                </button>
-            </div>
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="cyber-font text-sm tracking-[0.3em] text-cyan-400 mb-2 uppercase opacity-70">Establishing Connection...</div>
+        <div class="bar-container">
+            <div id="progress-bar"></div>
         </div>
+        <div id="percentage" class="mt-4 font-mono text-xs text-cyan-400">00%</div>
+    </div>
 
-        <!-- Quiz Screen -->
-        <div id="quiz-screen" class="hidden w-full space-y-6">
-            <div class="flex justify-between items-center px-4 font-bold text-pink-500">
-                <span id="progress-text">1 of 10</span>
-                <span id="score-text" class="bg-pink-100 dark:bg-pink-900/30 px-4 py-1 rounded-full">Score: 0</span>
-            </div>
+    <!-- Main Content -->
+    <div id="main-content" class="main-container w-full max-w-lg">
+        <div class="cyber-card p-8 md:p-12 text-center">
+            <div class="cyber-font text-[10px] text-cyan-500 tracking-[0.5em] mb-8 uppercase opacity-50">Transmission Received</div>
             
-            <div class="bg-white dark:bg-zinc-800 p-8 rounded-[3rem] bubble-shadow border-4 border-pink-100 dark:border-pink-900/20">
-                <!-- Category Tag -->
-                <div id="category-tag" class="inline-block px-4 py-1 rounded-full bg-pink-100 dark:bg-pink-900/40 text-pink-600 dark:text-pink-300 text-sm font-bold mb-4 uppercase tracking-wider">
-                    CATEGORY
-                </div>
-                
-                <h3 id="question-text" class="text-2xl md:text-3xl font-bold mb-8 leading-tight">Question text goes here?</h3>
-                <div id="options-grid" class="grid gap-4">
-                    <!-- Options injected here -->
-                </div>
+            <h1 class="text-xl md:text-2xl font-medium leading-relaxed text-gray-200 mb-12">
+                "Patiently waiting for <span class="glitch text-white font-bold">capitalism to fail</span> so growing tomatoes becomes a respected survival skill."
+            </h1>
+
+            <div class="space-y-4">
+                <a href="mailto:m@itechie.eu" class="btn-link block py-3 px-6 font-mono text-sm uppercase tracking-widest">
+                    [ Send Email ]
+                </a>
+                <a href="imessage:m@itechie.eu" class="btn-link block py-3 px-6 font-mono text-sm uppercase tracking-widest">
+                    [ iMessage ]
+                </a>
             </div>
 
-            <button id="next-btn" onclick="nextQuestion()" class="hidden w-full bg-purple-400 hover:bg-purple-500 text-white text-xl py-4 rounded-3xl font-bold transition-all active-btn">
-                Next Question ✨
-            </button>
-        </div>
-
-        <!-- Result Screen -->
-        <div id="result-screen" class="hidden text-center space-y-6">
-            <div class="bg-white dark:bg-zinc-800 p-12 rounded-[3rem] bubble-shadow border-4 border-pink-200">
-                <h2 class="text-6xl mb-2">🎉</h2>
-                <h2 class="text-4xl font-bold text-pink-500 mb-2">Finished!</h2>
-                <p id="final-score" class="text-3xl font-bold mb-8">You got 0/10</p>
-                <button onclick="startQuiz()" class="bg-blue-400 hover:bg-blue-500 text-white text-xl px-10 py-4 rounded-full font-bold active-btn">
-                    Play Again
-                </button>
+            <div class="mt-12 pt-6 border-t border-white/5 font-mono text-[9px] text-gray-600 uppercase tracking-widest">
+                m@itechie.eu // Zadar Sector
             </div>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="p-8 text-center opacity-60 text-xs">
-        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
-            <span>Hosted at <a href="https://github.com/Curkovic/iTechie" class="underline font-bold">Github</a></span>
-            <a href="mailto:m@itechie.eu" class="hover:text-pink-500 transition-colors">Email: m@itechie.eu</a>
-            <a href="imessage://m@itechie.eu" class="hover:text-pink-500 transition-colors">iMessage</a>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        const QUIZ_DATA = [
-            // Tech
-            { cat: "Technology", q: "What does HTML stand for?", a: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlink Text Mode"], c: 0 },
-            { cat: "Technology", q: "Which is the main language for styling?", a: ["Python", "CSS", "C++", "SASS"], c: 1 },
-            { cat: "Technology", q: "JS stands for?", a: ["JustStyle", "JavaSecure", "JavaScript"], c: 2 },
-            { cat: "Technology", q: "Which company owns Instagram?", a: ["Google", "Meta", "Twitter"], c: 1 },
-            { cat: "Technology", q: "Default port for HTTPS?", a: ["80", "443", "21"], c: 1 },
-            { cat: "Technology", q: "First iPhone year?", a: ["2005", "2007", "2009"], c: 1 },
-            { cat: "Technology", q: "CPU stands for?", a: ["Central Process Unit", "Core Power Unit", "Central Peripheral Unit"], c: 0 },
-            { cat: "Technology", q: "What is 2 + '2' in JS?", a: ["4", "22", "Error"], c: 1 },
-            { cat: "Technology", q: "Which is a NoSQL database?", a: ["MySQL", "PostgreSQL", "MongoDB"], c: 2 },
-            { cat: "Technology", q: "Who created Linux?", a: ["Linus Torvalds", "Bill Gates", "Steve Jobs"], c: 0 },
-            { cat: "Technology", q: "Binary for decimal 5?", a: ["101", "110", "011"], c: 0 },
-            { cat: "Technology", q: "React is a library for?", a: ["Python", "Java", "JavaScript"], c: 2 },
-
-            // Biology
-            { cat: "Biology", q: "What is known as the 'Powerhouse of the cell'?", a: ["Nucleus", "Ribosome", "Mitochondria"], c: 2 },
-            { cat: "Biology", q: "Which pigment gives plants their green color?", a: ["Chlorophyll", "Melanin", "Carotene"], c: 0 },
-            { cat: "Biology", q: "How many bones are in the adult human body?", a: ["186", "206", "216"], c: 1 },
-            { cat: "Biology", q: "What is the largest organ in the human body?", a: ["Liver", "Brain", "Skin"], c: 2 },
-            { cat: "Biology", q: "Human DNA is shaped like a...?", a: ["Double Helix", "Single Strand", "Triple Loop"], c: 0 },
-            { cat: "Biology", q: "Which blood type is the universal donor?", a: ["A+", "AB-", "O-"], c: 2 },
-            { cat: "Biology", q: "What part of the brain controls balance?", a: ["Cerebrum", "Cerebellum", "Brainstem"], c: 1 },
-            { cat: "Biology", q: "How many chambers does the human heart have?", a: ["2", "3", "4"], c: 2 },
-            { cat: "Biology", q: "What is the primary gas we breathe out?", a: ["Oxygen", "Carbon Dioxide", "Nitrogen"], c: 1 },
-            { cat: "Biology", q: "Which acid is found in the human stomach?", a: ["Sulfuric", "Citric", "Hydrochloric"], c: 2 },
-
-            // Physics
-            { cat: "Physics", q: "What is the speed of light approx?", a: ["300,000 km/s", "150,000 km/s", "1,000,000 km/s"], c: 0 },
-            { cat: "Physics", q: "Who developed the theory of General Relativity?", a: ["Newton", "Einstein", "Hawking"], c: 1 },
-            { cat: "Physics", q: "What is the unit of electrical resistance?", a: ["Volt", "Ampere", "Ohm"], c: 2 },
-            { cat: "Physics", q: "What force keeps planets in orbit?", a: ["Magnetism", "Gravity", "Friction"], c: 1 },
-            { cat: "Physics", q: "Which state of matter has a fixed volume but no fixed shape?", a: ["Solid", "Liquid", "Gas"], c: 1 },
-            { cat: "Physics", q: "What is the boiling point of water in Celsius?", a: ["90°C", "100°C", "110°C"], c: 1 },
-            { cat: "Physics", q: "Sound travels fastest through which medium?", a: ["Air", "Water", "Steel"], c: 2 },
-            { cat: "Physics", q: "What particle has a negative charge?", a: ["Proton", "Neutron", "Electron"], c: 2 },
-            { cat: "Physics", q: "E=mc² - what does the 'c' stand for?", a: ["Constant", "Speed of Light", "Charge"], c: 1 },
-            { cat: "Physics", q: "Which color has the shortest wavelength?", a: ["Red", "Green", "Violet"], c: 2 },
-
-            // General Science
-            { cat: "General Science", q: "What is the chemical symbol for Gold?", a: ["Ag", "Au", "Fe"], c: 1 },
-            { cat: "General Science", q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Saturn"], c: 1 },
-            { cat: "General Science", q: "What is the most abundant gas in Earth's atmosphere?", a: ["Oxygen", "Nitrogen", "Argon"], c: 1 },
-            { cat: "General Science", q: "What is the chemical formula for table salt?", a: ["H2O", "CO2", "NaCl"], c: 2 },
-            { cat: "General Science", q: "Which layer of the atmosphere contains the Ozone layer?", a: ["Troposphere", "Stratosphere", "Mesosphere"], c: 1 },
-            { cat: "General Science", q: "Diamond is a solid form of which element?", a: ["Carbon", "Silicon", "Coal"], c: 0 },
-            { cat: "General Science", q: "What is the center of an atom called?", a: ["Electron", "Nucleus", "Orbit"], c: 1 },
-            { cat: "General Science", q: "How many planets are in our solar system?", a: ["7", "8", "9"], c: 1 },
-            { cat: "General Science", q: "What is the pH of pure water?", a: ["5", "7", "9"], c: 1 },
-            { cat: "General Science", q: "Which scale measures earthquake intensity?", a: ["Richter", "Celsius", "Kelvin"], c: 0 },
-
-            // History
-            { cat: "History", q: "Who was the first President of the USA?", a: ["George Washington", "Abraham Lincoln", "John Adams"], c: 0 },
-            { cat: "History", q: "In which year did WWII end?", a: ["1943", "1945", "1947"], c: 1 },
-            { cat: "History", q: "Which empire built the Colosseum?", a: ["Greek", "Roman", "Byzantine"], c: 1 },
-            { cat: "History", q: "The Cold War was mainly between USA and?", a: ["China", "Germany", "USSR"], c: 2 },
-            { cat: "History", q: "Who discovered America in 1492?", a: ["Magellan", "Columbus", "Vespucci"], c: 1 },
-
-            // Geography
-            { cat: "Geography", q: "Largest ocean on Earth?", a: ["Atlantic", "Indian", "Pacific"], c: 2 },
-            { cat: "Geography", q: "Capital of Australia?", a: ["Sydney", "Melbourne", "Canberra"], c: 2 },
-            { cat: "Geography", q: "Which continent is Egypt in?", a: ["Asia", "Africa", "Europe"], c: 1 },
-            { cat: "Geography", q: "Longest river in the world?", a: ["Amazon", "Nile", "Yangtze"], c: 1 },
-            { cat: "Geography", q: "Mount Everest is in which range?", a: ["Andes", "Alps", "Himalayas"], c: 2 },
-
-            // Mathematics
-            { cat: "Mathematics", q: "Value of π (approx)?", a: ["2.14", "3.14", "4.13"], c: 1 },
-            { cat: "Mathematics", q: "Square root of 64?", a: ["6", "8", "10"], c: 1 },
-            { cat: "Mathematics", q: "10² equals?", a: ["20", "100", "1000"], c: 1 },
-            { cat: "Mathematics", q: "Prime number?", a: ["9", "15", "17"], c: 2 },
-            { cat: "Mathematics", q: "0 divided by 5 equals?", a: ["0", "5", "Undefined"], c: 0 },
-
-            // Movies
-            { cat: "Movies", q: "Director of Titanic?", a: ["Spielberg", "Cameron", "Nolan"], c: 1 },
-            { cat: "Movies", q: "First Star Wars movie year?", a: ["1977", "1980", "1983"], c: 0 },
-            { cat: "Movies", q: "Which movie won Best Picture 1994?", a: ["Pulp Fiction", "Forrest Gump", "Shawshank"], c: 1 },
-            { cat: "Movies", q: "Who played Iron Man?", a: ["Chris Evans", "Robert Downey Jr.", "Mark Ruffalo"], c: 1 },
-            { cat: "Movies", q: "Studio behind Toy Story?", a: ["DreamWorks", "Pixar", "Disney"], c: 1 },
-
-            // General Knowledge
-            { cat: "General Knowledge", q: "Fastest land animal?", a: ["Lion", "Cheetah", "Horse"], c: 1 },
-            { cat: "General Knowledge", q: "Currency of Japan?", a: ["Won", "Yuan", "Yen"], c: 2 },
-            { cat: "General Knowledge", q: "How many days in a leap year?", a: ["365", "366", "367"], c: 1 },
-            { cat: "General Knowledge", q: "Largest mammal?", a: ["Elephant", "Blue Whale", "Giraffe"], c: 1 },
-            { cat: "General Knowledge", q: "Primary color?", a: ["Green", "Purple", "Red"], c: 2 }
-        ];
-
-        let gameQuestions = [];
-        let currentIdx = 0;
-        let score = 0;
-
-        function goHome() {
-            gameQuestions = [];
-            currentIdx = 0;
-            score = 0;
-            showView('start-screen');
-        }
-
-        function startQuiz() {
-            // Group by category to ensure diversity
-            const grouped = QUIZ_DATA.reduce((acc, q) => {
-                (acc[q.cat] = acc[q.cat] || []).push(q);
-                return acc;
-            }, {});
-
-            // Shuffle within each group
-            Object.values(grouped).forEach(group => group.sort(() => 0.5 - Math.random()));
-
-            const categories = Object.keys(grouped).sort(() => 0.5 - Math.random());
-            let selection = [];
-            let catIndex = 0;
-
-            // Pick 10 questions across different categories
-            while (selection.length < 10) {
-                const currentCat = categories[catIndex % categories.length];
-                const pool = grouped[currentCat];
-                if (pool.length > 0) {
-                    selection.push(pool.pop());
-                }
-                catIndex++;
-            }
-
-            // Final shuffle of the 10 selected questions
-            gameQuestions = selection.sort(() => 0.5 - Math.random());
-            
-            currentIdx = 0;
-            score = 0;
-            showView('quiz-screen');
-            renderQuestion();
-        }
-
-        function renderQuestion() {
-            const data = gameQuestions[currentIdx];
-            document.getElementById('progress-text').innerText = `${currentIdx + 1} of 10`;
-            document.getElementById('score-text').innerText = `Score: ${score}`;
-            document.getElementById('category-tag').innerText = data.cat || "General";
-            document.getElementById('question-text').innerText = data.q;
-            document.getElementById('next-btn').classList.add('hidden');
-
-            const grid = document.getElementById('options-grid');
-            grid.innerHTML = '';
-            
-            data.a.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = "text-left p-5 text-lg rounded-2xl border-2 border-pink-50 dark:border-zinc-700 bg-pink-50/30 dark:bg-zinc-900/50 hover:border-pink-300 transition-all font-medium active-btn";
-                btn.innerText = opt;
-                btn.onclick = () => selectOption(i, btn);
-                grid.appendChild(btn);
-            });
-        }
-
-        function selectOption(index, btn) {
-            const data = gameQuestions[currentIdx];
-            const allBtns = document.getElementById('options-grid').querySelectorAll('button');
-            allBtns.forEach(b => b.disabled = true);
-
-            if (index === data.c) {
-                score++;
-                btn.classList.add('is-correct');
+        const progressBar = document.getElementById('progress-bar');
+        const percentageText = document.getElementById('percentage');
+        const loader = document.getElementById('loader');
+        const mainContent = document.getElementById('main-content');
+        
+        let progress = 0;
+        
+        function updateLoader() {
+            if (progress < 100) {
+                progress += Math.random() * 4;
+                if (progress > 100) progress = 100;
+                
+                progressBar.style.width = progress + '%';
+                percentageText.innerText = Math.floor(progress).toString().padStart(2, '0') + '%';
+                
+                setTimeout(updateLoader, 30 + Math.random() * 100);
             } else {
-                btn.classList.add('is-wrong');
-                allBtns[data.c].classList.add('is-correct');
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        mainContent.classList.add('visible');
+                    }, 500);
+                }, 500);
             }
-
-            document.getElementById('score-text').innerText = `Score: ${score}`;
-            document.getElementById('next-btn').classList.remove('hidden');
         }
 
-        function nextQuestion() {
-            currentIdx++;
-            if (currentIdx < 10) renderQuestion();
-            else finish();
-        }
-
-        function finish() {
-            showView('result-screen');
-            document.getElementById('final-score').innerText = `You got ${score}/10`;
-        }
-
-        function showView(id) {
-            ['start-screen', 'quiz-screen', 'result-screen'].forEach(v => {
-                document.getElementById(v).classList.add('hidden');
-            });
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        const themeBtn = document.getElementById('theme-toggle');
-        themeBtn.onclick = () => document.documentElement.classList.toggle('dark');
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+        window.onload = updateLoader;
     </script>
 </body>
 </html>
