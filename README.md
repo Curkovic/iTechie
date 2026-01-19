@@ -10,4 +10,4 @@ iMessage: m@itechie.eu
 
 Hosted on GitHub Pages
 
-## This site is a static site hosted via GitHub Pages for the Zadar Sector.
+## This site is a static site hosted via GitHub Pages.
