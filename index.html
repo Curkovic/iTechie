@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CP77 // RED_ENGINE_PORTAL</title>
+    <title>JOIN THE RESISTANCEL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Fira+Code:wght@300;500&display=swap');
@@ -13,6 +13,7 @@
             --cp-blue: #00f0ff;
             --cp-red: #ff003c;
             --cp-black: #050505;
+            --cp-gray: #333333;
         }
 
         body {
@@ -20,20 +21,49 @@
             font-family: 'Rajdhani', sans-serif;
             overflow: hidden;
             margin: 0;
-            transition: background-color 0.5s ease;
+        }
+
+        /* CRT EFFECTS */
+        .crt-effects {
+            display: none;
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2000;
+        }
+
+        .crt-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            background-size: 100% 3px, 3px 100%;
+        }
+
+        .crt-scanline {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,255,255,0.08) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.15;
+            animation: scanlineMove 4s linear infinite;
+        }
+
+        @keyframes scanlineMove {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
 
         #loader {
             position: fixed;
             inset: 0;
             background-color: var(--cp-yellow);
-            z-index: 1000;
+            z-index: 3000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: black;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.8s ease-in-out;
             padding: 20px;
         }
 
@@ -67,7 +97,6 @@
             height: 4px;
             background: rgba(0,0,0,0.1);
             margin-top: 15px;
-            position: relative;
         }
 
         #progress-bar {
@@ -83,6 +112,29 @@
             color: var(--cp-yellow);
             position: relative;
             z-index: 1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reveal-node {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .reveal-node.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: nodeFlicker 0.6s ease-out;
+        }
+
+        @keyframes nodeFlicker {
+            0% { opacity: 0; transform: skewX(12deg); }
+            30% { opacity: 1; transform: skewX(-6deg); }
+            50% { opacity: 0.4; }
+            70% { opacity: 0.9; transform: skewX(2deg); }
+            100% { opacity: 1; transform: skewX(0); }
         }
 
         .cp-border {
@@ -90,6 +142,13 @@
             clip-path: polygon(0 0, 100% 0, 100% 88%, 92% 100%, 0 100%);
             background: rgba(252, 238, 10, 0.02);
             position: relative;
+            animation: borderPulse 6s infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 95%, 100% { border-color: var(--cp-yellow); }
+            96%, 98% { border-color: white; opacity: 0.8; }
+            97%, 99% { border-color: var(--cp-red); }
         }
 
         .cp-border::after {
@@ -105,7 +164,7 @@
         }
 
         .glitch-text {
-            animation: glitch 3s infinite;
+            animation: glitch 2.5s infinite;
             text-transform: uppercase;
             font-family: 'Orbitron', sans-serif;
         }
@@ -129,27 +188,29 @@
             text-align: center;
             font-size: 0.85rem;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
         }
 
         .cp-button:hover {
-            background: var(--cp-blue);
+            background: var(--cp-gray) !important;
+            color: white !important;
             transform: scale(1.03);
-            box-shadow: -4px 4px 0px var(--cp-red);
+            box-shadow: -4px 4px 0px var(--cp-blue);
         }
 
-        .scanlines {
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%);
+        .scanlines-texture {
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.08) 50%);
             background-size: 100% 4px;
-            z-index: 100;
+            z-index: 2002;
             pointer-events: none;
             position: fixed;
             inset: 0;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="scanlines"></div>
-
     <div id="loader">
         <div class="terminal-box">
             <div class="terminal-header">
@@ -163,23 +224,29 @@
         </div>
     </div>
 
-    <div id="main-content" class="flex items-center justify-center p-6 w-full">
+    <div class="crt-effects" id="crt-overlay">
+        <div class="crt-overlay"></div>
+        <div class="crt-scanline"></div>
+    </div>
+    <div class="scanlines-texture" id="texture-overlay"></div>
+
+    <div id="main-content" class="p-6 w-full">
         <div class="max-w-2xl w-full">
-            <div class="cp-border p-8 md:p-12 mb-8">
-                <div class="text-[10px] mb-4 tracking-[0.3em] font-black text-white">INCOMING_TRANSMISSION // 04-B</div>
-                <h1 class="text-2xl md:text-4xl font-black mb-8 leading-none italic">
-                    PATIENTLY WAITING FOR <span class="glitch-text text-white">CAPITALISM TO FAIL</span> SO GROWING <span class="text-white">TOMATOES</span> BECOMES A RESPECTED SURVIVAL SKILL.
+            <div id="node-card" class="cp-border p-8 md:p-12 mb-8 reveal-node">
+                <div id="node-tag" class="text-[10px] mb-4 tracking-[0.3em] font-black text-white reveal-node">INCOMING_TRANSMISSION // 04-B</div>
+                <h1 id="node-title" class="text-2xl md:text-4xl font-black mb-8 leading-none italic reveal-node">
+                    GATHERING <span class="glitch-text text-white">RESOURCES</span> FOR THE SOON-TO-BE <span class="text-white">AI OVERLORDS</span>. CONTACT FOR <span class="text-white">SURVIVAL GUIDES</span> OR TO JOIN THE <span class="glitch-text text-white">RESISTANCE</span>.
                 </h1>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="mailto:m@itechie.eu" class="cp-button">Neural-Mail</a>
-                    <a href="imessage:m@itechie.eu" class="cp-button" style="background: var(--cp-blue);">iMessage</a>
-                    <a href="https://instagram.com/matecurkovic" target="_blank" class="cp-button" style="background: var(--cp-red); color: white;">Instagram</a>
-                    <a href="https://wa.me/385911010101" target="_blank" class="cp-button" style="background: #25D366;">WhatsApp</a>
+                    <a href="mailto:m@itechie.eu" class="cp-button reveal-node">Neural-Mail</a>
+                    <a href="imessage:m@itechie.eu" class="cp-button reveal-node" style="background: var(--cp-blue);">iMessage</a>
+                    <a href="https://instagram.com/matecurkovic" target="_blank" class="cp-button reveal-node" style="background: var(--cp-red); color: white;">Instagram</a>
+                    <a href="https://wa.me/385911010101" target="_blank" class="cp-button reveal-node" style="background: #25D366;">WhatsApp</a>
                 </div>
             </div>
             
-            <div class="flex justify-between font-mono text-[9px] font-bold uppercase opacity-60">
+            <div id="node-footer" class="flex justify-between font-mono text-[9px] font-bold uppercase opacity-60 reveal-node">
                 <span>IDENTITY: MATE CURKOVIC</span>
                 <span>ENC: RSA_4096</span>
                 <span>LOC: ZADAR_HR</span>
@@ -193,17 +260,17 @@
         const loaderPercent = document.getElementById('loader-percent');
         const loaderContainer = document.getElementById('loader');
         const mainContentElem = document.getElementById('main-content');
+        const crtOverlay = document.getElementById('crt-overlay');
+        const textureOverlay = document.getElementById('texture-overlay');
 
         const logs = [
             "> Initializing ICE breaker...",
             "> Searching for local nodes (Zadar)...",
             "> Handshake @ m.itechie.eu",
-            "> Status: Connection unstable",
-            "> Re-routing via neural link...",
             "> Bypassing corporate firewalls...",
             "> Decrypting matecurkovic.key",
-            "> Social identifiers located...",
             "> Building secure uplink...",
+            "> Finalizing secure handshake...",
             "> Access Granted."
         ];
 
@@ -212,7 +279,7 @@
 
         function startLoading() {
             if (loadProgress < 100) {
-                loadProgress += Math.random() * 5 + 1;
+                loadProgress += Math.random() * 3 + 1; 
                 if(loadProgress > 100) loadProgress = 100;
                 
                 progressBarElem.style.width = loadProgress + '%';
@@ -228,16 +295,27 @@
                     lastLogIndex = logIndex;
                 }
                 
-                setTimeout(startLoading, 30 + Math.random() * 100);
+                setTimeout(startLoading, 80 + Math.random() * 150); 
             } else {
+                revealInterface();
+            }
+        }
+
+        async function revealInterface() {
+            loaderContainer.style.opacity = '0';
+            await new Promise(r => setTimeout(r, 1000));
+            loaderContainer.style.display = 'none';
+
+            mainContentElem.style.display = 'flex';
+            crtOverlay.style.display = 'block';
+            textureOverlay.style.display = 'block';
+            document.body.style.backgroundColor = 'var(--cp-black)';
+
+            const nodes = Array.from(document.querySelectorAll('.reveal-node'));
+            for (let i = 0; i < nodes.length; i++) {
                 setTimeout(() => {
-                    loaderContainer.style.opacity = '0';
-                    setTimeout(() => {
-                        loaderContainer.style.display = 'none';
-                        mainContentElem.style.display = 'flex';
-                        document.body.style.backgroundColor = 'var(--cp-black)';
-                    }, 500);
-                }, 500);
+                    nodes[i].classList.add('visible');
+                }, i * 250); 
             }
         }
 
