@@ -3,183 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo-Agrarian Protocol</title>
+    <title>CP77 // RED_ENGINE_PORTAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Fira+Code:wght@300;500&display=swap');
 
         :root {
-            --neon-pink: #ff0055;
-            --neon-blue: #00f2ff;
-            --neon-green: #39ff14;
-            --dark-bg: #050505;
+            --cp-yellow: #fcee0a;
+            --cp-blue: #00f0ff;
+            --cp-red: #ff003c;
+            --cp-black: #050505;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: #fff;
+            background-color: var(--cp-yellow);
             font-family: 'Rajdhani', sans-serif;
             overflow: hidden;
+            margin: 0;
+            transition: background-color 0.5s ease;
         }
 
-        .cyber-font { font-family: 'Orbitron', sans-serif; }
-
-        /* Glitch Animation */
-        .glitch {
-            position: relative;
-            text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue);
-            animation: glitch 1.5s infinite;
-        }
-
-        @keyframes glitch {
-            0% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); transform: translate(0); }
-            20% { text-shadow: -0.05em -0.025em 0 var(--neon-pink), 0.025em 0.025em 0 var(--neon-blue); transform: translate(-2px, 2px); }
-            40% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); transform: translate(2px, -2px); }
-            60% { text-shadow: -0.05em -0.025em 0 var(--neon-pink), 0.025em 0.025em 0 var(--neon-blue); transform: translate(-2px, -2px); }
-            100% { text-shadow: 0.05em 0 0 var(--neon-pink), -0.05em -0.025em 0 var(--neon-blue); transform: translate(0); }
-        }
-
-        /* Scanline Overlay */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        /* Loading Screen */
         #loader {
             position: fixed;
             inset: 0;
-            background: var(--dark-bg);
+            background-color: var(--cp-yellow);
             z-index: 1000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: black;
+            transition: opacity 0.5s ease-in-out;
+            padding: 20px;
         }
 
-        .bar-container {
-            width: 260px;
-            height: 2px;
-            background: #111;
-            margin-top: 20px;
-            border: 1px solid rgba(0, 242, 255, 0.3);
+        .terminal-box {
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            width: 100%;
+            max-width: 400px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .terminal-header {
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        #console-output {
+            height: 120px;
+            overflow: hidden;
+            line-height: 1.4;
+            opacity: 0.8;
+        }
+
+        .loading-bar-bg {
+            width: 100%;
+            height: 4px;
+            background: rgba(0,0,0,0.1);
+            margin-top: 15px;
+            position: relative;
         }
 
         #progress-bar {
             width: 0%;
             height: 100%;
-            background: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
+            background: black;
         }
 
-        /* Main Content */
-        .main-container {
-            opacity: 0;
-            filter: blur(10px);
-            transition: all 1s ease-out;
+        #main-content {
+            background-color: var(--cp-black);
+            min-height: 100vh;
+            display: none;
+            color: var(--cp-yellow);
+            position: relative;
+            z-index: 1;
         }
 
-        .visible {
-            opacity: 1;
-            filter: blur(0);
-        }
-
-        .cyber-card {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(0, 242, 255, 0.2);
+        .cp-border {
+            border: 4px solid var(--cp-yellow);
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 92% 100%, 0 100%);
+            background: rgba(252, 238, 10, 0.02);
             position: relative;
         }
 
-        .cyber-card::before {
-            content: "";
+        .cp-border::after {
+            content: "DECRYPTED_LINE";
             position: absolute;
-            top: -1px; left: -1px;
-            width: 10px; height: 10px;
-            border-top: 2px solid var(--neon-pink);
-            border-left: 2px solid var(--neon-pink);
+            bottom: 5px;
+            right: 12%;
+            font-size: 9px;
+            background: var(--cp-yellow);
+            color: black;
+            padding: 0 5px;
+            font-weight: 900;
         }
 
-        .btn-link {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .glitch-text {
+            animation: glitch 3s infinite;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .btn-link:hover {
-            background: var(--neon-blue);
-            color: #000;
-            box-shadow: 0 0 20px var(--neon-blue);
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            1% { transform: skew(8deg); text-shadow: 2px 0 var(--cp-red); }
+            2% { transform: skew(-8deg); text-shadow: -2px 0 var(--cp-blue); }
+            3% { transform: skew(0deg); text-shadow: none; }
+        }
+
+        .cp-button {
+            background: var(--cp-yellow);
+            color: black;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+            transition: all 0.2s;
+            display: block;
+            text-align: center;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .cp-button:hover {
+            background: var(--cp-blue);
+            transform: scale(1.03);
+            box-shadow: -4px 4px 0px var(--cp-red);
+        }
+
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
         }
     </style>
 </head>
-<body class="bg-black flex items-center justify-center min-h-screen p-4">
+<body>
     <div class="scanlines"></div>
 
-    <!-- Loading Screen -->
     <div id="loader">
-        <div class="cyber-font text-sm tracking-[0.3em] text-cyan-400 mb-2 uppercase opacity-70">Establishing Connection...</div>
-        <div class="bar-container">
-            <div id="progress-bar"></div>
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span>BREACH_PROTOCOL_v4.2</span>
+                <span id="loader-percent">00%</span>
+            </div>
+            <div id="console-output"></div>
+            <div class="loading-bar-bg">
+                <div id="progress-bar"></div>
+            </div>
         </div>
-        <div id="percentage" class="mt-4 font-mono text-xs text-cyan-400">00%</div>
     </div>
 
-    <!-- Main Content -->
-    <div id="main-content" class="main-container w-full max-w-lg">
-        <div class="cyber-card p-8 md:p-12 text-center">
-            <div class="cyber-font text-[10px] text-cyan-500 tracking-[0.5em] mb-8 uppercase opacity-50">Transmission Received</div>
-            
-            <h1 class="text-xl md:text-2xl font-medium leading-relaxed text-gray-200 mb-12">
-                "Patiently waiting for <span class="glitch text-white font-bold">capitalism to fail</span> so growing tomatoes becomes a respected survival skill."
-            </h1>
+    <div id="main-content" class="flex items-center justify-center p-6 w-full">
+        <div class="max-w-2xl w-full">
+            <div class="cp-border p-8 md:p-12 mb-8">
+                <div class="text-[10px] mb-4 tracking-[0.3em] font-black text-white">INCOMING_TRANSMISSION // 04-B</div>
+                <h1 class="text-2xl md:text-4xl font-black mb-8 leading-none italic">
+                    PATIENTLY WAITING FOR <span class="glitch-text text-white">CAPITALISM TO FAIL</span> SO GROWING <span class="text-white">TOMATOES</span> BECOMES A RESPECTED SURVIVAL SKILL.
+                </h1>
 
-            <div class="space-y-4">
-                <a href="mailto:m@itechie.eu" class="btn-link block py-3 px-6 font-mono text-sm uppercase tracking-widest">
-                    [ Send Email ]
-                </a>
-                <a href="imessage:m@itechie.eu" class="btn-link block py-3 px-6 font-mono text-sm uppercase tracking-widest">
-                    [ iMessage ]
-                </a>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="mailto:m@itechie.eu" class="cp-button">Neural-Mail</a>
+                    <a href="imessage:m@itechie.eu" class="cp-button" style="background: var(--cp-blue);">iMessage</a>
+                    <a href="https://instagram.com/matecurkovic" target="_blank" class="cp-button" style="background: var(--cp-red); color: white;">Instagram</a>
+                    <a href="https://wa.me/385911010101" target="_blank" class="cp-button" style="background: #25D366;">WhatsApp</a>
+                </div>
             </div>
-
-            <div class="mt-12 pt-6 border-t border-white/5 font-mono text-[9px] text-gray-600 uppercase tracking-widest">
-                m@itechie.eu // Zadar Sector
+            
+            <div class="flex justify-between font-mono text-[9px] font-bold uppercase opacity-60">
+                <span>IDENTITY: MATE CURKOVIC</span>
+                <span>ENC: RSA_4096</span>
+                <span>LOC: ZADAR_HR</span>
             </div>
         </div>
     </div>
 
     <script>
-        const progressBar = document.getElementById('progress-bar');
-        const percentageText = document.getElementById('percentage');
-        const loader = document.getElementById('loader');
-        const mainContent = document.getElementById('main-content');
-        
-        let progress = 0;
-        
-        function updateLoader() {
-            if (progress < 100) {
-                progress += Math.random() * 4;
-                if (progress > 100) progress = 100;
+        const progressBarElem = document.getElementById('progress-bar');
+        const consoleOutput = document.getElementById('console-output');
+        const loaderPercent = document.getElementById('loader-percent');
+        const loaderContainer = document.getElementById('loader');
+        const mainContentElem = document.getElementById('main-content');
+
+        const logs = [
+            "> Initializing ICE breaker...",
+            "> Searching for local nodes (Zadar)...",
+            "> Handshake @ m.itechie.eu",
+            "> Status: Connection unstable",
+            "> Re-routing via neural link...",
+            "> Bypassing corporate firewalls...",
+            "> Decrypting matecurkovic.key",
+            "> Social identifiers located...",
+            "> Building secure uplink...",
+            "> Access Granted."
+        ];
+
+        let loadProgress = 0;
+        let lastLogIndex = -1;
+
+        function startLoading() {
+            if (loadProgress < 100) {
+                loadProgress += Math.random() * 5 + 1;
+                if(loadProgress > 100) loadProgress = 100;
                 
-                progressBar.style.width = progress + '%';
-                percentageText.innerText = Math.floor(progress).toString().padStart(2, '0') + '%';
+                progressBarElem.style.width = loadProgress + '%';
+                loaderPercent.innerText = Math.floor(loadProgress).toString().padStart(2, '0') + '%';
                 
-                setTimeout(updateLoader, 30 + Math.random() * 100);
+                const logIndex = Math.min(Math.floor((loadProgress / 100) * logs.length), logs.length - 1);
+                
+                if (logIndex !== lastLogIndex) {
+                    const line = document.createElement('div');
+                    line.innerText = logs[logIndex];
+                    consoleOutput.appendChild(line);
+                    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                    lastLogIndex = logIndex;
+                }
+                
+                setTimeout(startLoading, 30 + Math.random() * 100);
             } else {
                 setTimeout(() => {
-                    loader.style.opacity = '0';
+                    loaderContainer.style.opacity = '0';
                     setTimeout(() => {
-                        loader.style.display = 'none';
-                        mainContent.classList.add('visible');
+                        loaderContainer.style.display = 'none';
+                        mainContentElem.style.display = 'flex';
+                        document.body.style.backgroundColor = 'var(--cp-black)';
                     }, 500);
                 }, 500);
             }
         }
 
-        window.onload = updateLoader;
+        window.onload = startLoading;
     </script>
 </body>
 </html>
