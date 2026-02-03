@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zero Runner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game" width="800" height="300"></canvas>
+
+    <div id="ui">
+      <div class="logo">ZERO//RUN</div>
+      <div class="status">
+        <span>STATE:<span id="state-value">0</span></span>
+        <span>ONES:<span id="ones-value">0</span>/5</span>
+        <span>SCORE:<span id="score-value">0</span></span>
+      </div>
+      <div id="message">
+        PRESS SPACE OR TAP TO START
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
