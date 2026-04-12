@@ -8,7 +8,7 @@ content:
     type: collection
     path: blog
     format: raw
-    filename: "{{slug}}.html"
+    filename: "{slug}.html"
     fields:
-      - {name: title, type: string}
-      - {name: body, type: rich-text}
+      - { name: title, type: string, required: true }
+      - { name: body, type: rich-text }
