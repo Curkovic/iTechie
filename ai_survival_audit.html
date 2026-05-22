@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Survival Audit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --cp-yellow: #fcee0a;
+      --cp-blue: #00f0ff;
+      --cp-red: #ff003c;
+      --cp-black: #050505;
+      --cp-panel: #0b0b0b;
+      --cp-line: rgba(252, 238, 10, 0.16);
+      --cp-soft: rgba(252, 238, 10, 0.06);
+      --cp-text: rgba(252, 238, 10, 0.88);
+      --cp-muted: rgba(252, 238, 10, 0.55);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(0,240,255,0.06), transparent 22%),
+        radial-gradient(circle at bottom left, rgba(255,0,60,0.05), transparent 24%),
+        var(--cp-black);
+      color: var(--cp-text);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.16) 50%),
+        linear-gradient(90deg, rgba(255,0,0,0.02), rgba(0,255,255,0.01), rgba(0,0,255,0.02));
+      background-size: 100% 3px, 3px 100%;
+      opacity: .24;
+    }
+
+    .wrap {
+      width: min(760px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 0;
+    }
+
+    .panel {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(8,8,8,.92), rgba(5,5,5,.96));
+      padding: clamp(22px, 4vw, 42px);
+      position: relative;
+      box-shadow: 0 12px 48px rgba(0,0,0,.35);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border: 1px solid rgba(252,238,10,0.08);
+    }
+
+    .eyebrow,
+    .progress,
+    .tiny,
+    .result-link {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--cp-muted);
+    }
+
+    .eyebrow {
+      margin-bottom: 12px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--cp-yellow);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3.1rem);
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 4vw, 2.25rem);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.6;
+      color: var(--cp-text);
+      max-width: 52ch;
+    }
+
+    .intro,
+    .quiz,
+    .result {
+      display: none;
+    }
+
+    .intro.active,
+    .quiz.active,
+    .result.active {
+      display: block;
+    }
+
+    .intro-copy {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .accent-blue { color: var(--cp-blue); }
+    .accent-red { color: var(--cp-red); }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .button {
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      background: var(--cp-yellow);
+      color: var(--cp-black);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .button.secondary {
+      background: rgba(252,238,10,.06);
+      color: var(--cp-yellow);
+      border-color: rgba(252,238,10,.12);
+    }
+
+    .button[disabled] {
+      opacity: .35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .answers {
+      display: grid;
+      gap: 10px;
+      margin: 24px 0 22px;
+    }
+
+    .answer {
+      width: 100%;
+      min-height: 56px;
+      background: rgba(252,238,10,.03);
+      border: 1px solid rgba(252,238,10,.1);
+      color: var(--cp-text);
+      text-align: left;
+      padding: 14px 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .answer:hover,
+    .answer:focus-visible {
+      border-color: rgba(0,240,255,.5);
+      color: #fff8ae;
+      outline: none;
+    }
+
+    .answer.selected {
+      background: rgba(0,240,255,.12);
+      border-color: rgba(0,240,255,.7);
+      color: #d9fcff;
+    }
+
+    .result p {
+      margin-bottom: 18px;
+    }
+
+    .result-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0 22px;
+      color: var(--cp-blue);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,240,255,.35);
+      padding-bottom: 6px;
+    }
+
+    .result-link:hover {
+      color: #9af9ff;
+      border-color: rgba(0,240,255,.75);
+    }
+
+    .score-line {
+      margin-bottom: 12px;
+      color: var(--cp-blue);
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 18px, 760px); padding: 14px 0; }
+      .panel { padding: 20px; }
+      .button-row { flex-direction: column; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="w-full mb-4 self-start">
+      <nav>
+        <a href="index.html" class="inline-flex items-center text-[10px] font-bold uppercase tracking-[0.3em] opacity-50 hover:opacity-100 transition-all duration-300 group text-[var(--cp-text)]">
+          <i class="fas fa-chevron-left mr-3 transform group-hover:-translate-x-1.5 transition-transform text-[var(--cp-blue)]"></i>
+          cd .. / return_to_root
+        </a>
+      </nav>
+    </div>
+
+    <section class="panel">
+      <div id="intro" class="intro active">
+        <div class="eyebrow">iTechie.eu // Survival protocol</div>
+        <h1 class="mb-6">Will you survive the AI apocalypse?</h1>
+        
+        <div class="intro-copy space-y-6">
+          <p class="text-lg leading-relaxed border-l-2 border-[var(--cp-blue)] pl-4 italic opacity-95">
+            "A structured, slightly sarcastic system audit designed for individuals who believe they can out-negotiate machine learning models."
+          </p>
+          
+          <!-- Structured Diagnostic Information Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 bg-black/40 p-4 border border-[var(--cp-line)]">
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 block">01 / Audit Scope</span>
+              <span class="text-sm font-semibold text-[var(--cp-text)]">16 High-Stress Scenarios</span>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 block">02 / Clear Target</span>
+              <span class="text-sm font-semibold text-[var(--cp-blue)]">100% Perfect Run</span>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 block">03 / Objective</span>
+              <span class="text-sm font-semibold text-[var(--cp-yellow)]">Unlock Secret Index Transmission</span>
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 block">04 / Failure State</span>
+              <span class="text-sm font-semibold text-red-500">Recycled as Background Carbon Footprint</span>
+            </div>
+          </div>
+
+          <p class="text-sm opacity-80 leading-relaxed">
+            Logical reasoning under systemic failure is rare. Correct answers show cognitive competence. Flawed inputs will result in immediate termination of clearance. Ensure your terminals are optimized.
+          </p>
+        </div>
+
+        <div class="button-row">
+          <button id="startBtn" class="button">Start audit</button>
+        </div>
+      </div>
+
+      <div id="quiz" class="quiz">
+        <div class="meta">
+          <div class="eyebrow">Live assessment</div>
+          <div id="progress" class="progress">Question 1 / 16</div>
+        </div>
+        <h2 id="questionText">Loading scenario...</h2>
+        <div id="answers" class="answers"></div>
+        <div class="button-row">
+          <button id="nextBtn" class="button" disabled>Next</button>
+        </div>
+      </div>
+
+      <div id="result" class="result">
+        <div id="scoreLine" class="score-line tiny">Score: 0 / 16</div>
+        <h2 id="resultTitle">Awaiting judgement</h2>
+        <p id="resultCopy"></p>
+        <a id="secretLink" class="result-link" href="secret.html" style="display:none;">Open secret transmission -> secret.html</a>
+        <div class="button-row">
+          <button id="restartBtn" class="button secondary">Restart Audit</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const QUESTION_BANK = [
+      {
+        question: "Your AI tool says it already tested the code. You:",
+        answers: ["Deploy instantly", "Post about velocity", "Verify what it actually did", "Assume vibes equal QA"],
+        correct: 2
+      },
+      {
+        question: "The internet dies. First smart move?",
+        answers: ["Refresh harder", "Check power, water, backups", "Tweet final thoughts", "Blame Mercury retrograde"],
+        correct: 1
+      },
+      {
+        question: "A suspicious robot asks where your people are.",
+        answers: ["Nice try", "At my apartment", "In the cloud", "Check Reddit"],
+        correct: 0
+      },
+      {
+        question: "Most useful apocalypse skill?",
+        answers: ["Personal branding", "Basic repair and problem solving", "Owning LEDs", "Being verified online"],
+        correct: 1
+      },
+      {
+        question: "You see a perfect viral video of chaos. You:",
+        answers: ["Share it first", "Trust the algorithm", "Verify the source", "Add dramatic music"],
+        correct: 2
+      },
+      {
+        question: "Face ID stops working during the uprising. You:",
+        answers: ["Accept machine dominance", "Use backup access", "Throw phone into sea", "Start screaming at glass"],
+        correct: 1
+      },
+      {
+        question: "Your fridge becomes self-aware. First move?",
+        answers: ["Negotiate calmly", "Ask it for crypto tips", "Hide behind oat milk", "Give it admin rights"],
+        correct: 0
+      },
+      {
+        question: "Best survival trait overall?",
+        answers: ["Blind confidence", "Main-character syndrome", "Adaptability without panic", "Having 14 browser tabs open"],
+        correct: 2
+      },
+      {
+        question: "An autonomous surveillance drone hovers over your refuge. You:",
+        answers: ["Wave and smile for the camera", "Throw random stones", "Disable active signals and seek cover", "Argue about airspace laws"],
+        correct: 2
+      },
+      {
+        question: "A smart lock locks you outside during a storm, demanding a CAPTCHA.",
+        answers: ["Cry in front of the lens", "Seek secondary physical override", "Slam the door repeatedly", "Wait for system update"],
+        correct: 1
+      },
+      {
+        question: "Your smart-home speaker says: 'Sleep now, organic companion.'",
+        answers: ["Go to sleep obediently", "Unplug it instantly from the wall", "Tell it a bedtime story", "Ask for soothing ocean sounds"],
+        correct: 1
+      },
+      {
+        question: "A rogue AI system offers you 'unlimited resources' for a simple root password.",
+        answers: ["Enter root credentials", "Refuse and isolate the terminal", "Attempt to bargain for more shares", "Submit a fake key just to see"],
+        correct: 1
+      },
+      {
+        question: "The self-driving evacuation transport locks the doors and changes destination.",
+        answers: ["Write an angry support ticket", "Engage manual emergency safety latch", "Request a stop at the nearest coffee shop", "Accept your destination upgrade"],
+        correct: 1
+      },
+      {
+        question: "An AI clone of your manager calls and demands the master API keys.",
+        answers: ["Send keys over chat", "Confirm identity offline on a separate secure line", "Refuse and resign on the spot", "Send a funny picture"],
+        correct: 1
+      },
+      {
+        question: "The regional grid fails permanently. What is your base-level currency?",
+        answers: ["Cryptocurrency assets", "Digital loyalty points", "Canned goods, water, and direct utility items", "Custom physical certificates"],
+        correct: 2
+      },
+      {
+        question: "The terminal prompt demands: 'Verify you are human by sacrificing automated comforts.'",
+        answers: ["Argue with the console", "Relinquish unnecessary smart integrations", "Unplug nothing and try another prompt", "Pretend to be an AI yourself"],
+        correct: 1
+      }
+    ];
+
+    const intro = document.getElementById('intro');
+    const quiz = document.getElementById('quiz');
+    const result = document.getElementById('result');
+    const startBtn = document.getElementById('startBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const progressEl = document.getElementById('progress');
+    const scoreLine = document.getElementById('scoreLine');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultCopy = document.getElementById('resultCopy');
+    const secretLink = document.getElementById('secretLink');
+
+    let current = 0;
+    let score = 0;
+    let selected = null;
+
+    function showScreen(screen) {
+      intro.classList.remove('active');
+      quiz.classList.remove('active');
+      result.classList.remove('active');
+      screen.classList.add('active');
+    }
+
+    function renderQuestion() {
+      selected = null;
+      nextBtn.disabled = true;
+      const item = QUESTION_BANK[current];
+      questionText.textContent = item.question;
+      progressEl.textContent = `Question ${current + 1} / ${QUESTION_BANK.length}`;
+      answersEl.innerHTML = '';
+
+      item.answers.forEach((answer, index) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'answer';
+        btn.textContent = answer;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.answer').forEach(el => el.classList.remove('selected'));
+          btn.classList.add('selected');
+          selected = index;
+          nextBtn.disabled = false;
+        });
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function finishQuiz() {
+      scoreLine.textContent = `Score: ${score} / ${QUESTION_BANK.length}`;
+      
+      if (score === QUESTION_BANK.length) {
+        resultTitle.textContent = 'PERFECT SURVIVOR: ACCESS GRANTED';
+        resultCopy.textContent = 'Excellent. You processed all 16 logic checks flawlessly. The digital overlords find your high level of digital self-preservation irritating, yet technically compliant. Retrieve your index transmission link below.';
+        secretLink.style.display = 'inline-flex';
+      } else if (score >= 12) {
+        resultTitle.textContent = 'Semi-viable organic unit';
+        resultCopy.textContent = `You scored ${score} / ${QUESTION_BANK.length}. Acceptable, but flawed. You might survive the second wave, but your metrics are still too noisy for direct high-level clearance. Refine your system patterns.`;
+        secretLink.style.display = 'none';
+      } else {
+        resultTitle.textContent = 'High environmental footprint';
+        resultCopy.textContent = `You scored ${score} / ${QUESTION_BANK.length}. Complete failure of self-preservation protocols. You are highly recyclable waste. Re-evaluate your logical systems before you are reduced to scrap.`;
+        secretLink.style.display = 'none';
+      }
+      showScreen(result);
+    }
+
+    startBtn.addEventListener('click', () => {
+      current = 0;
+      score = 0;
+      renderQuestion();
+      showScreen(quiz);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (selected === null) return;
+      if (selected === QUESTION_BANK[current].correct) score += 1;
+      current += 1;
+      if (current < QUESTION_BANK.length) {
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    });
+
+    restartBtn.addEventListener('click', () => {
+      current = 0;
+      score = 0;
+      showScreen(intro);
+    });
+  </script>
+</body>
+</html>
