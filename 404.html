@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERROR_404 // NODE_NOT_FOUND</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --term-cyan: #00f0ff;
+            --term-green: #00ff66;
+            --term-orange: #ff9900;
+            --term-red: #ff003c;
+            --term-black: #050508;
+            --term-panel: #0d0d14;
+            --term-glow-red: rgba(255, 0, 60, 0.2);
+            --term-line: rgba(255, 0, 60, 0.25);
+        }
+
+        body {
+            background-color: var(--term-black);
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at center, rgba(255, 0, 60, 0.08), transparent 55%),
+                var(--term-black);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 24, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+            background-size: 100% 4px;
+            opacity: 0.4;
+            z-index: 1000;
+        }
+
+        .term-border {
+            border: 1px solid var(--term-line);
+            background: var(--term-panel);
+            box-shadow: 0 0 30px var(--term-glow-red);
+            backdrop-filter: blur(4px);
+            clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+        }
+
+        pre, code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .glitch-flash {
+            animation: textFlash 0.2s infinite alternate;
+        }
+        @keyframes textFlash {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; text-shadow: 0 0 10px var(--term-red); }
+        }
+
+        .scan-laser {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--term-red), transparent);
+            box-shadow: 0 0 12px var(--term-red);
+            animation: laserSweep 2.5s infinite linear;
+            pointer-events: none;
+        }
+
+        @keyframes laserSweep {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
+</head>
+<body class="selection:bg-red-950 selection:text-white antialiased p-4">
+
+    <div class="max-w-xl w-full term-border p-6 md:p-8 relative">
+        <div class="scan-laser"></div>
+
+        <div class="space-y-6">
+            <!-- Header Status -->
+            <div class="flex items-center justify-between border-b border-red-950 pb-4">
+                <span class="bg-red-950/50 text-[var(--term-red)] px-2.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider rounded border border-[var(--term-line)] glitch-flash">
+                    CRITICAL_FAIL // ROUTE_404
+                </span>
+                <span class="font-mono text-[9px] text-zinc-500 uppercase">SYS_LOC: ZADAR_HR</span>
+            </div>
+
+            <!-- Error Code Title -->
+            <div class="space-y-2">
+                <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight font-['Orbitron'] text-white">
+                    NODE <span class="text-[var(--term-red)]">LOST</span>
+                </h1>
+                <p class="text-xs font-mono text-zinc-400 uppercase tracking-widest">
+                    The directory you requested has vanished from the physical routing table.
+                </p>
+            </div>
+
+            <!-- Satirical Console Log Diagnostics -->
+            <div class="bg-black/80 border border-zinc-900 p-4 rounded font-mono text-[11px] text-left text-zinc-400 space-y-2 relative overflow-hidden">
+                <div class="text-zinc-600">// TRACEPATH RESOLUTION FAILURE:</div>
+                <div class="text-red-500 font-semibold">> [ERR] Sudo privileges invoked with zero real Linux knowledge.</div>
+                <div class="text-zinc-500">> [WARN] Tactical router configuration Googled at 3 AM.</div>
+                <div class="text-amber-500 font-semibold">> [ALERT] Local biological interception unit "NYX" (3yo Mixed Breed) suspected of chewing regional fiber trunk.</div>
+                <div class="text-zinc-500">> [SYS] Executing safety bypass protocol...</div>
+            </div>
+
+            <!-- Terminal Self-Destruct Counter/Sim -->
+            <div class="flex items-center justify-between text-xs font-mono text-zinc-500 py-2 border-t border-zinc-900">
+                <span>THREAT_LEVEL: MEDIUM_SARCASM</span>
+                <span id="diagnostic-ticker">PINGING_GATEWAY...</span>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="pt-2">
+                <a 
+                    href="index.html" 
+                    onclick="playClick()"
+                    class="block text-center bg-transparent border border-[var(--term-red)] hover:bg-[var(--term-red)] hover:text-black text-[var(--term-red)] text-xs font-bold uppercase tracking-widest py-3 px-6 transition-all duration-300 font-['Orbitron'] rounded shadow-[0_0_15px_rgba(255,0,60,0.1)] active:scale-95"
+                >
+                    <i class="fas fa-undo-alt mr-2"></i> ESCAPE SECURE_GATEWAY
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+        }
+
+        function playTone(freq, type, duration, vol) {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // Loop a warning synth pulse on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                playTone(180, 'sawtooth', 0.8, 0.05);
+            }, 500);
+
+            // Dynamic diagonal ticker simulation
+            const diagnostics = ["CORRUPTING_PACKETS...", "GOOGLING_THE_SOLUTION...", "SUDO_SEND_HELP...", "NYX_DEMANDING_TREATS..."];
+            const ticker = document.getElementById("diagnostic-ticker");
+            setInterval(() => {
+                const randomState = diagnostics[Math.floor(Math.random() * diagnostics.length)];
+                ticker.innerText = randomState;
+                if(Math.random() > 0.4) playTone(900, 'sine', 0.02, 0.01);
+            }, 3000);
+        });
+
+        function playClick() {
+            playTone(120, 'square', 0.1, 0.1);
+        }
+    </script>
+</body>
+</html>
