@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="hr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing & Web Audit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cp-yellow: #fcee0a;
+      --cp-blue: #00f0ff;
+      --cp-red: #ff003c;
+      --cp-black: #050505;
+      --cp-panel: #0b0b0b;
+      --cp-gray: #242424;
+      --cp-soft: rgba(252, 238, 10, 0.08);
+      --cp-line: rgba(252, 238, 10, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(0,240,255,0.08), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(255,0,60,0.08), transparent 26%),
+        var(--cp-black);
+      color: var(--cp-yellow);
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.22) 50%),
+        linear-gradient(90deg, rgba(255,0,0,0.02), rgba(0,255,255,0.01), rgba(0,0,255,0.02));
+      background-size: 100% 3px, 3px 100%;
+      opacity: .35;
+      z-index: 1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, transparent 0%, rgba(252,238,10,.06) 48%, transparent 100%);
+      animation: scan 7s linear infinite;
+      z-index: 1;
+      opacity: .3;
+    }
+
+    @keyframes scan {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(100%); }
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 rgba(252,238,10,0), 0 0 0 rgba(0,240,255,0); }
+      50% { box-shadow: 0 0 24px rgba(252,238,10,0.12), 0 0 8px rgba(0,240,255,0.12); }
+    }
+
+    .shell {
+      position: relative;
+      z-index: 2;
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto;
+      background: linear-gradient(180deg, rgba(9,9,9,.96), rgba(4,4,4,.96));
+      border: 2px solid var(--cp-yellow);
+      clip-path: polygon(0 0, 100% 0, 100% 96%, 98% 100%, 0 100%);
+      animation: pulseBorder 5s infinite ease-in-out;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--cp-line);
+      background: rgba(252, 238, 10, 0.05);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      color: var(--cp-yellow);
+      flex: 0 0 auto;
+      filter: drop-shadow(0 0 10px rgba(252,238,10,.22));
+    }
+
+    .brand h1,
+    .section-title,
+    .question-title,
+    .result-title {
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .brand h1 {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin: 0;
+      line-height: 1;
+    }
+
+    .muted,
+    .mini,
+    .result-copy,
+    .side-copy {
+      color: rgba(252,238,10,.72);
+    }
+
+    .mini {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    .cursor {
+      width: 8px;
+      height: 16px;
+      background: var(--cp-yellow);
+      display: inline-block;
+      animation: blink 1s step-end infinite;
+      margin-left: 6px;
+    }
+
+    .grid-wrap {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .panel,
+    .quiz-panel {
+      background: rgba(252,238,10,.03);
+      border: 1px solid var(--cp-line);
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .stack { display: grid; gap: 14px; }
+
+    .stat {
+      border: 1px solid var(--cp-line);
+      padding: 12px 14px;
+      background: rgba(0,0,0,.35);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      text-transform: uppercase;
+      font-size: .92rem;
+      letter-spacing: .08em;
+    }
+
+    .stat strong {
+      color: var(--cp-blue);
+      font-size: 1.15rem;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      padding: 7px 10px;
+      border: 1px solid var(--cp-line);
+      background: rgba(0,240,255,.1);
+      color: var(--cp-blue);
+      font-weight: 700;
+    }
+
+    .question-title {
+      font-size: clamp(1.3rem, 3vw, 2.2rem);
+      line-height: 1.25;
+      margin: 14px 0 18px;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .answer {
+      width: 100%;
+      min-height: 64px;
+      border: 1px solid var(--cp-yellow);
+      background: rgba(252,238,10,.03);
+      color: var(--cp-yellow);
+      padding: 14px;
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .answer:hover,
+    .answer:focus-visible {
+      background: var(--cp-yellow);
+      color: var(--cp-black);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .answer.selected {
+      background: var(--cp-blue);
+      border-color: var(--cp-blue);
+      color: var(--cp-black);
+      box-shadow: 0 0 16px rgba(0,240,255,.18);
+    }
+
+    .answer.correct-highlight {
+      background: #10B981 !important;
+      border-color: #10B981 !important;
+      color: var(--cp-black) !important;
+    }
+
+    .answer.wrong-highlight {
+      background: var(--cp-red) !important;
+      border-color: var(--cp-red) !important;
+      color: var(--cp-black) !important;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      min-height: 52px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      min-height: 46px;
+      border: 1px solid var(--cp-yellow);
+      background: var(--cp-yellow);
+      color: var(--cp-black);
+      padding: 0 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: .2s ease;
+      clip-path: polygon(0 0, 92% 0, 100% 28%, 100% 100%, 8% 100%, 0 72%);
+    }
+
+    .button:hover { transform: translateY(-1px); }
+    .button.secondary {
+      background: transparent;
+      color: var(--cp-yellow);
+    }
+
+    .button[disabled] {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .progress {
+      font-family: 'Fira Code', monospace;
+      font-size: .84rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(252,238,10,.6);
+    }
+
+    .result {
+      display: none;
+      min-height: 420px;
+      align-content: center;
+    }
+
+    .result.show { display: grid; }
+    .hidden-panel { display: none; }
+
+    .result-title {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin: 12px 0;
+      line-height: .95;
+    }
+
+    .result-score {
+      font-family: 'Fira Code', monospace;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--cp-blue);
+      font-size: .92rem;
+    }
+
+    .result-copy {
+      font-size: 1.08rem;
+      line-height: 1.65;
+      max-width: 54ch;
+      margin-bottom: 20px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 22px;
+    }
+
+    .badge {
+      border: 1px solid var(--cp-line);
+      padding: 8px 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .75rem;
+      background: rgba(252,238,10,.05);
+    }
+
+    .callout {
+      border: 1px dashed rgba(0,240,255,.5);
+      color: var(--cp-blue);
+      padding: 12px 14px;
+      font-size: .95rem;
+      line-height: 1.5;
+      background: rgba(0,240,255,.06);
+    }
+
+    .accent-red { color: var(--cp-red); }
+    .accent-blue { color: var(--cp-blue); }
+
+    @media (max-width: 920px) {
+      .grid-wrap { grid-template-columns: 1fr; }
+      .answers { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 18px, 1120px); margin: 10px auto; }
+      .topbar { padding: 12px 14px; }
+      .grid-wrap { padding: 14px; gap: 14px; }
+      .panel, .quiz-panel { padding: 14px; }
+      .controls { align-items: stretch; }
+      .controls .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 64 64" aria-label="iTechie logo" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="48" height="34" rx="6" stroke="currentColor" stroke-width="4"/>
+          <path d="M20 52H44" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          <path d="M24 23L18 28L24 33" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M31 36L36 20" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          <path d="M41 23L47 28L41 33" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <div class="mini">iTechie.eu // Digitalni Marketing & Web</div>
+          <h1>Marketing & Web Audit <span class="cursor"></span></h1>
+        </div>
+      </div>
+      <div class="mini accent-blue">Status: Analiziram spremnost</div>
+    </header>
+
+    <div class="grid-wrap">
+      <aside class="panel stack">
+        <div>
+          <div class="section-title mini">Brifing</div>
+          <p class="side-copy" style="margin-top:10px; line-height:1.6;">
+            Provjera znanja iz web dizajna, SEO optimizacije, Google Ads kampanja, e-mail marketinga i analitike. Baza sadrži 100 stručnih pitanja.
+          </p>
+        </div>
+
+        <div class="stack">
+          <div class="stat"><span>Pitanja ukupno</span><strong id="stat-total">100</strong></div>
+          <div class="stat"><span>Trenutno</span><strong id="stat-current">0</strong></div>
+          <div class="stat"><span>Prolaznost</span><strong id="stat-score">0%</strong></div>
+        </div>
+
+        <div>
+          <div class="section-title mini">Kategorizacija</div>
+          <div class="badge-row">
+            <span class="badge">0-39% Amater</span>
+            <span class="badge">40-79% Specijalist</span>
+            <span class="badge">80-100% Guru</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          Sustav automatski vrednuje točne odgovore u realnom vremenu. Odaberite način igre i započnite testiranje.
+        </div>
+      </aside>
+
+      <section class="quiz-panel">
+        <!-- START STAGE -->
+        <div id="startStage" class="stack" style="align-content: center; min-height: 350px;">
+          <div class="tag">Inicijalizacija sustava</div>
+          <h2 class="question-title">Odaberite način testiranja</h2>
+          <p class="side-copy" style="margin-bottom: 20px;">
+            Želite li brzi test od 20 nasumično odabranih pitanja ili se osjećate spremno za prolazak kroz svih 100 pitanja iz baze?
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button id="startQuickBtn" class="button">Brzi Audit (20 pitanja)</button>
+            <button id="startFullBtn" class="button secondary">Kompletni Audit (100 pitanja)</button>
+          </div>
+        </div>
+
+        <!-- QUIZ STAGE -->
+        <div id="quizStage" class="hidden-panel">
+          <div class="tag">Protokol provjere aktivan</div>
+          <h2 id="questionText" class="question-title">Učitavam pitanje...</h2>
+          <div id="answers" class="answers"></div>
+          <div class="controls">
+            <div id="progress" class="progress">Pitanje 1 / 100</div>
+            <button id="nextBtn" class="button" disabled>Potvrdi odgovor</button>
+          </div>
+        </div>
+
+        <!-- RESULT STAGE -->
+        <div id="resultStage" class="result" aria-live="polite">
+          <div class="tag">Audit završen</div>
+          <div id="resultScore" class="result-score">Rezultat: 0 / 100</div>
+          <h2 id="resultTitle" class="result-title">Sustav obrađuje...</h2>
+          <p id="resultCopy" class="result-copy"></p>
+          <div id="resultBadges" class="badge-row"></div>
+          <div class="controls">
+            <button id="restartBtn" class="button">Ponovi test</button>
+            <a href="https://itechie.eu" target="_blank" rel="noopener noreferrer" class="button secondary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">Povratak na čvor</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const QUESTION_BANK = [
+      {
+        question: "Što je internetsko sjedište?",
+        answers: ["Samo jedna web stranica.", "Skup internet stranica i srodnog sadržaja pod zajedničkom domenom.", "Aplikacija za mobilni telefon.", "E-mail servis."],
+        correct: 1
+      },
+      {
+        question: "Što je CMS?",
+        answers: ["Sustav za upravljanje sadržajem.", "Sustav za mjerenje klikova.", "Marketinška kampanja.", "Vrsta domene."],
+        correct: 0
+      },
+      {
+        question: "Što je WordPress?",
+        answers: ["Društvena mreža.", "Besplatna platforma otvorenog koda za izradu web stranica.", "Alat za oglašavanje.", "E-mail klijent."],
+        correct: 1
+      },
+      {
+        question: "Što je domena?",
+        answers: ["IP adresa servera.", "Adresa web mjesta koju korisnici upisuju u preglednik.", "Naziv HTML datoteke.", "Vrsta oglasne kampanje."],
+        correct: 1
+      },
+      {
+        question: "Što je poddomena?",
+        answers: ["Dio domene koji označava dodatni poddio web mjesta.", "Tip oglasa.", "Naziv CMS-a.", "Vrsta e-maila."],
+        correct: 0
+      },
+      {
+        question: "Što je TLD?",
+        answers: ["Second level domain.", "Domena najviše razine.", "WordPress dodatak.", "Tražilica."],
+        correct: 1
+      },
+      {
+        question: "Što je blog?",
+        answers: ["Web sjedište za raspravu.", "Internetsko sjedište s objavama sadržaja, često jednog autora.", "Trgovina na internetu.", "E-mail kampanja."],
+        correct: 1
+      },
+      {
+        question: "Što je forum?",
+        answers: ["Web mjesto za raspravu gdje korisnici komuniciraju porukama.", "Vrsta WordPress teme.", "Oglasna mreža.", "Analitički alat."],
+        correct: 0
+      },
+      {
+        question: "Što je e-commerce?",
+        answers: ["Online trgovina za prodaju proizvoda i usluga.", "Službeni blog tvrtke.", "Aplikacija za dizajn.", "Vrsta newslettera."],
+        correct: 0
+      },
+      {
+        question: "Što je SaaS?",
+        answers: ["Softver koji se koristi kao usluga.", "Sustav za analitiku.", "Vrsta oglasa.", "Domena najviše razine."],
+        correct: 0
+      },
+      {
+        question: "Što su društvene mreže?",
+        answers: ["Internetske usluge za povezivanje i komunikaciju korisnika.", "Sustavi za naplatu.", "Vrsta web hostingga.", "Alati za izradu banner oglasa."],
+        correct: 0
+      },
+      {
+        question: "Koja je jedna od prednosti društvenih mreža?",
+        answers: ["Smanjuju komunikaciju.", "Povećavaju dostupnost informacija.", "Brišu sadržaj.", "Uklanjaju privatnost."],
+        correct: 1
+      },
+      {
+        question: "Koji je jedan rizik društvenih mreža?",
+        answers: ["Ovisnost.", "Veća brzina interneta.", "Bolji SEO.", "Više domena."],
+        correct: 0
+      },
+      {
+        question: "Što je osobni profil na Facebooku?",
+        answers: ["Javni profil tvrtke.", "Profil koji predstavlja fizičku osobu.", "Grupa korisnika.", "Vrsta oglasa."],
+        correct: 1
+      },
+      {
+        question: "Što je stranica na Facebooku?",
+        answers: ["Privatni chat.", "Javni profil koji predstavlja poslovnu, organizacijsku ili javnu osobu.", "Vrsta storyja.", "E-mail lista."],
+        correct: 1
+      },
+      {
+        question: "Što je grupa na Facebooku?",
+        answers: ["Privatni profil za povezivanje ljudi sa zajedničkim interesom.", "Javna stranica za oglase.", "Vrsta kampanje.", "SEO alat."],
+        correct: 0
+      },
+      {
+        question: "Što je post na Instagramu?",
+        answers: ["Email.", "Fotografija ili videozapis objavljen na Instagramu.", "Vrsta domene.", "URL."],
+        correct: 1
+      },
+      {
+        question: "Što je feed na Instagramu?",
+        answers: ["Popis postova koje korisnik vidi kada otvori aplikaciju.", "Uređivač slika.", "Analitika profila.", "Vrsta oglasa."],
+        correct: 0
+      },
+      {
+        question: "Što je LinkedIn?",
+        answers: ["Društvena mreža za profesionalno povezivanje.", "Platforma za igrice.", "E-mail servis.", "CMS dodatak."],
+        correct: 0
+      },
+      {
+        question: "Što je content marketing?",
+        answers: ["Kupnja oglasa na Googleu.", "Strategija stvaranja i distribucije vrijednog sadržaja radi privlačenja publike.", "Slanje spam e-mailova.", "Izrada logotipa."],
+        correct: 1
+      },
+      {
+        question: "Koji je glavni cilj content marketinga?",
+        answers: ["Izgraditi povjerenje i privući publiku kroz koristan sadržaj.", "Smanjiti broj posjetitelja.", "Zamijeniti web stranicu.", "Onemogućiti SEO."],
+        correct: 0
+      },
+      {
+        question: "Koja je jedna od vrsta content marketinga?",
+        answers: ["Blogovi.", "VPN.", "Cache plugin.", "Ad Rank."],
+        correct: 0
+      },
+      {
+        question: "Što je influencer marketing?",
+        answers: ["Suradnja brenda s utjecajnim osobama na društvenim mrežama.", "Izrada web stranice bez sadržaja.", "Slanje masovnih oglasa bez publike.", "Kupnja domena."],
+        correct: 0
+      },
+      {
+        question: "Tko su mikro influenceri?",
+        answers: ["Ljudi s manje od 1.000 pratitelja.", "Ljudi s 10.000 do 100.000 pratitelja na jednoj platformi.", "Isključivo slavne osobe.", "Vlasnici web stranica."],
+        correct: 1
+      },
+      {
+        question: "Što je e-mail marketing?",
+        answers: ["Slanje komercijalnih poruka putem e-maila potencijalnim ili postojećim kupcima.", "Slanje SMS-ova bez privole.", "Objavljivanje samo na blogu.", "Izrada banner oglasa."],
+        correct: 0
+      },
+      {
+        question: "Što je newsletter?",
+        answers: ["Vrsta bloga.", "Periodični e-mail s novostima, člancima ili drugim sadržajem.", "Google Ads kampanja.", "CMS dodatak."],
+        correct: 1
+      },
+      {
+        question: "Što je double opt-in?",
+        answers: ["Kupnja e-mail liste.", "Dvostruka prijava za e-mail komunikaciju.", "Vrsta analitike.", "SEO tehnika."],
+        correct: 1
+      },
+      {
+        question: "Što je CTA?",
+        answers: ["Content tracking analytics.", "Poziv na akciju.", "Customer traffic ad.", "Click to average."],
+        correct: 1
+      },
+      {
+        question: "Što je segment u e-mail marketingu?",
+        answers: ["Dio popisa primatelja.", "Vrsta predloška.", "Spam filter.", "Kategorija domene."],
+        correct: 0
+      },
+      {
+        question: "Što je flow u e-mail marketingu?",
+        answers: ["Jedna promotivna kampanja.", "Niz e-poruka koje se šalju pojedinim profilima kada ispune određene zahtjeve.", "Vrsta newslettera.", "Naziv domene."],
+        correct: 1
+      },
+      {
+        question: "Što je template u e-mail marketingu?",
+        answers: ["Predložak za ponovno korištenje elemenata e-maila.", "Lista pretplatnika.", "Spam poruka.", "HTML oznaka."],
+        correct: 0
+      },
+      {
+        question: "Koja je važna praksa u e-mail marketingu?",
+        answers: ["Kupovati liste za slanje e-pošte.", "Segmentirati publiku.", "Slati bez naslova.", "Koristiti samo veliki tekst."],
+        correct: 1
+      },
+      {
+        question: "Što je re-engagement e-mail?",
+        answers: ["E-mail za ponovno angažiranje neaktivnih korisnika.", "E-mail za kupnju domene.", "E-mail za brisanje računa.", "E-mail za SEO."],
+        correct: 0
+      },
+      {
+        question: "Što je permission e-mail?",
+        answers: ["E-mail poslan bez dopuštenja.", "E-mail poslan nakon što korisnik izrazi interes ili da dopuštenje.", "E-mail s virusom.", "E-mail za oglas."],
+        correct: 1
+      },
+      {
+        question: "Koji alat za e-mail marketing je naveden?",
+        answers: ["Mailchimp.", "Figma.", "Ahrefs.", "Canva."],
+        correct: 0
+      },
+      {
+        question: "Koji je još jedan alat za e-mail marketing naveden?",
+        answers: ["AWeber.", "Wordfence.", "Yoast.", "Elementor."],
+        correct: 0
+      },
+      {
+        question: "Koji je još jedan alat za e-mail marketing naveden?",
+        answers: ["Brevo.", "Google Analytics.", "WooCommerce.", "Buffer."],
+        correct: 0
+      },
+      {
+        question: "Što je SEO?",
+        answers: ["Optimizacija za tražilice.", "Slanje e-mail kampanja.", "Dizajn logotipa.", "Kupnja ključnih riječi."],
+        correct: 0
+      },
+      {
+        question: "Što je SEM?",
+        answers: ["Samo plaćeni oglasi.", "Širi pojam marketinških strategija korištenja internetskih tražilica.", "Isključivo društvene mreže.", "Vrsta CMS-a."],
+        correct: 1
+      },
+      {
+        question: "Što je SERP?",
+        answers: ["Sustav za e-mail redoslijed.", "Stranica rezultata pretraživanja.", "Dodatak za WordPress.", "Vrsta oglasa."],
+        correct: 1
+      },
+      {
+        question: "Koja tri elementa tražilice uzima u obzir pri određivanju mjesta na SERP-u?",
+        answers: ["Rang, autoritet i relevantnost.", "Boja, font i logo.", "Budget, ads i CTR.", "Traffic, template i title."],
+        correct: 0
+      },
+      {
+        question: "Što je rang?",
+        answers: ["Položaj internetskog sjedišta na SERP-u.", "Broj pretplatnika.", "Naziv domene.", "Vrsta contenta."],
+        correct: 0
+      },
+      {
+        question: "Što je relevantnost u SEO-u?",
+        answers: ["Koliko je sadržaj povezan s korisničkim upitom.", "Koliko je stranica šarena.", "Koliko ima reklama.", "Koliko je duga domena."],
+        correct: 0
+      },
+      {
+        question: "Što je title tag?",
+        answers: ["Tekstualna oznaka naslova stranice u pregledniku i SERP-u.", "Vrsta e-maila.", "Link u newsletteru.", "Naziv servera."],
+        correct: 0
+      },
+      {
+        question: "Što je meta description?",
+        answers: ["Kratki opis stranice koji se prikazuje ispod rezultata pretraživanja.", "Glavna slika na stranici.", "Vrsta h1 oznake.", "E-mail predložak."],
+        correct: 0
+      },
+      {
+        question: "Koja je preporuka za h1 oznaku?",
+        answers: ["Koristiti više h1 oznaka na svakoj stranici.", "Koristiti samo jednu h1 oznaku po stranici.", "Uopće ne koristiti h oznake.", "Koristiti samo h5."],
+        correct: 1
+      },
+      {
+        question: "Što je alt atribut?",
+        answers: ["Alternativni tekst uz sliku.", "Vrsta budžeta.", "Naziv domene.", "Poseban CTR."],
+        correct: 0
+      },
+      {
+        question: "Što je mobile optimization?",
+        answers: ["Optimizacija web stranice za mobilne uređaje.", "Izrada mobilne aplikacije.", "Uklanjanje slike sa stranice.", "Prebacivanje na desktop verziju."],
+        correct: 0
+      },
+      {
+        question: "Što je anchor text?",
+        answers: ["Sidreni tekst poveznice.", "Uvodni tekst e-maila.", "Naziv domena.", "Naslov oglasa."],
+        correct: 0
+      },
+      {
+        question: "Što je keyword stuffing?",
+        answers: ["Prirodno korištenje riječi.", "Pretjerano ponavljanje ključnih riječi radi manipulacije rangiranjem.", "Korištenje meta opisa.", "Izrada sadržaja za korisnike."],
+        correct: 1
+      },
+      {
+        question: "Što je black hat SEO?",
+        answers: ["Nelegalne ili manipulativne SEO tehnike.", "Optimizacija brzine stranice.", "Pisanje kvalitetnog sadržaja.", "Izgradnja interne navigacije."],
+        correct: 0
+      },
+      {
+        question: "Što je white hat SEO?",
+        answers: ["Kvalitetan, pošten i korisnički orijentiran SEO.", "Spam komentari.", "Cloaking.", "Doorway pages."],
+        correct: 0
+      },
+      {
+        question: "Što je Google Analytics?",
+        answers: ["Alat za detaljnu analizu posjetitelja web stranice.", "Alat za dizajn logotipa.", "CMS dodatak za galerije.", "Alat za slanje newslettera."],
+        correct: 0
+      },
+      {
+        question: "Što je Google Search Console?",
+        answers: ["Alat za praćenje prisutnosti web stranice u rezultatima pretraživanja.", "Alat za video montažu.", "Alat za e-mail marketing.", "Alat za izradu bannera."],
+        correct: 0
+      },
+      {
+        question: "Što je AEO?",
+        answers: ["Optimizacija za odgovore.", "Optimizacija za oglase.", "Optimizacija za e-mail.", "Optimizacija za aplikacije."],
+        correct: 0
+      },
+      {
+        question: "Čemu služi AEO?",
+        answers: ["Prikazu izravnih odgovora u rezultatima pretrage.", "Slanju više e-mailova.", "Povećanju veličine slika.", "Izradi newslettera."],
+        correct: 0
+      },
+      {
+        question: "Što je schema markup?",
+        answers: ["Strukturirani podaci koje tražilice i AI lakše razumiju.", "Dizajn stranice.", "Vrsta kampanje.", "Filter za spam."],
+        correct: 0
+      },
+      {
+        question: "Što je upit tipa informational?",
+        answers: ["Upit za kupnju.", "Upit za informacije.", "Upit za navigaciju do brenda.", "Upit za brisanje računa."],
+        correct: 1
+      },
+      {
+        question: "Što je transakcijski upit?",
+        answers: ["Upit kojim korisnik želi ostvariti konverziju.", "Upit za čitanje novosti.", "Upit za gledanje profila.", "Upit za ulazak u grupu."],
+        correct: 0
+      },
+      {
+        question: "Što je konverzija?",
+        answers: ["Ostvarenje cilja tvrtke kroz akciju korisnika.", "Promjena boje stranice.", "Slanje poruke.", "Klik na logo."],
+        correct: 0
+      },
+      {
+        question: "Što je mikro konverzija?",
+        answers: ["Aktivnost neposredno prije kupnje.", "Konačna kupnja.", "Brisanje košarice.", "Odjava s newslettera."],
+        correct: 0
+      },
+      {
+        question: "Što je makro konverzija?",
+        answers: ["Kupnja, rezervacija, upit za ponudu ili sličan glavni cilj.", "Otvaranje stranice.", "Čitanje bloga.", "Dijeljenje posta."],
+        correct: 0
+      },
+      {
+        question: "Što je Google Ads?",
+        answers: ["Servis za oglašavanje na digitalnim kanalima.", "Alat za uređivanje slika.", "CMS dodatak.", "E-mail servis."],
+        correct: 0
+      },
+      {
+        question: "Što je impresija?",
+        answers: ["Broj prikaza oglasa.", "Broj kupnji.", "Broj domena.", "Broj linkova u tekstu."],
+        correct: 0
+      },
+      {
+        question: "Što je klik?",
+        answers: ["Kad korisnik odabere oglas.", "Kad korisnik zatvori stranicu.", "Kad korisnik pošalje e-mail.", "Kad korisnik promijeni lozinku."],
+        correct: 0
+      },
+      {
+        question: "Što je CTR?",
+        answers: ["Omjer klikova i impresija.", "Omjer cijene i prihoda.", "Omjer slika i teksta.", "Omjer pratitelja i objava."],
+        correct: 0
+      },
+      {
+        question: "Što je Ad Rank?",
+        answers: ["Rang oglasa dobiven iz ponude i ocjene kvalitete.", "Broj posjeta webu.", "Naziv kampanje.", "Vrsta ključne riječi."],
+        correct: 0
+      },
+      {
+        question: "Što je Quality score?",
+        answers: ["Ocjena kvalitete oglasa i relevantnosti.", "Vrsta budžeta.", "Broj pojavljivanja.", "Naziv publike."],
+        correct: 0
+      },
+      {
+        question: "Što je pretraživačka kampanja?",
+        answers: ["Kampanja na search mreži usmjerena na klikove i radnje.", "Kampanja za video igre.", "Kampanja za e-mail.", "Kampanja za blog."],
+        correct: 0
+      },
+      {
+        question: "Što je prikazivačka mreža?",
+        answers: ["Googleove i partnerske stranice koje prikazuju oglase.", "E-mail inbox.", "WordPress tema.", "SEO alat."],
+        correct: 0
+      },
+      {
+        question: "Što je video kampanja?",
+        answers: ["Kampanja koja doseže publiku na YouTubeu i partnerima za video sadržaj.", "Kampanja samo za e-mail.", "Kampanja za blog komentare.", "Kampanja za SEO."],
+        correct: 0
+      },
+      {
+        question: "Što je lokalna kampanja?",
+        answers: ["Kampanja usmjerena na lokacije trgovina i offline ciljeve.", "Kampanja za e-mail liste.", "Kampanja za web hosting.", "Kampanja za privatne grupe."],
+        correct: 0
+      },
+      {
+        question: "Što je shopping kampanja?",
+        answers: ["Kampanja koja koristi podatke o proizvodu iz Merchant Centera.", "Kampanja koja koristi hashtagove.", "Kampanja koja koristi blog postove.", "Kampanja koja koristi newsletter."],
+        correct: 0
+      },
+      {
+        question: "Što je budget u Google Ads-u?",
+        answers: ["Iznos predviđen za potrošnju na kampanju.", "Broj klikova.", "Naziv oglasa.", "Vrsta konverzije."],
+        correct: 0
+      },
+      {
+        question: "Što je dnevni budžet?",
+        answers: ["Prosječan iznos koji se planira trošiti po danu.", "Iznos po satu.", "Iznos po tjednu.", "Iznos po prikazu."],
+        correct: 0
+      },
+      {
+        question: "Što je broad match?",
+        answers: ["Široko podudaranje ključne riječi.", "Točno podudaranje.", "Negativno podudaranje.", "Fraza podudaranje."],
+        correct: 0
+      },
+      {
+        question: "Što je exact match?",
+        answers: ["Točno podudaranje upita.", "Široko podudaranje.", "Negativno podudaranje.", "Djelomično podudaranje."],
+        correct: 0
+      },
+      {
+        question: "Što je negative keyword?",
+        answers: ["Riječ koju isključuješ iz kampanje.", "Riječ koja povećava budžet.", "Naziv oglasa.", "Vrsta publike."],
+        correct: 0
+      },
+      {
+        question: "Što je korisničko putovanje?",
+        answers: ["Tijek interakcije korisnika s brendom.", "Putovanje zaposlenika.", "Tijek hostinga.", "Putovanje oglasa."],
+        correct: 0
+      },
+      {
+        question: "Što je persona?",
+        answers: ["Fiktivni profil idealnog korisnika temeljen na istraživanju.", "Broj u kampanji.", "Vrsta e-maila.", "Naziv domene."],
+        correct: 0
+      },
+      {
+        question: "Što je misija?",
+        answers: ["Kratka izjava o osnovnoj svrsi poduzeća.", "Buduća slika tvrtke.", "Lista proizvoda.", "SEO plan."],
+        correct: 0
+      },
+      {
+        question: "Što je vizija?",
+        answers: ["Dugoročna slika ili cilj kojem poduzeće teži.", "Trenutna prodaja.", "Popis kupaca.", "Plan objava."],
+        correct: 0
+      },
+      {
+        question: "Što je SWOT analiza?",
+        answers: ["Analiza snaga, slabosti, prilika i prijetnji.", "Analiza klikova i impresija.", "Analiza e-maila.", "Analiza grupa na Facebooku."],
+        correct: 0
+      },
+      {
+        question: "Što je PEST analiza?",
+        answers: ["Analiza političkih, ekonomskih, društvenih i tehnoloških čimbenika.", "Analiza oglasa i prodaje.", "Analiza sadržaja i slika.", "Analiza domena i servera."],
+        correct: 0
+      },
+      {
+        question: "Što je segmentacija potrošača?",
+        answers: ["Dijeljenje tržišta na manje, smisleno definirane skupine.", "Brisanje publike.", "Spajanje svih kupaca u jednu skupinu.", "Izrada jednog oglasa za sve bez razlike."],
+        correct: 0
+      },
+      {
+        question: "Što je geografska segmentacija?",
+        answers: ["Segmentacija po lokaciji, regiji, državi ili klimi.", "Segmentacija po omiljenoj boji.", "Segmentacija po broju e-mailova.", "Segmentacija po tipu oglasa."],
+        correct: 0
+      },
+      {
+        question: "Što je demografska segmentacija?",
+        answers: ["Segmentacija po dobi, spolu, prihodu, obrazovanju i sl.", "Segmentacija po dizajnu stranice.", "Segmentacija po h1 oznaci.", "Segmentacija po web hostingu."],
+        correct: 0
+      },
+      {
+        question: "Što je psihografska segmentacija?",
+        answers: ["Segmentacija po vrijednostima, interesima i lifestyleu.", "Segmentacija po IP adresi.", "Segmentacija po nazivu domena.", "Segmentacija po broju linkova."],
+        correct: 0
+      },
+      {
+        question: "Što je customer journey mapping?",
+        answers: ["Dijagram koji prikazuje korake interakcije korisnika s brendom.", "Popis linkova.", "E-mail predložak.", "Google Ads budžet."],
+        correct: 0
+      },
+      {
+        question: "Što je mapa empatije?",
+        answers: ["Vizualizacija korisnikovih osjećaja i potreba.", "Plan objava.", "Tehnički SEO audit.", "Lista ključnih riječi."],
+        correct: 0
+      },
+      {
+        question: "Što je SMART cilj?",
+        answers: ["Cilj koji je specifičan, mjerljiv, ostvariv, relevantan i vremenski ograničen.", "Cilj koji je nasumičan.", "Cilj koji nema rok.", "Cilj koji se ne može mjeriti."],
+        correct: 0
+      },
+      {
+        question: "Što su mikro ciljevi?",
+        answers: ["Radnje bez izravnog utjecaja na poslovni rezultat, ali korisne za praćenje.", "Konačne prodaje.", "Samo offline kupnje.", "Isključivo pozivi."],
+        correct: 0
+      },
+      {
+        question: "Što su makro ciljevi?",
+        answers: ["Ciljevi koji imaju izravan utjecaj na poslovni rezultat.", "Male tehničke radnje.", "Samo lajkanje objava.", "Otvaranje stranice."],
+        correct: 0
+      },
+      {
+        question: "Što je produktna stranica?",
+        answers: ["Stranica proizvoda s detaljima o ponudi.", "Početna stranica za sve posjetitelje.", "Stranica za kontakt.", "Stranica za prijavu na newsletter."],
+        correct: 0
+      },
+      {
+        question: "Što je početna stranica?",
+        answers: ["Uvodna stranica koja upoznaje korisnika sa sadržajem i funkcionalnostima.", "Stranica za plaćanje.", "Stranica za komentare.", "Stranica za oglase."],
+        correct: 0
+      },
+      {
+        question: "Što je wireframe?",
+        answers: ["Nacrt web stranice fokusiran na funkcionalnost, a ne dizajn.", "Konačni vizualni dizajn.", "E-mail predložak.", "SEO alat."],
+        correct: 0
+      },
+      {
+        question: "Što je UX?",
+        answers: ["Dizajn korisničkog iskustva.", "Dizajn logotipa.", "Tip oglasa.", "Vrsta domene."],
+        correct: 0
+      },
+      {
+        question: "Što je UI?",
+        answers: ["Dizajn korisničkog sučelja.", "Upravljanje e-mail kampanjama.", "Optimizacija za tražilice.", "Analitika oglasa."],
+        correct: 0
+      },
+      {
+        question: "Što je drip campaign?",
+        answers: ["Niz e-poruka koje se šalju prema unaprijed definiranim uvjetima.", "Jedan banner oglas.", "Jedna Facebook objava.", "Jedna SEO izmjena."],
+        correct: 0
+      },
+      {
+        question: "Što je Wordfence Security?",
+        answers: ["Dodatak za sigurnost web stranice.", "Dodatak za izradu stranica.", "Dodatak za e-mail marketing.", "Dodatak za društvene mreže."],
+        correct: 0
+      }
+    ];
+
+    const RESULTS = [
+      {
+        min: 0,
+        max: 39,
+        title: "Digitalni Amater",
+        copy: "Vaše razumijevanje weba i digitalnog marketinga je na bazičnoj razini. Vrijeme je za učenje i rad na stvarnim projektima kako biste stekli sigurnost.",
+        badges: ["Bazično znanje", "Klik-žrtva", "Početnički status"]
+      },
+      {
+        min: 40,
+        max: 79,
+        title: "Web i Marketing Specijalist",
+        copy: "Odlično vladate većinom koncepata. Razumijete kako povezati SEO, Google Ads i analitiku u skladnu cjelinu. Uz malo finog ugađanja spremni ste za top ligu.",
+        badges: ["Srednja razina", "Konzistentan rast", "Certificirani kadar"]
+      },
+      {
+        min: 80,
+        max: 100,
+        title: "Digitalni Guru",
+        copy: "Čestitamo! Pokazali ste iznimno, profesionalno razumijevanje svih područja. Optimizacija konverzija, klijentska psihologija i napredne tehnikalije su vam u malom prstu.",
+        badges: ["Apsolutni guru", "Konverzijski mag", "Node voditelj"]
+      }
+    ];
+
+    // DOM Elements
+    const startStage = document.getElementById('startStage');
+    const quizStage = document.getElementById('quizStage');
+    const resultStage = document.getElementById('resultStage');
+    const questionText = document.getElementById('questionText');
+    const answersEl = document.getElementById('answers');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressEl = document.getElementById('progress');
+    const statCurrent = document.getElementById('stat-current');
+    const statTotal = document.getElementById('stat-total');
+    const statScore = document.getElementById('stat-score');
+    const resultScore = document.getElementById('resultScore');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultCopy = document.getElementById('resultCopy');
+    const resultBadges = document.getElementById('resultBadges');
+    const restartBtn = document.getElementById('restartBtn');
+    const startQuickBtn = document.getElementById('startQuickBtn');
+    const startFullBtn = document.getElementById('startFullBtn');
+
+    let activeQuestions = [];
+    let current = 0;
+    let score = 0;
+    let selected = null;
+    let hasAnswered = false;
+
+    // Start options
+    startQuickBtn.addEventListener('click', () => startQuiz(20));
+    startFullBtn.addEventListener('click', () => startQuiz(100));
+
+    function startQuiz(count) {
+      if (count === 20) {
+        // Shuffle and pick 20
+        const shuffled = [...QUESTION_BANK].sort(() => 0.5 - Math.random());
+        activeQuestions = shuffled.slice(0, 20);
+      } else {
+        activeQuestions = [...QUESTION_BANK];
+      }
+
+      current = 0;
+      score = 0;
+      statTotal.textContent = activeQuestions.length;
+      startStage.classList.add('hidden-panel');
+      quizStage.classList.remove('hidden-panel');
+      renderQuestion();
+    }
+
+    function updateStats() {
+      statCurrent.textContent = Math.min(current + 1, activeQuestions.length);
+      statScore.textContent = Math.round((score / activeQuestions.length) * 100) + '%';
+      progressEl.textContent = `Pitanje ${current + 1} / ${activeQuestions.length}`;
+    }
+
+    function renderQuestion() {
+      selected = null;
+      hasAnswered = false;
+      nextBtn.disabled = true;
+      nextBtn.textContent = "Potvrdi odgovor";
+
+      const item = activeQuestions[current];
+      questionText.textContent = item.question;
+      answersEl.innerHTML = '';
+
+      item.answers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer';
+        button.type = 'button';
+        button.textContent = answer;
+
+        button.addEventListener('click', () => {
+          if (hasAnswered) return; // Prevent clicking after submit
+          document.querySelectorAll('.answer').forEach(el => el.classList.remove('selected'));
+          button.classList.add('selected');
+          selected = index;
+          nextBtn.disabled = false;
+        });
+
+        answersEl.appendChild(button);
+      });
+
+      updateStats();
+    }
+
+    function handleSubmission() {
+      const item = activeQuestions[current];
+      hasAnswered = true;
+      nextBtn.disabled = false;
+
+      const buttons = document.querySelectorAll('.answer');
+      
+      // Highlight correct and selected wrong answers
+      buttons.forEach((btn, idx) => {
+        if (idx === item.correct) {
+          btn.classList.add('correct-highlight');
+        } else if (idx === selected) {
+          btn.classList.add('wrong-highlight');
+        }
+        btn.classList.remove('selected');
+        btn.style.cursor = 'default';
+      });
+
+      if (selected === item.correct) {
+        score += 1;
+      }
+
+      // Change button text to proceed
+      nextBtn.textContent = (current + 1 < activeQuestions.length) ? "Sljedeće pitanje" : "Prikaži rezultate";
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (selected === null) return;
+
+      if (!hasAnswered) {
+        handleSubmission();
+      } else {
+        current += 1;
+        if (current < activeQuestions.length) {
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }
+    });
+
+    function showResult() {
+      const percentage = Math.round((score / activeQuestions.length) * 100);
+      const band = RESULTS.find(r => percentage >= r.min && percentage <= r.max) || RESULTS[0];
+
+      quizStage.classList.add('hidden-panel');
+      resultStage.classList.add('show');
+      
+      resultScore.textContent = `Rezultat: ${score} / ${activeQuestions.length} (${percentage}%)`;
+      resultTitle.textContent = band.title;
+      resultCopy.textContent = band.copy;
+      resultBadges.innerHTML = '';
+
+      band.badges.forEach(label => {
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = label;
+        resultBadges.appendChild(badge);
+      });
+
+      statCurrent.textContent = activeQuestions.length;
+      statScore.textContent = percentage + '%';
+    }
+
+    restartBtn.addEventListener('click', () => {
+      resultStage.classList.remove('show');
+      startStage.classList.remove('hidden-panel');
+      statCurrent.textContent = '0';
+      statScore.textContent = '0%';
+    });
+  </script>
+</body>
+</html>
