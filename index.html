@@ -8,7 +8,7 @@
         <title>JOIN THE RESISTANCE - Contact Mate Ćurković</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
-            @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Fira+Code:wght@300;500&display=swap");
+            @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght=900&family=Rajdhani:wght=500;700&family=Fira+Code:wght=300;500&display=swap");
 
             :root {
                 --cp-yellow: #fcee0a;
@@ -362,7 +362,14 @@
                     id="node-footer"
                     class="flex justify-between font-mono text-[9px] font-bold uppercase opacity-60 reveal-node"
                 >
-                    <span>IDENTITY: MATE CURKOVIC</span>
+                    <!-- Trigger link to slide in portrait -->
+                    <span 
+                        id="identity-trigger" 
+                        class="cursor-pointer hover:text-[var(--cp-blue)] hover:opacity-100 active:text-[var(--cp-red)] transition-all duration-300 relative group select-none"
+                    >
+                        IDENTITY: MATE CURKOVIC
+                        <span class="absolute left-0 bottom-[-2px] w-0 h-[1px] bg-[var(--cp-blue)] group-hover:w-full transition-all duration-300"></span>
+                    </span>
                     <span>ENC: RSA_4096</span>
                     <span>LOC: ZADAR_HR</span>
                 </div>
@@ -378,6 +385,19 @@
                     </a>
                 </div>
             </div>
+        </div>
+
+        <!-- Fixed bottom-left container sliding off screen with 0 border & zero pointer interference -->
+        <div 
+            id="identity-peek" 
+            class="fixed bottom-0 left-0 md:left-12 z-10 pointer-events-none transform translate-y-full opacity-0 transition-all duration-700 ease-out select-none"
+        >
+            <img 
+                src="https://itechie.eu/itechie.png" 
+                alt="Mate Ćurković Hologram" 
+                class="h-64 sm:h-80 md:h-[450px] w-auto object-contain filter drop-shadow-[0_0_15px_rgba(252,238,10,0.2)]"
+                onerror="this.style.display='none'"
+            />
         </div>
 
         <script>
@@ -450,6 +470,50 @@
                         nodes[i].classList.add("visible");
                     }, i * 250);
                 }
+
+                setupPeekInteractions();
+            }
+
+            function setupPeekInteractions() {
+                const trigger = document.getElementById("identity-trigger");
+                const peek = document.getElementById("identity-peek");
+                let mobileTimeout;
+
+                function showPortrait() {
+                    peek.classList.remove("translate-y-full", "opacity-0");
+                    peek.classList.add("translate-y-0", "opacity-100");
+                }
+
+                function hidePortrait() {
+                    peek.classList.remove("translate-y-0", "opacity-100");
+                    peek.classList.add("translate-y-full", "opacity-0");
+                }
+
+                // Desktop Hover Actions
+                trigger.addEventListener("mouseenter", showPortrait);
+                trigger.addEventListener("mouseleave", hidePortrait);
+
+                // Mobile/Touch Toggle Actions
+                trigger.addEventListener("click", (e) => {
+                    e.stopPropagation(); // Stop clicking background from closing instantly
+                    const isOpen = peek.classList.contains("translate-y-0");
+
+                    if (isOpen) {
+                        hidePortrait();
+                        if (mobileTimeout) clearTimeout(mobileTimeout);
+                    } else {
+                        showPortrait();
+                        // Auto-hide peek after 3 seconds on mobile
+                        if (mobileTimeout) clearTimeout(mobileTimeout);
+                        mobileTimeout = setTimeout(hidePortrait, 3000);
+                    }
+                });
+
+                // Close portrait if user taps anywhere else on mobile viewport
+                document.addEventListener("click", () => {
+                    hidePortrait();
+                    if (mobileTimeout) clearTimeout(mobileTimeout);
+                });
             }
 
             window.onload = startLoading;
