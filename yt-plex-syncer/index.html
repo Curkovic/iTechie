@@ -166,6 +166,7 @@
                         private Plex interface.
                     </p>
 
+                    <!-- News-style inline wrapped image -->
                     <div
                         class="md:float-right md:ml-6 md:mb-4 w-full md:w-64 border border-zinc-800 bg-zinc-950 p-2 rounded text-center mx-auto float-none mb-6"
                     >
@@ -402,7 +403,7 @@
                         0 * * * * /bin/bash /absolute/path/to/your/yt.sh >/dev/null 2>&1
                     </div>
                     <p class="text-xs text-zinc-500 font-mono">
-                        // The <code class="text-zinc-400">0 * * * *</code> layout commands the runtime to target minute zero of every passing hour. Output logging streams are piped directly into null space to prevent terminal terminal-spooling leaks.
+                        // The <code class="text-zinc-400">0 * * * *</code> layout commands the runtime to target minute zero of every passing hour. Output logging streams are piped directly into null space to prevent terminal-spooling leaks.
                     </p>
 
                     <h3
@@ -473,6 +474,7 @@
             </footer>
         </main>
 
+        <!-- Lightbox Functional Modal Container -->
         <div
             id="lightbox"
             class="lightbox items-center justify-center p-4"
@@ -486,6 +488,7 @@
             />
         </div>
 
+        <!-- Lightbox Logic Engine -->
         <script>
             function openLightbox(src) {
                 const lightbox = document.getElementById("lightbox");
@@ -497,8 +500,6 @@
 
             function closeLightbox() {
                 const lightbox = document.getElementById("lightbox");
-                const lightboxImg = document.getElementById("lightbox-img");
-                lightboxImg.src = src;
                 lightbox.classList.remove("active");
                 document.body.style.overflow = ""; // Unlock scrolling
             }
