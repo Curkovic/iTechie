@@ -130,7 +130,7 @@
                         <div
                             class="flex items-center space-x-4 font-mono text-[9px] text-zinc-500"
                         >
-                            <span>TIMESTAMP: 2026.06.12</span>
+                            <span>TIMESTAMP: 2026.06.14</span>
                             <span>CLEARANCE: PUBLIC_ACCESS</span>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                         ></i>
                         <span>DECRYPTED BY: MATE ĆURKOVIĆ</span>
                         <span class="text-zinc-600">//</span>
-                        <span>TAGS: #BASH #PLEX #YT-DLP #LINUX</span>
+                        <span>TAGS: #BASH #PLEX #YT-DLP #CRON #LINUX</span>
                     </div>
                 </header>
 
@@ -166,7 +166,6 @@
                         private Plex interface.
                     </p>
 
-                    <!-- News-style inline wrapped image -->
                     <div
                         class="md:float-right md:ml-6 md:mb-4 w-full md:w-64 border border-zinc-800 bg-zinc-950 p-2 rounded text-center mx-auto float-none mb-6"
                     >
@@ -366,6 +365,63 @@
                         </table>
                     </div>
 
+                    <h2
+                        class="text-lg md:text-xl font-bold uppercase tracking-wider font-['Orbitron'] text-white pt-4"
+                    >
+                        04 // Automated Scheduling via Cron
+                    </h2>
+                    <p>
+                        To transform this script into a continuous background utility, orchestrate it via the system daemon using an hourly cron schedule. 
+                    </p>
+                    
+                    <h3
+                        class="text-sm font-mono text-white font-bold uppercase tracking-wider pt-2"
+                    >
+                        Step A: Open the Crontab Interface
+                    </h3>
+                    <p>
+                        Initialize your user profile's cron editor matrix by executing:
+                    </p>
+                    <div
+                        class="bg-zinc-950 border border-zinc-900 p-4 rounded font-mono text-xs text-emerald-400 my-2"
+                    >
+                        crontab -e
+                    </div>
+
+                    <h3
+                        class="text-sm font-mono text-white font-bold uppercase tracking-wider pt-4"
+                    >
+                        Step B: Inject Hourly Sync Rule
+                    </h3>
+                    <p>
+                        Add the following line to the bottom of the config file. Crontab environment layers typically strip out default execution trajectories, so you must explicitly specify the absolute file paths for both the shell binary and your script asset:
+                    </p>
+                    <div
+                        class="bg-zinc-950 border border-zinc-900 p-4 rounded font-mono text-xs text-emerald-400 my-2"
+                    >
+                        0 * * * * /bin/bash /absolute/path/to/your/yt.sh >/dev/null 2>&1
+                    </div>
+                    <p class="text-xs text-zinc-500 font-mono">
+                        // The <code class="text-zinc-400">0 * * * *</code> layout commands the runtime to target minute zero of every passing hour. Output logging streams are piped directly into null space to prevent terminal terminal-spooling leaks.
+                    </p>
+
+                    <h3
+                        class="text-sm font-mono text-white font-bold uppercase tracking-wider pt-4"
+                    >
+                        Step C: Discovering and Replacing the Path
+                    </h3>
+                    <p>
+                        If you are unsure where your script resides within the local storage arrays, break into the deployment directory and fetch the absolute workspace trajectory string:
+                    </p>
+                    <div
+                        class="bg-zinc-950 border border-zinc-900 p-4 rounded font-mono text-xs text-emerald-400 my-2"
+                    >
+                        cd /path/to/yt-plex-syncer/ && pwd
+                    </div>
+                    <p>
+                        Swap out <code class="text-[var(--term-orange)]">/absolute/path/to/your/yt.sh</code> inside your cron schematic file with the output string printed by that diagnostic check (e.g., <code class="text-[var(--term-cyan)]">/home/user/scripts/yt.sh</code>). Save and exit the editor matrix to initialize background operations.
+                    </p>
+
                     <blockquote
                         class="cyber-blockquote p-5 rounded-sm my-6 font-mono text-xs md:text-sm text-zinc-400 italic"
                     >
@@ -417,7 +473,6 @@
             </footer>
         </main>
 
-        <!-- Lightbox Functional Modal Container -->
         <div
             id="lightbox"
             class="lightbox items-center justify-center p-4"
@@ -431,7 +486,6 @@
             />
         </div>
 
-        <!-- Lightbox Logic Engine -->
         <script>
             function openLightbox(src) {
                 const lightbox = document.getElementById("lightbox");
@@ -443,6 +497,8 @@
 
             function closeLightbox() {
                 const lightbox = document.getElementById("lightbox");
+                const lightboxImg = document.getElementById("lightbox-img");
+                lightboxImg.src = src;
                 lightbox.classList.remove("active");
                 document.body.style.overflow = ""; // Unlock scrolling
             }
