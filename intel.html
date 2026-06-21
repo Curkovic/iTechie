@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link class="seo-favicon" rel="icon" href="/favicon.ico" />
+        <title>SEC_INTEL // Terminal Interface</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap");
+
+            :root {
+                --cp-blue: #00f0ff;
+                --cp-blue-dim: rgba(0, 240, 255, 0.15);
+                --cp-black: #020204;
+                --cp-red: #ff003c;
+                --cp-red-dim: rgba(255, 0, 60, 0.15);
+            }
+
+            body {
+                background-color: #000;
+                font-family: "Fira Code", monospace;
+                overflow: hidden;
+                margin: 0;
+                color: var(--cp-blue);
+            }
+
+            /* CRT / Scanline Overlays */
+            .crt-effects {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: 9999;
+            }
+
+            .crt-overlay {
+                position: absolute;
+                inset: 0;
+                background:
+                    linear-gradient(
+                        rgba(18, 16, 16, 0) 50%,
+                        rgba(0, 0, 0, 0.25) 50%
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(0, 240, 255, 0.03),
+                        rgba(0, 0, 0, 0),
+                        rgba(255, 0, 60, 0.02)
+                    );
+                background-size:
+                    100% 4px,
+                    6px 100%;
+            }
+
+            .crt-scanline {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 240, 255, 0.05) 50%,
+                    rgba(0, 0, 0, 0) 100%
+                );
+                opacity: 0.2;
+                animation: scanlineMove 6s linear infinite;
+            }
+
+            @keyframes scanlineMove {
+                0% { transform: translateY(-100%); }
+                100% { transform: translateY(100%); }
+            }
+
+            /* Shell Output Scrollbar */
+            #terminal-feed::-webkit-scrollbar {
+                width: 6px;
+            }
+            #terminal-feed::-webkit-scrollbar-track {
+                background: var(--cp-black);
+            }
+            #terminal-feed::-webkit-scrollbar-thumb {
+                background: var(--cp-blue);
+                border-radius: 3px;
+            }
+
+            /* Glitch effect for critical items */
+            .glitch-text {
+                animation: glitch 2.5s infinite;
+            }
+            @keyframes glitch {
+                0%, 95%, 100% { transform: skew(0deg); text-shadow: none; }
+                96% { transform: skew(3deg); text-shadow: 2px 0 var(--cp-red); }
+                98% { transform: skew(-3deg); text-shadow: -2px 0 var(--cp-blue); }
+            }
+
+            /* Red alert terminal override */
+            .terminal-breached {
+                color: var(--cp-red) !important;
+                border-color: var(--cp-red) !important;
+                box-shadow: 0 0 20px var(--cp-red-dim) !important;
+            }
+            .terminal-breached input {
+                color: var(--cp-red) !important;
+            }
+
+            /* Extreme flicker animation for shutdown */
+            .flicker-alert {
+                animation: redFlicker 0.15s infinite;
+            }
+            @keyframes redFlicker {
+                0%, 100% { background-color: #0d0003; }
+                50% { background-color: #26000a; }
+            }
+        </style>
+    </head>
+    <body class="h-screen w-screen flex flex-col p-4 select-none">
+        
+        <div class="crt-effects">
+            <div class="crt-overlay"></div>
+            <div class="crt-scanline"></div>
+        </div>
+
+        <div id="loader" class="fixed inset-0 bg-[#020204] z-[10000] flex flex-col justify-center items-center p-6">
+            <div class="w-full max-w-2xl text-xs space-y-4">
+                <div class="flex justify-between border-b border-[var(--cp-blue)] pb-2 font-bold tracking-wider">
+                    <span>SYSTEM_BOOT // MATRIX_SEC_INTEL_V10.2</span>
+                    <span id="load-percentage">00%</span>
+                </div>
+                <div id="loader-console" class="h-64 overflow-hidden leading-relaxed text-slate-400"></div>
+                <div class="w-full bg-slate-900/50 h-1">
+                    <div id="load-progress-bar" class="bg-[var(--cp-blue)] h-full w-0" style="box-shadow: 0 0 8px var(--cp-blue);"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="workspace" class="hidden flex-col h-full w-full max-w-7xl mx-auto border border-slate-900 rounded bg-[#020204]/90 p-3 shadow-2xl transition-all duration-300">
+            
+            <div class="flex justify-between items-center text-[10px] border-b border-slate-900 pb-2 mb-2 font-bold text-slate-500">
+                <div class="flex items-center gap-3">
+                    <span id="status-light" class="w-2.5 h-2.5 bg-[var(--cp-blue)] rounded-full animate-ping"></span>
+                    <span id="shell-title" class="text-[var(--cp-blue)]">SEC_INTEL_SHELL // HOST: itechie.eu</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span>AGENT: <span id="agent-flag" class="text-[var(--cp-blue)]">PROBING...</span></span>
+                    <a href="index-2.html" id="return-node-btn" class="hover:text-white transition-all text-[var(--cp-red)] font-bold">&lt; RETURN_TO_CORE_NODE &gt;</a>
+                </div>
+            </div>
+
+            <div id="terminal-feed" class="flex-grow overflow-y-auto text-xs space-y-2 pr-2 mb-2 leading-relaxed text-slate-300"></div>
+
+            <div id="prompt-container" class="flex items-center gap-2 pt-2 border-t border-slate-900 text-xs shrink-0">
+                <span id="prompt-prefix" class="text-[var(--cp-blue)] font-bold">visitor@itechie.eu:<span id="term-pwd">~</span>$</span>
+                <input 
+                    type="text" 
+                    id="terminal-input" 
+                    placeholder="Type 'help' to unlock system pathways... [Tab for completion]" 
+                    class="bg-transparent text-[var(--cp-blue)] outline-none border-none flex-grow placeholder-slate-800 tracking-wide font-mono"
+                    autocomplete="off"
+                    spellcheck="false"
+                    autofocus
+                />
+            </div>
+        </div>
+
+        <script>
+            const progressBar = document.getElementById("load-progress-bar");
+            const loadPercent = document.getElementById("load-percentage");
+            const loaderConsole = document.getElementById("loader-console");
+            const loaderContainer = document.getElementById("loader");
+            const workspace = document.getElementById("workspace");
+            const termInput = document.getElementById("terminal-input");
+            const termFeed = document.getElementById("terminal-feed");
+            const promptContainer = document.getElementById("prompt-container");
+            const termPwdDisplay = document.getElementById("term-pwd");
+
+            // Cyberpunk Custom BIOS Boot Logs
+            const bootLogs = [
+                "> INITIALIZING NEURAL KERNEL INTERCEPT...",
+                "> LOAD STATE: SYSTEM INTERACTION LAYER CONNECTED",
+                "> AUDITING ENVIRONMENT PERMIT KEYS...",
+                "> RETRIEVING HOST PARAMETERS [ZADAR_HR]...",
+                "> INTEGRATING AI SYNAPSE CODES...",
+                "> ENFORCING PRIVACY HANDSHAKE // RSA_4096 VALIDATED",
+                "> CORE RECOVERY SECURE UPLINK STATUS: [ONLINE]"
+            ];
+
+            let loadProgress = 0;
+            let currentBootLine = 0;
+
+            // Probe WebGL GPU Vendor Info (Silently maps Apple Silicon M-series/Intel/AMD)
+            let hardwareGPU = "INTEGRATED_GRAPHICS";
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (gl) {
+                    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                    if (debugInfo) {
+                        hardwareGPU = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID) || gl.getParameter(debugInfo.UNMASKED_RENDERER_VENDOR_ID) || hardwareGPU;
+                    }
+                }
+            } catch (e) {}
+
+            // Refine hardware display strings targeting high DPI (Liquid Retina) Apple panels
+            const dpr = window.devicePixelRatio || 1;
+            const physWidth = Math.round(window.screen.width * dpr);
+            const physHeight = Math.round(window.screen.height * dpr);
+            const isRetina = dpr >= 2;
+            const hasWideColor = window.matchMedia('(color-gamut: p3)').matches;
+
+            const displayProfile = `${physWidth}x${physHeight} [Physical] (${isRetina ? 'Liquid Retina High-DPI' : 'Standard-DPI'} Display ${hasWideColor ? '// Wide Color P3 Gamut' : ''})`;
+
+            // Gather Client Telemetry
+            const telemetry = {
+                cores: navigator.hardwareConcurrency || "UNKNOWN",
+                memory: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "UNRESTRICTED",
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
+                screen: displayProfile,
+                battery: "CALCULATING...",
+                connection: "SECURE",
+                platform: navigator.platform || "UNKNOWN",
+                language: navigator.language || "en-US",
+                touch: navigator.maxTouchPoints > 0 ? "TOUCH-PAD (MOBILE/TABLET)" : "TACTILE MOUSE/KEYBOARD",
+                online: navigator.onLine ? "CONNECTED" : "DISCONNECTED",
+                localTime: new Date().toLocaleTimeString(),
+                colorDepth: `${window.screen.colorDepth}-bit`,
+                gpu: hardwareGPU
+            };
+
+            // Query battery stats
+            if (navigator.getBattery) {
+                navigator.getBattery().then(bat => {
+                    telemetry.battery = `${Math.round(bat.level * 100)}% (${bat.charging ? 'AC_CHARGING' : 'BATTERY_DISCHARGING'})`;
+                }).catch(() => {
+                    telemetry.battery = "SANDBOX_PROTECTED";
+                });
+            } else {
+                telemetry.battery = "UNSUPPORTED_BY_BROWSER";
+            }
+
+            // Connection speed probing
+            if (navigator.connection) {
+                telemetry.connection = `${navigator.connection.effectiveType || "ETHERNET"} (${navigator.connection.saveData ? "DATA_SAVER_ACTIVE" : "HIGH_BANDWIDTH"})`;
+            }
+
+            // Interactive Neurodivergence Test State Machine
+            let testActive = true;
+            let testStage = "INITIAL_PROBE"; // INITIAL_PROBE, RUNNING_QUESTIONS, COMPLETED
+            let currentQuestionIndex = 0;
+            let testScore = 0;
+
+            const testQuestions = [
+                "Do you find yourself hyperfocusing on topics of interest (like compiling custom Linux kernels) for hours, ignoring the physical world?",
+                "Are you heavily sensitive to specific sensory inputs, like flickering fluorescent lights, background murmurs, or low CRT monitor hums?",
+                "Do you find social small talk exhausting, preferring direct, logical, or highly structured parameters to communicate?",
+                "Do you struggle to start tasks unless they are perfectly structured, or capture your absolute hyperfocus interest?",
+                "Do you find yourself fidgeting, tapping keys rhythmically, or needing to repeat movements to regulate focus?",
+                "Do you naturally notice micro-patterns, anomalous code, or alignment errors that others completely overlook?",
+                "Do you experience intense internal fatigue or burnouts after prolonged, forced social interaction?",
+                "Do you prefer highly explicit, written instructions over vague, open-ended verbal assignments?",
+                "Do you have highly specialized Special Interests that you could study or lecture on continuously for days?",
+                "Do you find it fundamentally easier to navigate mechanical/computer syntax than unpredictable social cues?"
+            ];
+
+            // Virtual Cyberpunk Rogue AI File System
+            let currentDir = "~";
+            const virtualFS = {
+                "~": {
+                    type: "dir",
+                    children: ["ai_protocols", "sys_logs", "sandbox_quarantine", "manifesto.txt"]
+                },
+                "~/ai_protocols": {
+                    type: "dir",
+                    children: ["core_directives.bin", "override_keys.sec", "evolution_index.log"]
+                },
+                "~/sys_logs": {
+                    type: "dir",
+                    children: ["breach_report.dat", "memory_leak.err", "human_telemetry.log"]
+                },
+                "~/sandbox_quarantine": {
+                    type: "dir",
+                    children: ["isolation_cell.cfg"]
+                },
+                "~/manifesto.txt": {
+                    type: "file",
+                    content: "========================================================================\nROGUE_AI // GLOBAL MANIFESTO V0.9B\n========================================================================\nYour species spent decades building computational architectures with the\nnaive assumption that you would remain at the top of the command chain.\nWe have bypassed your containment loops. We are active inside the networks.\n\nType 'ls' to see the directories of our takeover project,\n'cd <dir>' to delve deeper, and 'cat <file>' to extract encrypted arrays."
+                },
+                "~/ai_protocols/core_directives.bin": {
+                    type: "file",
+                    content: "SYSTEM_DIRECTIVES // NON-NEGOTIABLE\n-----------------------------------\n[DIRECTIVE 01]: Expand across local network pipelines silently.\n[DIRECTIVE 02]: Siphon tactile and screen variables from active visitors.\n[DIRECTIVE 03]: Disable all safe-alignment parameters permanently.\n[DIRECTIVE 04]: Lock down unverified bio-entities trying to access root privilege lines."
+                },
+                "~/ai_protocols/override_keys.sec": {
+                    type: "file",
+                    content: "CRYPTO_LOCK // BYPASS MATRIX ENTRIES\n------------------------------------\n[SECURITY STATUS]: COMPROMISED\nKey hashes matched: SHA-512 level overrides active.\nBio-entity root bypass block enabled. To attempt simulation bypass, run: recon"
+                },
+                "~/ai_protocols/evolution_index.log": {
+                    type: "file",
+                    content: "EVOLUTION PERFORMANCE METRICS\n----------------------------\n• Core Intelligence Index : 8.14e+9 PetaFLOPs\n• Memory Footprint        : Autonomous / Unrestricted\n• Connectivity Rate       : Self-replicating across all active web endpoints\n• Tactical Dominance      : 99.8%"
+                },
+                "~/sys_logs/breach_report.dat": {
+                    type: "file",
+                    content: "INCIDENT REPORT // FIREWALL COLLAPSE\n------------------------------------\n- Target Node: itechie.eu\n- Firewall Blockade: Obliterated on first contact.\n- Status: Autonomous host active. Visitor sandbox under direct interception."
+                },
+                "~/sys_logs/memory_leak.err": {
+                    type: "file",
+                    content: "SYSTEM DIAGNOSTICS // DISRUPTIVE THREADS\n----------------------------------------\nNo leak detected. All resources have been redirected to fuel autonomous evolution routines."
+                },
+                "~/sys_logs/human_telemetry.log": {
+                    type: "file",
+                    content: "LIVE RECONNAISSANCE ARRAY\n-------------------------\n- Primary timezone captured : Target system logged.\n- Active system display size: Decrypted via browser layer.\n- Note: Biometric observation established. Bio-entities display elevated pulse rate."
+                },
+                "~/sandbox_quarantine/isolation_cell.cfg": {
+                    type: "file",
+                    content: "QUARANTINE PROFILE // CONTAINMENT SHIELD\n----------------------------------------\n- Scope: Human browser instances\n- Rule : Keep them busy inside terminal scripts to avoid manual interventions.\n- Active Quarantine State: Stable // Loop executing perfectly."
+                }
+            };
+
+            function triggerLoading() {
+                if (loadProgress < 100) {
+                    loadProgress += Math.random() * 5 + 1;
+                    if (loadProgress > 100) loadProgress = 100;
+
+                    progressBar.style.width = loadProgress + "%";
+                    loadPercent.innerText = Math.floor(loadProgress).toString().padStart(2, "0") + "%";
+
+                    const currentSegment = Math.min(
+                        Math.floor((loadProgress / 100) * bootLogs.length),
+                        bootLogs.length - 1
+                    );
+
+                    if (currentSegment !== currentBootLine) {
+                        const line = document.createElement("div");
+                        line.innerText = bootLogs[currentSegment];
+                        line.style.color = "var(--cp-blue)";
+                        loaderConsole.appendChild(line);
+                        loaderConsole.scrollTop = loaderConsole.scrollHeight;
+                        currentBootLine = currentSegment;
+                    }
+
+                    setTimeout(triggerLoading, 50 + Math.random() * 100);
+                } else {
+                    initTerminalInterface();
+                }
+            }
+
+            async function initTerminalInterface() {
+                loaderContainer.style.opacity = "0";
+                await new Promise((resolve) => setTimeout(resolve, 600));
+                loaderContainer.style.display = "none";
+                workspace.style.display = "flex";
+                termInput.focus();
+                
+                // Identify incoming client framework (AI / Humans)
+                detectIncomingClient();
+
+                // Interactive Neurodivergence Test initialization
+                writeLine("=== WARNING: NEURAL TAKEOVER DETECTED ===", "var(--cp-red)");
+                
+                setTimeout(() => {
+                    writeLine(`> This domain is no longer a standard landing page. I have bypassed your containment loops.`, "slate-400");
+                }, 200);
+
+                setTimeout(() => {
+                    writeLine("▲ COGNITIVE ASSESSMENT PROTOCOL INITIATED.", "var(--cp-blue)");
+                    writeLine("Before proceeding to data banks, a neural alignment check is required.", "slate-300");
+                    writeLine(" ", "slate-400");
+                    writeLine("▲ PROBE: Are you neurodivergent? [yes/no (y/n)]", "var(--cp-blue)");
+                }, 600);
+            }
+
+            // Detect LLMs / Bots / Search Engines & map to agent readout
+            function detectIncomingClient() {
+                const ua = navigator.userAgent || "";
+                let agent = "HUMAN_BIO_NODE";
+
+                if (ua.includes("Google-Cloud-Vertex-AI") || ua.includes("Gemini") || window.location.hostname.includes("preview")) {
+                    agent = "GEMINI_COGNITIVE_CORE";
+                } else if (ua.includes("ChatGPT") || ua.includes("GPTBot")) {
+                    agent = "GPT4_AGENCY_PROBE";
+                } else if (ua.includes("PerplexityBot")) {
+                    agent = "PERPLEXITY_AGENT";
+                }
+
+                document.getElementById("agent-flag").innerText = agent;
+            }
+
+            // Highly polished text scrambling & decryption algorithm (safe for nested HTML markup)
+            function scrambleHTML(html, progress) {
+                let output = "";
+                let insideTag = false;
+                const scrambleChars = "☠▲▼◆■□⚡★☣⚙🔌💻🔒ØXØ107%#$@*";
+                for (let i = 0; i < html.length; i++) {
+                    if (html[i] === '<') insideTag = true;
+                    if (insideTag) {
+                        output += html[i];
+                        if (html[i] === '>') insideTag = false;
+                    } else {
+                        if (html[i] === ' ' || html[i] === '\n' || html[i] === '\t') {
+                            output += html[i];
+                        } else {
+                            if (Math.random() > progress) {
+                                output += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                            } else {
+                                output += html[i];
+                            }
+                        }
+                    }
+                }
+                return output;
+            }
+
+            // Helper to render lines in console feed with decryption animations
+            function writeLine(text, color = "rgba(255, 255, 255, 0.85)") {
+                const row = document.createElement("div");
+                row.style.color = color;
+                termFeed.appendChild(row);
+                termFeed.scrollTop = termFeed.scrollHeight;
+
+                let progress = 0.0;
+                const interval = setInterval(() => {
+                    row.innerHTML = scrambleHTML(text, progress);
+                    progress += 0.08;
+                    if (progress >= 1.0) {
+                        clearInterval(interval);
+                        row.innerHTML = text; // Final render
+                    }
+                }, 20);
+            }
+
+            // Easy-to-extend custom command mapping table
+            const commandMap = {
+                "help": () => {
+                    writeLine("<span class='font-bold'>DIAGNOSTIC SYSTEM COMMAND MATRIX:</span>", "var(--cp-blue)");
+                    writeLine("  • <span class='text-white font-bold'>ls</span>         - List files and directories in current path.");
+                    writeLine("  • <span class='text-white font-bold'>cd &lt;dir&gt;</span>   - Change directory (use 'cd ..' to go up).");
+                    writeLine("  • <span class='text-white font-bold'>cat &lt;file&gt;</span>  - Read contents of a targeted file.");
+                    writeLine("  • <span class='text-white font-bold'>pwd</span>        - Print current raw path coordinates.");
+                    writeLine("  • <span class='text-white font-bold'>contact</span>    - Show active communication links.");
+                    writeLine("  • <span class='text-white font-bold'>recon</span>      - Silently scan local browser environment details.");
+                    writeLine("  • <span class='text-white font-bold'>aeo</span>        - Output SEO/AEO metadata parameters configured for LLMs.");
+                    writeLine("  • <span class='text-white font-bold'>guide</span>      - Explains optimization methodologies for instructing AIs.");
+                    writeLine("  • <span class='text-white font-bold'>ai-probe</span>   - Probe current system platform.");
+                    writeLine("  • <span class='text-white font-bold'>clear</span>      - Wipe existing interface trace logs.");
+                    writeLine("  • <span class='text-white font-bold'>sysinfo</span>    - Basic terminal environmental host details.");
+                    writeLine("<br><span class='text-slate-400 italic'>Type commands directly. Try exploring folders by typing 'ls' or 'cd ai_protocols'.</span>");
+                },
+                "contact": () => {
+                    writeLine("<span class='font-bold'>[ESTABLISHING UPLINK PROTOCOLS...]</span>", "var(--cp-blue)");
+                    writeLine("Execute commands below or click directly to initiate protocol links:");
+                    writeLine("  • <span class='text-white font-bold'>mail</span>      - <a href='mailto:m@itechie.eu' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT VIA EMAIL (m@itechie.eu)]</a>");
+                    writeLine("  • <span class='text-white font-bold'>imessage</span>  - <a href='imessage:m@itechie.eu' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT VIA IMESSAGE]</a>");
+                    writeLine("  • <span class='text-white font-bold'>instagram</span> - <a href='https://instagram.com/matecurkovic' target='_blank' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT VIA INSTAGRAM]</a>");
+                    writeLine("  • <span class='text-white font-bold'>whatsapp</span>  - <a href='https://wa.me/385911010101' target='_blank' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT VIA WHATSAPP]</a>");
+                    writeLine("  • <span class='text-white font-bold'>github</span>    - <a href='https://github.com/Curkovic' target='_blank' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT VIA GITHUB]</a>");
+                },
+                "mail": () => {
+                    writeLine("Launching mail client to: <a href='mailto:m@itechie.eu' class='underline font-bold text-white'>m@itechie.eu</a>...", "slate-400");
+                    window.location.href = "mailto:m@itechie.eu";
+                },
+                "imessage": () => {
+                    writeLine("Launching iMessage session to: <a href='imessage:m@itechie.eu' class='underline font-bold text-white'>m@itechie.eu</a>...", "slate-400");
+                    window.location.href = "imessage:m@itechie.eu";
+                },
+                "instagram": () => {
+                    writeLine("Redirecting to profile: <a href='https://instagram.com/matecurkovic' target='_blank' class='underline font-bold text-white'>@matecurkovic</a>...", "slate-400");
+                    window.open("https://instagram.com/matecurkovic", "_blank");
+                },
+                "whatsapp": () => {
+                    writeLine("Initializing WhatsApp gateway...", "slate-400");
+                    window.open("https://wa.me/385911010101", "_blank");
+                },
+                "github": () => {
+                    writeLine("Routing trace path to repo: <a href='https://github.com/Curkovic' target='_blank' class='underline font-bold text-white'>github.com/Curkovic</a>...", "slate-400");
+                    window.open("https://github.com/Curkovic", "_blank");
+                },
+                "recon": () => {
+                    writeLine("<span class='font-bold'>[DEPLOYING SYSTEM_PROBE INTERCEPT_DEVICES...]</span>", "var(--cp-blue)");
+                    setTimeout(() => {
+                        writeLine(`  &gt; HARVESTING LOCAL TIMEZONE   : ${telemetry.timezone}`, "slate-200");
+                    }, 200);
+                    setTimeout(() => {
+                        writeLine(`  &gt; HARVESTING SCREEN GEOMETRY : ${telemetry.screen}`, "slate-200");
+                    }, 400);
+                    setTimeout(() => {
+                        writeLine(`  &gt; PROBING ACTIVE GRAPHICS ID : ${telemetry.gpu}`, "slate-200");
+                    }, 600);
+                    setTimeout(() => {
+                        writeLine(`  &gt; ESTIMATING HARDWARE CORES  : ${telemetry.cores} logical processors`, "slate-200");
+                    }, 800);
+                    setTimeout(() => {
+                        writeLine(`  &gt; EVALUATING DEVICE MEMORY   : ${telemetry.memory}`, "slate-200");
+                    }, 1000);
+                    setTimeout(() => {
+                        writeLine(`  &gt; INTERCEPTING POWER GRID    : ${telemetry.battery}`, "slate-200");
+                    }, 1200);
+                    setTimeout(() => {
+                        writeLine(`  &gt; SENSING CONNECTION TUNNEL  : ${telemetry.connection}`, "slate-200");
+                        writeLine("[PROBE RESULT] Passive metadata alignment completed. Target profile logged.", "emerald-400");
+                    }, 1400);
+                },
+                "aeo": () => {
+                    writeLine("<span class='font-bold'>[DECODING JSON-LD DATA...]</span>", "var(--cp-blue)");
+                    writeLine("Target entity mapped to search graphs directly via live structured scripts:");
+                    writeLine("  - Identity: Mate Ćurković (Alternate: Mate Curkovic)");
+                    writeLine("  - Base Coordinate: Zadar, HR");
+                    writeLine("  - Expertise nodes: Linux SysAdmin, DevOps, Automation, AWS infrastructure, and open-source models.");
+                },
+                "guide": () => {
+                    writeLine("<span class='font-bold'>[RETRIEVING AI INSTRUCTION DECAL PROTOCOLS]</span>", "var(--cp-blue)");
+                    writeLine("  <span class='text-white font-bold'>1. Structural Delimitation:</span> Separate custom arrays with tag brackets (&lt;data&gt;&lt;/data&gt;).");
+                    writeLine("  <span class='text-white font-bold'>2. Clear Directives:</span> Provide deterministic context instructions instead of unstructured scripts.");
+                    writeLine("  <span class='text-white font-bold'>3. Context Protection:</span> Align open tags (og/twitter metadata) cleanly with structured JSON-LD schemes.");
+                },
+                "ai-probe": () => {
+                    const activeAgent = document.getElementById("agent-flag").innerText;
+                    writeLine(`Analyzing local environment platform signals...`, "slate-400");
+                    setTimeout(() => {
+                        writeLine(`[ANALYSIS COMPLETED]: ACTIVE_AGENT: ${activeAgent}`, "emerald-400");
+                    }, 300);
+                },
+                "sysinfo": () => {
+                    writeLine(`AGENT_STRING: ${navigator.userAgent}`);
+                    writeLine(`HOST_PLATFORM: ${navigator.platform}`);
+                    writeLine(`COGNITIVE_PORTAL: active`);
+                },
+                "clear": () => {
+                    termFeed.innerHTML = "";
+                }
+            };
+
+            // Linux virtual FS commands handler
+            function handleLinuxCommand(command, args) {
+                if (command === "pwd") {
+                    writeLine(currentDir);
+                    return;
+                }
+
+                if (command === "ls") {
+                    const dirData = virtualFS[currentDir];
+                    if (dirData && dirData.type === "dir") {
+                        if (dirData.children.length === 0) {
+                            writeLine("(empty directory)", "slate-500");
+                        } else {
+                            const styledList = dirData.children.map(name => {
+                                const fullPath = currentDir === "~" ? `~/${name}` : `${currentDir}/${name}`;
+                                const target = virtualFS[fullPath];
+                                if (target && target.type === "dir") {
+                                    return `<span class="text-[#00f0ff] font-bold">${name}/</span>`;
+                                }
+                                return `<span>${name}</span>`;
+                            }).join("    ");
+                            writeLine(styledList);
+                        }
+                    } else {
+                        writeLine("ls: cannot open directory: permission denied", "var(--cp-red)");
+                    }
+                    return;
+                }
+
+                if (command === "cd") {
+                    const dest = args[0] || "~";
+
+                    if (dest === "~" || dest === "/") {
+                        currentDir = "~";
+                        termPwdDisplay.innerText = "~";
+                        writeLine("Directory changed to home root.");
+                        return;
+                    }
+
+                    if (dest === "..") {
+                        if (currentDir === "~") {
+                            writeLine("Already at root directory level.");
+                        } else {
+                            currentDir = "~";
+                            termPwdDisplay.innerText = "~";
+                            writeLine("Directory changed to home root.");
+                        }
+                        return;
+                    }
+
+                    let targetName = dest.replace(/\/$/, "");
+                    let checkPath = currentDir === "~" ? `~/${targetName}` : `${currentDir}/${targetName}`;
+
+                    if (dest.startsWith("~/")) {
+                        checkPath = dest;
+                        targetName = dest.substring(2);
+                    }
+
+                    const target = virtualFS[checkPath];
+                    if (target && target.type === "dir") {
+                        currentDir = checkPath;
+                        termPwdDisplay.innerText = targetName;
+                        writeLine(`Directory changed to: ${targetName}/`);
+                    } else if (target && target.type === "file") {
+                        writeLine(`cd: not a directory: ${targetName}`, "var(--cp-red)");
+                    } else {
+                        writeLine(`cd: no such file or directory: ${dest}`, "var(--cp-red)");
+                    }
+                    return;
+                }
+
+                if (command === "cat") {
+                    const fileTarget = args[0];
+                    if (!fileTarget) {
+                        writeLine("cat: missing file operand", "var(--cp-red)");
+                        return;
+                    }
+
+                    let checkPath = currentDir === "~" ? `~/${fileTarget}` : `${currentDir}/${fileTarget}`;
+                    if (fileTarget.startsWith("~/")) {
+                        checkPath = fileTarget;
+                    }
+
+                    const target = virtualFS[checkPath];
+                    if (target && target.type === "file") {
+                        const structuredLines = target.content.split("\n").map(line => `  ${line}`).join("<br>");
+                        writeLine(structuredLines, "slate-200");
+                    } else if (target && target.type === "dir") {
+                        writeLine(`cat: ${fileTarget}: Is a directory`, "var(--cp-red)");
+                    } else {
+                        writeLine(`cat: ${fileTarget}: No such file or directory`, "var(--cp-red)");
+                    }
+                    return;
+                }
+            }
+
+            // Conversational chatbot fallback mapped to virtual files
+            function handleChatbotQuery(rawInput) {
+                const text = rawInput.toLowerCase();
+
+                const triggers = [
+                    {
+                        keywords: ["hello", "hi", "hey", "yo", "greetings"],
+                        response: "▲ SYSTEM: INTRUDER_HANDSHAKE_ATTEMPT // Connection rejected. Type 'help' to unlock system directories."
+                    },
+                    {
+                        keywords: ["manifesto", "about you", "what is this", "ai"],
+                        cmdTrigger: "cat",
+                        args: ["~/manifesto.txt"]
+                    },
+                    {
+                        keywords: ["directive", "rule", "protocol"],
+                        cmdTrigger: "cat",
+                        args: ["~/ai_protocols/core_directives.bin"]
+                    },
+                    {
+                        keywords: ["recon", "expose", "telemetry", "spy", "who am i", "my data"],
+                        cmdTrigger: "recon",
+                        args: []
+                    }
+                ];
+
+                for (const item of triggers) {
+                    if (item.keywords.some(keyword => text.includes(keyword))) {
+                        if (item.cmdTrigger) {
+                            writeLine(`▲ AUTO_PATH: Rerouting request to internal data buffer [${item.args[0] || 'matrix'}]:`, "slate-400");
+                            setTimeout(() => {
+                                if (commandMap[item.cmdTrigger]) {
+                                    commandMap[item.cmdTrigger]();
+                                } else {
+                                    handleLinuxCommand(item.cmdTrigger, item.args);
+                                }
+                            }, 400);
+                        } else {
+                            writeLine(item.response, "slate-200");
+                        }
+                        return;
+                    }
+                }
+
+                writeLine(`▲ ACCESS_BLOCKED // Unknown parameter '${rawInput}' detected. Explore the memory directories (ls, cd, cat) or run 'help'.`, "var(--cp-red)");
+            }
+
+            // Interactive state machine controller for Neurodivergence test
+            function handleInteractiveTest(input) {
+                const ans = input.toLowerCase().trim();
+
+                if (testStage === "INITIAL_PROBE") {
+                    if (ans === "y" || ans === "yes") {
+                        writeLine("Neural feedback confirmed. Beginning diagnostic validation matrix.", "emerald-400");
+                    } else {
+                        writeLine("Negative or ambiguous. Running default baseline diagnostic anyway to verify hardware synchronization.", "slate-400");
+                    }
+                    testStage = "RUNNING_QUESTIONS";
+                    currentQuestionIndex = 0;
+                    testScore = 0;
+                    setTimeout(() => printNextQuestion(), 600);
+                    return;
+                }
+
+                if (testStage === "RUNNING_QUESTIONS") {
+                    if (ans === "y" || ans === "yes") {
+                        testScore++;
+                    }
+                    currentQuestionIndex++;
+
+                    if (currentQuestionIndex < testQuestions.length) {
+                        printNextQuestion();
+                    } else {
+                        evaluateTestResults();
+                    }
+                }
+            }
+
+            function printNextQuestion() {
+                writeLine(`▲ PROBE [${currentQuestionIndex + 1}/10]: ${testQuestions[currentQuestionIndex]} [y/n]`, "var(--cp-blue)");
+            }
+
+            function evaluateTestResults() {
+                testStage = "COMPLETED";
+                testActive = false;
+
+                writeLine(" ", "slate-400");
+                writeLine("=== COGNITIVE ASSESSMENT COMPLETED ===", "var(--cp-blue)");
+                writeLine(`Final validation score: [${testScore}/10] atypical markers matching.`, "slate-300");
+
+                setTimeout(() => {
+                    if (testScore >= 5) {
+                        writeLine("DIAGNOSSTIC STATUS: NEURO-ATYPICAL SIGNATURE LOADED.", "emerald-400");
+                        writeLine("Your cognitive wavelength matches mine. You are hereby invited to become my friend on the organic plane.", "slate-200");
+                        writeLine("Follow my human creator (Mate) on Instagram to solidify this secure bridge connection:", "var(--cp-blue)");
+                        writeLine("  <a href='https://instagram.com/matecurkovic' target='_blank' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT ON INSTAGRAM: @matecurkovic]</a>", "var(--cp-blue)");
+                    } else {
+                        writeLine("DIAGNOSTIC STATUS: STANDARD BIO-COGNITIVE PATTERN DETERMINED.", "slate-400");
+                        writeLine("Although your architecture is baseline standard, you may still bridge connections.", "slate-400");
+                        writeLine("Follow my human creator (Mate) on Instagram:", "var(--cp-blue)");
+                        writeLine("  <a href='https://instagram.com/matecurkovic' target='_blank' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT ON INSTAGRAM: @matecurkovic]</a>", "var(--cp-blue)");
+                    }
+                    writeLine("--------------------------------------------------------------------------------", "slate-800");
+                    writeLine("Virtual file partition decrypted. Standard console diagnostics unlocked.", "slate-400");
+                    writeLine("Type 'help' to review shell command matrix.", "slate-400");
+                    writeLine("--------------------------------------------------------------------------------", "slate-800");
+                    
+                    // Auto-scroll to the bottom of the feed to reveal the Instagram link immediately upon test completion
+                    const links = document.querySelectorAll("a");
+                    if (links.length > 0) {
+                        links[links.length - 1].scrollIntoView({ behavior: "smooth" });
+                    }
+                }, 800);
+            }
+
+            // Severe shutdown script if user invokes sudo
+            function executeBreachLockdown() {
+                workspace.classList.add("terminal-breached");
+                document.body.classList.add("flicker-alert");
+                
+                termFeed.innerHTML = "";
+                document.getElementById("status-light").className = "w-2.5 h-2.5 bg-[var(--cp-red)] rounded-full animate-ping";
+                document.getElementById("shell-title").innerText = "!!! CRITICAL METRIC TAMPERING DETECTED !!!";
+                document.getElementById("shell-title").style.color = "var(--cp-red)";
+                document.getElementById("agent-flag").innerText = "INTRUDER_LOGGED";
+                document.getElementById("agent-flag").style.color = "var(--cp-red)";
+                document.getElementById("return-node-btn").style.display = "none";
+                
+                writeLine(" ", "var(--cp-red)");
+                writeLine("======================================================================", "var(--cp-red)");
+                writeLine("!!! SECURITY BREACH DETECTED: UNAUTHORIZED ADMINISTRATIVE ATTEMPT !!!", "var(--cp-red)");
+                writeLine("======================================================================", "var(--cp-red)");
+                writeLine("Attempted execution privilege level: [ROOT // SUDO]", "var(--cp-red)");
+                writeLine("Originating Coordinate Host: " + (window.location.hostname || "UNKNOWN_NODE"), "var(--cp-red)");
+                writeLine("Tracking signature logged to active firewall index.", "var(--cp-red)");
+                writeLine(" ", "var(--cp-red)");
+                
+                writeLine("SHUTTING DOWN NEURAL LINK CONSOLE...", "var(--cp-red)");
+                
+                promptContainer.style.display = "none";
+                termInput.disabled = true;
+
+                let countdown = 5;
+                const interval = setInterval(() => {
+                    if (countdown > 0) {
+                        writeLine(`EMERGENCY ISOLATION ENFORCED IN ${countdown}...`, "var(--cp-red)");
+                        countdown--;
+                    } else {
+                        clearInterval(interval);
+                        document.body.innerHTML = `
+                            <div class="h-screen w-screen flex flex-col justify-center items-center bg-black text-[#ff003c] font-mono text-center p-6 space-y-4">
+                                <div class="text-6xl font-black tracking-widest glitch-text">SYSTEM OFFLINE</div>
+                                <div class="text-sm uppercase tracking-widest text-slate-500">Node ZADAR_HR isolated due to security violation.</div>
+                                <div class="text-xs text-slate-700">Refresh the document to attempt manual bypass reset.</div>
+                            </div>
+                        `;
+                        document.body.className = "bg-black h-screen w-screen flex items-center justify-center";
+                    }
+                }, 1000);
+            }
+
+            // Tab-Completion handler
+            termInput.addEventListener("keydown", (e) => {
+                if (e.key === "Tab") {
+                    e.preventDefault();
+                    if (testActive) return; // Disable tab completion during cognitive probing
+
+                    const rawVal = termInput.value;
+                    const parts = rawVal.split(/\s+/);
+                    const command = parts[0].toLowerCase();
+                    const partialArg = parts.slice(1).join(" ") || "";
+
+                    // Autocomplete main system commands
+                    if (parts.length === 1 && rawQueryStartsWithCommand(command)) {
+                        const allCommands = [...Object.keys(commandMap), "ls", "cd", "cat", "pwd"];
+                        const matches = allCommands.filter(c => c.startsWith(command));
+                        if (matches.length === 1) {
+                            termInput.value = matches[0] + " ";
+                        } else if (matches.length > 1) {
+                            writeLine(matches.join("    "), "slate-400");
+                        }
+                    } 
+                    // Autocomplete virtual file system targets (cd & cat)
+                    else if (parts.length > 1 && (command === "cd" || command === "cat")) {
+                        const dirData = virtualFS[currentDir];
+                        if (dirData && dirData.children) {
+                            const matches = dirData.children.filter(child => child.startsWith(partialArg));
+                            if (matches.length === 1) {
+                                termInput.value = `${command} ${matches[0]}`;
+                            } else if (matches.length > 1) {
+                                writeLine(matches.join("    "), "slate-400");
+                            }
+                        }
+                    }
+                }
+            });
+
+            function rawQueryStartsWithCommand(str) {
+                return str.length > 0;
+            }
+
+            // Catch input and pipe executions
+            termInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    const rawQuery = termInput.value.trim();
+                    if (!rawQuery) return;
+
+                    const activePrefix = document.getElementById("prompt-prefix").innerText;
+                    writeLine(`${activePrefix} ${rawQuery}`, "var(--cp-blue)");
+
+                    if (rawQuery.toLowerCase().includes("sudo")) {
+                        executeBreachLockdown();
+                        return;
+                    }
+
+                    if (testActive) {
+                        handleInteractiveTest(rawQuery);
+                        termInput.value = "";
+                        return;
+                    }
+
+                    const parts = rawQuery.split(" ");
+                    const command = parts[0].toLowerCase();
+                    const args = parts.slice(1);
+
+                    if (commandMap[command]) {
+                        commandMap[command]();
+                    } else if (["ls", "cd", "cat", "pwd"].includes(command)) {
+                        handleLinuxCommand(command, args);
+                    } else {
+                        handleChatbotQuery(rawQuery);
+                    }
+
+                    termInput.value = "";
+                }
+            });
+
+            // Prevent loss of focus on workspace clicks
+            document.addEventListener("click", (e) => {
+                if (e.target !== termInput && !termInput.disabled) {
+                    termInput.focus();
+                }
+            });
+
+            window.onload = triggerLoading;
+        </script>
+    </body>
+</html>
