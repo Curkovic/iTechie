@@ -25,7 +25,7 @@
                 margin: 0;
             }
 
-            /* CRT EFEKTI */
+            /* CRT EFFECTS */
             .crt-effects {
                 display: none;
                 position: fixed;
@@ -355,7 +355,6 @@
                             style="background: #25d366"
                             >WhatsApp</a
                         >
-                        <!-- GitHub gumb u punoj širini rešetke na većim ekranima -->
                         <a
                             href="https://github.com/Curkovici"
                             target="_blank"
@@ -370,7 +369,7 @@
                     id="node-footer"
                     class="flex justify-between font-mono text-[9px] font-bold uppercase opacity-60 reveal-node"
                 >
-                    <!-- Okidač za prikaz holograma -->
+                    <!-- Trigger link to slide in portrait -->
                     <span 
                         id="identity-trigger" 
                         class="cursor-pointer hover:text-[var(--cp-blue)] hover:opacity-100 active:text-[var(--cp-red)] transition-all duration-300 relative group select-none"
@@ -395,7 +394,7 @@
             </div>
         </div>
 
-        <!-- Hologram u donjem lijevom kutu -->
+        <!-- Fixed bottom-left container sliding off screen with 0 border & zero pointer interference -->
         <div 
             id="identity-peek" 
             class="fixed bottom-0 left-0 md:left-12 z-10 pointer-events-none transform translate-y-full opacity-0 transition-all duration-700 ease-out select-none"
@@ -418,14 +417,14 @@
             const textureOverlay = document.getElementById("texture-overlay");
 
             const logs = [
-                "> Inicijalizacija ICE breakera...",
-                "> Pretraživanje lokalnih čvorova (Zadar)...",
+                "> Initializing ICE breaker...",
+                "> Searching for local nodes (Zadar)...",
                 "> Handshake @ m.itechie.eu",
-                "> Zaobilaženje korporativnih vatrozida...",
-                "> Dekriptiranje matecurkovic.key",
-                "> Izgradnja sigurnog ulinka...",
-                "> Finalizacija sigurnog protokola...",
-                "> Pristup odobren."
+                "> Bypassing corporate firewalls...",
+                "> Decrypting matecurkovic.key",
+                "> Building secure uplink...",
+                "> Finalizing secure handshake...",
+                "> Access Granted."
             ];
 
             let loadProgress = 0;
@@ -497,11 +496,11 @@
                     peek.classList.add("translate-y-full", "opacity-0");
                 }
 
-                // Hover akcije za desktop
+                // Desktop Hover Actions
                 trigger.addEventListener("mouseenter", showPortrait);
                 trigger.addEventListener("mouseleave", hidePortrait);
 
-                // Klik/dodir za mobilne uređaje
+                // Mobile/Touch Toggle Actions
                 trigger.addEventListener("click", (e) => {
                     e.stopPropagation();
                     const isOpen = peek.classList.contains("translate-y-0");
