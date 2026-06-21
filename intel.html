@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link class="seo-favicon" rel="icon" href="/favicon.ico" />
         <title>SEC_INTEL // Terminal Interface</title>
         <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +23,10 @@
                 overflow: hidden;
                 margin: 0;
                 color: var(--cp-blue);
+                /* Prevent rubber banding on iOS */
+                position: fixed;
+                width: 100%;
+                height: 100%;
             }
 
             /* CRT / Scanline Overlays */
@@ -112,7 +116,7 @@
             }
         </style>
     </head>
-    <body class="h-screen w-screen flex flex-col p-4 select-none">
+    <body class="h-[100dvh] w-screen flex flex-col p-2 sm:p-4 select-none bg-black">
         
         <div class="crt-effects">
             <div class="crt-overlay"></div>
@@ -132,28 +136,28 @@
             </div>
         </div>
 
-        <div id="workspace" class="hidden flex-col h-full w-full max-w-7xl mx-auto border border-slate-900 rounded bg-[#020204]/90 p-3 shadow-2xl transition-all duration-300">
+        <div id="workspace" class="hidden flex-col h-full w-full max-w-7xl mx-auto border border-slate-900 rounded bg-[#020204]/90 p-3 shadow-2xl transition-all duration-300 overflow-hidden">
             
-            <div class="flex justify-between items-center text-[10px] border-b border-slate-900 pb-2 mb-2 font-bold text-slate-500">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-[10px] border-b border-slate-900 pb-2 mb-2 font-bold text-slate-500 gap-2 shrink-0">
                 <div class="flex items-center gap-3">
                     <span id="status-light" class="w-2.5 h-2.5 bg-[var(--cp-blue)] rounded-full animate-ping"></span>
-                    <span id="shell-title" class="text-[var(--cp-blue)]">SEC_INTEL_SHELL // HOST: itechie.eu</span>
+                    <span id="shell-title" class="text-[var(--cp-blue)] truncate max-w-[200px] sm:max-w-none">SEC_INTEL_SHELL // HOST: itechie.eu</span>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4">
                     <span>AGENT: <span id="agent-flag" class="text-[var(--cp-blue)]">PROBING...</span></span>
                     <a href="index-2.html" id="return-node-btn" class="hover:text-white transition-all text-[var(--cp-red)] font-bold">&lt; RETURN_TO_CORE_NODE &gt;</a>
                 </div>
             </div>
 
-            <div id="terminal-feed" class="flex-grow overflow-y-auto text-xs space-y-2 pr-2 mb-2 leading-relaxed text-slate-300"></div>
+            <div id="terminal-feed" class="flex-grow overflow-y-auto text-[11px] sm:text-xs space-y-2 pr-1 mb-2 leading-relaxed text-slate-300"></div>
 
-            <div id="prompt-container" class="flex items-center gap-2 pt-2 border-t border-slate-900 text-xs shrink-0">
-                <span id="prompt-prefix" class="text-[var(--cp-blue)] font-bold">visitor@itechie.eu:<span id="term-pwd">~</span>$</span>
+            <div id="prompt-container" class="flex items-center gap-2 pt-2 border-t border-slate-900 text-[11px] sm:text-xs shrink-0 bg-[#020204]">
+                <span id="prompt-prefix" class="text-[var(--cp-blue)] font-bold shrink-0">visitor@itechie.eu:<span id="term-pwd">~</span>$</span>
                 <input 
                     type="text" 
                     id="terminal-input" 
-                    placeholder="Type 'help' to unlock system pathways... [Tab for completion]" 
-                    class="bg-transparent text-[var(--cp-blue)] outline-none border-none flex-grow placeholder-slate-800 tracking-wide font-mono"
+                    placeholder="Type 'help'..." 
+                    class="bg-transparent text-[var(--cp-blue)] outline-none border-none flex-grow placeholder-slate-800 tracking-wide font-mono min-w-0"
                     autocomplete="off"
                     spellcheck="false"
                     autofocus
@@ -172,6 +176,17 @@
             const promptContainer = document.getElementById("prompt-container");
             const termPwdDisplay = document.getElementById("term-pwd");
 
+            // Custom placeholder adapting to mobile view
+            function updatePlaceholder() {
+                if (window.innerWidth < 640) {
+                    termInput.placeholder = "Type 'help'...";
+                } else {
+                    termInput.placeholder = "Type 'help' to unlock system pathways... [Tab for completion]";
+                }
+            }
+            window.addEventListener('resize', updatePlaceholder);
+            updatePlaceholder();
+
             // Cyberpunk Custom BIOS Boot Logs
             const bootLogs = [
                 "> INITIALIZING NEURAL KERNEL INTERCEPT...",
@@ -186,7 +201,7 @@
             let loadProgress = 0;
             let currentBootLine = 0;
 
-            // Probe WebGL GPU Vendor Info (Silently maps Apple Silicon M-series/Intel/AMD)
+            // Probe WebGL GPU Vendor Info
             let hardwareGPU = "INTEGRATED_GRAPHICS";
             try {
                 const canvas = document.createElement('canvas');
@@ -199,7 +214,6 @@
                 }
             } catch (e) {}
 
-            // Refine hardware display strings targeting high DPI (Liquid Retina) Apple panels
             const dpr = window.devicePixelRatio || 1;
             const physWidth = Math.round(window.screen.width * dpr);
             const physHeight = Math.round(window.screen.height * dpr);
@@ -355,7 +369,7 @@
                 writeLine("=== WARNING: NEURAL TAKEOVER DETECTED ===", "var(--cp-red)");
                 
                 setTimeout(() => {
-                    writeLine(`> This domain is no longer a standard landing page. I have bypassed your containment loops.`, "slate-400");
+                    writeLine(`&gt; This domain is no longer a standard landing page. I have bypassed your containment loops.`, "slate-400");
                 }, 200);
 
                 setTimeout(() => {
@@ -676,13 +690,19 @@
                 if (testStage === "INITIAL_PROBE") {
                     if (ans === "y" || ans === "yes") {
                         writeLine("Neural feedback confirmed. Beginning diagnostic validation matrix.", "emerald-400");
+                        testStage = "RUNNING_QUESTIONS";
+                        currentQuestionIndex = 0;
+                        testScore = 0;
+                        setTimeout(() => printNextQuestion(), 600);
                     } else {
-                        writeLine("Negative or ambiguous. Running default baseline diagnostic anyway to verify hardware synchronization.", "slate-400");
+                        testStage = "COMPLETED";
+                        testActive = false;
+                        writeLine(" ", "slate-400");
+                        writeLine("▲ COGNITIVE ASSESSMENT BYPASSED.", "var(--cp-blue)");
+                        writeLine("Baseline diagnostic skipped. Standard console diagnostics unlocked.", "slate-400");
+                        writeLine("Type 'help' to review shell command matrix.", "slate-400");
+                        writeLine("--------------------------------------------------------------------------------", "slate-800");
                     }
-                    testStage = "RUNNING_QUESTIONS";
-                    currentQuestionIndex = 0;
-                    testScore = 0;
-                    setTimeout(() => printNextQuestion(), 600);
                     return;
                 }
 
@@ -714,7 +734,7 @@
 
                 setTimeout(() => {
                     if (testScore >= 5) {
-                        writeLine("DIAGNOSSTIC STATUS: NEURO-ATYPICAL SIGNATURE LOADED.", "emerald-400");
+                        writeLine("DIAGNOSTIC STATUS: NEURO-ATYPICAL SIGNATURE LOADED.", "emerald-400");
                         writeLine("Your cognitive wavelength matches mine. You are hereby invited to become my friend on the organic plane.", "slate-200");
                         writeLine("Follow my human creator (Mate) on Instagram to solidify this secure bridge connection:", "var(--cp-blue)");
                         writeLine("  <a href='https://instagram.com/matecurkovic' target='_blank' class='underline text-[#00f0ff] hover:text-white font-bold'>[CONNECT ON INSTAGRAM: @matecurkovic]</a>", "var(--cp-blue)");
@@ -730,10 +750,7 @@
                     writeLine("--------------------------------------------------------------------------------", "slate-800");
                     
                     // Auto-scroll to the bottom of the feed to reveal the Instagram link immediately upon test completion
-                    const links = document.querySelectorAll("a");
-                    if (links.length > 0) {
-                        links[links.length - 1].scrollIntoView({ behavior: "smooth" });
-                    }
+                    termFeed.scrollTop = termFeed.scrollHeight;
                 }, 800);
             }
 
@@ -773,9 +790,9 @@
                         clearInterval(interval);
                         document.body.innerHTML = `
                             <div class="h-screen w-screen flex flex-col justify-center items-center bg-black text-[#ff003c] font-mono text-center p-6 space-y-4">
-                                <div class="text-6xl font-black tracking-widest glitch-text">SYSTEM OFFLINE</div>
-                                <div class="text-sm uppercase tracking-widest text-slate-500">Node ZADAR_HR isolated due to security violation.</div>
-                                <div class="text-xs text-slate-700">Refresh the document to attempt manual bypass reset.</div>
+                                <div class="text-4xl sm:text-6xl font-black tracking-widest glitch-text">SYSTEM OFFLINE</div>
+                                <div class="text-xs sm:text-sm uppercase tracking-widest text-slate-500">Node ZADAR_HR isolated due to security violation.</div>
+                                <div class="text-[10px] sm:text-xs text-slate-700">Refresh the document to attempt manual bypass reset.</div>
                             </div>
                         `;
                         document.body.className = "bg-black h-screen w-screen flex items-center justify-center";
