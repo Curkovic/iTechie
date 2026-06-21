@@ -329,9 +329,9 @@
                         <span class="glitch-text text-white">RESISTANCE</span>.
                     </h1>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                         <a
-                            href="mailto:web@itechie.eu"
+                            href="mailto:m@itechie.eu"
                             class="cp-button reveal-node"
                             >Neural-Mail</a
                         >
@@ -356,12 +356,20 @@
                             >WhatsApp</a
                         >
                         <a
-                            href="https://github.com/Curkovic"
+                            href="https://github.com/Curkovici"
                             target="_blank"
                             class="cp-button reveal-node md:col-span-2"
                             style="background: #24292e; color: white"
                             >GitHub</a
                         >
+                    </div>
+
+                    <!-- Cyberpunk Bio & Collaboration Area -->
+                    <div class="reveal-node border-t border-[rgba(252,238,10,0.3)] pt-6 font-mono text-xs text-slate-300 leading-relaxed">
+                        <span class="text-[var(--cp-blue)] font-bold block mb-1">SYSTEM_OVERVIEW // MISSION_LOG</span>
+                        <p>
+                            Highly focused on hardening Linux networks, building robust automation pipelines, and embedding advanced AI engines into active workflows. Deeply passionate about the Open Source movement. Always scouting for fresh nodes, complex infrastructures to break, and creative teams to build with. Let's merge protocols and collaborate.
+                        </p>
                     </div>
                 </div>
 
@@ -486,6 +494,7 @@
                 const peek = document.getElementById("identity-peek");
                 let mobileTimeout;
 
+                // Toggle logic
                 function showPortrait() {
                     peek.classList.remove("translate-y-full", "opacity-0");
                     peek.classList.add("translate-y-0", "opacity-100");
