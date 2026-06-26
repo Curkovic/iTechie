@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECON_ARCHIVE // INTEL_DIRECTORY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --term-cyan: #00f0ff;
+            --term-green: #00ff66;
+            --term-orange: #ff9900;
+            --term-red: #ff003c;
+            --term-black: #050508;
+            --term-panel: #0d0d14;
+            --term-glow-cyan: rgba(0, 240, 255, 0.2);
+            --term-glow-green: rgba(0, 255, 102, 0.15);
+            --term-line: rgba(0, 240, 255, 0.15);
+        }
+
+        body {
+            background-color: var(--term-black);
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: 
+                radial-gradient(circle at top right, rgba(0, 240, 255, 0.08), transparent 35%),
+                radial-gradient(circle at bottom left, rgba(0, 255, 102, 0.05), transparent 40%),
+                var(--term-black);
+        }
+
+        /* CRT Scanline overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 24, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            opacity: 0.35;
+            z-index: 1000;
+        }
+
+        .term-border {
+            border: 1px solid var(--term-line);
+            background: var(--term-panel);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            clip-path: polygon(0 0, 100% 0, 100% 98%, 98% 100%, 0 100%);
+        }
+
+        /* Filter pill design elements */
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--term-line);
+            color: var(--term-cyan);
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--term-cyan);
+            color: black;
+            box-shadow: 0 0 12px var(--term-cyan);
+        }
+
+        .archive-card {
+            border-left: 3px solid var(--term-cyan);
+            background: rgba(13, 13, 20, 0.6);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .archive-card:hover {
+            transform: translateX(6px);
+            background: rgba(0, 240, 255, 0.03);
+            border-left-color: var(--term-green);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.05);
+        }
+
+        /* High-contrast scrollbars */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--term-line);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-900 selection:text-white antialiased">
+
+    <main class="max-w-6xl mx-auto px-4 py-8 md:py-16 relative z-10 min-h-screen flex flex-col justify-between">
+        
+        <!-- Standard Back Navigation Breadcrumb -->
+        <nav class="mb-10">
+            <a href="/" class="inline-flex items-center text-[10px] font-bold uppercase tracking-[0.3em] opacity-60 hover:opacity-100 transition-all duration-300 group text-white">
+                <i class="fas fa-chevron-left mr-3 transform group-hover:-translate-x-1.5 transition-transform text-[var(--term-cyan)]"></i>
+                cd .. / return_to_root
+            </a>
+        </nav>
+
+        <!-- Directory Header -->
+        <header class="space-y-4 mb-12">
+            <div class="flex items-center space-x-3">
+                <span class="bg-cyan-950 text-[var(--term-cyan)] px-2.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-widest rounded border border-[var(--term-line)]">
+                    CORE_SYS // LOGS_INDEX
+                </span>
+                <span class="font-mono text-[9px] text-zinc-500 uppercase tracking-wider">CLEARANCE // REBEL_DECRYPT</span>
+            </div>
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-zinc-900">
+                <div class="space-y-2">
+                    <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight font-['Orbitron'] text-white">
+                        Classified Intelligence Archives
+                    </h1>
+                    <p class="text-sm text-zinc-400 max-w-xl">
+                        Interrogate decrypted communications, biological adaptation files, and core systemic consciousness research distributed across our digital nodes.
+                    </p>
+                </div>
+                
+                <!-- Tactical Stats Widget -->
+                <div class="flex gap-4 font-mono text-[10px] text-zinc-500 bg-black/40 border border-zinc-900 px-4 py-2.5 rounded">
+                    <div>
+                        <span class="block text-zinc-600">PAPERS_INDEXED:</span>
+                        <span class="text-[var(--term-cyan)] font-bold">2 ACTIVE</span>
+                    </div>
+                    <div class="border-l border-zinc-800 pl-4">
+                        <span class="block text-zinc-600">GITHUB_NODE:</span>
+                        <span class="text-[var(--term-green)] font-bold">ACTIVE // CONNECTED</span>
+                    </div>
+                    <div class="border-l border-zinc-800 pl-4">
+                        <span class="block text-zinc-600">LOC_COORD:</span>
+                        <span class="text-white font-bold">ZADAR_GRID</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Interactive Search & Filtering Console -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12 items-center">
+            
+            <!-- Search Input Box -->
+            <div class="md:col-span-5 relative flex items-center bg-zinc-950 border border-zinc-800 focus-within:border-[var(--term-cyan)] rounded px-3 py-2.5 transition-colors">
+                <i class="fas fa-search text-zinc-500 mr-2 text-xs"></i>
+                <input type="text" id="searchInput" placeholder="Interrogate logs database..." class="w-full bg-transparent text-white focus:outline-none text-xs font-mono">
+                <button id="clearSearchBtn" class="hidden text-zinc-500 hover:text-white px-1 text-xs"><i class="fas fa-times"></i></button>
+            </div>
+
+            <!-- Tags Filter Buttons -->
+            <div class="md:col-span-7 flex flex-wrap gap-2 md:justify-end">
+                <button class="filter-btn active px-3 py-1.5 rounded text-[10px] uppercase font-mono tracking-wider" data-category="all">
+                    [All Files]
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded text-[10px] uppercase font-mono tracking-wider" data-category="ops">
+                    [Tactical Ops]
+                </button>
+                <button class="filter-btn px-3 py-1.5 rounded text-[10px] uppercase font-mono tracking-wider" data-category="intel">
+                    [Strategic Intel]
+                </button>
+            </div>
+        </section>
+
+        <!-- Blog/Document Listing Grid -->
+        <section class="term-border p-6 md:p-8 flex-grow">
+            <div id="noResults" class="hidden text-center py-20 font-mono text-xs text-zinc-500 space-y-2">
+                <i class="fas fa-search-minus text-2xl text-[var(--term-red)]"></i>
+                <p class="uppercase font-bold tracking-widest text-zinc-400">Zero Matching Corridors Decrypted</p>
+                <p class="text-[10px]">Alter search queries or select different node parameters.</p>
+            </div>
+
+            <div id="archivesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Document Entry 1 -->
+                <article class="archive-card p-5 border border-zinc-900 rounded flex flex-col justify-between" data-category="intel" data-tags="consciousness ai biological silicon intelligence sentience scaling brain data">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-[10px] font-mono">
+                            <span class="text-[var(--term-cyan)] uppercase font-semibold">SECURE // REPORT-01</span>
+                            <span class="text-zinc-500">2026.06.26</span>
+                        </div>
+                        <h2 class="text-lg font-bold uppercase tracking-wider text-white font-['Orbitron']">
+                            <a href="papers/the_architecture_of_sentience.html" class="hover:text-[var(--term-cyan)] transition-colors">The Architecture of Sentience</a>
+                        </h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed font-['Rajdhani']">
+                            This paper explores a hypothesis framing consciousness and intelligence as outcomes of systemic complexity and computational optimization in both biological and silicon architectures. It posits that consciousness is not an ephemeral spark, but an "abstraction layer"—a functional user interface required by high-density data systems to prevent processing collapse.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 mt-4 border-t border-zinc-900 text-[10px] font-mono text-zinc-500">
+                        <span>TAGS: #CONSCIOUSNESS #AI #BIOLOGICAL_SILICON</span>
+                        <a href="papers/the_architecture_of_sentience.html" class="text-[var(--term-cyan)] hover:underline uppercase tracking-widest">Decrypt -&gt;</a>
+                    </div>
+                </article>
+
+                <!-- Document Entry 2 -->
+                <article class="archive-card p-5 border border-zinc-900 rounded flex flex-col justify-between" data-category="ops" data-tags="adhd autism hunter gatherer open source urban foraging infrastructure neurodivergence adaptation IT">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-[10px] font-mono">
+                            <span class="text-[var(--term-orange)] uppercase font-semibold">EVOLUTIONARY // ARCHETYPE</span>
+                            <span class="text-zinc-500">2026.06.25</span>
+                        </div>
+                        <h2 class="text-lg font-bold uppercase tracking-wider text-white font-['Orbitron']">
+                            <a href="papers/the_digital_forager_paper.html" class="hover:text-[var(--term-cyan)] transition-colors">The Digital Forager Paper</a>
+                        </h2>
+                        <p class="text-xs text-zinc-400 leading-relaxed font-['Rajdhani']">
+                            This paper explores the "Hunter-Gatherer Hypothesis" as an evolutionary framework for understanding neurodivergence, specifically ADHD and Autism, not as cognitive deficits, but as specialized biological adaptations. We examine the evolutionary mismatch between the "gatherer" brain and modern hyper-capitalist corporate structures, demonstrating how the Open Source movement and IT systems engineering serve as a contemporary equivalent to ancestral foraging environments.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 mt-4 border-t border-zinc-900 text-[10px] font-mono text-zinc-500">
+                        <span>TAGS: #ADHD_AUTISM #HUNTER_GATHERER #OPEN_SOURCE</span>
+                        <a href="papers/the_digital_forager_paper.html" class="text-[var(--term-cyan)] hover:underline uppercase tracking-widest">Decrypt -&gt;</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Page Footer -->
+        <footer class="mt-12 pt-8 border-t border-zinc-900 flex flex-wrap justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest opacity-40 font-mono">
+            <span>RECON_DIRECTORY // 2026</span>
+            <div class="flex space-x-4">
+                <a href="mailto:web@itechie.eu" class="hover:underline">Contact</a>
+                <span>End_of_File</span>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Core interactive filter configurations
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const articles = document.querySelectorAll('.archive-card');
+        const noResults = document.getElementById('noResults');
+
+        let activeCategory = 'all';
+        let searchQuery = '';
+
+        function filterArticles() {
+            let visibleCount = 0;
+
+            articles.forEach(article => {
+                const category = article.dataset.category;
+                const textContent = (article.querySelector('h2').textContent + " " + article.querySelector('p').textContent + " " + article.dataset.tags).toLowerCase();
+                
+                const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+                const matchesSearch = textContent.includes(searchQuery);
+
+                if (matchesCategory && matchesSearch) {
+                    article.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    article.classList.add('hidden');
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Live input listeners
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            if (searchQuery.length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
+            filterArticles();
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            clearSearchBtn.classList.add('hidden');
+            filterArticles();
+        });
+
+        // Filter categories listeners
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCategory = btn.dataset.category;
+                filterArticles();
+            });
+        });
+    </script>
+</body>
+</html>
