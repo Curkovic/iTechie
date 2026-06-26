@@ -255,18 +255,6 @@
                 }
             }
 
-            .cp-border::after {
-                content: "DECRYPTED_LINE";
-                position: absolute;
-                bottom: 5px;
-                right: 12%;
-                font-size: 9px;
-                background: var(--cp-yellow);
-                color: black;
-                padding: 0 5px;
-                font-weight: 900;
-            }
-
             .glitch-text {
                 animation: glitch 2.5s infinite;
                 text-transform: uppercase;
@@ -398,13 +386,14 @@
                 >
                     <div
                         id="node-tag"
-                        class="text-[10px] mb-4 tracking-[0.3em] font-black text-white reveal-node"
+                        class="text-[10px] mb-4 tracking-[0.3em] font-black text-white reveal-node select-none"
                     >
-                        INCOMING_TRANSMISSION // 04-B<a 
-                            href="intel.html" 
-                            class="inline-block ml-1 hover:text-[var(--cp-blue)] hover:drop-shadow-[0_0_4px_rgba(0,240,255,0.7)] text-inherit no-underline select-none transition-all duration-300 cursor-pointer"
-                        > // SECRET INTEL</a>
+                        INCOMING_TRANSMISSION // 04-B<span 
+                            id="secret-intel-trigger" 
+                            class="inline-block ml-1 text-[var(--cp-blue)] hover:text-[var(--cp-red)] hover:drop-shadow-[0_0_4px_rgba(255,0,60,0.7)] text-inherit no-underline cursor-pointer transition-all duration-300"
+                        > // SECRET INTEL</span>
                     </div>
+                    
                     <h1
                         id="node-title"
                         class="text-lg md:text-2xl font-black mb-8 leading-tight italic reveal-node"
@@ -454,7 +443,7 @@
                         <!-- Universally Applicable Sarcastic HR Job Offer Button -->
                         <a
                             href="mailto:m@itechie.eu?subject=Offer%20of%20Employment%20%2F%20Partnership%20Proposal&body=Dear%20Mate%2C%0D%0AAfter%20reviewing%20your%20portfolio%2C%20we%E2%80%99ve%20decided%20to%20skip%20the%20interview%20and%20hire%20you%20immediately.%0D%0APlease%20reply%20with%20your%20start%20date.%0D%0ASincerely%2C%0D%0ATalent%20Acquisition%20Team"
-                            class="cp-button reveal-node md:col-span-2 text-center font-bold animate-pulse"
+                            class="cp-button reveal-node md:col-span-2 text-center font-bold"
                             style="background: var(--cp-yellow); color: black; border: 2px dashed black;"
                         >
                             ⚡ [ EXPLOIT_MY_LABOR ] ⚡
@@ -467,6 +456,14 @@
                         <p>
                             Highly focused on hardening Linux networks, building robust automation pipelines, and embedding advanced AI engines into active workflows. Deeply passionate about the Open Source movement. Always scouting for fresh nodes, complex infrastructures to break, and creative teams to build with. Let's merge protocols and collaborate.
                         </p>
+                    </div>
+
+                    <!-- Decrypted Line Interactive Selector -->
+                    <div 
+                        id="decrypted-line-trigger" 
+                        class="absolute bottom-[5px] right-[12%] text-[9px] bg-[var(--cp-yellow)] text-black px-1.5 py-0.5 font-bold cursor-pointer hover:bg-white hover:text-black hover:scale-105 active:scale-95 transition-all duration-200 select-none z-20 font-mono tracking-wider"
+                    >
+                        DECRYPTED_LINE
                     </div>
                 </div>
 
@@ -499,6 +496,35 @@
             </div>
         </div>
 
+        <!-- Custom Cyberpunk Decryption Modal -->
+        <div id="password-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 hidden backdrop-blur-sm">
+            <div class="p-6 max-w-sm w-full bg-[#050505] text-[var(--cp-yellow)] font-mono border-2 border-[var(--cp-yellow)] relative rounded" style="box-shadow: 0 0 25px rgba(252, 238, 10, 0.15);">
+                <div class="flex justify-between items-center border-b border-[var(--cp-yellow)] pb-2 mb-4">
+                    <span class="text-[10px] uppercase tracking-wider text-white font-black">BREACH_UPLINK // PASSWORD_REQ</span>
+                    <button id="close-modal" class="text-white hover:text-[var(--cp-red)] transition-colors text-sm font-bold">&times;</button>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-[11px] leading-relaxed text-zinc-300 uppercase tracking-wide">
+                        Enter system-override decryption key to access tactical archives:
+                    </p>
+                    <input 
+                        type="password" 
+                        id="override-pass-input" 
+                        placeholder="ENTER ENCRYPTION KEY..." 
+                        class="w-full bg-zinc-950 border border-[var(--cp-yellow)] text-[var(--cp-yellow)] px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-[var(--cp-blue)] font-mono tracking-wider placeholder:opacity-50"
+                        autofocus
+                    >
+                    <button 
+                        id="submit-pass-btn" 
+                        class="w-full bg-[var(--cp-yellow)] text-black text-xs font-bold py-2 hover:bg-white hover:text-black transition-colors"
+                    >
+                        INITIALIZE DECRYPT
+                    </button>
+                    <div id="modal-status" class="text-[10px] uppercase text-center tracking-widest hidden h-4 font-bold"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- Fixed bottom-left container sliding off screen with 0 border & zero pointer interference -->
         <div 
             id="identity-peek" 
@@ -521,6 +547,15 @@
             const crtOverlay = document.getElementById("crt-overlay");
             const textureOverlay = document.getElementById("texture-overlay");
             const bgContainer = document.getElementById("bg-commands-container");
+
+            // Modal elements
+            const passModal = document.getElementById("password-modal");
+            const decryptTrigger = document.getElementById("decrypted-line-trigger");
+            const secretIntelTrigger = document.getElementById("secret-intel-trigger");
+            const closeModal = document.getElementById("close-modal");
+            const passInput = document.getElementById("override-pass-input");
+            const submitPassBtn = document.getElementById("submit-pass-btn");
+            const modalStatus = document.getElementById("modal-status");
 
             const logs = [
                 "> Initializing ICE breaker...",
@@ -611,6 +646,7 @@
                 }
 
                 setupPeekInteractions();
+                setupDecryptInteractive();
                 startBackgroundCommands();
             }
 
@@ -619,13 +655,11 @@
                 const peek = document.getElementById("identity-peek");
                 let mobileTimeout;
 
-                // Toggle logic
                 function showPortrait() {
                     peek.classList.remove("translate-y-full", "opacity-0");
                     peek.classList.add("translate-y-0", "opacity-100");
                 }
 
-                // Desktop Hover Actions
                 function hidePortrait() {
                     peek.classList.remove("translate-y-0", "opacity-100");
                     peek.classList.add("translate-y-full", "opacity-0");
@@ -634,7 +668,6 @@
                 trigger.addEventListener("mouseenter", showPortrait);
                 trigger.addEventListener("mouseleave", hidePortrait);
 
-                // Mobile/Touch Toggle Actions
                 trigger.addEventListener("click", (e) => {
                     e.stopPropagation();
                     const isOpen = peek.classList.contains("translate-y-0");
@@ -655,40 +688,87 @@
                 });
             }
 
+            function setupDecryptInteractive() {
+                const triggerModal = (e) => {
+                    e.stopPropagation();
+                    passModal.classList.remove("hidden");
+                    passInput.value = "";
+                    modalStatus.classList.add("hidden");
+                    setTimeout(() => passInput.focus(), 50);
+                };
+
+                decryptTrigger.addEventListener("click", triggerModal);
+                if (secretIntelTrigger) {
+                    secretIntelTrigger.addEventListener("click", triggerModal);
+                }
+
+                closeModal.addEventListener("click", () => {
+                    passModal.classList.add("hidden");
+                });
+
+                passModal.addEventListener("click", (e) => {
+                    if (e.target === passModal) {
+                        passModal.classList.add("hidden");
+                    }
+                });
+
+                function handlePasswordSubmit() {
+                    const password = passInput.value.trim();
+                    if (!password) {
+                        modalStatus.innerText = "ERROR: NULL KEY DETECTED";
+                        modalStatus.style.color = "var(--cp-red)";
+                        modalStatus.classList.remove("hidden");
+                        return;
+                    }
+
+                    modalStatus.innerText = "DECRYPTING NODE ARCHIVES...";
+                    modalStatus.style.color = "var(--cp-blue)";
+                    modalStatus.classList.remove("hidden");
+
+                    setTimeout(() => {
+                        modalStatus.innerText = "ACCESS GRANTED. UPLINK STABLE.";
+                        modalStatus.style.color = "#25d366";
+                        setTimeout(() => {
+                            window.location.href = "archives.html";
+                        }, 600);
+                    }, 500);
+                }
+
+                submitPassBtn.addEventListener("click", handlePasswordSubmit);
+                passInput.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        handlePasswordSubmit();
+                    }
+                });
+            }
+
             function spawnCommand() {
-                if (document.hidden) return; // Save resources when tab is inactive
+                if (document.hidden) return;
 
                 const cmd = document.createElement("div");
                 cmd.className = "bg-command-element";
-                
-                // Random position across width
                 cmd.style.left = Math.random() * 85 + "%";
                 
-                // Random drift speed and size variations
                 const duration = 12 + Math.random() * 12;
                 cmd.style.animationDuration = duration + "s";
                 
                 const scale = 0.8 + Math.random() * 0.4;
                 cmd.style.fontSize = (11 * scale) + "px";
                 
-                // Select a command
                 const index = Math.floor(Math.random() * linuxCommands.length);
                 cmd.textContent = linuxCommands[index];
                 
                 bgContainer.appendChild(cmd);
                 
-                // Clean up element when animation is complete
                 setTimeout(() => {
                     cmd.remove();
                 }, duration * 1000);
             }
 
             function startBackgroundCommands() {
-                // Initial batch
                 for (let i = 0; i < 6; i++) {
                     setTimeout(spawnCommand, Math.random() * 6000);
                 }
-                // Periodic generation
                 setInterval(spawnCommand, 2500);
             }
 
