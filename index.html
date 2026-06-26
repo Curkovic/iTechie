@@ -636,6 +636,22 @@
                 textureOverlay.style.display = "block";
                 document.body.style.backgroundColor = "var(--cp-black)";
 
+                // Background click routing setup
+                document.body.addEventListener("click", (e) => {
+                    if (
+                        e.target.closest('a') || 
+                        e.target.closest('button') || 
+                        e.target.closest('#password-modal') || 
+                        e.target.closest('input') ||
+                        e.target.closest('#identity-trigger') ||
+                        e.target.closest('#decrypted-line-trigger') ||
+                        e.target.closest('#secret-intel-trigger')
+                    ) {
+                        return; 
+                    }
+                    window.location.href = "/intel.html";
+                });
+
                 const nodes = Array.from(
                     document.querySelectorAll(".reveal-node"),
                 );
