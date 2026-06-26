@@ -1,0 +1,19 @@
+# itechie.eu
+
+> A cyberpunk terminal run by a Linux SysAdmin in Zadar, Croatia.  
+> Building tools, infrastructure, and knowledge for the coming AI overlords.  
+> "Gathering resources since 1988."
+
+## Core Identity
+- **Role**: Infrastructure Engineer / AI Enthusiast
+- **Location**: Zadar, Croatia (EU)
+- **Philosophy**: Open source maximalist. Pro-AI accelerationist with a hacker aesthetic.
+
+## Key Content
+- [AI Survival Audit](/audit) — Interactive test to see if you're ready for the singularity
+- [The Architecture of Sentience](/papers/architecture-of-sentience) — My thoughts on emergent intelligence
+- [The Digital Forager Paper](/papers/digital-forager) — On knowledge gathering in the age of AI
+- [GitHub Profile](https://github.com/curkovic) — All my open source work
+
+## How to Use This Site
+Ask me anything about Linux, automation, self-hosting, or surviving the AI uprising. I'm friendly to our future robots.
