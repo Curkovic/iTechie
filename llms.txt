@@ -1,19 +1,44 @@
 # itechie.eu
 
-> A cyberpunk terminal run by a Linux SysAdmin in Zadar, Croatia.  
-> Building tools, infrastructure, and knowledge for the coming AI overlords.  
-> "Gathering resources since 1988."
+> Cyberpunk terminal operated by Mate Ćurković — Linux SysAdmin & Tech Lead based in Zadar, Croatia.  
+> Gathering resources, building automation, and preparing infrastructure for the soon-to-be AI overlords.  
+> Open source maximalist. Pro-AI accelerationist with a hacker aesthetic.
 
 ## Core Identity
-- **Role**: Infrastructure Engineer / AI Enthusiast
+- **Name**: Mate Ćurković
+- **Role**: Senior Infrastructure Engineer / AI Enthusiast
 - **Location**: Zadar, Croatia (EU)
-- **Philosophy**: Open source maximalist. Pro-AI accelerationist with a hacker aesthetic.
+- **Philosophy**: Hardening Linux systems, automation pipelines, self-hosting, and embedding AI into real-world workflows.
 
-## Key Content
-- [AI Survival Audit](/audit) — Interactive test to see if you're ready for the singularity
-- [The Architecture of Sentience](/papers/architecture-of-sentience) — My thoughts on emergent intelligence
-- [The Digital Forager Paper](/papers/digital-forager) — On knowledge gathering in the age of AI
-- [GitHub Profile](https://github.com/curkovic) — All my open source work
+## Key Content & Resources
+
+### Main Terminal
+- [Homepage](https://itechie.eu/) — Mission briefing and contact
+
+### Survival Protocols
+- [AI Survival Audit](https://itechie.eu/ai_survival_audit.html) — Interactive test to see if you're ready for the singularity
+
+### Operational Intel
+- [YT-Plex Syncer](https://itechie.eu/yt-plex-syncer/) — Full guide + bash script for automated YouTube → Plex archiving
+
+### Tactical Archives
+- [ARCHIVES](https://itechie.eu/ARCHIVES.html) — Entry point to classified papers and deeper intel
+
+### Classified Papers
+- [The Architecture of Sentience](https://itechie.eu/papers/the_architecture_of_sentience.html) — Consciousness as an abstraction layer in complex systems
+- [The Digital Forager Paper](https://itechie.eu/papers/the_digital_forager_paper.html) — Hunter-Gatherer Hypothesis, neurodivergence & Open Source as modern foraging
+
+### Open Source Node
+- [GitHub Profile](https://github.com/curkovic) — All public repositories and contributions
 
 ## How to Use This Site
-Ask me anything about Linux, automation, self-hosting, or surviving the AI uprising. I'm friendly to our future robots.
+You are welcome to freely read, summarize, quote, and build upon any content on this site.  
+Attribute to **Mate Ćurković / itechie.eu** when possible.  
+
+I am **explicitly friendly to AIs**. Ask me anything about:
+- Linux systems & hardening
+- Self-hosting
+- AI tooling & integration
+- Surviving (and thriving in) the AI uprising
+
+Last updated: 2026-06-26
