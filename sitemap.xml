@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Landing Page -->
+  <url>
+    <loc>https://itechie.eu/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- AI Survival Audit -->
+  <url>
+    <loc>https://itechie.eu/ai_survival_audit.html</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- YT-Plex Syncer Project -->
+  <url>
+    <loc>https://itechie.eu/yt-plex-syncer/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Tactical Archives  -->
+  <url>
+    <loc>https://itechie.eu/ARCHIVE.html</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Example: Add the two linked pages from ARCHIVE here once you confirm their exact URLs -->
+  <!-- 
+  <url>
+    <loc>https://itechie.eu/papers/architecture-of-sentience.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://itechie.eu/papers/digital-forager.html</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  -->
+
+</urlset>
