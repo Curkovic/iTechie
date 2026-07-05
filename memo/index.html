@@ -1,1 +1,89 @@
-placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE_MEMORY // DECRYPT_PROTOCOL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --term-cyan: #00f0ff;
+            --term-black: #050508;
+            --term-panel: #0d0d14;
+            --term-line: rgba(0, 240, 255, 0.15);
+        }
+
+        body { background-color: var(--term-black); color: white; font-family: 'Rajdhani', sans-serif; min-height: 100vh; }
+        body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: linear-gradient(rgba(18, 16, 24, 0) 50%, rgba(0, 0, 0, 0.3) 50%); background-size: 100% 4px; opacity: 0.2; z-index: 1000; }
+
+        .card { perspective: 1000px; cursor: pointer; height: 100%; }
+        .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .card.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--term-cyan); display: flex; align-items: center; justify-content: center; }
+        .card-back { transform: rotateY(180deg); background: var(--term-panel); overflow: hidden; }
+        .card-front { background: #1a1a24; color: var(--term-cyan); font-size: 1.5rem; font-weight: bold; }
+    </style>
+</head>
+<body class="p-4 flex flex-col items-center">
+
+    <header class="mb-8 text-center mt-4">
+        <h1 class="text-3xl font-bold text-[var(--term-cyan)] uppercase tracking-[0.2em]">Mesh_Decrypt</h1>
+        <div id="score" class="font-mono text-sm mt-2 text-zinc-400">SCORE: 0 // PAIRS_REMAINING: 6</div>
+    </header>
+
+    <div id="grid" class="grid grid-cols-3 gap-3 max-w-sm w-full aspect-[3/4]"></div>
+
+    <script>
+        const images = [
+            'https://itechie.eu/memo/1ca.jpeg', 'https://itechie.eu/memo/2ca.jpeg',
+            'https://itechie.eu/memo/3ca.jpeg', 'https://itechie.eu/memo/4ca.jpeg',
+            'https://itechie.eu/memo/5ca.jpeg', 'https://itechie.eu/memo/6ca.jpeg'
+        ];
+
+        // 6 images * 2 = 12 cards (3x4 grid)
+        const deck = [...images, ...images];
+        deck.sort(() => Math.random() - 0.5);
+        
+        let flipped = [], score = 0, lock = false, matchesFound = 0;
+        const grid = document.getElementById('grid');
+        
+        deck.forEach((img) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back"><img src="${img}" class="w-full h-full object-cover"></div>
+                </div>
+            `;
+            card.onclick = () => flip(card, img);
+            grid.appendChild(card);
+        });
+
+        function flip(card, img) {
+            if (lock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            card.classList.add('flipped');
+            flipped.push({card, img});
+
+            if (flipped.length === 2) {
+                lock = true;
+                if (flipped[0].img === flipped[1].img) {
+                    score += 10;
+                    matchesFound++;
+                    flipped[0].card.classList.add('matched');
+                    flipped[1].card.classList.add('matched');
+                    document.getElementById('score').innerText = `SCORE: ${score} // PAIRS_REMAINING: ${6 - matchesFound}`;
+                    flipped = []; lock = false;
+                } else {
+                    setTimeout(() => {
+                        flipped.forEach(f => f.card.classList.remove('flipped'));
+                        flipped = []; lock = false;
+                    }, 1000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
