@@ -57,17 +57,17 @@
             <div class="text-sm font-mono mt-1 opacity-60">/ ${RAM_TOTAL} GB</div>
         </div>
 
+        <!-- DISK -->
+        <div class="card p-5 neon-border rounded-none">
+            <h2 class="text-xl uppercase font-bold mb-3">Storage</h2>
+            <div class="text-lg font-mono text-white">OS: <span class="text-neon">${DISK_OS_USED}</span></div>
+            <div class="text-lg font-mono text-white">EXT: <span class="text-neon">${DISK_EXT_USED}</span></div>
+        </div>
+
         <!-- IP -->
         <div class="card p-5 neon-border rounded-none">
             <h2 class="text-xl uppercase font-bold mb-3">Local IP</h2>
             <div class="text-2xl font-mono text-neon">${LOCAL_IP}</div>
-        </div>
-
-        <!-- NETWORK -->
-        <div class="card p-5 neon-border rounded-none">
-            <h2 class="text-xl uppercase font-bold mb-3">Network</h2>
-            <div class="text-lg font-mono text-white">UP: <span class="text-neon">${NET_UP} MB/s</span></div>
-            <div class="text-lg font-mono text-white">DN: <span class="text-neon">${NET_DOWN} MB/s</span></div>
         </div>
     </div>
 
