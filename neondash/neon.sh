@@ -19,5 +19,5 @@ export P2_PID=$(ps -eo pid,pcpu,pmem,comm --sort=-pcpu | sed -n '3p' | awk '{pri
 export P2_NAME=$(ps -eo pid,pcpu,pmem,comm --sort=-pcpu | sed -n '3p' | awk '{print $4}')
 export P2_CPU=$(ps -eo pid,pcpu,pmem,comm --sort=-pcpu | sed -n '3p' | awk '{print $2}')
 export P2_MEM=$(ps -eo pid,pcpu,pmem,comm --sort=-pcpu | sed -n '3p' | awk '{print $3}')
-
+cd /home/mate/Public/iTechie/neondash
 envsubst < index.html.template > index.html
