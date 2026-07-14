@@ -37,9 +37,14 @@
 </head>
 <body class="p-6">
 
-    <header class="mb-8 border-b border-yellow-500 pb-4">
-        <h1 class="text-4xl font-bold tracking-widest uppercase">NEONDASH // <span class="text-white">${DASH_VERSION}</span></h1>
-        <p class="font-mono text-sm mt-2 opacity-70">SYSTEM STATUS: <span class="text-green-500">${SYSTEM_STATUS}</span></p>
+    <header class="mb-8 border-b border-yellow-500 pb-4 flex justify-between items-end">
+        <div>
+            <h1 class="text-4xl font-bold tracking-widest uppercase">NEONDASH // <span class="text-white">${DASH_VERSION}</span></h1>
+            <p class="font-mono text-sm mt-2 opacity-70">SYSTEM STATUS: <span class="text-green-500">${SYSTEM_STATUS}</span></p>
+        </div>
+        <div class="text-right font-mono text-xs opacity-50 uppercase tracking-widest">
+            Last Updated: ${LAST_UPDATED}
+        </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -55,13 +60,14 @@
             <h2 class="text-xl uppercase font-bold mb-3">Memory</h2>
             <div class="text-4xl font-mono text-neon">${RAM_USED} GB</div>
             <div class="text-sm font-mono mt-1 opacity-60">/ ${RAM_TOTAL} GB</div>
+            <div class="w-full bg-gray-900 h-2 mt-3"><div class="bg-cyan-400 h-2" style="width: calc((${RAM_USED} / ${RAM_TOTAL}) * 100%);"></div></div>
         </div>
 
         <!-- DISK -->
         <div class="card p-5 neon-border rounded-none">
             <h2 class="text-xl uppercase font-bold mb-3">Storage</h2>
-            <div class="text-lg font-mono text-white">OS: <span class="text-neon">${DISK_OS_USED}</span></div>
-            <div class="text-lg font-mono text-white">EXT: <span class="text-neon">${DISK_EXT_USED}</span></div>
+            <div class="flex justify-between text-lg font-mono text-white mb-1"><span>OS:</span> <span class="text-neon">${DISK_OS_USED}</span></div>
+            <div class="flex justify-between text-lg font-mono text-white"><span>EXT:</span> <span class="text-neon">${DISK_EXT_USED}</span></div>
         </div>
 
         <!-- IP -->
@@ -76,7 +82,7 @@
         <div class="font-mono text-sm overflow-x-auto">
             <table class="w-full text-left">
                 <tr class="border-b border-gray-800 text-gray-500">
-                    <th class="p-2">PID</th><th class="p-2">NAME</th><th class="p-2">CPU</th><th class="p-2">MEM</th>
+                    <th class="p-2 w-16">PID</th><th class="p-2">NAME</th><th class="p-2 w-20">CPU</th><th class="p-2 w-20">MEM</th>
                 </tr>
                 <tr class="border-b border-gray-900">
                     <td class="p-2 text-white">${P1_PID}</td><td class="p-2">${P1_NAME}</td><td class="p-2 text-neon">${P1_CPU}%</td><td class="p-2 text-neon">${P1_MEM}%</td>
