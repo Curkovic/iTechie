@@ -58,8 +58,7 @@
         <!-- RAM -->
         <div class="card p-5 neon-border rounded-none">
             <h2 class="text-xl uppercase font-bold mb-3">Memory</h2>
-            <div class="text-4xl font-mono text-neon">${RAM_USED} GB</div>
-            <div class="text-sm font-mono mt-1 opacity-60">/ ${RAM_TOTAL} GB</div>
+            <div class="text-4xl font-mono text-neon">${RAM_USED} / ${RAM_TOTAL} GB</div>
             <div class="w-full bg-gray-900 h-2 mt-3"><div class="bg-cyan-400 h-2" style="width: calc((${RAM_USED} / ${RAM_TOTAL}) * 100%);"></div></div>
         </div>
 
