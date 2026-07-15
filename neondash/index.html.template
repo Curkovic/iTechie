@@ -43,7 +43,7 @@
             <p class="font-mono text-sm mt-2 opacity-70">SYSTEM STATUS: <span class="text-green-500">${SYSTEM_STATUS}</span></p>
         </div>
         <div class="text-right font-mono text-xs opacity-50 uppercase tracking-widest">
-            Last Updated: ${LAST_UPDATED}
+            ${LAST_UPDATED}
         </div>
     </header>
 
