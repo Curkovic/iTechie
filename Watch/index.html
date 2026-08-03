@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WRIST_RESISTANCE_TERMINAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap");
+        
+        :root {
+            --cp-yellow: #fcee0a;
+            --cp-black: #050505;
+            --cp-blue: #00f0ff;
+            --cp-red: #ff003c;
+        }
+
+        body {
+            background-color: var(--cp-black);
+            color: var(--cp-yellow);
+            font-family: "Fira Code", monospace;
+            margin: 0;
+            padding: 4px;
+            overflow-x: hidden;
+        }
+
+        .cp-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 48px;
+            margin-bottom: 8px;
+            background: rgba(252, 238, 10, 0.1);
+            border: 2px solid var(--cp-yellow);
+            clip-path: polygon(0 0, 95% 0, 100% 30%, 100% 100%, 5% 100%, 0 70%);
+            color: var(--cp-yellow);
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .cp-button:active {
+            background: var(--cp-yellow);
+            color: var(--cp-black);
+            transform: scale(0.98);
+        }
+
+        .header-line {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--cp-yellow);
+            padding-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .glitch {
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-line glitch">
+        <span>[RESISTANCE_OS_v1.0]</span>
+        <span>[ZADAR_HR]</span>
+    </div>
+
+    <div class="flex flex-col">
+        <a href="https://kagi.com" class="cp-button">KAGI_SEARCH</a>
+        <a href="https://www.google.com/search?q=time+in+zadar" class="cp-button">WORLD_CLK</a>
+        <a href="https://www.google.com/search?q=weather+zadar" class="cp-button">WEATHER_LOG</a>
+        <a href="mailto:m@itechie.eu" class="cp-button border-blue-400 text-blue-400" style="border-color: var(--cp-blue); color: var(--cp-blue)">NEURAL_MAIL</a>
+        <a href="https://maps.apple.com" class="cp-button border-red-500 text-red-500" style="border-color: var(--cp-red); color: var(--cp-red)">NAV_LINK</a>
+    </div>
+
+    <div class="mt-4 text-[8px] opacity-50 font-mono">
+        > SYSTEM_ENCRYPTED<br>
+        > UPLINK:ACTIVE
+    </div>
+</body>
+</html>
