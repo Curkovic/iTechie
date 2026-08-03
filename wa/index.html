@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Redirecting...</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+
+<meta http-equiv="refresh" content="1.2; url=https://wa.me/matecurkovic">
+
+<style>
+:root{
+    --cp-yellow:#fcee0a;
+    --cp-blue:#00f0ff;
+    --cp-red:#ff003c;
+    --cp-black:#050505;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--cp-black);
+    color:var(--cp-yellow);
+    font-family:"Rajdhani",sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        linear-gradient(rgba(255,255,255,.03) 50%, transparent 50%);
+    background-size:100% 4px;
+    pointer-events:none;
+}
+
+.card{
+    border:4px solid var(--cp-yellow);
+    padding:40px;
+    max-width:520px;
+    width:90%;
+    text-align:center;
+    clip-path:polygon(0 0,100% 0,100% 90%,94% 100%,0 100%);
+}
+
+.tag{
+    font-size:.8rem;
+    letter-spacing:.35em;
+    opacity:.7;
+    margin-bottom:1rem;
+}
+
+h1{
+    margin:0;
+    font-family:"Orbitron",sans-serif;
+    font-size:2rem;
+    line-height:1.2;
+}
+
+.glitch{
+    color:white;
+    animation:glitch 2s infinite;
+}
+
+p{
+    margin-top:1.5rem;
+    font-size:1rem;
+}
+
+a{
+    color:var(--cp-blue);
+    text-decoration:none;
+}
+
+.progress{
+    margin-top:2rem;
+    height:4px;
+    background:#333;
+    overflow:hidden;
+}
+
+.bar{
+    height:100%;
+    width:0%;
+    background:var(--cp-yellow);
+    animation:load 1.1s linear forwards;
+}
+
+@keyframes load{
+    to{width:100%;}
+}
+
+@keyframes glitch{
+    0%,100%{}
+    1%{text-shadow:2px 0 var(--cp-red);}
+    2%{text-shadow:-2px 0 var(--cp-blue);}
+    3%{text-shadow:none;}
+}
+</style>
+
+<script>
+setTimeout(() => {
+    window.location.replace("https://wa.me/matecurkovic");
+}, 1100);
+</script>
+
+</head>
+
+<body>
+
+<div class="card">
+    <div class="tag">SECURE LINK // WHATSAPP</div>
+
+    <h1>
+        OPENING
+        <span class="glitch">COMMS</span>
+    </h1>
+
+    <p>
+        Establishing encrypted uplink...
+    </p>
+
+    <div class="progress">
+        <div class="bar"></div>
+    </div>
+
+    <p style="margin-top:2rem;font-size:.85rem;opacity:.7;">
+        If nothing happens,
+        <a href="https://wa.me/matecurkovic">click here</a>.
+    </p>
+</div>
+
+</body>
+</html>
