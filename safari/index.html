@@ -57,13 +57,6 @@
             border-color: #007AFF;
         }
 
-        /* Prevent modern browser native input auto-expansion */
-        #search-input {
-            field-sizing: fixed !important;
-            min-width: 0 !important;
-            width: 100% !important;
-        }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -134,65 +127,74 @@
 
             <!-- Interactive Search Bar -->
             <div class="max-w-xl mx-auto w-full px-2">
-                <form id="search-form" onsubmit="executeSearch(event)" class="relative w-full">
+                <form id="search-form" onsubmit="executeSearch(event)" class="relative">
                     
-                    <div class="relative flex items-center flat-card rounded-xl px-3 py-2 shadow-sm transition-colors w-full box-border overflow-hidden">
+                    <div class="relative flex items-center flat-card rounded-xl px-3 py-2 shadow-sm transition-all">
                         
-                        <!-- Engine Selector Button -->
-                        <div class="relative shrink-0">
+                        <!-- Engine Selector Button (Text Only) -->
+                        <div class="relative">
                             <button type="button" onclick="toggleEngineDropdown(event)" id="engine-btn" class="flex items-center space-x-1.5 px-2 py-1.5 rounded-lg text-xs font-semibold hover:bg-[var(--hover-bg)] transition-colors">
-                                <span id="engine-icon" class="text-blue-500"><i class="fa-brands fa-google text-xs"></i></span>
-                                <span id="engine-label" class="hidden sm:inline">Google</span>
+                                <span id="engine-label">Google</span>
                                 <i class="fa-solid fa-chevron-down text-[9px] text-[var(--text-secondary)]"></i>
                             </button>
 
-                            <!-- Dropdown Menu -->
-                            <div id="engine-dropdown" class="hidden absolute top-full left-0 mt-1 w-36 flat-card rounded-xl shadow-lg py-1 z-50 text-xs">
-                                <button type="button" onclick="selectEngine('google')" class="w-full px-3 py-2 text-left hover:bg-[var(--hover-bg)] flex items-center space-x-2 font-medium">
-                                    <i class="fa-brands fa-google text-blue-500 text-xs"></i>
-                                    <span>Google</span>
+                            <!-- Dropdown Menu (Text Only) -->
+                            <div id="engine-dropdown" class="hidden absolute top-full left-0 mt-1 w-40 flat-card rounded-xl shadow-lg py-1 z-50 text-xs max-h-64 overflow-y-auto">
+                                <div class="px-3 py-1 text-[10px] font-bold tracking-wider text-[var(--text-secondary)] uppercase">Search Engines</div>
+                                <button type="button" onclick="selectEngine('google')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Google
                                 </button>
-                                <button type="button" onclick="selectEngine('perplexity')" class="w-full px-3 py-2 text-left hover:bg-[var(--hover-bg)] flex items-center space-x-2 font-medium">
-                                    <i class="fa-solid fa-atom text-teal-500 text-xs"></i>
-                                    <span>Perplexity</span>
+                                <button type="button" onclick="selectEngine('duckduckgo')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    DuckDuckGo
                                 </button>
-                                <button type="button" onclick="selectEngine('duckduckgo')" class="w-full px-3 py-2 text-left hover:bg-[var(--hover-bg)] flex items-center space-x-2 font-medium">
-                                    <i class="fa-solid fa-shield-halved text-orange-500 text-xs"></i>
-                                    <span>DuckDuckGo</span>
+                                <button type="button" onclick="selectEngine('bing')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Bing
                                 </button>
-                                <button type="button" onclick="selectEngine('bing')" class="w-full px-3 py-2 text-left hover:bg-[var(--hover-bg)] flex items-center space-x-2 font-medium">
-                                    <i class="fa-brands fa-microsoft text-sky-500 text-xs"></i>
-                                    <span>Bing</span>
+
+                                <div class="px-3 py-1 mt-1 border-t border-[var(--card-border)] text-[10px] font-bold tracking-wider text-[var(--text-secondary)] uppercase">AI Engines</div>
+                                <button type="button" onclick="selectEngine('chatgpt')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    ChatGPT
+                                </button>
+                                <button type="button" onclick="selectEngine('gemini')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Gemini
+                                </button>
+                                <button type="button" onclick="selectEngine('claude')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Claude
+                                </button>
+                                <button type="button" onclick="selectEngine('grok')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Grok
+                                </button>
+                                <button type="button" onclick="selectEngine('perplexity')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Perplexity
+                                </button>
+                                <button type="button" onclick="selectEngine('mistral')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
+                                    Mistral
                                 </button>
                             </div>
                         </div>
 
                         <!-- Divider -->
-                        <div class="h-4 w-[1px] bg-[var(--card-border)] mx-2 shrink-0"></div>
+                        <div class="h-4 w-[1px] bg-[var(--card-border)] mx-2"></div>
 
-                        <!-- Search Input Wrapper (Locked flexbox bounds) -->
-                        <div class="flex-1 min-w-0 flex items-center overflow-hidden">
-                            <input 
-                                type="text" 
-                                id="search-input" 
-                                placeholder="Search Google or type a web address..." 
-                                autocomplete="off"
-                                autofocus
-                                class="w-full min-w-0 bg-transparent border-none outline-none text-sm font-normal text-[var(--text-primary)] placeholder-[var(--text-secondary)] px-1 focus:ring-0 focus:outline-none"
-                            />
-                        </div>
+                        <!-- Search Input -->
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Search Google or type a web address..." 
+                            autocomplete="off"
+                            autofocus
+                            class="w-full bg-transparent border-none outline-none text-sm font-normal text-[var(--text-primary)] placeholder-[var(--text-secondary)] px-1"
+                        />
 
-                        <!-- Clear Input Button Container (Fixed width reserved space or absolute/flex non-growing toggle) -->
-                        <div class="shrink-0 flex items-center min-w-[24px] justify-center">
-                            <button type="button" id="clear-btn" onclick="clearSearch()" class="hidden p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-                                <i class="fa-solid fa-xmark text-xs"></i>
-                            </button>
-                        </div>
+                        <!-- Clear Input Button -->
+                        <button type="button" id="clear-btn" onclick="clearSearch()" class="hidden p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mr-1">
+                            <i class="fa-solid fa-xmark text-xs"></i>
+                        </button>
 
                         <!-- Submit Button -->
                         <button 
                             type="submit" 
-                            class="shrink-0 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium text-xs transition-colors"
+                            class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium text-xs transition-colors"
                         >
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
@@ -346,11 +348,17 @@
         let currentThemeMode = 'auto';
         let currentEngine = 'google';
 
+        // Engines registry without icon strings for cleaner UI
         const engines = {
-            google: { name: 'Google', url: 'https://www.google.com/search?q=', icon: '<i class="fa-brands fa-google text-xs"></i>', placeholder: 'Search Google or type a web address...' },
-            perplexity: { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=', icon: '<i class="fa-solid fa-atom text-teal-500 text-xs"></i>', placeholder: 'Ask Perplexity AI...' },
-            duckduckgo: { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=', icon: '<i class="fa-solid fa-shield-halved text-orange-500 text-xs"></i>', placeholder: 'Private search with DuckDuckGo...' },
-            bing: { name: 'Bing', url: 'https://www.bing.com/search?q=', icon: '<i class="fa-brands fa-microsoft text-sky-500 text-xs"></i>', placeholder: 'Search Microsoft Bing...' }
+            google: { name: 'Google', url: 'https://www.google.com/search?q=', placeholder: 'Search Google or type a web address...' },
+            duckduckgo: { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=', placeholder: 'Private search with DuckDuckGo...' },
+            bing: { name: 'Bing', url: 'https://www.bing.com/search?q=', placeholder: 'Search Microsoft Bing...' },
+            chatgpt: { name: 'ChatGPT', url: 'https://chatgpt.com/?q=', placeholder: 'Ask ChatGPT AI...' },
+            gemini: { name: 'Gemini', url: 'https://gemini.google.com/app?q=', placeholder: 'Ask Google Gemini AI...' },
+            claude: { name: 'Claude', url: 'https://claude.ai/new?q=', placeholder: 'Ask Anthropic Claude AI...' },
+            grok: { name: 'Grok', url: 'https://grok.com/?q=', placeholder: 'Ask xAI Grok...' },
+            perplexity: { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=', placeholder: 'Ask Perplexity AI...' },
+            mistral: { name: 'Mistral', url: 'https://chat.mistral.ai/?q=', placeholder: 'Ask Mistral Le Chat...' }
         };
 
         const searchInput = document.getElementById('search-input');
@@ -360,6 +368,14 @@
         const greetingText = document.getElementById('greeting-text');
         const engineDropdown = document.getElementById('engine-dropdown');
         const helpModal = document.getElementById('help-modal');
+
+        // Selects a random engine from all available options on reload
+        function setRandomDefaultEngine() {
+            const engineKeys = Object.keys(engines);
+            const randomIndex = Math.floor(Math.random() * engineKeys.length);
+            const randomKey = engineKeys[randomIndex];
+            selectEngine(randomKey);
+        }
 
         function applyTheme() {
             const html = document.documentElement;
@@ -450,7 +466,6 @@
             if (engines[key]) {
                 currentEngine = key;
                 document.getElementById('engine-label').textContent = engines[key].name;
-                document.getElementById('engine-icon').innerHTML = engines[key].icon;
                 searchInput.placeholder = engines[key].placeholder;
             }
             engineDropdown.classList.add('hidden');
@@ -485,6 +500,7 @@
         });
 
         window.onload = function() {
+            setRandomDefaultEngine();
             applyTheme();
             updateClock();
             setInterval(updateClock, 1000);
