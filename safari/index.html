@@ -167,9 +167,6 @@
                                 <button type="button" onclick="selectEngine('perplexity')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
                                     Perplexity
                                 </button>
-                                <button type="button" onclick="selectEngine('mistral')" class="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] font-medium">
-                                    Mistral
-                                </button>
                             </div>
                         </div>
 
@@ -348,7 +345,7 @@
         let currentThemeMode = 'auto';
         let currentEngine = 'google';
 
-        // Engines registry without icon strings for cleaner UI
+        // Search Engines registry without icons for a clean text-first layout
         const engines = {
             google: { name: 'Google', url: 'https://www.google.com/search?q=', placeholder: 'Search Google or type a web address...' },
             duckduckgo: { name: 'DuckDuckGo', url: 'https://duckduckgo.com/?q=', placeholder: 'Private search with DuckDuckGo...' },
@@ -357,8 +354,7 @@
             gemini: { name: 'Gemini', url: 'https://gemini.google.com/app?q=', placeholder: 'Ask Google Gemini AI...' },
             claude: { name: 'Claude', url: 'https://claude.ai/new?q=', placeholder: 'Ask Anthropic Claude AI...' },
             grok: { name: 'Grok', url: 'https://grok.com/?q=', placeholder: 'Ask xAI Grok...' },
-            perplexity: { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=', placeholder: 'Ask Perplexity AI...' },
-            mistral: { name: 'Mistral', url: 'https://chat.mistral.ai/?q=', placeholder: 'Ask Mistral Le Chat...' }
+            perplexity: { name: 'Perplexity', url: 'https://www.perplexity.ai/search?q=', placeholder: 'Ask Perplexity AI...' }
         };
 
         const searchInput = document.getElementById('search-input');
@@ -369,7 +365,7 @@
         const engineDropdown = document.getElementById('engine-dropdown');
         const helpModal = document.getElementById('help-modal');
 
-        // Selects a random engine from all available options on reload
+        // Selects a random search or AI engine on reload
         function setRandomDefaultEngine() {
             const engineKeys = Object.keys(engines);
             const randomIndex = Math.floor(Math.random() * engineKeys.length);
