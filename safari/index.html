@@ -57,6 +57,13 @@
             border-color: #007AFF;
         }
 
+        /* Prevent modern browser native input auto-expansion */
+        #search-input {
+            field-sizing: fixed !important;
+            min-width: 0 !important;
+            width: 100% !important;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -127,12 +134,12 @@
 
             <!-- Interactive Search Bar -->
             <div class="max-w-xl mx-auto w-full px-2">
-                <form id="search-form" onsubmit="executeSearch(event)" class="relative">
+                <form id="search-form" onsubmit="executeSearch(event)" class="relative w-full">
                     
-                    <div class="relative flex items-center flat-card rounded-xl px-3 py-2 shadow-sm transition-all">
+                    <div class="relative flex items-center flat-card rounded-xl px-3 py-2 shadow-sm transition-colors w-full box-border overflow-hidden">
                         
                         <!-- Engine Selector Button -->
-                        <div class="relative">
+                        <div class="relative shrink-0">
                             <button type="button" onclick="toggleEngineDropdown(event)" id="engine-btn" class="flex items-center space-x-1.5 px-2 py-1.5 rounded-lg text-xs font-semibold hover:bg-[var(--hover-bg)] transition-colors">
                                 <span id="engine-icon" class="text-blue-500"><i class="fa-brands fa-google text-xs"></i></span>
                                 <span id="engine-label" class="hidden sm:inline">Google</span>
@@ -161,27 +168,31 @@
                         </div>
 
                         <!-- Divider -->
-                        <div class="h-4 w-[1px] bg-[var(--card-border)] mx-2"></div>
+                        <div class="h-4 w-[1px] bg-[var(--card-border)] mx-2 shrink-0"></div>
 
-                        <!-- Search Input -->
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            placeholder="Search Google or type a web address..." 
-                            autocomplete="off"
-                            autofocus
-                            class="w-full bg-transparent border-none outline-none text-sm font-normal text-[var(--text-primary)] placeholder-[var(--text-secondary)] px-1"
-                        />
+                        <!-- Search Input Wrapper (Locked flexbox bounds) -->
+                        <div class="flex-1 min-w-0 flex items-center overflow-hidden">
+                            <input 
+                                type="text" 
+                                id="search-input" 
+                                placeholder="Search Google or type a web address..." 
+                                autocomplete="off"
+                                autofocus
+                                class="w-full min-w-0 bg-transparent border-none outline-none text-sm font-normal text-[var(--text-primary)] placeholder-[var(--text-secondary)] px-1 focus:ring-0 focus:outline-none"
+                            />
+                        </div>
 
-                        <!-- Clear Input Button -->
-                        <button type="button" id="clear-btn" onclick="clearSearch()" class="hidden p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mr-1">
-                            <i class="fa-solid fa-xmark text-xs"></i>
-                        </button>
+                        <!-- Clear Input Button Container (Fixed width reserved space or absolute/flex non-growing toggle) -->
+                        <div class="shrink-0 flex items-center min-w-[24px] justify-center">
+                            <button type="button" id="clear-btn" onclick="clearSearch()" class="hidden p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                                <i class="fa-solid fa-xmark text-xs"></i>
+                            </button>
+                        </div>
 
                         <!-- Submit Button -->
                         <button 
                             type="submit" 
-                            class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium text-xs transition-colors"
+                            class="shrink-0 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium text-xs transition-colors"
                         >
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
