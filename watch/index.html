@@ -44,22 +44,22 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center p-2 sm:p-4 scanlines select-none overflow-hidden">
+<body class="min-h-screen w-full bg-black text-slate-100 scanlines select-none p-3 flex flex-col justify-between items-center box-border overflow-x-hidden">
 
-  <!-- Apple Watch Frame Simulator Container (Scales nicely down to small displays) -->
-  <div class="w-full max-w-[280px] bg-black/90 border-2 border-cyan-500/50 rounded-3xl p-4 sm:p-5 flex flex-col items-center justify-between glow-cyan relative overflow-hidden backdrop-blur-md">
+  <!-- Full-width edge-to-edge Cyberpunk Interface -->
+  <div class="w-full flex-1 flex flex-col justify-between items-center relative z-10 gap-3">
     
     <!-- Header Decorator -->
-    <div class="w-full flex justify-between items-center mb-3">
+    <div class="w-full flex justify-between items-center pt-1 pb-1 border-b border-cyan-500/30">
       <div class="flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-        <span class="cyber-font text-[10px] tracking-widest text-cyan-400 uppercase font-bold">CYBER//SRCH</span>
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span class="cyber-font text-xs tracking-widest text-cyan-400 uppercase font-bold">CYBER//SRCH</span>
       </div>
-      <span class="cyber-font text-[9px] text-pink-500/80 tracking-tighter">v1.0</span>
+      <span class="cyber-font text-[10px] text-pink-500/80 tracking-tighter">WATCH v1.2</span>
     </div>
 
-    <!-- Main Search Form -->
-    <form action="https://www.google.com/search" method="GET" class="w-full flex flex-col gap-3">
+    <!-- Main Search Form - Stretches full width -->
+    <form action="https://www.google.com/search" method="GET" class="w-full my-auto flex flex-col gap-3">
       
       <!-- Search Input Wrapper -->
       <div class="relative w-full">
@@ -72,19 +72,19 @@
           autocorrect="off"
           autocapitalize="off"
           spellcheck="false"
-          class="w-full h-14 bg-slate-950/90 text-cyan-300 placeholder-slate-600 font-bold text-center text-base rounded-xl border border-cyan-500/60 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/50 transition-all duration-300 glow-cyan tracking-wider"
+          class="w-full h-14 bg-slate-950/90 text-cyan-300 placeholder-slate-600 font-bold text-center text-lg rounded-xl border border-cyan-500/60 focus:border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-500/50 transition-all duration-300 glow-cyan tracking-wider"
         />
         <!-- Decorative Cyber Corner Accents -->
-        <div class="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-cyan-400 pointer-events-none"></div>
-        <div class="absolute bottom-1 right-1 w-1.5 h-1.5 border-b border-r border-cyan-400 pointer-events-none"></div>
+        <div class="absolute top-1 left-1 w-2 h-2 border-t-2 border-l-2 border-cyan-400 pointer-events-none"></div>
+        <div class="absolute bottom-1 right-1 w-2 h-2 border-b-2 border-r-2 border-cyan-400 pointer-events-none"></div>
       </div>
 
       <!-- Large Cyberpunk Search Button -->
       <button 
         type="submit" 
-        class="w-full h-14 bg-gradient-to-r from-cyan-500 via-teal-500 to-pink-500 hover:from-cyan-400 hover:to-pink-400 active:scale-95 text-slate-950 font-black cyber-font text-base tracking-widest rounded-xl transition-all duration-200 uppercase shadow-lg glow-cyan-lg flex items-center justify-center gap-2 border border-cyan-300/50 cursor-pointer"
+        class="w-full h-14 bg-gradient-to-r from-cyan-500 via-teal-500 to-pink-500 hover:from-cyan-400 hover:to-pink-400 active:scale-95 text-slate-950 font-black cyber-font text-lg tracking-widest rounded-xl transition-all duration-200 uppercase shadow-lg glow-cyan-lg flex items-center justify-center gap-2 border border-cyan-300/50 cursor-pointer"
       >
-        <svg class="w-5 h-5 fill-current text-slate-950" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 fill-current text-slate-950" viewBox="0 0 24 24">
           <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         </svg>
         SEARCH
@@ -92,17 +92,17 @@
 
     </form>
 
-    <!-- Quick Links / Preset Cyber Actions -->
-    <div class="w-full mt-3 pt-2 border-t border-slate-800/80 flex justify-around">
-      <a href="https://www.google.com/search?q=weather" class="text-[10px] cyber-font text-cyan-400/80 hover:text-cyan-300 uppercase tracking-wider py-1 px-2 rounded border border-cyan-500/20 bg-slate-900/50 active:bg-cyan-500/20">WEATHER</a>
-      <a href="https://www.google.com/search?q=news" class="text-[10px] cyber-font text-pink-400/80 hover:text-pink-300 uppercase tracking-wider py-1 px-2 rounded border border-pink-500/20 bg-slate-900/50 active:bg-pink-500/20">NEWS</a>
+    <!-- Footer Decorator -->
+    <div class="w-full flex justify-between items-center text-[10px] text-cyan-600/70 border-t border-cyan-500/20 pt-1">
+      <span>SYS.READY</span>
+      <span>GOOGLE//NET</span>
     </div>
 
-    <!-- Background Subtle Ambient Glows -->
-    <div class="absolute -top-10 -left-10 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl pointer-events-none"></div>
-    <div class="absolute -bottom-10 -right-10 w-24 h-24 bg-pink-500/10 rounded-full blur-xl pointer-events-none"></div>
-
   </div>
+
+  <!-- Background Subtle Ambient Glows -->
+  <div class="fixed -top-10 -left-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="fixed -bottom-10 -right-10 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
 </body>
 </html>
