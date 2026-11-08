@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEON//OS</title>
+  <meta name="description" content="A cyberpunk web operating system — files, terminal, and a NightNet browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Boot screen -->
+  <div id="boot">
+    <pre id="boot-log"></pre>
+    <div class="boot-center">
+      <div class="glitch boot-logo" data-text="NEON//OS">NEON//OS</div>
+      <div class="boot-sub">NEURAL INTERFACE OPERATING SYSTEM · BUILD 7.7.2</div>
+      <div class="boot-bar"><span></span></div>
+      <div class="boot-hint">click or press any key to skip</div>
+    </div>
+  </div>
+
+  <!-- Power-off screen -->
+  <div id="off" hidden>
+    <button id="power" aria-label="Power on">⏻</button>
+    <p>SYSTEM HALTED · PRESS TO REBOOT</p>
+  </div>
+
+  <!-- Desktop -->
+  <main id="desktop" hidden>
+    <div id="icons"></div>
+    <div id="windows"></div>
+    <div id="toasts"></div>
+    <div id="startmenu" hidden></div>
+    <footer id="taskbar">
+      <button id="startbtn" aria-label="Start menu">◢ NEON</button>
+      <div id="tasks"></div>
+      <div id="tray">
+        <span class="tray-net" title="NightNet connected">NET<i></i></span>
+        <span id="clock"></span>
+      </div>
+    </footer>
+  </main>
+
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <script src="js/fs.js"></script>
+  <script src="js/sites.js"></script>
+  <script src="js/os.js"></script>
+</body>
+</html>
