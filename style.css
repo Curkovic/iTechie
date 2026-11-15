@@ -87,6 +87,7 @@ a:hover { color: var(--yellow); }
 .panel-head .op-name { margin: 0; font: 400 0.68rem var(--mono); letter-spacing: 0.08em; text-transform: none; color: var(--muted); }
 .live-label { margin: 0 0 8px; font: 400 0.66rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; }
 .live-label .dot { width: 6px; height: 6px; margin-right: 6px; vertical-align: 1px; }
+.panel-head .mood { font-size: 1.55em; line-height: 0; vertical-align: -0.12em; margin: 0 1px; }
 .panel-head small { font: 400 0.68rem var(--mono); letter-spacing: 0.04em; text-transform: none; color: var(--muted); }
 .panel-body { padding: 16px; }
 

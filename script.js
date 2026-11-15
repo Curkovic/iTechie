@@ -78,4 +78,16 @@
       cards.slice(0, show).forEach(function (c) { qg.appendChild(c.cloneNode(true)); });
     }
   }
+
+  // Make the flat ☺ / ☹ mood glyphs in panel headers bigger (wrap them in a span)
+  Array.prototype.forEach.call(document.querySelectorAll(".panel-head small"), function (sm) {
+    Array.prototype.slice.call(sm.childNodes).forEach(function (node) {
+      if (node.nodeType !== 3) return;
+      var m = node.nodeValue.match(/[\u263a\u2639]\ufe0e?/);
+      if (!m) return;
+      var after = node.splitText(m.index); after.splitText(m[0].length);
+      var span = document.createElement("span"); span.className = "mood"; span.textContent = after.nodeValue;
+      sm.replaceChild(span, after);
+    });
+  });
 })();
