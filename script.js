@@ -90,4 +90,33 @@
       sm.replaceChild(span, after);
     });
   });
+
+  // NASA image: click to view large (without JS the link opens the image itself)
+  var iotd = document.querySelector("a.iotd[data-big]");
+  if (iotd) {
+    var lb = document.createElement("div"); lb.className = "lb"; lb.hidden = true;
+    lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
+    var box = document.createElement("div"); box.className = "lb-box";
+    var x = document.createElement("button"); x.type = "button"; x.className = "lb-close"; x.textContent = "✕"; x.setAttribute("aria-label", "Close");
+    var im = document.createElement("img"); im.alt = "";
+    var ti = document.createElement("p"); ti.className = "lb-title";
+    var de = document.createElement("p"); de.className = "lb-desc";
+    var ln = document.createElement("a"); ln.className = "lb-link"; ln.target = "_blank"; ln.rel = "noopener noreferrer"; ln.textContent = "Full story on NASA.gov ↗";
+    box.appendChild(x); box.appendChild(im); box.appendChild(ti); box.appendChild(de); box.appendChild(ln); lb.appendChild(box);
+    document.body.appendChild(lb);
+    var closeLb = function () { lb.hidden = true; document.body.classList.remove("lb-open"); iotd.focus(); };
+    iotd.addEventListener("click", function (ev) {
+      var big = iotd.getAttribute("data-big") || "";
+      if (big.indexOf("https://") !== 0) return;            // fall back to normal link
+      ev.preventDefault();
+      im.src = big; im.alt = iotd.getAttribute("data-title") || "";
+      ti.textContent = iotd.getAttribute("data-title") || "";
+      de.textContent = iotd.getAttribute("data-desc") || "";
+      var l = iotd.getAttribute("data-link") || ""; if (l.indexOf("https://") === 0) { ln.href = l; ln.hidden = false; } else ln.hidden = true;
+      lb.hidden = false; document.body.classList.add("lb-open"); x.focus();
+    });
+    x.addEventListener("click", closeLb);
+    lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
+    document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !lb.hidden) closeLb(); });
+  }
 })();
