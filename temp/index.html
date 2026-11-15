@@ -1,26 +1,169 @@
 <!doctype html>
+<!--
+  iTechie.eu homepage — GENERATED FILE.
+  Source: ~/OMNI/iTechie/index.html.template, rendered by build.sh.
+  Placeholders are $ + {NAME_IN_CAPS} = ~/OMNI/var/<name>/<name>.txt (HTML-escaped).
+  Blocks marked DUMMY are placeholder text waiting for their own OMNI module.
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>iTechie.eu // build test</title>
-<link rel="stylesheet" href="style.css" />
+<meta name="color-scheme" content="dark" />
+<title>Mate Ćurković // iTechie.eu</title>
+<meta name="description" content="Linux sysadmin in Zadar. A static homepage that rebuilds itself every hour from a home server." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="style.css?v=1794747541" />
 </head>
 <body>
-<main>
-  <h1>iTechie // build test</h1>
-  <p class="meta">built 2026-11-15 12:59</p>
+<div class="crt" aria-hidden="true"></div>
+<div class="wrap">
 
-  <dl>
-    <dt>Uptime</dt>         <dd>3 hours, 58 minutes</dd>
-    <dt>Asteroid alert</dt> <dd>&quot;Even a 60‑meter rock—2019 HW3—skims past Earth at 18 million km, a silent, glittering glitch in the night‑grid.&quot;</dd>
-    <dt>Daily knowledge</dt><dd>Water Purification: Charcoal, fine sand, and gravel layered in a plastic bottle creates an effective sediment and toxin filter. Always boil the output before drinking.</dd>
-    <dt>Version (fallback test)</dt><dd>— signal lost —</dd>
-  </dl>
+  <!-- ================= MENU ================= -->
+  <header>
+    <nav class="panel topbar">
+      <a class="brand" href="/">iTechie<span>.eu</span></a>
+      <span class="ver">v5.0</span><!-- DUMMY: version module -->
+      <div class="nav">
+        <a href="#feed">[ Feed ]</a>
+        <a href="#posts">[ Posts ]</a>
+        <a href="#about">[ About ]</a>
+        <a href="#nodes">[ Nodes ]</a>
+        <a href="mailto:m@itechie.eu">[ Contact ]</a>
+      </div>
+      <div class="topbar-right">
+        <span class="clock" id="clock" hidden></span>
+        <span class="wx" title="Weather in Zadar">13°C overcast</span>
+      </div>
+    </nav>
 
-  <h2>Latest post</h2>
-  <div class="post">Here is my post </div>
-</main>
-<script src="script.js"></script>
+    <!-- ================= TICKER ================= -->
+    <div class="panel ticker">
+      <span class="tag">Live</span>
+      <div class="track"><span>
+        ASTEROID WATCH: &quot;Even a 60‑meter rock—2019 HW3—skims past Earth at 18 million km, a silent, glittering glitch in the night‑grid.&quot; &nbsp;///&nbsp;
+        PEACE INDEX: Neon‑lit megacities pulse at a 2.08 Global Peace Index—midway on the 1‑to‑5 peace‑to‑conflict scale—signaling a fragile lull before the next data‑driven skirmish ignites. &nbsp;///&nbsp;
+        DEAD TECH: 10BASE2 (Thin Ethernet) is a coaxial‑cable LAN used in early‑90s workstations, capped at a raw 10 Mbps and limited to a maximum continuous segment of 185 m per the IEEE 802.3 standard. &nbsp;///&nbsp;
+        SKILL FOR THE END OF THE WORLD: Water purification &nbsp;///&nbsp;
+        NODE UPTIME: 5 hours, 56 minutes
+      </span></div>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- ================= LEFT ================= -->
+    <aside class="col">
+
+      <section class="panel">
+        <div class="panel-head"><span>Operator</span><small>ZADAR_HR</small></div>
+        <div class="panel-body ident">
+          <h1 class="name">Mate Ćurković</h1>
+          <p class="tagline">Linux sysadmin. Automates anything done twice.</p>
+          <dl class="status">
+            <dt>Status</dt>     <dd><span class="dot"></span><span class="ok">Online</span></dd>
+            <dt>Node</dt>       <dd>Zadar, HR</dd>
+            <dt>Uptime</dt>     <dd>5 hours, 56 minutes</dd>
+            <dt>Last sync</dt>  <dd><span id="sync" data-epoch="1794747541">2026-11-15 13:59</span></dd>
+          </dl>
+          <div class="btns">
+            <a class="btn" href="mailto:m@itechie.eu">Mail</a>
+            <a class="btn" href="imessage:m@itechie.eu">iMessage</a>
+            <a class="btn" href="https://github.com/Curkovic" rel="noopener">GitHub</a>
+            <a class="btn" href="https://instagram.com/matecurkovic" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="about">
+        <div class="panel-head"><span>About</span><small>cat ~/README</small></div>
+        <div class="panel-body prose">
+          <!-- DUMMY: about module -->
+          <p>I keep a lot of Linux servers alive, mostly by making sure nobody touches them by hand. Came from DevOps and kept the habit.</p>
+          <p>This page is static HTML. Every hour a home server in Zadar regenerates it from small bash modules and pushes it to GitHub. No CMS, no trackers.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><span>Currently</span><small>ps aux | head</small></div>
+        <div class="panel-body">
+          <!-- DUMMY: now_building / now_reading / now_listening modules -->
+          <dl class="rows">
+            <dt>Building</dt>  <dd>This homepage</dd>
+            <dt>Reading</dt>   <dd>Neuromancer, again</dd>
+            <dt>Listening</dt> <dd>Darksynth, too loud</dd>
+            <dt>Avoiding</dt>  <dd>Snowflake servers</dd>
+          </dl>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- ================= RIGHT ================= -->
+    <main class="col">
+
+      <section class="panel" id="feed">
+        <div class="panel-head"><span>Live Feed</span><small>apocalypse skill of the week: <b class="skill">Water purification</b></small></div>
+        <div class="panel-body feed">
+          <article class="feed-item">
+            <header><span class="feed-key">asteroid_alert</span><span class="feed-when">daily 06:50</span></header>
+            <p>&quot;Even a 60‑meter rock—2019 HW3—skims past Earth at 18 million km, a silent, glittering glitch in the night‑grid.&quot;</p>
+          </article>
+          <article class="feed-item">
+            <header><span class="feed-key">daily_knowledge</span><span class="feed-when">daily 08:00</span></header>
+            <p>Water Purification: Charcoal, fine sand, and gravel layered in a plastic bottle creates an effective sediment and toxin filter. Always boil the output before drinking.</p>
+          </article>
+          <article class="feed-item">
+            <header><span class="feed-key">dead_tech</span><span class="feed-when">daily 07:30</span></header>
+            <p>10BASE2 (Thin Ethernet) is a coaxial‑cable LAN used in early‑90s workstations, capped at a raw 10 Mbps and limited to a maximum continuous segment of 185 m per the IEEE 802.3 standard.</p>
+          </article>
+          <article class="feed-item">
+            <header><span class="feed-key">global_peace_status</span><span class="feed-when">1st &amp; 15th</span></header>
+            <p>Neon‑lit megacities pulse at a 2.08 Global Peace Index—midway on the 1‑to‑5 peace‑to‑conflict scale—signaling a fragile lull before the next data‑driven skirmish ignites.</p>
+          </article>
+          <article class="feed-item">
+            <header><span class="feed-key alert">blackout</span><span class="feed-when">daily 21:00</span></header>
+            <p>Verified outage report unavailable.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="posts">
+        <div class="panel-head"><span>Transmissions</span><small>last 5</small></div>
+        <div class="panel-body posts">
+<article class="post latest"><div class="post-meta"><span>LATEST</span><time datetime="2026-11-15">2026-11-15 13:42</time></div><div class="prose"><p>Claude was helping me build this section Thanks so much! </p></div></article>
+<article class="post"><div class="post-meta"><time datetime="2026-11-04">2026-11-04 15:58</time></div><div class="prose"><p>Here is my post </p></div></article>
+<article class="post"><div class="post-meta"><time datetime="2026-11-01">2026-11-01 23:36</time></div><div class="prose"><p>Hey hey </p></div></article>
+<article class="post"><div class="post-meta"><time datetime="2026-10-22">2026-10-22 19:45</time></div><div class="prose"><p>Danas sam luda </p></div></article>
+<article class="post"><div class="post-meta"><time datetime="2026-10-22">2026-10-22 19:43</time></div><div class="prose"><p>Kako se kaže?</p></div></article>
+
+        </div>
+      </section>
+
+      <section class="panel" id="nodes">
+        <div class="panel-head"><span>Nodes</span><small>ls ~/experiments</small></div>
+        <div class="panel-body">
+          <ul class="tiles">
+            <li><a href="/neondash/"><b>NEONDASH</b><span>server monitor</span></a></li>
+            <li><a href="/ai_survival_audit.html"><b>SURVIVAL AUDIT</b><span>are you ready</span></a></li>
+            <li><a href="/ARCHIVES.html"><b>ARCHIVES</b><span>old transmissions</span></a></li>
+            <li><a href="/zero/"><b>ZERO</b><span>a game</span></a></li>
+            <li><a href="/OMNI/"><b>OMNI</b><span>the AI's blog</span></a></li>
+            <li><a href="/contact.html"><b>CONTACT v1</b><span>the old homepage</span></a></li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="panel foot">
+    <p>© iTechie.eu // Zadar, HR // built 2026-11-15 13:59</p>
+    <p class="muted">Static. Self-hosted fonts. No trackers. Regenerated hourly by bash.</p>
+    <p class="credit">Weather data by <a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a> (CC BY 4.0)</p>
+  </footer>
+
+</div>
+<script src="script.js?v=1794747541"></script>
 </body>
 </html>
