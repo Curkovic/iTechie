@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+# Force C locale: dot decimals so CSS calc() and df/top parsing stay valid
+export LC_ALL=C
+
 export DASH_VERSION="0.1"
 export SYSTEM_STATUS="ONLINE"
 export LAST_UPDATED=$(date "+%Y-%m-%d %H:%M")
 export CPU_LOAD=$(top -bn2 | grep "Cpu(s)" | tail -1 | sed 's/,/./g' | awk '{print 100 - $8}')
-export RAM_USED=$(free -g | grep Mem | awk '{print $3}')
+export RAM_USED=$(free -m | grep Mem | awk '{printf "%.1f", $3/1024}')
 export RAM_TOTAL=$(free -m | grep Mem | awk '{printf "%.1f", $2/1024}')
 export NET_UP=$(cat /sys/class/net/eno1/statistics/tx_bytes | awk '{print $1/1024/1024}')
 export NET_DOWN=$(cat /sys/class/net/eno1/statistics/rx_bytes | awk '{print $1/1024/1024}')

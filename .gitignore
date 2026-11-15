@@ -1,0 +1,6 @@
+# macOS junk (written over Samba)
+.DS_Store
+._*
+
+# build.sh temp files (only exist for a split second)
+.index.html.*

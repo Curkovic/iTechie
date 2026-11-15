@@ -1,0 +1,9 @@
+/* iTechie.eu homepage — build test styles */
+:root { --cp-yellow: #fcee0a; --cp-blue: #00f0ff; --cp-red: #ff003c; --cp-black: #050505; }
+body { margin: 0; background: var(--cp-black); color: var(--cp-yellow); font: 17px/1.55 monospace; }
+main { max-width: 760px; margin: 40px auto; padding: 0 16px; }
+h1, h2 { text-transform: uppercase; letter-spacing: .08em; }
+.meta { color: var(--cp-red); }
+dt { color: var(--cp-blue); margin-top: 12px; text-transform: uppercase; font-size: .8em; }
+dd { margin: 2px 0 0; }
+.post { border-left: 3px solid var(--cp-red); padding: 4px 14px; }
