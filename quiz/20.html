@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Croatian Culture &amp; Traditions Quiz" />
+<meta name="quiz-topic" content="Croatian Culture" />
+<meta name="quiz-icon" content="croatia" />
+<meta name="quiz-description" content="Klapa, šahovnica, Alka and licitar hearts: Croatia beyond the beaches." />
+<title>Croatian Culture &amp; Traditions Quiz // iTechie.eu</title>
+<meta name="description" content="Klapa, šahovnica, Alka and licitar hearts: Croatia beyond the beaches. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "What is klapa?", "a": ["A Dalmatian dance with swords", "A cappella group singing from Dalmatia", "A type of fishing boat", "A stone house on the islands"], "c": 1, "e": "Klapa is multipart singing without instruments, born in Dalmatian towns. It's on UNESCO's list of intangible cultural heritage."},
+ {"q": "What do Croatians call the red-and-white checkerboard on their coat of arms?", "a": ["Šahovnica", "Kockica", "Grbica", "Pleter"], "c": 0, "e": "Šahovnica means 'chessboard'. It appears on the flag, the football shirts and countless souvenirs."},
+ {"q": "What is the nickname of Croatia's national football team?", "a": ["Kockasti", "Vatreni", "Sokoli", "Plavi"], "c": 1, "e": "'Vatreni' means 'the fiery ones'. 'Kockasti' (the checkered ones) is also heard, but Vatreni is the classic."},
+ {"q": "Licitar hearts, the red decorated honey-dough hearts, are a tradition of…", "a": ["Dalmatia", "Istria", "Northern Croatia", "The islands"], "c": 2, "e": "They come from northern Croatia (around Zagreb). The craft is on UNESCO's intangible heritage list."},
+ {"q": "Sinjska alka is a knightly tournament where riders try to…", "a": ["Jump over a river", "Hit a ring with a lance at full gallop", "Race donkeys through town", "Shoot arrows at a target"], "c": 1, "e": "Held in Sinj every August since 1715, it commemorates a victory over an Ottoman army."},
+ {"q": "Who is the patron saint of Dubrovnik, celebrated every 3 February?", "a": ["St. Blaise (Sveti Vlaho)", "St. Krševan", "St. Domnius (Sveti Duje)", "St. Mark"], "c": 0, "e": "St. Blaise's festivity has been celebrated in Dubrovnik for over a thousand years. St. Krševan is Zadar's patron, St. Domnius Split's."},
+ {"q": "What is Croatia's highest peak?", "a": ["Učka", "Biokovo (Sveti Jure)", "Dinara (Sinjal)", "Velebit (Vaganski vrh)"], "c": 2, "e": "Sinjal on Dinara is 1,831 m, just ahead of Sveti Jure on Biokovo (1,762 m)."},
+ {"q": "Pula's best-known Roman monument is…", "a": ["A triumphal arch", "An amphitheatre (the Arena)", "A lighthouse", "An aqueduct"], "c": 1, "e": "The Pula Arena is one of the best-preserved Roman amphitheatres in the world, still used for concerts and film festivals."},
+ {"q": "Nobel chemistry laureate Lavoslav Ružička (1939) was born in which Croatian town?", "a": ["Vukovar", "Osijek", "Varaždin", "Karlovac"], "c": 0, "e": "Ružička was born in Vukovar in 1887. A second Croatian-born chemist, Vladimir Prelog, won the Nobel in 1975."},
+ {"q": "On the island of Hvar, nuns make a delicate lace from…", "a": ["Silk", "Agave leaf threads", "Sheep's wool", "Linen"], "c": 1, "e": "Hvar agave lace is made by Benedictine nuns in Hvar town and is listed by UNESCO."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

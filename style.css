@@ -762,7 +762,7 @@ body.lb-open { overflow: hidden; }
 .otd-wrap > * { position: relative; z-index: 1; }
 
 /* ---------- Operator available / busy (phone Do Not Disturb) ---------- */
-.op-av { margin-left: 10px; font: 400 0.6rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; vertical-align: 2px; cursor: help; }
-.op-av::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; vertical-align: 1px; background: currentColor; }
+.op-av { margin-left: 10px; font: 400 0.6rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; vertical-align: baseline; cursor: help; }   /* sits on the same baseline as OPERATOR */
+.op-av::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; vertical-align: 0.05em; background: currentColor; }
 .op-av.free { color: var(--green); }
 .op-av.busy { color: var(--red); }
