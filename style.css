@@ -680,3 +680,81 @@ body.lb-open { overflow: hidden; }
 .hz-v { font-weight: 500; color: var(--bright); }
 .hz-v small { font-weight: 400; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.92em; }
 .hz-graph .aq-graph { display: block; height: 12px; width: auto; }   /* bars sit on the text line */
+
+/* ---------- WIND COMPASS ---------- */
+.wc, .wc-fc { --c: var(--cyan); }
+.wc .s-good, .wc-fc .s-good { --c: var(--st-good); } .wc .s-warn, .wc-fc .s-warn { --c: var(--st-warn); }
+.wc .s-serious, .wc-fc .s-serious { --c: var(--st-serious); } .wc .s-crit, .wc-fc .s-crit { --c: var(--st-crit); }
+.wc { display: grid; grid-template-columns: minmax(0, 210px) 1fr; gap: 16px; align-items: center; }
+.wc-dial { width: 100%; height: auto; display: block; overflow: visible; }
+.wc-rim { fill: rgba(0, 240, 255, 0.03); stroke: var(--line-strong); stroke-width: 1; }
+.wc-ring { fill: none; stroke: var(--line); stroke-dasharray: 2 3; }
+.wc-tick { stroke: var(--line-strong); stroke-width: 1; } .wc-tick.major { stroke: var(--cyan); stroke-width: 1.6; }
+.wc-name { font: 700 8px var(--head-font); letter-spacing: 0.08em; fill: var(--muted); text-anchor: middle; }
+.wc-name.on { fill: var(--bright); }
+.wc-gauge { fill: none; stroke: var(--c); stroke-width: 4; stroke-linecap: round; opacity: 0.9; }
+.wc-needle line { stroke: var(--c); stroke-width: 3; stroke-linecap: round; }
+.wc-needle path, .wc-needle circle { fill: var(--c); }
+.wc-big { font: 900 30px var(--head-font); fill: var(--bright); text-anchor: middle; }
+.wc-unit { font: 400 8px var(--mono); fill: var(--muted); text-anchor: middle; letter-spacing: 0.1em; }
+.wc-name-big { margin: 0; font: 900 1.6rem/1 var(--head-font); letter-spacing: 0.06em; color: var(--c); }
+.wc-note { margin: 4px 0 10px; font-size: 0.92rem; color: #a9b6bf; }
+.wc-stats { margin: 0; display: grid; gap: 4px; }
+.wc-stats div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 3px; }
+.wc-stats dt { font: 400 0.66rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.wc-stats dd { margin: 0; font: 400 0.76rem var(--mono); color: var(--bright); text-align: right; }
+.wc-fc { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font: 400 0.62rem var(--mono); color: var(--muted); }
+.wc-fc-l { text-transform: uppercase; letter-spacing: 0.1em; }
+.wc-fc-r { text-align: right; color: var(--text); }
+.wc-graph { grid-column: 1 / -1; grid-row: 2; width: 100%; height: 56px; }
+.wc-graph rect { fill: var(--c); opacity: 0.75; } .wc-graph path { fill: var(--c); }
+.wc-graph g:hover rect { opacity: 1; }
+@media (max-width: 420px) { .wc { grid-template-columns: 1fr; } .wc-dial { max-width: 230px; margin: 0 auto; } }
+
+/* ---------- FULL-WIDTH ROW + NIGHT & DAY world map ---------- */
+.wide { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
+.wm { position: relative; border: 1px solid var(--line); background: #05070a; overflow: hidden; }
+.wm-map { display: block; width: 100%; height: auto; }
+.wm-twilight { fill: #000; opacity: 0.35; }
+.wm-night { fill: #000; opacity: 0.6; }
+.wm-city { fill: var(--yellow); opacity: 0.9; filter: drop-shadow(0 0 3px var(--yellow)); }
+.wm-sun circle { fill: var(--yellow); opacity: 0.85; } .wm-sun .halo { fill: none; stroke: var(--yellow); stroke-width: 1; opacity: 0.4; }
+.wm-track { fill: none; stroke: var(--cyan); stroke-width: 1.2; stroke-linecap: round; }
+.wm-track.past { opacity: 0.35; }
+.wm-track.next { opacity: 0.9; stroke-dasharray: 1 5; stroke-width: 1.8; }
+.wm-iss { color: var(--bright); }
+.wm-iss path { stroke: var(--bright); stroke-width: 1.6; fill: none; }
+.wm-iss circle { fill: var(--bright); } .wm-iss .halo { fill: rgba(0, 240, 255, 0.15); stroke: var(--cyan); stroke-width: 1; }
+.wm-home circle { fill: var(--red); } .wm-home .pulse { fill: none; stroke: var(--red); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: wm-pulse 2.4s ease-out infinite; }
+@keyframes wm-pulse { from { transform: scale(0.4); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .wm-home .pulse { animation: none; } }
+.wm-label { font: 700 10px var(--head-font); letter-spacing: 0.12em; fill: var(--red); }
+.wm-label.iss { fill: var(--cyan); }
+.wm-info { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; margin-top: 10px; font: 400 0.68rem var(--mono); color: var(--text); white-space: nowrap; }
+.wm-time { color: var(--muted); }
+.wm-info b { font-weight: 400; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 6px; }
+
+/* ---------- ON THIS DAY ---------- */
+.otd { display: grid; grid-template-columns: minmax(0, 240px) 1fr; gap: 18px; align-items: start; }
+.otd-img { aspect-ratio: 16 / 10; }
+.otd-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.otd-year { margin: 0; font: 900 1.6rem/1 var(--head-font); color: var(--cyan); }
+.otd-year small { margin-left: 8px; font: 400 0.66rem var(--mono); color: var(--muted); letter-spacing: 0.08em; }
+.otd h3 { margin: 2px 0 0; font: 700 1.2rem/1.25 "Rajdhani", sans-serif; }
+.otd h3 a { color: var(--bright); } .otd h3 a:hover { color: var(--cyan); }
+.otd-ctx { margin: 0; font-size: 0.9rem; color: #a9b6bf; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.otd-go { margin-top: 2px; font: 400 0.7rem var(--mono); }
+.otd-also { list-style: none; margin: 12px 0 0; padding: 10px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.88rem; }
+.otd-also .lab { font: 400 0.62rem/1.9 var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+.otd-also a { color: var(--text); } .otd-also a:hover { color: var(--cyan); }
+.otd-also time { margin-right: 8px; font: 400 0.7rem var(--mono); color: var(--cyan); }
+@media (max-width: 600px) { .otd { grid-template-columns: 1fr; } }
+
+/* On This Day: the same photo, blurred, as a backdrop (like My Latest Recommendation) */
+.otd-wrap { position: relative; margin: -16px; padding: 16px; overflow: hidden; }
+.otd-wrap::before { content: ""; position: absolute; inset: -30px; z-index: 0; pointer-events: none;
+  background: var(--otd-bg, none) center / cover no-repeat; filter: blur(16px) saturate(1.2) brightness(0.3); }
+.otd-wrap::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.25) 50%) 0 0 / 100% 3px,
+              linear-gradient(to right, rgba(13, 16, 20, 0.2), rgba(13, 16, 20, 0.75)); }
+.otd-wrap > * { position: relative; z-index: 1; }
