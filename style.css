@@ -147,6 +147,36 @@ a:hover { color: var(--yellow); }
 .prose p { margin: 0 0 10px; }
 .prose p:last-child { margin: 0; }
 
+/* ---------- HEADLINE OF THE DAY (source thumbnail + CRT overlay) ---------- */
+.hl { display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: center; color: var(--text); }
+.hl:hover { color: var(--text); }
+.hl:hover b { color: var(--cyan); }
+.hl-img { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line-strong); background: var(--panel-2); }
+.hl-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.75) contrast(1.1) brightness(0.9); animation: hl-glitch 7s infinite; }
+.hl-img::before {   /* scanlines + RGB mask */
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.35) 50%),
+    linear-gradient(90deg, rgba(255, 0, 60, 0.08), rgba(0, 255, 102, 0.04), rgba(0, 240, 255, 0.08));
+  background-size: 100% 3px, 3px 100%;
+}
+.hl-img::after {    /* cyan tint + vignette */
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.06) 40%, rgba(0, 0, 0, 0.55) 100%);
+  mix-blend-mode: screen;
+}
+.hl-noimg { background: repeating-linear-gradient(45deg, var(--panel-2) 0 6px, transparent 6px 12px); }
+@keyframes hl-glitch {
+  0%, 94%, 100% { transform: none; }
+  95% { transform: translateX(-3px) skewX(4deg); filter: saturate(1.4) hue-rotate(-20deg) contrast(1.3); }
+  96% { transform: translateX(3px); }
+  97% { transform: none; }
+}
+.hl-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.hl-text b { font: 700 1.35rem/1.2 "Rajdhani", sans-serif; color: var(--bright); }
+.hl-orig { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+.hl-src { font: 400 0.68rem var(--mono); color: var(--cyan); letter-spacing: 0.04em; }
+
 /* ---------- LIVE FEED ---------- */
 .feed { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .feed-item { border: 1px solid var(--line); background: var(--panel-2); padding: 10px 14px; }
@@ -216,7 +246,7 @@ a:hover { color: var(--yellow); }
 }
 @media (max-width: 620px) {
   .feed, .tiles { grid-template-columns: 1fr 1fr; }
-  .feed, .crew { grid-template-columns: 1fr; }
+  .feed, .crew, .hl { grid-template-columns: 1fr; }
   .topbar-right { width: 100%; justify-content: space-between; }
 }
 @media (prefers-reduced-motion: reduce) {
