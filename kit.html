@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<title>72-Hour Survival Check // iTechie.eu</title>
+<meta name="description" content="Could you get through 3 days without power, water or shops? 16 honest questions, a readiness score and your personal shopping list." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+<style>
+.kt-people { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 22px; }
+.kt-people button { width: 46px; height: 42px; font: 500 0.95rem var(--mono); color: var(--text); background: var(--panel-2); border: 1px solid var(--line); cursor: pointer; }
+.kt-people button[aria-pressed="true"] { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
+.kt-label { margin: 0; font: 400 0.7rem var(--mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.qz-opts.kt3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 560px) { .qz-opts.kt3 { grid-template-columns: 1fr; } }
+.qz-opt.mid { opacity: 1; border-color: var(--yellow); color: var(--yellow); background: rgba(252, 238, 10, 0.06); }
+.qz-opt.mid kbd { color: var(--yellow); border-color: var(--yellow); }
+.qz-prog i.mid { background: var(--yellow); border-color: var(--yellow); }
+.qz-explain.mid b { color: var(--yellow); }
+.kt-hours { margin: 4px 0 0; font: 400 0.8rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.kt-h2 { margin: 26px 0 0; font: 700 0.75rem var(--head-font); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.qz-review li.mid { border-left-color: var(--yellow); }
+.qz-review li.mid .mark { color: var(--yellow); }
+.qz-review .rc { font: 400 0.62rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.kt-done { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.kt-done li { font: 400 0.7rem var(--mono); color: var(--green); border: 1px solid rgba(0, 255, 102, 0.35); padding: 3px 8px; }
+.kt-privacy { margin: 18px 0 0; font: 400 0.66rem var(--mono); color: var(--muted); }
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .crt, .qz-top, .qz-prog, .qz-count, .qz-actions, .kt-privacy { display: none !important; }
+  .qz-card { border: 0 !important; background: none !important; box-shadow: none !important; clip-path: none !important; }
+  .qz-review li { background: none !important; border: 1px solid #999 !important; break-inside: avoid; }
+  .qz-review .rq, .qz-review .ra, .qz-review .re, .qz-verdict, .qz-h1 { color: #000 !important; }
+  .qz-score { color: #000 !important; text-shadow: none !important; }
+}
+</style>
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="kit-app">
+  <noscript><p class="qz-meta">This check needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script>
+(function () {
+  "use strict";
+  // Each item: category, question, tip (n = people in the household). Yes = 2, Partly = 1, No = 0.
+  var Q = [
+    ["Water & food", "Do you have at least 4 litres of drinking water per person per day, for 3 days?", function (n) { return "Aim for 12 litres per person: " + 12 * n + " L for your household. Sealed bottles, stored dark and cool, replaced every 6–12 months."; }, "Water"],
+    ["Water & food", "Enough food for 3 days that needs no fridge and no cooking?", function (n) { return "Think canned fish and beans, crackers, nuts, peanut butter, dried fruit, chocolate. Roughly 2,000 kcal per person per day: " + 3 * n + " person-days in total."; }, "Food"],
+    ["Water & food", "A manual can opener (or only cans with pull tabs)?", function () { return "The classic mistake: a cupboard full of cans and an electric opener. A manual one costs a few euros."; }, "Can opener"],
+    ["Water & food", "A way to heat food or water without electricity, like a camping stove with fuel?", function () { return "Use it outdoors or with a window open. Never burn anything indoors without ventilation: carbon monoxide gives no warning."; }, "Stove"],
+    ["Power & light", "A torch or headlamp with spare batteries for everyone?", function (n) { return "One per person (" + n + "), plus spare batteries. A headlamp keeps both hands free. Candles are a fire risk; use them last."; }, "Torches"],
+    ["Power & light", "A charged power bank or solar charger for your phone?", function () { return "A 20,000 mAh power bank is about 4 phone charges. Top it up every few months; batteries slowly drain on the shelf."; }, "Power bank"],
+    ["Power & light", "A battery or hand-crank radio to hear official announcements?", function () { return "When mobile networks and internet go down, FM radio usually keeps working. Public broadcasters carry civil protection alerts."; }, "Radio"],
+    ["Health", "A first-aid kit, and do you know the basics of using it?", function () { return "Plasters, bandages, gauze, disinfectant, painkillers, tweezers, gloves. A first-aid course is the best upgrade."; }, "First aid"],
+    ["Health", "At least a week of any regular medicines, plus copies of prescriptions?", function () { return "Pharmacies may be closed or offline. Keep a rotating spare supply and a paper list of medicines and doses."; }, "Medicines"],
+    ["Health", "Hygiene supplies: toilet paper, wet wipes, soap, bin bags?", function () { return "If the water stops, a bucket lined with strong bin bags makes an emergency toilet. Wet wipes and hand gel replace washing."; }, "Hygiene"],
+    ["Documents & money", "Copies of ID, insurance and key documents in a waterproof bag?", function () { return "Paper copies in a zip bag, or an encrypted USB stick. You'll need them for help, insurance and travel."; }, "Documents"],
+    ["Documents & money", "Some cash in small notes?", function () { return "Card terminals and ATMs need power and network. Keep enough for a few days of essentials in €5–20 notes."; }, "Cash"],
+    ["Documents & money", "Important phone numbers written on paper?", function () { return "Your phone may be dead or lost. Write down 112 (the emergency number everywhere in the EU), family, a doctor and one contact outside your area."; }, "Numbers on paper"],
+    ["Shelter & plan", "Warm clothes, blankets or sleeping bags for everyone, and sturdy shoes?", function (n) { return "Without power there's often no heating. One sleeping bag or two blankets per person (" + n + "), plus rain gear and shoes you can walk far in."; }, "Warm gear"],
+    ["Shelter & plan", "A household plan: where you'd meet if separated, and who calls whom?", function () { return "Agree on a meeting point near home and one farther away. In Croatia, the public sirens are tested on the first Saturday of every month at noon, so you'll know a test from the real thing."; }, "Family plan"],
+    ["Shelter & plan", "If you have pets: food, water and a carrier for them too? (No pets? Answer Yes.)", function () { return "Pets need 3 days of food and water as well, plus a leash or carrier and their vet papers. Shelters may require a carrier."; }, "Pet supplies"]
+  ];
+  var ICON = '<path d="M8 7V5a4 4 0 0 1 8 0v2"/><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M4 12h16M10 12v3h4v-3"/>';
+  var LABELS = ["Yes", "Partly", "No"], POINTS = [2, 1, 0], CLS = ["ok", "mid", "bad"];
+  var app = document.getElementById("kit-app");
+  var people = 1, i = 0, ans = [], locked = false;
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function icon() { var s = document.createElementNS("http://www.w3.org/2000/svg", "svg"); s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("class", "qz-ico"); s.setAttribute("fill", "none"); s.setAttribute("stroke", "currentColor"); s.setAttribute("stroke-width", "1.6"); s.setAttribute("stroke-linecap", "round"); s.setAttribute("stroke-linejoin", "round"); s.innerHTML = ICON; return s; }
+  function shell(showProg) {
+    app.innerHTML = "";
+    var top = el("div", "qz-top");
+    var brand = el("a", "qz-brand"); brand.href = "/"; brand.textContent = "iTechie"; var sp = el("span", null, ".eu"); brand.appendChild(sp);
+    top.appendChild(brand); top.appendChild(el("div", "qz-title", "72-hour survival check"));
+    var x = el("a", "qz-close", "✕"); x.href = "/"; x.setAttribute("aria-label", "Close"); top.appendChild(x);
+    app.appendChild(top);
+    if (showProg) {
+      var p = el("div", "qz-prog"); p.style.setProperty("--n", Q.length);
+      for (var k = 0; k < Q.length; k++) { var seg = el("i"); if (k < ans.length) seg.className = CLS[ans[k]]; else if (k === i) seg.className = "cur"; p.appendChild(seg); }
+      app.appendChild(p);
+    }
+    var stage = el("div", "qz-stage"); var card = el("div", "qz-card"); stage.appendChild(card); app.appendChild(stage);
+    return card;
+  }
+
+  function start() {
+    var c = shell(false);
+    c.appendChild(icon());
+    c.appendChild(el("h1", "qz-h1", "72-Hour Survival Check"));
+    c.appendChild(el("p", "qz-lead", "A bura knocks out the power, the water stops, the shops are shut. Could your household manage on its own for 3 days? Answer 16 questions honestly and get a readiness score and a personal shopping list."));
+    c.appendChild(el("p", "kt-label", "People in your household"));
+    var row = el("div", "kt-people");
+    [1, 2, 3, 4, 5, 6].forEach(function (n) {
+      var b = el("button", null, n === 6 ? "6+" : String(n)); b.type = "button"; b.setAttribute("aria-pressed", n === people ? "true" : "false");
+      b.onclick = function () { people = n; row.querySelectorAll("button").forEach(function (o) { o.setAttribute("aria-pressed", "false"); }); b.setAttribute("aria-pressed", "true"); };
+      row.appendChild(b);
+    });
+    c.appendChild(row);
+    c.appendChild(el("p", "qz-meta", "16 questions · about 3 minutes · nothing is saved or sent"));
+    var go = el("button", "qz-btn", "Start check"); go.type = "button"; go.onclick = function () { i = 0; ans = []; ask(); };
+    var acts = el("div", "qz-actions"); acts.appendChild(go); c.appendChild(acts);
+    go.focus();
+  }
+
+  function ask() {
+    locked = false;
+    var q = Q[i], c = shell(true);
+    c.appendChild(el("p", "qz-count", q[0] + " · " + (i + 1) + " / " + Q.length));
+    c.appendChild(el("h2", "qz-q", q[1]));
+    var opts = el("div", "qz-opts kt3");
+    LABELS.forEach(function (lab, k) {
+      var b = el("button", "qz-opt"); b.type = "button";
+      b.appendChild(el("kbd", null, String(k + 1))); b.appendChild(el("span", null, lab));
+      b.onclick = function () { choose(k, opts, c); };
+      opts.appendChild(b);
+    });
+    c.appendChild(opts);
+    opts.firstChild.focus();
+  }
+
+  function choose(k, opts, c) {
+    if (locked) return; locked = true;
+    ans[i] = k;
+    var bs = opts.querySelectorAll(".qz-opt");
+    bs.forEach(function (b, j) { b.disabled = true; if (j === k) b.classList.add(["right", "mid", "wrong"][k]); });
+    var ex = el("p", "qz-explain " + CLS[k]);
+    ex.appendChild(el("b", null, ["Covered", "Halfway", "Add this"][k]));
+    ex.appendChild(document.createTextNode(Q[i][2](people)));
+    c.appendChild(ex);
+    var nx = el("button", "qz-btn qz-next", i + 1 < Q.length ? "Next" : "See my result"); nx.type = "button";
+    nx.onclick = function () { i++; if (i < Q.length) ask(); else result(); };
+    c.appendChild(nx); nx.focus();
+    var segs = app.querySelectorAll(".qz-prog i"); if (segs[i]) segs[i].className = CLS[k];
+  }
+
+  function result() {
+    var c = shell(true), pts = 0;
+    ans.forEach(function (k) { pts += POINTS[k]; });
+    var pct = Math.round(100 * pts / (2 * Q.length)), hours = Math.round(72 * pts / (2 * Q.length));
+    var verdict = pct >= 90 ? "Bunker-ready. You could ride out the storm and help the neighbours."
+                : pct >= 70 ? "Solid. A few gaps, nothing a single shopping trip can't fix."
+                : pct >= 40 ? "Half-prepared. Day two would get uncomfortable."
+                : "Shopping-list time. Right now the first evening would be hard.";
+    c.appendChild(icon());
+    var s = el("p", "qz-score", String(pct)); s.appendChild(el("small", null, "% ready")); c.appendChild(s);
+    c.appendChild(el("p", "kt-hours", "≈ " + hours + " of 72 hours covered · household of " + (people === 6 ? "6+" : people)));
+    c.appendChild(el("p", "qz-verdict", verdict));
+    var gaps = [], done = [];
+    Q.forEach(function (q, k) { if (ans[k] === 2) gaps.push(k); });   // "No" first
+    Q.forEach(function (q, k) { if (ans[k] === 1) gaps.push(k); });   // then "Partly"
+    Q.forEach(function (q, k) { if (ans[k] === 0) done.push(k); });   // "Yes"
+    if (gaps.length) {
+      c.appendChild(el("h3", "kt-h2", "Your shopping list (" + gaps.length + ")"));
+      var ul = el("ol", "qz-review");
+      gaps.forEach(function (k) {
+        var li = el("li", ans[k] === 1 ? "mid" : "");
+        li.appendChild(el("span", "mark", ans[k] === 1 ? "½" : "✗"));
+        li.appendChild(el("p", "rc", Q[k][0]));
+        li.appendChild(el("p", "rq", Q[k][1]));
+        li.appendChild(el("p", "re", Q[k][2](people)));
+        ul.appendChild(li);
+      });
+      c.appendChild(ul);
+    }
+    if (done.length) {
+      c.appendChild(el("h3", "kt-h2", "Already covered (" + done.length + ")"));
+      var d = el("ul", "kt-done");
+      done.forEach(function (k) { d.appendChild(el("li", null, "✓ " + Q[k][3])); });
+      c.appendChild(d);
+    }
+    var acts = el("div", "qz-actions");
+    var pr = el("button", "qz-btn", "Print my list"); pr.type = "button"; pr.onclick = function () { window.print(); };
+    var again = el("button", "qz-btn ghost", "Check again"); again.type = "button"; again.onclick = start;
+    var home = el("a", "qz-btn ghost", "Home"); home.href = "/";
+    acts.appendChild(pr); acts.appendChild(again); acts.appendChild(home); c.appendChild(acts);
+    c.appendChild(el("p", "kt-privacy", "Your answers stay on this page: nothing is saved or sent anywhere. General preparedness tips, not official advice; follow civil protection instructions in a real emergency, and call 112."));
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    var opts = app.querySelectorAll(".qz-opt:not(:disabled)");
+    if (opts.length && ev.key >= "1" && ev.key <= "3") { opts[+ev.key - 1].click(); ev.preventDefault(); }
+  });
+  start();
+})();
+</script>
+</body>
+</html>

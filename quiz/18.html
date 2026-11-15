@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Myths &amp; Legends Quiz" />
+<meta name="quiz-topic" content="Mythology" />
+<meta name="quiz-icon" content="myth" />
+<meta name="quiz-description" content="Gods, heroes and monsters from Greece, Scandinavia and the Slavs." />
+<title>Myths &amp; Legends Quiz // iTechie.eu</title>
+<meta name="description" content="Gods, heroes and monsters from Greece, Scandinavia and the Slavs. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Who is king of the gods in Greek mythology?", "a": ["Apollo", "Zeus", "Poseidon", "Hades"], "c": 1, "e": "Zeus ruled from Mount Olympus and threw thunderbolts."},
+ {"q": "Which Norse god carries the hammer Mjölnir?", "a": ["Odin", "Loki", "Thor", "Freyr"], "c": 2, "e": "Thor, god of thunder, uses Mjölnir to protect gods and humans."},
+ {"q": "What is the Roman name for the Greek goddess Aphrodite?", "a": ["Venus", "Minerva", "Diana", "Juno"], "c": 0, "e": "Venus is the goddess of love and beauty; Minerva matches Athena, Diana matches Artemis."},
+ {"q": "Which hero killed the Minotaur in the labyrinth of Crete?", "a": ["Hercules", "Perseus", "Theseus", "Jason"], "c": 2, "e": "Theseus found his way out using a thread given to him by Ariadne."},
+ {"q": "Which jackal-headed Egyptian god watched over embalming and the dead?", "a": ["Ra", "Anubis", "Horus", "Thoth"], "c": 1, "e": "Anubis guided souls and oversaw the weighing of the heart."},
+ {"q": "Who is the Slavic god of thunder?", "a": ["Veles", "Perun", "Svarog", "Morana"], "c": 1, "e": "Perun, like Thor and Zeus, ruled the sky; his rival Veles ruled the underworld."},
+ {"q": "When Pandora opened her jar (box), what stayed inside?", "a": ["Gold", "Hope", "Fire", "Love"], "c": 1, "e": "All the evils escaped into the world, but hope remained inside."},
+ {"q": "Where was Achilles' only weak spot?", "a": ["His shoulder", "His heel", "His eye", "His neck"], "c": 1, "e": "His mother dipped him in the river Styx holding him by the heel, which stayed vulnerable."},
+ {"q": "Odysseus spent ten years trying to get home to which island?", "a": ["Crete", "Rhodes", "Ithaca", "Cyprus"], "c": 2, "e": "Homer's Odyssey follows his journey back to Ithaca after the Trojan War."},
+ {"q": "What is the giant tree that connects the nine worlds in Norse myth?", "a": ["Yggdrasil", "Valhalla", "Bifröst", "Asgard"], "c": 0, "e": "Yggdrasil, the world ash tree. Bifröst is the rainbow bridge; Valhalla is Odin's hall."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

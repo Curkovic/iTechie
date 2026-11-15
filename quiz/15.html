@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Languages of the World Quiz" />
+<meta name="quiz-topic" content="Languages" />
+<meta name="quiz-icon" content="language" />
+<meta name="quiz-description" content="Alphabets, language families and who speaks what." />
+<title>Languages of the World Quiz // iTechie.eu</title>
+<meta name="description" content="Alphabets, language families and who speaks what. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Which language has the most native speakers?", "a": ["English", "Spanish", "Mandarin Chinese", "Hindi"], "c": 2, "e": "Mandarin has roughly 900+ million native speakers. English has more speakers overall when you count second-language learners."},
+ {"q": "Croatian is written today in which script?", "a": ["Cyrillic", "Latin", "Glagolitic", "Greek"], "c": 1, "e": "Croatian uses Gaj's Latin alphabet (č, ć, đ, š, ž). The older Glagolitic script was used in Croatia for centuries in church texts."},
+ {"q": "'Danke' means 'thank you' in…", "a": ["Dutch", "German", "Swedish", "Polish"], "c": 1, "e": "Danke is German. Dutch says 'dank je', Swedish 'tack', Polish 'dziękuję'."},
+ {"q": "Which of these is NOT a Romance language?", "a": ["Romanian", "Portuguese", "Catalan", "Hungarian"], "c": 3, "e": "Hungarian is a Uralic language, related to Finnish and Estonian, not to Latin."},
+ {"q": "What makes Basque special among European languages?", "a": ["It has no verbs", "It's a language isolate, unrelated to any other known language", "It's written right to left", "It was invented in the 1900s"], "c": 1, "e": "Basque (Euskara) predates the arrival of Indo-European languages in Europe and has no proven living relatives."},
+ {"q": "Which script is written from right to left?", "a": ["Greek", "Cyrillic", "Arabic", "Devanagari"], "c": 2, "e": "Arabic (like Hebrew) is written right to left; numbers, however, are written left to right."},
+ {"q": "Who created the constructed language Esperanto?", "a": ["Ludwik Zamenhof", "J. R. R. Tolkien", "Noam Chomsky", "Nikola Tesla"], "c": 0, "e": "L. L. Zamenhof published Esperanto in 1887, hoping a neutral second language would ease conflict between peoples."},
+ {"q": "Croatian belongs to which language group?", "a": ["West Slavic", "South Slavic", "Baltic", "Romance"], "c": 1, "e": "Croatian is South Slavic, together with Slovenian, Serbian, Bosnian, Montenegrin, Macedonian and Bulgarian."},
+ {"q": "Hindi is usually written in which script?", "a": ["Devanagari", "Latin", "Arabic", "Hangul"], "c": 0, "e": "Devanagari is also used for Sanskrit, Marathi and Nepali. Hangul is Korean."},
+ {"q": "Which language gave English the words 'kindergarten' and 'angst'?", "a": ["French", "German", "Dutch", "Danish"], "c": 1, "e": "Both are German loanwords: Kindergarten ('children's garden') and Angst ('fear, anxiety')."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

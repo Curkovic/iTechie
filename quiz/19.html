@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Food Around the World Quiz" />
+<meta name="quiz-topic" content="Food" />
+<meta name="quiz-icon" content="nutrition" />
+<meta name="quiz-description" content="From paella to peka: dishes, ingredients and where they come from." />
+<title>Food Around the World Quiz // iTechie.eu</title>
+<meta name="description" content="From paella to peka: dishes, ingredients and where they come from. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Paella comes from which country?", "a": ["Italy", "Spain", "Portugal", "Mexico"], "c": 1, "e": "Paella comes from the Valencia region of Spain, traditionally cooked over an open fire."},
+ {"q": "Sushi rice is seasoned mainly with…", "a": ["Soy sauce", "Rice vinegar", "Fish sauce", "Lemon juice"], "c": 1, "e": "Rice vinegar, sugar and salt give sushi rice its flavour and shine."},
+ {"q": "What is 'peka', the Dalmatian classic?", "a": ["A fish soup", "Food baked under a bell-shaped lid covered in embers", "A sweet pastry", "A type of wine"], "c": 1, "e": "Meat or octopus with potatoes slow-cooks under the iron bell (čripnja) buried in hot coals."},
+ {"q": "What is the main ingredient of guacamole?", "a": ["Avocado", "Pea", "Cucumber", "Lime"], "c": 0, "e": "Guacamole comes from Aztec Mexico: mashed avocado with lime, onion, chilli and salt."},
+ {"q": "Paški sir, the famous cheese from the island of Pag, is made from…", "a": ["Cow's milk", "Goat's milk", "Sheep's milk", "Buffalo milk"], "c": 2, "e": "Pag sheep graze on salty, herb-covered rocks, which gives the cheese its taste."},
+ {"q": "Kimchi is a traditional dish of which country?", "a": ["Japan", "China", "Korea", "Thailand"], "c": 2, "e": "Kimchi is fermented vegetables, usually napa cabbage with chilli, garlic and ginger."},
+ {"q": "Which spice is the most expensive by weight?", "a": ["Vanilla", "Cinnamon", "Saffron", "Black pepper"], "c": 2, "e": "Saffron comes from crocus flower threads picked by hand; about 150 flowers make one gram."},
+ {"q": "Hummus is made mainly from…", "a": ["Lentils", "Chickpeas", "White beans", "Peas"], "c": 1, "e": "Chickpeas blended with tahini, lemon, garlic and olive oil."},
+ {"q": "Maraschino, the cherry liqueur made from marasca cherries, is famously linked to which city?", "a": ["Split", "Zadar", "Rijeka", "Dubrovnik"], "c": 1, "e": "Zadar's maraschino was served at European royal courts; the Maraska factory still makes it today."},
+ {"q": "The croissant is a symbol of French baking, but it grew from which Austrian pastry?", "a": ["Strudel", "Kipferl", "Krapfen", "Sachertorte"], "c": 1, "e": "The crescent-shaped Viennese kipferl inspired the croissant made with laminated dough in Paris."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

@@ -32,6 +32,10 @@
     weather: '<path d="M7 17a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1A3.5 3.5 0 0 1 17 17"/><path d="M12 13l-2 4h3l-2 4"/>',
     croatia: '<path d="M5 3h14v9c0 5-7 9-7 9s-7-4-7-9z"/><path d="M5 7h14M5 11h14M9 3v12M15 3v12"/>',
     sea: '<circle cx="12" cy="8" r="3"/><path d="M2 15c2.5-2 5-2 7.5 0s5 2 7.5 0 3.5-1.5 5-1M2 19c2.5-2 5-2 7.5 0s5 2 7.5 0 3.5-1.5 5-1"/>',
+    language: '<path d="M4 4h11v8H9l-4 3v-3H4z"/><path d="M15 8h5v8h-1v3l-3-3h-5v-3"/>',
+    map: '<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>',
+    bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+    myth: '<path d="M13 2L5 13h6l-1 9 8-11h-6z"/>',
     "default": '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17v.5"/>'
   };
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }

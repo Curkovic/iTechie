@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Inventions &amp; Inventors Quiz" />
+<meta name="quiz-topic" content="Inventions" />
+<meta name="quiz-icon" content="bulb" />
+<meta name="quiz-description" content="Who built the things we use every day (a few Croatians included)." />
+<title>Inventions &amp; Inventors Quiz // iTechie.eu</title>
+<meta name="description" content="Who built the things we use every day (a few Croatians included). 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Who introduced printing with movable metal type to Europe around 1440?", "a": ["Leonardo da Vinci", "Johannes Gutenberg", "Galileo Galilei", "Isaac Newton"], "c": 1, "e": "Gutenberg's press made books cheap enough to spread ideas across Europe."},
+ {"q": "Who received the 1876 patent for the telephone?", "a": ["Thomas Edison", "Alexander Graham Bell", "Guglielmo Marconi", "Samuel Morse"], "c": 1, "e": "Bell's patent was granted in 1876, though others such as Antonio Meucci worked on similar ideas."},
+ {"q": "Nikola Tesla, born in Smiljan, Croatia, is best known for…", "a": ["The steam engine", "Alternating current (AC) systems", "The telescope", "The diesel engine"], "c": 1, "e": "Tesla's AC motor and power system is still how electricity reaches our homes."},
+ {"q": "Who invented the World Wide Web?", "a": ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"], "c": 1, "e": "Tim Berners-Lee proposed the Web at CERN in 1989; the first website went live in 1991."},
+ {"q": "Who discovered penicillin in 1928?", "a": ["Louis Pasteur", "Marie Curie", "Alexander Fleming", "Robert Koch"], "c": 2, "e": "Fleming noticed mould killing bacteria in a petri dish, which opened the age of antibiotics."},
+ {"q": "Croatian engineer Slavoljub Penkala is famous for the…", "a": ["Mechanical pencil", "Parachute", "Torpedo", "Necktie"], "c": 0, "e": "Penkala patented his mechanical pencil in 1906 and also built Croatia's first aircraft."},
+ {"q": "The self-propelled torpedo was developed in the 1860s in which city?", "a": ["Venice", "Rijeka", "Trieste", "Pula"], "c": 1, "e": "Ivan Lupis (Giovanni Luppis) and Robert Whitehead built it in Rijeka (then Fiume)."},
+ {"q": "Who is usually credited with the first practical incandescent light bulb?", "a": ["Nikola Tesla", "Thomas Edison", "James Watt", "Michael Faraday"], "c": 1, "e": "Edison's 1879 bulb lasted long enough to be practical; Joseph Swan worked on one in parallel in England."},
+ {"q": "Who made the first powered, controlled aeroplane flight in 1903?", "a": ["The Wright brothers", "The Montgolfier brothers", "Charles Lindbergh", "Amelia Earhart"], "c": 0, "e": "Orville and Wilbur Wright flew at Kitty Hawk, USA. The Montgolfiers flew hot-air balloons in 1783."},
+ {"q": "Which inventor of dynamite later founded famous prizes?", "a": ["Alfred Nobel", "Albert Einstein", "Henry Ford", "James Dyson"], "c": 0, "e": "Alfred Nobel patented dynamite in 1867 and left his fortune to create the Nobel Prizes."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

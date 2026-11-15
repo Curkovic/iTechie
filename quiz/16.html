@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Capitals &amp; Countries Quiz" />
+<meta name="quiz-topic" content="Geography" />
+<meta name="quiz-icon" content="map" />
+<meta name="quiz-description" content="Capitals, borders and the odd geography trick question." />
+<title>Capitals &amp; Countries Quiz // iTechie.eu</title>
+<meta name="description" content="Capitals, borders and the odd geography trick question. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "What is the capital of Australia?", "a": ["Sydney", "Melbourne", "Canberra", "Perth"], "c": 2, "e": "Canberra was purpose-built as a compromise between rivals Sydney and Melbourne."},
+ {"q": "What is the capital of Canada?", "a": ["Toronto", "Ottawa", "Vancouver", "Montreal"], "c": 1, "e": "Ottawa, on the border of Ontario and Quebec, has been the capital since 1857."},
+ {"q": "Which is the largest country by area?", "a": ["Canada", "China", "USA", "Russia"], "c": 3, "e": "Russia covers about 17 million km², roughly one-ninth of Earth's land."},
+ {"q": "What is the capital of Slovenia?", "a": ["Maribor", "Ljubljana", "Koper", "Celje"], "c": 1, "e": "Ljubljana, about 140 km from Zagreb, is one of Europe's smaller capitals."},
+ {"q": "What is the smallest country in the world?", "a": ["Monaco", "San Marino", "Vatican City", "Liechtenstein"], "c": 2, "e": "Vatican City covers about 0.44 km², entirely surrounded by Rome."},
+ {"q": "Which of these countries is landlocked?", "a": ["Portugal", "Denmark", "Switzerland", "Croatia"], "c": 2, "e": "Switzerland has no coastline; it borders France, Germany, Austria, Liechtenstein and Italy."},
+ {"q": "What is the capital of Turkey?", "a": ["Istanbul", "Ankara", "Izmir", "Antalya"], "c": 1, "e": "Ankara became the capital in 1923. Istanbul is the biggest city, but not the capital."},
+ {"q": "What is the capital of Morocco?", "a": ["Casablanca", "Marrakesh", "Fez", "Rabat"], "c": 3, "e": "Rabat is the capital; Casablanca is the largest city and economic centre."},
+ {"q": "Which two European capitals are only about 55 km apart?", "a": ["Vienna and Bratislava", "Ljubljana and Zagreb", "Brussels and Amsterdam", "Prague and Berlin"], "c": 0, "e": "Vienna and Bratislava sit on the Danube, close enough to commute between them."},
+ {"q": "Which country does Croatia NOT border?", "a": ["Slovenia", "Hungary", "Montenegro", "Austria"], "c": 3, "e": "Croatia borders Slovenia, Hungary, Serbia, Bosnia and Herzegovina, and Montenegro, plus Italy by sea."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>
