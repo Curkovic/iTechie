@@ -41,14 +41,32 @@
             <tr>
               <td>Weather in Zadar</td>
               <td><a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a></td>
-              <td>Temperature, sky and wind in the menu bar (hourly)</td>
+              <td>Temperature, sky and wind in the menu bar; sunrise, sunset and UV index, plus sea temperature and wave height from the Marine API, in the Daylight &amp; Sea block (hourly)</td>
               <td><a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a></td>
+            </tr>
+            <tr>
+              <td>Air quality in Zadar</td>
+              <td><a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a> Air Quality API, based on <a href="https://atmosphere.copernicus.eu/" rel="noopener">Copernicus Atmosphere Monitoring Service</a> data</td>
+              <td>Air strip under the ticker: European Air Quality Index, 24-hour graph, PM2.5, PM10, ozone, NO₂ (hourly). The survival verdicts are my own wording of the official EAQI bands.</td>
+              <td>CC BY 4.0; contains modified Copernicus Atmosphere Monitoring Service information</td>
             </tr>
             <tr>
               <td>People in space</td>
               <td><a href="https://github.com/corquaid/international-space-station-APIs" rel="noopener">International Space Station APIs</a> by corquaid</td>
               <td>Off-Planet panel and ticker: names, roles, agencies, spacecraft (daily)</td>
               <td>See repository</td>
+            </tr>
+            <tr>
+              <td>Rocket launches</td>
+              <td><a href="https://thespacedevs.com/" rel="noopener">Launch Library 2</a> by The Space Devs</td>
+              <td>Space Launch block and ticker: today's (or the next) launch, rocket, provider, site, time and status (hourly)</td>
+              <td>Free API, credited</td>
+            </tr>
+            <tr>
+              <td>My latest recommendation</td>
+              <td>My own <a href="https://watch.plex.tv/" rel="noopener">Plex</a> watchlist; description from <a href="https://en.wikipedia.org/" rel="noopener">Wikipedia</a>, matched via <a href="https://www.wikidata.org/" rel="noopener">Wikidata</a></td>
+              <td>Recommendation block: the title I added most recently, its poster (loaded from Plex), type, year, rating, genres and a two-sentence description</td>
+              <td>Description: <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>, linked to the article; Wikidata CC0; poster © its owner</td>
             </tr>
             <tr>
               <td>Near-Earth asteroids</td>
@@ -87,6 +105,7 @@
           <li><b>Rewritten from the sources above:</b> asteroid alert, peace index, blackout summary, and the headlines of the day: the AI only translates the four titles and summarises the main story's intro from the feed. It does not choose the stories. Every story links to the original Croatian article.</li>
           <li><b>Written from the model's own knowledge:</b> daily knowledge, dead tech (topic area: <a href="https://en.wikipedia.org/wiki/1990s_in_computing" rel="noopener">1990s in computing</a>), and the apocalypse skill of the week.</li>
           <li><b>Written on my phone:</b> the go&#8209;outside line in the ticker is written by Apple's AI model from the current weather, via an iPhone Shortcut.</li>
+          <li><b>Zadar This Morning:</b> every morning an iPhone Shortcut looks at a public live street camera of Five Wells Square and Apple's AI model describes the weather and how busy it is. Only the text is published, never the image.</li>
         </ul>
       </div>
     </section>
@@ -98,6 +117,7 @@
           <li><b>Avatars</b> in the Off-Planet panel are pixel patterns generated from each person's name. No photos are used.</li>
           <li><b>Posts</b> under my name are my own, sent from my phone.</li>
           <li><b>Uptime, build time and the clock</b> come from the home server and your browser.</li>
+          <li><b>Moon phase</b> is calculated on the home server from the date, no outside data.</li>
         </ul>
       </div>
     </section>
@@ -120,7 +140,7 @@
     <section class="panel">
       <div class="panel-head"><span>Hosting &amp; Privacy</span><small>what your browser talks to</small></div>
       <div class="panel-body prose">
-        <p>The site is static and hosted on <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>. No analytics, no cookies, no ads, no third-party scripts. Everything loads from this domain except the headline thumbnails, which your browser loads directly from the news sites (without telling it which page you came from). GitHub, as the host, may keep standard server logs; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
+        <p>The site is static and hosted on <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>. No analytics, no cookies, no ads, no third-party scripts. Everything loads from this domain except the headline thumbnails and the recommendation poster, which your browser loads directly from the news sites and Plex (without telling it which page you came from). GitHub, as the host, may keep standard server logs; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
         <p>Spot a missing credit, or want your data removed or credited differently? <a href="mailto:m@itechie.eu?subject=Sources%20page">Tell me</a>.</p>
       </div>
     </section>
