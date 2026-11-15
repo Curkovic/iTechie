@@ -556,3 +556,12 @@ body.lb-open { overflow: hidden; }
 .atc-graph rect { fill: var(--cyan); opacity: 0.35; }
 .atc-graph rect.now { opacity: 1; filter: drop-shadow(0 0 3px var(--cyan)); }
 @media (max-width: 520px) { .atc { grid-template-columns: 1fr; } .radar { max-width: 280px; margin: 0 auto; } }
+
+/* blog: inline code, code blocks, warning notes */
+.log-body code { font: 400 0.86em var(--mono); color: var(--green); background: rgba(0, 255, 102, 0.06); padding: 1px 5px; }
+.log-body .code { position: relative; margin: 18px 0; border: 1px solid var(--line); background: #050607; }
+.log-body .code-tag { position: absolute; top: 8px; right: 10px; font: 400 0.6rem var(--mono); letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 1px 6px; }
+.log-body pre { margin: 0; padding: 16px 18px; overflow-x: auto; font: 400 0.82rem/1.7 var(--mono); }
+.log-body pre code { background: none; padding: 0; color: var(--green); }
+.log-body .note.warn { border-left-color: var(--red); background: rgba(255, 0, 60, 0.05); }
+.log-body .note.warn .note-tag { color: var(--red); }
