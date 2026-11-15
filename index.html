@@ -1,10 +1,4 @@
 <!doctype html>
-<!--
-  iTechie.eu homepage — GENERATED FILE.
-  Source: ~/OMNI/iTechie/index.html.template, rendered by build.sh.
-  Placeholders are $ + {NAME_IN_CAPS} = ~/OMNI/var/<name>/<name>.txt (HTML-escaped).
-  Blocks marked DUMMY are placeholder text waiting for their own OMNI module.
--->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -13,20 +7,19 @@
 <title>Mate Ćurković // iTechie.eu</title>
 <meta name="description" content="Linux sysadmin in Zadar. A static homepage that rebuilds itself every hour from a home server." />
 <link rel="icon" href="/favicon.ico" />
-<link rel="stylesheet" href="style.css?v=1794747553" />
+<link rel="stylesheet" href="style.css?v=1794749402" />
 </head>
 <body>
 <div class="crt" aria-hidden="true"></div>
 <div class="wrap">
 
-  <!-- ================= MENU ================= -->
   <header>
     <nav class="panel topbar">
       <a class="brand" href="/">iTechie<span>.eu</span></a>
-      <span class="ver">v5.0</span><!-- DUMMY: version module -->
+      <span class="ver">v5.3665</span>
       <div class="nav">
         <a href="#feed">[ Feed ]</a>
-        <a href="#posts">[ Posts ]</a>
+        <a href="#operator">[ Posts ]</a>
         <a href="#about">[ About ]</a>
         <a href="#nodes">[ Nodes ]</a>
         <a href="/contact.html">[ Contact ]</a>
@@ -37,7 +30,6 @@
       </div>
     </nav>
 
-    <!-- ================= TICKER ================= -->
     <div class="panel ticker">
       <span class="tag">Live</span>
       <div class="track"><span>
@@ -45,6 +37,7 @@
         PEACE INDEX: Neon‑lit megacities pulse at a 2.08 Global Peace Index—midway on the 1‑to‑5 peace‑to‑conflict scale—signaling a fragile lull before the next data‑driven skirmish ignites. &nbsp;///&nbsp;
         DEAD TECH: 10BASE2 (Thin Ethernet) is a coaxial‑cable LAN used in early‑90s workstations, capped at a raw 10 Mbps and limited to a maximum continuous segment of 185 m per the IEEE 802.3 standard. &nbsp;///&nbsp;
         SKILL FOR THE END OF THE WORLD: Water purification &nbsp;///&nbsp;
+        HUMANS OFF-PLANET: 10 — ISS 7 · Shenzhou 23 3 &nbsp;///&nbsp;
         NODE UPTIME: 5 hours, 56 minutes
       </span></div>
     </div>
@@ -52,19 +45,22 @@
 
   <div class="grid">
 
-    <!-- ================= LEFT ================= -->
     <aside class="col">
 
-      <section class="panel">
+      <section class="panel" id="operator">
         <div class="panel-head"><span>Operator</span><small>ZADAR_HR</small></div>
         <div class="panel-body ident">
           <h1 class="name">Mate Ćurković</h1>
-          <p class="tagline">Linux sysadmin. Automates anything done twice.</p>
+<ul class="tx">
+<li class="tx-item latest"><time datetime="2026-11-15">15 Nov 14:16</time><p>I feel like I have personal social network hosted on GitHub pages </p></li>
+<li class="tx-item"><time datetime="2026-11-15">15 Nov 13:42</time><p>Claude was helping me build this section Thanks so much! </p></li>
+<li class="tx-item"><time datetime="2026-11-04">04 Nov 15:58</time><p>Here is my post </p></li>
+</ul>
           <dl class="status">
-            <dt>Status</dt>     <dd><span class="dot"></span><span class="ok">Online</span></dd>
+            <dt>Status</dt><dd><span class="dot"></span><span class="ok">Online</span></dd><dt>Feeds</dt><dd>9/9 fresh</dd>
             <dt>Node</dt>       <dd>Zadar, HR</dd>
             <dt>Uptime</dt>     <dd>5 hours, 56 minutes</dd>
-            <dt>Last sync</dt>  <dd><span id="sync" data-epoch="1794747553">2026-11-15 13:59</span></dd>
+            <dt>Last sync</dt>  <dd><span id="sync" data-epoch="1794749402">2026-11-15 14:30</span></dd>
           </dl>
           <div class="btns">
             <a class="btn" href="mailto:m@itechie.eu">Mail</a>
@@ -78,7 +74,6 @@
       <section class="panel" id="about">
         <div class="panel-head"><span>About</span><small>cat ~/README</small></div>
         <div class="panel-body prose">
-          <!-- DUMMY: about module -->
           <p>I keep a lot of Linux servers alive, mostly by making sure nobody touches them by hand. Came from DevOps and kept the habit.</p>
           <p>This page is static HTML. Every hour a home server in Zadar regenerates it from small bash modules and pushes it to GitHub. No CMS, no trackers.</p>
         </div>
@@ -87,7 +82,6 @@
       <section class="panel">
         <div class="panel-head"><span>Currently</span><small>ps aux | head</small></div>
         <div class="panel-body">
-          <!-- DUMMY: now_building / now_reading / now_listening modules -->
           <dl class="rows">
             <dt>Building</dt>  <dd>This homepage</dd>
             <dt>Reading</dt>   <dd>Neuromancer, again</dd>
@@ -99,44 +93,38 @@
 
     </aside>
 
-    <!-- ================= RIGHT ================= -->
     <main class="col">
 
       <section class="panel" id="feed">
         <div class="panel-head"><span>Live Feed</span><small>apocalypse skill of the week: <b class="skill">Water purification</b></small></div>
         <div class="panel-body feed">
           <article class="feed-item">
-            <header><span class="feed-key">asteroid_alert</span><span class="feed-when">daily 06:50</span></header>
+            <header><span class="feed-key">asteroid watch</span><span class="feed-when">daily 06:50</span></header>
             <p>&quot;Even a 60‑meter rock—2019 HW3—skims past Earth at 18 million km, a silent, glittering glitch in the night‑grid.&quot;</p>
           </article>
           <article class="feed-item">
-            <header><span class="feed-key">daily_knowledge</span><span class="feed-when">daily 08:00</span></header>
+            <header><span class="feed-key">daily knowledge</span><span class="feed-when">daily 08:00</span></header>
             <p>Water Purification: Charcoal, fine sand, and gravel layered in a plastic bottle creates an effective sediment and toxin filter. Always boil the output before drinking.</p>
           </article>
           <article class="feed-item">
-            <header><span class="feed-key">dead_tech</span><span class="feed-when">daily 07:30</span></header>
+            <header><span class="feed-key">dead tech</span><span class="feed-when">daily 07:30</span></header>
             <p>10BASE2 (Thin Ethernet) is a coaxial‑cable LAN used in early‑90s workstations, capped at a raw 10 Mbps and limited to a maximum continuous segment of 185 m per the IEEE 802.3 standard.</p>
           </article>
           <article class="feed-item">
-            <header><span class="feed-key">global_peace_status</span><span class="feed-when">1st &amp; 15th</span></header>
+            <header><span class="feed-key">peace index</span><span class="feed-when">1st &amp; 15th</span></header>
             <p>Neon‑lit megacities pulse at a 2.08 Global Peace Index—midway on the 1‑to‑5 peace‑to‑conflict scale—signaling a fragile lull before the next data‑driven skirmish ignites.</p>
           </article>
           <article class="feed-item">
-            <header><span class="feed-key alert">blackout</span><span class="feed-when">daily 21:00</span></header>
+            <header><span class="feed-key alert">outage watch</span><span class="feed-when">daily 21:00</span></header>
             <p>Verified outage report unavailable.</p>
           </article>
         </div>
       </section>
 
-      <section class="panel" id="posts">
-        <div class="panel-head"><span>Transmissions</span><small>last 5</small></div>
-        <div class="panel-body posts">
-<article class="post latest"><div class="post-meta"><span>LATEST</span><time datetime="2026-11-15">2026-11-15 13:42</time></div><div class="prose"><p>Claude was helping me build this section Thanks so much! </p></div></article>
-<article class="post"><div class="post-meta"><time datetime="2026-11-04">2026-11-04 15:58</time></div><div class="prose"><p>Here is my post </p></div></article>
-<article class="post"><div class="post-meta"><time datetime="2026-11-01">2026-11-01 23:36</time></div><div class="prose"><p>Hey hey </p></div></article>
-<article class="post"><div class="post-meta"><time datetime="2026-10-22">2026-10-22 19:45</time></div><div class="prose"><p>Danas sam luda </p></div></article>
-<article class="post"><div class="post-meta"><time datetime="2026-10-10">2026-10-10 17:48</time></div><div class="prose"><p>Today is rainy day!!!</p></div></article>
-
+      <section class="panel" id="space">
+        <div class="panel-head"><span>Off-Planet</span><small>humans in space: 10 — ISS 7 · Shenzhou 23 3</small></div>
+        <div class="panel-body">
+<ul class="crew"><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#00f0ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></svg><span class="who"><b>Jessica Watkins</b><small><em>ISS</em> Flight Engineer · NASA · Crew-13 Dragon · day 45</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#00f0ff"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></svg><span class="who"><b>Luke Delaney</b><small><em>ISS</em> Flight Engineer · NASA · Crew-13 Dragon · day 45</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#00ff66"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/></svg><span class="who"><b>Joshua Kutryk</b><small><em>ISS</em> Flight Engineer · CSA · Crew-13 Dragon · day 45</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#ff003c"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></svg><span class="who"><b>Sergey Teteryatnikov</b><small><em>ISS</em> Flight Engineer · Roscosmos · Crew-13 Dragon · day 45</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#ff003c"><rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></svg><span class="who"><b>Pyotr Dubrov</b><small><em>ISS</em> Commander · Roscosmos · Soyuz MS-29 · day 124</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#ff003c"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></svg><span class="who"><b>Anna Kikina</b><small><em>ISS</em> Flight Engineer · Roscosmos · Soyuz MS-29 · day 124</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#ff003c"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></svg><span class="who"><b>Anil Menon</b><small><em>ISS</em> Flight Engineer · NASA · Soyuz MS-29 · day 124</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#fcee0a"><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/></svg><span class="who"><b>Zhu Yangzhu</b><small><em>Shenzhou 23</em> Commander · CMSA · day 175</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#00ff66"><rect x="0" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/></svg><span class="who"><b>Zhang Zhiyuan</b><small><em>Shenzhou 23</em> Pilot · CMSA · day 175</small></span></li><li><svg class="ava" viewBox="0 0 5 5" aria-hidden="true" shape-rendering="crispEdges" fill="#00f0ff"><rect x="1" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></svg><span class="who"><b>Lai Ka-ying</b><small><em>Shenzhou 23</em> Payload Specialist · CMSA · day 175</small></span></li></ul>
         </div>
       </section>
 
@@ -158,12 +146,12 @@
   </div>
 
   <footer class="panel foot">
-    <p>© iTechie.eu // Zadar, HR // built 2026-11-15 13:59</p>
+    <p>© iTechie.eu // Zadar, HR // built 2026-11-15 14:30</p>
     <p class="muted">Static. Self-hosted fonts. No trackers. Regenerated hourly by bash.</p>
-    <p class="credit">Weather data by <a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a> (CC BY 4.0)</p>
+    <p class="credit"><a href="/sources.html">Data sources &amp; credits</a></p>
   </footer>
 
 </div>
-<script src="script.js?v=1794747553"></script>
+<script src="script.js?v=1794749402"></script>
 </body>
 </html>

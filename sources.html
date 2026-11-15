@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Sources &amp; credits // iTechie.eu</title>
+<meta name="description" content="Where the data on iTechie.eu comes from, who made it, and under which terms." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="crt" aria-hidden="true"></div>
+<div class="wrap narrow">
+
+  <header>
+    <nav class="panel topbar">
+      <a class="brand" href="/">iTechie<span>.eu</span></a>
+      <div class="nav">
+        <a href="/">[ cd ~ ]</a>
+        <a href="/contact.html">[ Contact ]</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="col" style="margin-top:20px">
+
+    <section class="panel">
+      <div class="panel-head"><span>Sources &amp; Credits</span><small>cat /etc/credits</small></div>
+      <div class="panel-body prose">
+        <p>The homepage rebuilds itself every hour on a small server in Zadar. Most of what it shows comes from other people's open data and tools. This page lists every source, says what it's used for, and links back to the people who made it. Thank you to all of them.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><span>Live Data</span><small>fetched by cron</small></div>
+      <div class="panel-body">
+        <table class="src">
+          <thead><tr><th>Data</th><th>Source</th><th>Used for</th><th>Terms</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Weather in Zadar</td>
+              <td><a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a></td>
+              <td>Temperature, sky and wind in the menu bar (hourly)</td>
+              <td><a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a></td>
+            </tr>
+            <tr>
+              <td>People in space</td>
+              <td><a href="https://github.com/corquaid/international-space-station-APIs" rel="noopener">International Space Station APIs</a> by corquaid</td>
+              <td>Off-Planet panel and ticker: names, roles, agencies, spacecraft (daily)</td>
+              <td>See repository</td>
+            </tr>
+            <tr>
+              <td>Near-Earth asteroids</td>
+              <td><a href="https://api.nasa.gov/" rel="noopener">NASA NeoWs</a> (Near Earth Object Web Service)</td>
+              <td>Closest asteroid of the day, in the feed and ticker (daily)</td>
+              <td>NASA open API</td>
+            </tr>
+            <tr>
+              <td>Global Peace Index</td>
+              <td><a href="https://www.visionofhumanity.org/" rel="noopener">Institute for Economics &amp; Peace</a>, retrieved via <a href="https://statbase.org/" rel="noopener">statbase.org</a></td>
+              <td>Peace index line in the feed and ticker (twice a month)</td>
+              <td>© IEP, cited</td>
+            </tr>
+            <tr>
+              <td>Internet outages</td>
+              <td><a href="https://netblocks.org/" rel="noopener">NetBlocks</a> public feed</td>
+              <td>Blackout line in the feed (daily)</td>
+              <td>© NetBlocks, cited</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><span>AI-Generated Text</span><small>read with care</small></div>
+      <div class="panel-body prose">
+        <p>Some lines on the homepage are written by an AI model, run through a self-hosted gateway (OmniRoute) on the home server. The models behind it vary. AI text can be wrong, so check the original sources before relying on it.</p>
+        <ul class="plain">
+          <li><b>Rewritten from the sources above:</b> asteroid alert, peace index, blackout summary.</li>
+          <li><b>Written from the model's own knowledge:</b> daily knowledge, dead tech (topic area: <a href="https://en.wikipedia.org/wiki/1990s_in_computing" rel="noopener">1990s in computing</a>), and the apocalypse skill of the week.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><span>Made Here</span><small>no outside data</small></div>
+      <div class="panel-body prose">
+        <ul class="plain">
+          <li><b>Avatars</b> in the Off-Planet panel are pixel patterns generated from each person's name. No photos are used.</li>
+          <li><b>Posts</b> under my name are my own, sent from my phone.</li>
+          <li><b>Uptime, build time and the clock</b> come from the home server and your browser.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><span>Fonts</span><small>self-hosted</small></div>
+      <div class="panel-body">
+        <table class="src">
+          <thead><tr><th>Font</th><th>Made by</th><th>Licence</th></tr></thead>
+          <tbody>
+            <tr><td>Orbitron</td><td><a href="https://github.com/theleagueof/orbitron" rel="noopener">The Orbitron Project Authors</a></td><td><a href="fonts/OFL-Orbitron.txt">SIL OFL 1.1</a></td></tr>
+            <tr><td>Rajdhani</td><td><a href="https://www.indiantypefoundry.com/" rel="noopener">Indian Type Foundry</a></td><td><a href="fonts/OFL-Rajdhani.txt">SIL OFL 1.1</a></td></tr>
+            <tr><td>Fira Code</td><td><a href="https://github.com/tonsky/FiraCode" rel="noopener">The Fira Code Project Authors</a></td><td><a href="fonts/OFL-FiraCode.txt">SIL OFL 1.1</a></td></tr>
+          </tbody>
+        </table>
+        <p class="note">Font files packaged by <a href="https://fontsource.org/" rel="noopener">Fontsource</a> and served from this site, so your browser never contacts a font CDN.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><span>Hosting &amp; Privacy</span><small>what your browser talks to</small></div>
+      <div class="panel-body prose">
+        <p>The site is static and hosted on <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>. Everything the page loads comes from this domain: no analytics, no cookies, no ads, no third-party scripts. GitHub, as the host, may keep standard server logs; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
+        <p>Spot a missing credit, or want your data removed or credited differently? <a href="mailto:m@itechie.eu?subject=Sources%20page">Tell me</a>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="panel foot">
+    <p>© iTechie.eu // Zadar, HR</p>
+    <p class="muted"><a href="/">← back to the homepage</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
