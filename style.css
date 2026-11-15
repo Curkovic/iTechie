@@ -571,7 +571,7 @@ body.lb-open { overflow: hidden; }
 .threat { margin-top: 8px; padding: 10px 14px; }
 .tl { --c: var(--green); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px; }
 .tl.l2 { --c: var(--cyan); } .tl.l3 { --c: var(--yellow); } .tl.l4 { --c: #ff7a00; } .tl.l5 { --c: var(--red); }
-.tl-main { display: grid; grid-template-columns: auto auto; grid-template-areas: "lab lab" "num name" "num big" "why why"; align-items: center; gap: 0 10px; }
+.tl-main { display: grid; grid-template-columns: max-content 1fr; grid-template-areas: "lab lab" "num name" "num big" "why why" "kit kit"; align-items: center; gap: 0 10px; }
 .tl-label { grid-area: lab; font: 400 0.64rem var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 .tl-num { grid-area: num; font: 900 2.6rem/1 var(--head-font); color: var(--c); }
 .tl-name { grid-area: name; font: 700 0.95rem var(--head-font); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c); align-self: end; }
@@ -671,3 +671,12 @@ body.lb-open { overflow: hidden; }
 .nv-bar.warm i { background: var(--yellow); } .nv-bar.hot i { background: var(--red); }
 .nv-spark { width: 40px; height: 14px; overflow: visible; }
 .nv-spark polyline { fill: none; stroke: var(--cyan); stroke-width: 1.2; vector-effect: non-scaling-stroke; opacity: 0.8; }
+.tl-kit { grid-area: kit; margin-top: 3px; font: 400 0.64rem var(--mono); color: var(--cyan); }
+.tl-kit:hover { color: var(--yellow); }
+
+/* ---------- HAZARD ENV strip (UV, dust, pollen; air index lives in Threat Level) ---------- */
+.hz { display: inline-flex; align-items: center; gap: 7px; cursor: help; }
+.hz b { font-weight: 400; color: var(--muted); letter-spacing: 0.1em; }
+.hz-v { font-weight: 500; color: var(--bright); }
+.hz-v small { font-weight: 400; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.92em; }
+.hz-graph .aq-graph { display: block; height: 12px; width: auto; }   /* bars sit on the text line */
