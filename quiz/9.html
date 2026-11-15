@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Human Body Quiz" />
+<meta name="quiz-topic" content="Human Body" />
+<meta name="quiz-icon" content="body" />
+<meta name="quiz-description" content="The machine you live in: bones, blood and organs." />
+<title>Human Body Quiz // iTechie.eu</title>
+<meta name="description" content="The machine you live in: bones, blood and organs. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "How many bones does an adult human have?", "a": ["106", "206", "306", "406"], "c": 1, "e": "Babies are born with around 270; many fuse as they grow."},
+ {"q": "Where is the smallest bone in the body?", "a": ["Finger", "Toe", "Ear", "Nose"], "c": 2, "e": "The stapes in the middle ear is about 3 mm long."},
+ {"q": "How many chambers does the human heart have?", "a": ["2", "3", "4", "6"], "c": 2, "e": "Two atria and two ventricles."},
+ {"q": "What is a typical resting heart rate for an adult?", "a": ["20–40 bpm", "60–100 bpm", "120–160 bpm", "180–200 bpm"], "c": 1, "e": "Trained athletes are often lower."},
+ {"q": "Which blood type is the universal red-cell donor?", "a": ["AB positive", "A negative", "O negative", "B positive"], "c": 2, "e": "O negative red cells can be given to almost anyone in an emergency."},
+ {"q": "Which organs filter blood and produce urine?", "a": ["Lungs", "Kidneys", "Spleen", "Stomach"], "c": 1, "e": "Together they filter around 180 litres of blood plasma a day."},
+ {"q": "What is the largest internal organ?", "a": ["Heart", "Brain", "Liver", "Lungs"], "c": 2, "e": "The liver weighs about 1.5 kg and does hundreds of jobs."},
+ {"q": "Which vitamin does your skin make when exposed to sunlight?", "a": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"], "c": 2, "e": "UVB light triggers vitamin D production in the skin."},
+ {"q": "Roughly what share of an adult's body is water?", "a": ["About 20%", "About 40%", "About 60%", "About 90%"], "c": 2, "e": "Around 60%, a bit more in children."},
+ {"q": "How many teeth does a full adult set have, including wisdom teeth?", "a": ["24", "28", "32", "36"], "c": 2, "e": "Many people never get all four wisdom teeth."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

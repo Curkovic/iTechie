@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Space Quiz" />
+<meta name="quiz-topic" content="Space" />
+<meta name="quiz-icon" content="space" />
+<meta name="quiz-description" content="Orbits, planets and the things that float between them." />
+<title>Space Quiz // iTechie.eu</title>
+<meta name="description" content="Orbits, planets and the things that float between them. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Which planet has the shortest year?", "a": ["Mercury", "Venus", "Mars", "Earth"], "c": 0, "e": "Mercury circles the Sun in about 88 Earth days."},
+ {"q": "Which is the largest planet in the Solar System?", "a": ["Saturn", "Jupiter", "Neptune", "Uranus"], "c": 1, "e": "Jupiter is more than twice as massive as all the other planets combined."},
+ {"q": "Roughly how long does sunlight take to reach Earth?", "a": ["8 seconds", "8 minutes", "8 hours", "8 days"], "c": 1, "e": "About 8 minutes 20 seconds to cross roughly 150 million km."},
+ {"q": "Which is the hottest planet?", "a": ["Mercury", "Mars", "Venus", "Jupiter"], "c": 2, "e": "Venus' thick CO₂ atmosphere traps heat: around 465 °C at the surface, hotter than Mercury."},
+ {"q": "Olympus Mons, the tallest volcano in the Solar System, is on…", "a": ["the Moon", "Venus", "Io", "Mars"], "c": 3, "e": "It rises about 22 km above the Martian plains, roughly 2.5 times Everest."},
+ {"q": "About how long does the ISS take to orbit Earth once?", "a": ["90 minutes", "12 hours", "24 hours", "7 days"], "c": 0, "e": "Around 90–93 minutes, so the crew sees about 16 sunrises a day."},
+ {"q": "Who was the first human in space?", "a": ["Neil Armstrong", "Yuri Gagarin", "Alan Shepard", "Valentina Tereshkova"], "c": 1, "e": "Yuri Gagarin orbited Earth in Vostok 1 on 12 April 1961."},
+ {"q": "The Kármán line, a common boundary of space, sits at about…", "a": ["10 km", "50 km", "100 km", "400 km"], "c": 2, "e": "100 km above sea level is the widely used convention."},
+ {"q": "Which planet spins tipped on its side?", "a": ["Uranus", "Neptune", "Saturn", "Mars"], "c": 0, "e": "Uranus' axis is tilted about 98°, so it rolls around the Sun."},
+ {"q": "What is a light-year a measure of?", "a": ["Time", "Distance", "Brightness", "Speed"], "c": 1, "e": "The distance light travels in one year: about 9.46 trillion km."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

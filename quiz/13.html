@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Croatia Quiz" />
+<meta name="quiz-topic" content="Croatia" />
+<meta name="quiz-icon" content="croatia" />
+<meta name="quiz-description" content="Ties, Tesla, islands and a World Cup final." />
+<title>Croatia Quiz // iTechie.eu</title>
+<meta name="description" content="Ties, Tesla, islands and a World Cup final. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "What is the capital of Croatia?", "a": ["Split", "Rijeka", "Zagreb", "Osijek"], "c": 2, "e": "Zagreb is home to about a fifth of the population."},
+ {"q": "Which currency has Croatia used since 1 January 2023?", "a": ["Kuna", "Euro", "Dinar", "Forint"], "c": 1, "e": "Croatia replaced the kuna with the euro and joined the Schengen area the same day."},
+ {"q": "In which year did Croatia join the European Union?", "a": ["2004", "2007", "2013", "2016"], "c": 2, "e": "Croatia became the 28th member on 1 July 2013."},
+ {"q": "Which accessory gets its name from Croatian soldiers?", "a": ["The beret", "The necktie (cravat)", "The scarf", "The bow"], "c": 1, "e": "Croatian soldiers' neckerchiefs in 17th-century France gave the 'cravate' its name."},
+ {"q": "Which famous inventor was born in Smiljan, Croatia?", "a": ["Thomas Edison", "Nikola Tesla", "Guglielmo Marconi", "Alexander Graham Bell"], "c": 1, "e": "Tesla was born there in 1856 and pioneered alternating current."},
+ {"q": "The Dalmatian dog breed is named after…", "a": ["A Roman general", "The Dalmatia region of Croatia", "A Disney film", "A Venetian merchant"], "c": 1, "e": "The breed's name comes from Dalmatia on the Croatian coast."},
+ {"q": "Which Croatian national park is famous for 16 terraced lakes and waterfalls?", "a": ["Kornati", "Brijuni", "Plitvice Lakes", "Paklenica"], "c": 2, "e": "It's been on the UNESCO World Heritage list since 1979."},
+ {"q": "Roughly how many islands, islets and reefs does Croatia have?", "a": ["About 50", "About 200", "Over 1,000", "About 10,000"], "c": 2, "e": "Over 1,000, of which only around 50 are inhabited."},
+ {"q": "How did Croatia finish at the 2018 FIFA World Cup?", "a": ["Winners", "Runners-up", "Third place", "Quarter-finals"], "c": 1, "e": "Croatia lost the final 4–2 to France; Luka Modrić won the Golden Ball."},
+ {"q": "Which Croatian polymath designed an early parachute, 'Homo Volans'?", "a": ["Faust Vrančić", "Ruđer Bošković", "Marko Marulić", "Andrija Mohorovičić"], "c": 0, "e": "Vrančić published the design around 1615 in 'Machinae Novae'."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

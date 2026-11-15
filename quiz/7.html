@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="World Geography Quiz" />
+<meta name="quiz-topic" content="World Geography" />
+<meta name="quiz-icon" content="globe" />
+<meta name="quiz-description" content="Oceans, capitals and the shape of the planet." />
+<title>World Geography Quiz // iTechie.eu</title>
+<meta name="description" content="Oceans, capitals and the shape of the planet. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Which is the largest ocean?", "a": ["Atlantic", "Indian", "Arctic", "Pacific"], "c": 3, "e": "The Pacific covers about a third of Earth's surface."},
+ {"q": "What is the smallest country in the world?", "a": ["Monaco", "San Marino", "Vatican City", "Liechtenstein"], "c": 2, "e": "Vatican City covers about 0.44 km²."},
+ {"q": "What is the capital of Australia?", "a": ["Sydney", "Melbourne", "Canberra", "Perth"], "c": 2, "e": "Canberra was purpose-built as a compromise between Sydney and Melbourne."},
+ {"q": "What is the highest mountain above sea level?", "a": ["K2", "Mount Everest", "Kangchenjunga", "Mont Blanc"], "c": 1, "e": "Everest stands at about 8,849 m."},
+ {"q": "Which is the largest hot desert?", "a": ["Gobi", "Kalahari", "Sahara", "Atacama"], "c": 2, "e": "The Sahara is roughly the size of the United States (Antarctica is the largest cold desert)."},
+ {"q": "Which is the largest country by area?", "a": ["Canada", "China", "USA", "Russia"], "c": 3, "e": "Russia spans 11 time zones and about 17 million km²."},
+ {"q": "Which continent has the most countries?", "a": ["Asia", "Europe", "Africa", "South America"], "c": 2, "e": "Africa has 54 countries."},
+ {"q": "Which strait separates Europe from Africa?", "a": ["Bosporus", "Strait of Gibraltar", "Strait of Hormuz", "Bering Strait"], "c": 1, "e": "At its narrowest it is only about 14 km wide."},
+ {"q": "Where is the deepest point in the ocean?", "a": ["Mariana Trench", "Puerto Rico Trench", "Java Trench", "Adriatic Pit"], "c": 0, "e": "The Challenger Deep is nearly 11 km below the surface."},
+ {"q": "What is the capital of Canada?", "a": ["Toronto", "Vancouver", "Montreal", "Ottawa"], "c": 3, "e": "Ottawa was chosen in 1857, partly as a compromise between English and French Canada."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

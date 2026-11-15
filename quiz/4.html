@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Survival Quiz" />
+<meta name="quiz-topic" content="Survival" />
+<meta name="quiz-icon" content="survival" />
+<meta name="quiz-description" content="Water, fire, shelter: what you need when the grid goes down." />
+<title>Survival Quiz // iTechie.eu</title>
+<meta name="description" content="Water, fire, shelter: what you need when the grid goes down. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "By the survival 'rule of threes', how long can a person last without water?", "a": ["About 3 hours", "About 3 days", "About 3 weeks", "About 3 months"], "c": 1, "e": "Rule of thumb: 3 minutes without air, 3 hours without shelter in harsh weather, 3 days without water, 3 weeks without food."},
+ {"q": "How long should water be kept at a rolling boil to make it safe to drink (at normal altitudes)?", "a": ["1 minute", "10 seconds", "10 minutes", "It only needs to get warm"], "c": 0, "e": "A full minute at a rolling boil kills pathogens; above about 2,000 m, boil for 3 minutes."},
+ {"q": "Below which core body temperature does hypothermia begin?", "a": ["37 °C", "36 °C", "35 °C", "30 °C"], "c": 2, "e": "Hypothermia starts when core temperature drops below 35 °C."},
+ {"q": "What does the fire triangle consist of?", "a": ["Heat, fuel, oxygen", "Wood, paper, matches", "Spark, wind, water", "Heat, smoke, ash"], "c": 0, "e": "Remove any one of the three and the fire goes out."},
+ {"q": "What is the international distress signal in Morse code?", "a": ["MAYDAY", "SOS: ··· – – – ···", "HELP", "CQ CQ"], "c": 1, "e": "SOS is sent as one continuous sequence. Three of anything (fires, whistle blasts) also signals distress."},
+ {"q": "Which number reaches emergency services anywhere in the EU?", "a": ["911", "999", "112", "192"], "c": 2, "e": "112 works free of charge from any phone in every EU country, including Croatia."},
+ {"q": "In the Northern Hemisphere, which star points (almost exactly) north?", "a": ["Sirius", "Polaris", "Vega", "Betelgeuse"], "c": 1, "e": "Polaris, the North Star, sits within about 1° of the celestial north pole."},
+ {"q": "Why is eating snow a bad way to stay hydrated in the cold?", "a": ["Snow has no water in it", "It lowers your core body temperature", "It is always poisonous", "It makes you sleepy"], "c": 1, "e": "Your body burns precious heat melting it. Melt snow first, ideally by boiling it."},
+ {"q": "Where is the safest place to be in a thunderstorm?", "a": ["Under a tall tree", "In an open field, lying flat", "Inside a building or a hard-top car", "On a hilltop"], "c": 2, "e": "Enclosed buildings and metal-roofed vehicles protect you; trees and high ground attract strikes."},
+ {"q": "Lost in the Northern Hemisphere at noon: roughly where is the Sun?", "a": ["North", "South", "East", "West"], "c": 1, "e": "North of the tropics, the midday Sun sits roughly due south."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

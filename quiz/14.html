@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Zadar &amp; the Adriatic Quiz" />
+<meta name="quiz-topic" content="Zadar &amp; the Adriatic" />
+<meta name="quiz-icon" content="sea" />
+<meta name="quiz-description" content="Sea Organ, sunsets and 3,000 years of history on the waterfront." />
+<title>Zadar &amp; the Adriatic Quiz // iTechie.eu</title>
+<meta name="description" content="Sea Organ, sunsets and 3,000 years of history on the waterfront. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "The Sea Organ on Zadar's waterfront makes music using…", "a": ["Wind turbines", "Waves pushing air through pipes", "Solar panels", "Hidden speakers"], "c": 1, "e": "Designed by architect Nikola Bašić, it opened in 2005."},
+ {"q": "What is the 'Greeting to the Sun'?", "a": ["A morning festival", "A solar-powered light installation", "A Roman statue", "A boat race"], "c": 1, "e": "Its glass panels collect sunlight by day and put on a light show at night."},
+ {"q": "Which film director supposedly called Zadar's sunset the most beautiful in the world?", "a": ["Steven Spielberg", "Alfred Hitchcock", "Orson Welles", "Federico Fellini"], "c": 1, "e": "The story goes that Hitchcock said it during his visit in 1964."},
+ {"q": "The round Church of St. Donatus in Zadar dates from roughly the…", "a": ["2nd century", "9th century", "15th century", "19th century"], "c": 1, "e": "Built around the 9th century, it's a symbol of the city."},
+ {"q": "Which cherry liqueur is traditionally made in Zadar?", "a": ["Limoncello", "Maraschino", "Pelinkovac", "Rakija"], "c": 1, "e": "Maraschino is made from sour marasca cherries."},
+ {"q": "Zadar's Roman Forum is said to be the largest on the eastern Adriatic coast. Who founded it?", "a": ["Emperor Augustus", "Julius Caesar", "Diocletian", "Hadrian"], "c": 0, "e": "It was built from the 1st century BC to the 3rd century AD, starting under Augustus."},
+ {"q": "Which archipelago national park lies near Zadar and Šibenik?", "a": ["Brijuni", "Mljet", "Kornati", "Lastovo"], "c": 2, "e": "Kornati's park has about 89 islands, islets and reefs."},
+ {"q": "From which direction does the bura wind blow?", "a": ["Northeast", "Southeast", "West", "South"], "c": 0, "e": "Bura is cold, dry and gusty, pouring down from the mountains to the sea."},
+ {"q": "The Adriatic Sea is part of which larger sea?", "a": ["Black Sea", "Baltic Sea", "Mediterranean Sea", "North Sea"], "c": 2, "e": "It's the northernmost arm of the Mediterranean."},
+ {"q": "Zadar's Five Wells Square (Trg pet bunara) was built in the 16th century mainly to…", "a": ["Host markets", "Supply water to the city", "Store gunpowder", "Train soldiers"], "c": 1, "e": "The Venetians built the cistern and wells in 1574 to secure water during sieges."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

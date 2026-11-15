@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="History Quiz" />
+<meta name="quiz-topic" content="History" />
+<meta name="quiz-icon" content="history" />
+<meta name="quiz-description" content="Empires, inventions and turning points." />
+<title>History Quiz // iTechie.eu</title>
+<meta name="description" content="Empires, inventions and turning points. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "In which year did the Berlin Wall fall?", "a": ["1979", "1989", "1991", "1999"], "c": 1, "e": "It opened on 9 November 1989."},
+ {"q": "In which year did humans first land on the Moon?", "a": ["1959", "1965", "1969", "1972"], "c": 2, "e": "Apollo 11 landed on 20 July 1969."},
+ {"q": "Who introduced movable-type printing to Europe around 1440?", "a": ["Leonardo da Vinci", "Johannes Gutenberg", "Martin Luther", "Galileo Galilei"], "c": 1, "e": "Gutenberg's press made books cheap and spread ideas across Europe."},
+ {"q": "Which of the Seven Wonders of the Ancient World still stands?", "a": ["Colossus of Rhodes", "Lighthouse of Alexandria", "Great Pyramid of Giza", "Hanging Gardens of Babylon"], "c": 2, "e": "Built about 4,500 years ago, it's the oldest of the seven."},
+ {"q": "In which year did World War I begin?", "a": ["1905", "1914", "1918", "1939"], "c": 1, "e": "It began in 1914 after the assassination of Archduke Franz Ferdinand in Sarajevo."},
+ {"q": "Which Roman emperor built a palace that became the heart of Split?", "a": ["Augustus", "Nero", "Diocletian", "Constantine"], "c": 2, "e": "Diocletian retired there around 305 AD; the old town grew inside its walls."},
+ {"q": "In which year did Columbus first reach the Americas?", "a": ["1453", "1492", "1519", "1607"], "c": 1, "e": "He landed in the Bahamas in October 1492."},
+ {"q": "In which year did the Titanic sink?", "a": ["1898", "1905", "1912", "1923"], "c": 2, "e": "It struck an iceberg on its maiden voyage in April 1912."},
+ {"q": "The Magna Carta, limiting the English king's power, was sealed in…", "a": ["1066", "1215", "1415", "1688"], "c": 1, "e": "King John agreed to it at Runnymede in 1215."},
+ {"q": "Who was the first president of the United States?", "a": ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"], "c": 2, "e": "Washington took office in 1789."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

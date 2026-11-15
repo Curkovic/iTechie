@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Biology Quiz" />
+<meta name="quiz-topic" content="Biology" />
+<meta name="quiz-icon" content="biology" />
+<meta name="quiz-description" content="Cells, DNA and four billion years of production code." />
+<title>Biology Quiz // iTechie.eu</title>
+<meta name="description" content="Cells, DNA and four billion years of production code. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Which organelle produces most of a cell's energy (ATP)?", "a": ["Nucleus", "Ribosome", "Mitochondrion", "Golgi apparatus"], "c": 2, "e": "Mitochondria run cellular respiration and even carry their own DNA."},
+ {"q": "Which base is found in RNA but not in DNA?", "a": ["Adenine", "Uracil", "Guanine", "Cytosine"], "c": 1, "e": "RNA uses uracil where DNA uses thymine."},
+ {"q": "How many chromosomes does a typical human cell have?", "a": ["23", "44", "46", "48"], "c": 2, "e": "23 pairs: 22 pairs of autosomes plus the sex chromosomes."},
+ {"q": "What is the largest organ of the human body?", "a": ["Liver", "Skin", "Brain", "Lungs"], "c": 1, "e": "Skin covers about 1.5–2 m² in an adult."},
+ {"q": "Which gas do plants release during photosynthesis?", "a": ["Carbon dioxide", "Nitrogen", "Oxygen", "Methane"], "c": 2, "e": "Light energy splits water, and oxygen is released as a by-product."},
+ {"q": "Which protein in red blood cells carries oxygen?", "a": ["Keratin", "Insulin", "Hemoglobin", "Collagen"], "c": 2, "e": "Each hemoglobin molecule can bind four oxygen molecules."},
+ {"q": "Who proposed evolution by natural selection, together with Alfred Russel Wallace?", "a": ["Gregor Mendel", "Charles Darwin", "Louis Pasteur", "Carl Linnaeus"], "c": 1, "e": "Darwin and Wallace presented the idea jointly in 1858."},
+ {"q": "Which tiny animal is famous for surviving extreme cold, heat, radiation and even space?", "a": ["Ant", "Tardigrade", "Earthworm", "Jellyfish"], "c": 1, "e": "Tardigrades survive by drying out into a dormant state called a tun."},
+ {"q": "Roughly how old is the oldest widely accepted evidence of life on Earth?", "a": ["35 thousand years", "350 million years", "3.5 billion years", "35 billion years"], "c": 2, "e": "Fossil microbial mats (stromatolites) date back about 3.5 billion years."},
+ {"q": "What is CRISPR best known for?", "a": ["Gene editing", "Carbon dating", "Blood typing", "Protein folding prediction"], "c": 0, "e": "Adapted from a bacterial immune system, it lets scientists cut and edit DNA precisely."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

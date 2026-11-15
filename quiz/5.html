@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="AI &amp; Machine Learning Quiz" />
+<meta name="quiz-topic" content="AI &amp; Machine Learning" />
+<meta name="quiz-icon" content="ai" />
+<meta name="quiz-description" content="From the Turing test to chatbots: how machines learned to &#x27;think&#x27;." />
+<title>AI &amp; Machine Learning Quiz // iTechie.eu</title>
+<meta name="description" content="From the Turing test to chatbots: how machines learned to &#x27;think&#x27;. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Who proposed the 'imitation game', now known as the Turing test?", "a": ["Alan Turing", "John von Neumann", "Ada Lovelace", "Claude Shannon"], "c": 0, "e": "Alan Turing described it in his 1950 paper 'Computing Machinery and Intelligence'."},
+ {"q": "What does LLM stand for?", "a": ["Linear Logic Machine", "Large Language Model", "Long Learning Memory", "Layered Logic Module"], "c": 1, "e": "Large Language Models are trained on huge amounts of text to predict the next word."},
+ {"q": "The term 'artificial intelligence' was coined for a workshop held in…", "a": ["1936", "1956", "1976", "1996"], "c": 1, "e": "The 1956 Dartmouth workshop, organised by John McCarthy and others."},
+ {"q": "In 1997 IBM's Deep Blue beat world champion Garry Kasparov at…", "a": ["Go", "Poker", "Chess", "Jeopardy!"], "c": 2, "e": "It was the first time a computer beat a reigning world chess champion in a match."},
+ {"q": "In 2016 DeepMind's AlphaGo defeated Lee Sedol at…", "a": ["Chess", "Go", "Shogi", "StarCraft"], "c": 1, "e": "Go was long thought too complex for computers to master."},
+ {"q": "Artificial neural networks are loosely inspired by…", "a": ["The brain's neurons", "Computer motherboards", "The immune system", "Spider webs"], "c": 0, "e": "Layers of simple connected units adjust their connection strengths as they learn."},
+ {"q": "In machine learning, what is 'inference'?", "a": ["Collecting training data", "Using a trained model to make predictions", "Deleting bad data", "Building the hardware"], "c": 1, "e": "Training builds the model; inference is the model at work answering new inputs."},
+ {"q": "When an AI 'hallucinates', it…", "a": ["Crashes", "Refuses to answer", "Confidently states something false", "Runs out of memory"], "c": 2, "e": "It produces fluent, plausible-sounding text that isn't true, so always verify."},
+ {"q": "Why are GPUs widely used to train AI models?", "a": ["They are cheap to cool", "They do many calculations in parallel", "They store more data", "They were invented for AI"], "c": 1, "e": "Neural networks are mostly huge matrix multiplications, which GPUs run in parallel."},
+ {"q": "Data kept aside to check a model on examples it has never seen is called the…", "a": ["Test set", "Training set", "Cache", "Prompt"], "c": 0, "e": "Testing on unseen data shows whether a model generalises or just memorised."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

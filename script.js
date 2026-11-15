@@ -66,4 +66,16 @@
     };
     tickSky(); setInterval(tickSky, 30000);
   }
+
+  // Quizzes: a fresh random 4 on every page load (daily picks stay without JS)
+  var qg = document.getElementById("quiz-grid"), qall = document.getElementById("quiz-all");
+  if (qg && qall && qall.content) {
+    var cards = Array.prototype.slice.call(qall.content.querySelectorAll(".quiz-card"));
+    var show = parseInt(qg.getAttribute("data-show"), 10) || 4;
+    for (var i = cards.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = cards[i]; cards[i] = cards[j]; cards[j] = t; }
+    if (cards.length >= show) {
+      qg.innerHTML = "";
+      cards.slice(0, show).forEach(function (c) { qg.appendChild(c.cloneNode(true)); });
+    }
+  }
 })();

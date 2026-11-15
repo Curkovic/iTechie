@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Film &amp; Sci-Fi Quiz" />
+<meta name="quiz-topic" content="Film &amp; Sci-Fi" />
+<meta name="quiz-icon" content="film" />
+<meta name="quiz-description" content="Replicants, red pills and time machines." />
+<title>Film &amp; Sci-Fi Quiz // iTechie.eu</title>
+<meta name="description" content="Replicants, red pills and time machines. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Who directed Blade Runner (1982)?", "a": ["Steven Spielberg", "Ridley Scott", "James Cameron", "George Lucas"], "c": 1, "e": "It was based on Philip K. Dick's novel 'Do Androids Dream of Electric Sheep?'."},
+ {"q": "In The Matrix, which pill does Neo take?", "a": ["Blue", "Red", "Green", "Both"], "c": 1, "e": "The red pill shows him how deep the rabbit hole goes."},
+ {"q": "In The Empire Strikes Back, who turns out to be Luke's father?", "a": ["Obi-Wan Kenobi", "Emperor Palpatine", "Darth Vader", "Han Solo"], "c": 2, "e": "'No, I am your father.' One of cinema's most famous reveals."},
+ {"q": "In which film does the computer HAL 9000 appear?", "a": ["Alien", "2001: A Space Odyssey", "Solaris", "Star Trek"], "c": 1, "e": "Stanley Kubrick's 1968 classic."},
+ {"q": "In Back to the Future, what speed must the DeLorean reach to time travel?", "a": ["55 mph", "88 mph", "100 mph", "121 mph"], "c": 1, "e": "88 miles per hour, powered by 1.21 gigawatts."},
+ {"q": "What is the main character called in Ghost in the Shell?", "a": ["Motoko Kusanagi", "Akira Kaneda", "Rei Ayanami", "Alita"], "c": 0, "e": "Major Motoko Kusanagi, a cyborg agent of Section 9."},
+ {"q": "Which Croatian city stood in for King's Landing in Game of Thrones?", "a": ["Split", "Zadar", "Dubrovnik", "Šibenik"], "c": 2, "e": "Dubrovnik's walls and old town became the capital of Westeros."},
+ {"q": "Who directed Jurassic Park (1993)?", "a": ["Steven Spielberg", "James Cameron", "Ridley Scott", "Robert Zemeckis"], "c": 0, "e": "Its CGI dinosaurs changed visual effects forever."},
+ {"q": "Which actor said 'I'll be back' in The Terminator?", "a": ["Sylvester Stallone", "Bruce Willis", "Arnold Schwarzenegger", "Keanu Reeves"], "c": 2, "e": "The line from 1984 became one of film's most quoted."},
+ {"q": "Which Christopher Nolan film (2014) travels through a wormhole near Saturn?", "a": ["Inception", "Tenet", "Interstellar", "Dunkirk"], "c": 2, "e": "Physicist Kip Thorne advised on its black hole visuals."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Internet &amp; Everyday Tech Quiz" />
+<meta name="quiz-topic" content="Internet &amp; Everyday Tech" />
+<meta name="quiz-icon" content="internet" />
+<meta name="quiz-description" content="The tech you use every day, no coding required." />
+<title>Internet &amp; Everyday Tech Quiz // iTechie.eu</title>
+<meta name="description" content="The tech you use every day, no coding required. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Who invented the World Wide Web?", "a": ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"], "c": 1, "e": "He proposed it at CERN in 1989."},
+ {"q": "What does the 'S' in HTTPS stand for?", "a": ["Speed", "Server", "Secure", "Standard"], "c": 2, "e": "HTTPS encrypts the connection between your browser and the website."},
+ {"q": "What does DNS do?", "a": ["Speeds up Wi-Fi", "Turns website names into IP addresses", "Stores your passwords", "Blocks viruses"], "c": 1, "e": "It's the internet's phone book: itechie.eu becomes the numeric address of a server."},
+ {"q": "How many bits are in a byte?", "a": ["4", "8", "10", "16"], "c": 1, "e": "One byte = 8 bits, enough for 256 different values."},
+ {"q": "What is phishing?", "a": ["A slow internet connection", "Fake messages that trick you into giving away data", "A type of computer virus for fish farms", "Backing up photos"], "c": 1, "e": "Check the sender and the link before entering passwords anywhere."},
+ {"q": "Two-factor authentication (2FA) means logging in with…", "a": ["Two passwords", "A password plus a second proof, like a code on your phone", "Two different browsers", "Your email twice"], "c": 1, "e": "Even if your password leaks, an attacker still needs the second factor."},
+ {"q": "Wi-Fi at home typically uses which frequency bands?", "a": ["2.4 GHz and 5 GHz", "100 MHz and 200 MHz", "50 Hz and 60 Hz", "1 THz"], "c": 0, "e": "2.4 GHz reaches further; 5 GHz is faster but shorter range (newer routers add 6 GHz)."},
+ {"q": "Who sent the first network email and picked the @ sign?", "a": ["Ray Tomlinson", "Vint Cerf", "Mark Zuckerberg", "Larry Page"], "c": 0, "e": "Ray Tomlinson, in 1971 on ARPANET."},
+ {"q": "What does URL stand for?", "a": ["Universal Router Link", "Uniform Resource Locator", "User Registry List", "Unified Remote Login"], "c": 1, "e": "A URL is the full address of something on the web."},
+ {"q": "What does 'QR' in QR code stand for?", "a": ["Quick Response", "Quality Record", "Query Reader", "Quantum Read"], "c": 0, "e": "Invented in Japan in 1994 to track car parts quickly."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

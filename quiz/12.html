@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Weather &amp; Climate Quiz" />
+<meta name="quiz-topic" content="Weather &amp; Climate" />
+<meta name="quiz-icon" content="weather" />
+<meta name="quiz-description" content="Winds, clouds and storms: read the sky before it reads you." />
+<title>Weather &amp; Climate Quiz // iTechie.eu</title>
+<meta name="description" content="Winds, clouds and storms: read the sky before it reads you. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "Jugo is a wind on the Adriatic that is typically…", "a": ["Cold and dry from the northeast", "Warm and humid from the southeast", "Calm and foggy", "A summer sea breeze from the west"], "c": 1, "e": "Jugo brings clouds, rain and high waves; bura is the cold, dry northeasterly."},
+ {"q": "What instrument measures air pressure?", "a": ["Thermometer", "Barometer", "Anemometer", "Hygrometer"], "c": 1, "e": "Falling pressure often means bad weather is coming."},
+ {"q": "Which towering cloud type produces thunderstorms?", "a": ["Cirrus", "Stratus", "Cumulonimbus", "Altostratus"], "c": 2, "e": "Cumulonimbus clouds can reach over 12 km high."},
+ {"q": "You see lightning and hear thunder 6 seconds later. Roughly how far away is it?", "a": ["About 200 m", "About 2 km", "About 6 km", "About 20 km"], "c": 1, "e": "Sound travels about 1 km in 3 seconds, so divide the seconds by 3."},
+ {"q": "What creates a rainbow?", "a": ["Sunlight bent and split inside raindrops", "Reflection from the ocean", "Ice crystals only", "Pollution in the air"], "c": 0, "e": "Each raindrop acts like a tiny prism, splitting white light into colours."},
+ {"q": "Which gas from burning fossil fuels is the main driver of global warming?", "a": ["Oxygen", "Nitrogen", "Carbon dioxide", "Helium"], "c": 2, "e": "CO₂ traps heat in the atmosphere; methane is the second biggest contributor."},
+ {"q": "Hurricanes, typhoons and cyclones are…", "a": ["Three different kinds of storms", "The same kind of storm in different regions", "Only found in Europe", "Types of tornado"], "c": 1, "e": "They're all tropical cyclones; the name depends on the ocean they form over."},
+ {"q": "What instrument measures humidity?", "a": ["Hygrometer", "Barometer", "Seismograph", "Altimeter"], "c": 0, "e": "Humidity is how much water vapour the air holds."},
+ {"q": "What is the 'eye' of a hurricane?", "a": ["Its most violent part", "A calm area at its centre", "The first raindrops", "A rainbow inside it"], "c": 1, "e": "The eye can be calm and even clear, surrounded by the fierce eyewall."},
+ {"q": "High-pressure systems usually bring…", "a": ["Storms and heavy rain", "Clear, settled weather", "Snow only", "Fog only"], "c": 1, "e": "Sinking air in high pressure suppresses cloud formation."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

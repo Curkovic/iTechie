@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Telescopes Quiz" />
+<meta name="quiz-topic" content="Telescopes" />
+<meta name="quiz-icon" content="telescope" />
+<meta name="quiz-description" content="From Galileo&#x27;s lens to JWST&#x27;s mirrors: how we look up." />
+<title>Telescopes Quiz // iTechie.eu</title>
+<meta name="description" content="From Galileo&#x27;s lens to JWST&#x27;s mirrors: how we look up. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "In which year did Galileo first turn a telescope to the sky?", "a": ["1509", "1609", "1709", "1809"], "c": 1, "e": "In 1609–1610 he saw Jupiter's moons, lunar craters and the phases of Venus."},
+ {"q": "A refracting telescope gathers light with…", "a": ["mirrors", "lenses", "radio dishes", "prisms only"], "c": 1, "e": "Refractors use lenses; reflectors use mirrors."},
+ {"q": "Who built the first practical reflecting telescope?", "a": ["Isaac Newton", "Johannes Kepler", "Edwin Hubble", "Tycho Brahe"], "c": 0, "e": "Newton's reflector of 1668 used a curved mirror to avoid colour fringes."},
+ {"q": "When was the Hubble Space Telescope launched?", "a": ["1980", "1990", "2000", "2010"], "c": 1, "e": "It launched in April 1990 aboard Space Shuttle Discovery."},
+ {"q": "What was wrong with Hubble's mirror when it launched?", "a": ["It was cracked", "It was the wrong shape", "It was too small", "It was dusty"], "c": 1, "e": "A tiny grinding error caused spherical aberration, corrected by a servicing mission in 1993."},
+ {"q": "JWST mainly observes in which kind of light?", "a": ["X-ray", "Ultraviolet", "Infrared", "Radio"], "c": 2, "e": "Infrared lets it see through dust and catch light from the earliest galaxies."},
+ {"q": "How many hexagonal segments make up JWST's main mirror?", "a": ["6", "12", "18", "36"], "c": 2, "e": "18 gold-coated beryllium segments form a 6.5 m mirror."},
+ {"q": "Where does JWST operate?", "a": ["Low Earth orbit", "On the Moon", "Near the Sun–Earth L2 point", "Geostationary orbit"], "c": 2, "e": "About 1.5 million km from Earth, near the second Lagrange point."},
+ {"q": "Why put telescopes in space at all?", "a": ["To be closer to stars", "Earth's atmosphere blurs and blocks light", "It is cheaper", "Gravity bends light on Earth"], "c": 1, "e": "Above the atmosphere there is no twinkling and no absorption of infrared, UV or X-rays."},
+ {"q": "The Extremely Large Telescope (39 m mirror) is being built in…", "a": ["Hawaii", "Chile", "Spain", "South Africa"], "c": 1, "e": "ESO is building it on Cerro Armazones in Chile's Atacama Desert."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>

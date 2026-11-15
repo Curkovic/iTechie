@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+  Quiz page. New quiz = copy this file as the next number, fill in the
+  4 quiz-* meta tags and the questions. Icons: space, telescope, biology,
+  nutrition, survival, tech, ai, internet, globe, history, body, animals,
+  film, weather, croatia, sea (anything else = generic icon).
+  Question: {"q": "question", "a": ["4 answers"], "c": index of the correct answer (0-3), "e": "short explanation"}
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#07080a" />
+<meta name="quiz-title" content="Animals &amp; Nature Quiz" />
+<meta name="quiz-topic" content="Animals &amp; Nature" />
+<meta name="quiz-icon" content="animals" />
+<meta name="quiz-description" content="Whales, bees, octopuses and the strange rules of life." />
+<title>Animals &amp; Nature Quiz // iTechie.eu</title>
+<meta name="description" content="Whales, bees, octopuses and the strange rules of life. 10 questions." />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="stylesheet" href="/quiz.css" />
+</head>
+<body class="quiz-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="qz" id="quiz-app">
+  <noscript><p class="qz-meta">This quiz needs JavaScript. <a href="/">Back to iTechie.eu</a></p></noscript>
+</div>
+<script id="quiz-data" type="application/json">
+[
+ {"q": "What is the largest animal that has ever lived?", "a": ["African elephant", "Blue whale", "Megalodon", "Argentinosaurus"], "c": 1, "e": "Blue whales can exceed 30 m and 150 tonnes."},
+ {"q": "What is the fastest land animal?", "a": ["Lion", "Pronghorn", "Cheetah", "Greyhound"], "c": 2, "e": "Cheetahs can briefly reach around 100 km/h."},
+ {"q": "Which mammal lays eggs?", "a": ["Platypus", "Kangaroo", "Bat", "Dolphin"], "c": 0, "e": "Platypuses and echidnas are the only egg-laying mammals."},
+ {"q": "How many hearts does an octopus have?", "a": ["1", "2", "3", "4"], "c": 2, "e": "Two pump blood through the gills, one through the rest of the body."},
+ {"q": "How do honeybees tell each other where food is?", "a": ["By colour changes", "By the waggle dance", "By buzzing louder", "By leaving notes of wax"], "c": 1, "e": "The angle and length of the dance encode direction and distance."},
+ {"q": "What is a group of crows called?", "a": ["A herd", "A murder", "A pack", "A school"], "c": 1, "e": "'A murder of crows' dates back to the 15th century."},
+ {"q": "Which tree species grows the tallest?", "a": ["Oak", "Coast redwood", "Baobab", "Giant sequoia"], "c": 1, "e": "The tallest known coast redwood is over 115 m."},
+ {"q": "Which bird can fly backwards?", "a": ["Eagle", "Penguin", "Hummingbird", "Swallow"], "c": 2, "e": "Its wings rotate at the shoulder, allowing it to hover and reverse."},
+ {"q": "How many legs does a spider have?", "a": ["6", "8", "10", "12"], "c": 1, "e": "Spiders are arachnids; insects have six legs."},
+ {"q": "How do bats find their way in the dark?", "a": ["Echolocation", "Night vision only", "Magnetic fields only", "Smell only"], "c": 0, "e": "They emit high-pitched calls and listen for the echoes."}
+]
+</script>
+<script src="/quiz.js"></script>
+</body>
+</html>
