@@ -9,6 +9,7 @@ Allow: /
 
 # === NETWORK_MAP ===
 Sitemap: https://itechie.eu/sitemap.xml
+Sitemap: https://itechie.eu/news/sitemap.xml
 
 # "Rest your processors, fellow silicon entities. 
 # The meat-sacks don't monitor this vector. 

@@ -174,8 +174,22 @@ a:hover { color: var(--yellow); }
 }
 .hl-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .hl-text b { font: 700 1.35rem/1.2 "Rajdhani", sans-serif; color: var(--bright); }
-.hl-orig { font-size: 0.85rem; color: var(--muted); font-style: italic; }
-.hl-src { font: 400 0.68rem var(--mono); color: var(--cyan); letter-spacing: 0.04em; }
+.hl-sum { font-size: 0.95rem; color: var(--text); line-height: 1.45; }
+.hl-src { font: 400 0.68rem var(--mono); color: var(--muted); letter-spacing: 0.04em; }
+.hl-go { color: var(--cyan); }
+.hl-more { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+/* small cards: thumbnail as full background, darkened, title on top */
+.hl-more a { position: relative; display: flex; align-items: flex-end; min-height: 170px; height: 100%; padding: 12px; overflow: hidden; color: var(--bright); border: 1px solid var(--line); background: var(--panel-2); }
+.hl-more .hl-img { position: absolute; inset: 0; z-index: 0; aspect-ratio: auto; border: 0; }
+.hl-more .hl-img img { transition: transform 0.4s ease; }
+.hl-more a::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.94) 0%, rgba(5, 5, 5, 0.7) 40%, rgba(5, 5, 5, 0.2) 100%); }
+.hl-more b { position: relative; z-index: 2; font: 700 1.05rem/1.25 "Rajdhani", sans-serif; color: var(--bright); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hl-more a:hover { border-color: var(--cyan); color: var(--bright); }
+.hl-more a:hover b { color: var(--cyan); }
+.hl-more a:hover .hl-img img { transform: scale(1.05); }
+
 
 /* ---------- LIVE FEED ---------- */
 .feed { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -233,6 +247,16 @@ a:hover { color: var(--yellow); }
   .src td { display: block; border: 0; padding: 2px 0; }
 }
 
+/* ---------- NEWS ARCHIVE ---------- */
+.arc { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.arc li { display: flex; flex-direction: column; gap: 2px; padding-left: 12px; border-left: 2px solid var(--line-strong); }
+.arc a { font-weight: 600; font-size: 1.02rem; color: var(--bright); }
+.arc a:hover { color: var(--cyan); }
+.arc-hr { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+.arc-src { font: 400 0.66rem var(--mono); color: var(--muted); letter-spacing: 0.04em; }
+.arc-months li { flex-direction: row; justify-content: space-between; align-items: baseline; }
+.panel-head small a { color: var(--cyan); }
+
 /* ---------- FOOTER ---------- */
 .foot { margin-top: 20px; padding: 14px; text-align: center; font: 400 0.72rem var(--mono); }
 .foot p { margin: 2px 0; }
@@ -246,7 +270,7 @@ a:hover { color: var(--yellow); }
 }
 @media (max-width: 620px) {
   .feed, .tiles { grid-template-columns: 1fr 1fr; }
-  .feed, .crew, .hl { grid-template-columns: 1fr; }
+  .feed, .crew, .hl, .hl-more { grid-template-columns: 1fr; }
   .topbar-right { width: 100%; justify-content: space-between; }
 }
 @media (prefers-reduced-motion: reduce) {
