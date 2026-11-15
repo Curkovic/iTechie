@@ -104,7 +104,9 @@ a:hover { color: var(--yellow); }
 .nav a:hover { color: var(--cyan); }
 .topbar-right { display: flex; align-items: center; gap: 12px; }
 .clock { font: 400 0.74rem var(--mono); color: var(--muted); }
-.wx { font: 400 0.74rem var(--mono); color: var(--cyan); border: 1px solid var(--line-strong); padding: 2px 8px; white-space: nowrap; }
+.wx { display: inline-flex; align-items: center; gap: 6px; font: 400 0.74rem var(--mono); color: var(--cyan); border: 1px solid var(--line-strong); padding: 2px 8px; white-space: nowrap; }
+.wx-ico { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.wx p { display: inline; margin: 0; }
 
 /* hamburger (phones only; without JS the menu simply stays visible) */
 .menu-btn { display: none; width: 34px; height: 30px; padding: 0 7px; background: transparent; border: 1px solid var(--line-strong); cursor: pointer; flex-direction: column; justify-content: center; gap: 4px; }
@@ -758,3 +760,9 @@ body.lb-open { overflow: hidden; }
   background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.25) 50%) 0 0 / 100% 3px,
               linear-gradient(to right, rgba(13, 16, 20, 0.2), rgba(13, 16, 20, 0.75)); }
 .otd-wrap > * { position: relative; z-index: 1; }
+
+/* ---------- Operator available / busy (phone Do Not Disturb) ---------- */
+.op-av { margin-left: 10px; font: 400 0.6rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; vertical-align: 2px; cursor: help; }
+.op-av::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; vertical-align: 1px; background: currentColor; }
+.op-av.free { color: var(--green); }
+.op-av.busy { color: var(--red); }

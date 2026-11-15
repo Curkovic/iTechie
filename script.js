@@ -119,4 +119,18 @@
     lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
     document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !lb.hidden) closeLb(); });
   }
+
+  // Operator available / busy: busy for data-window seconds after the last Do Not Disturb file
+  var av = document.getElementById("op-av");
+  if (av) {
+    var dnd = parseInt(av.getAttribute("data-dnd"), 10) || 0, win = parseInt(av.getAttribute("data-window"), 10) || 3600;
+    var tickAv = function () {
+      var busy = dnd > 0 && Date.now() / 1000 - dnd < win;
+      av.className = "op-av " + (busy ? "busy" : "free");
+      av.textContent = busy ? "busy" : "available";
+      if (busy) { var d = new Date(dnd * 1000); av.title = "Do Not Disturb since " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); }
+      else av.title = "Available";
+    };
+    tickAv(); setInterval(tickAv, 60000);
+  }
 })();
