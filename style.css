@@ -851,3 +851,15 @@ p.tx-all a:hover { color: #fcee0a; }
 .ae-text { margin: 0; padding-left: 10px; border-left: 2px solid var(--cyan); color: var(--text); line-height: 1.5; }
 .ae-cur { display: inline-block; width: 2px; height: 1em; margin-left: 4px; background: var(--cyan); vertical-align: -0.15em; animation: crumb-blink 1.06s steps(1) infinite; }
 @media (prefers-reduced-motion: reduce) { .ae-iris, .ae-rec, .ae-cur { animation: none; } }
+/* Operator header: OPERATOR · status · name · pronouns on one centred line, one small size */
+#operator .panel-head { align-items: center; }
+#operator .panel-head > span:first-child { display: inline-flex; align-items: center; }
+#operator .panel-head .op-av { display: inline-flex; align-items: center; margin-left: 10px; font: 400 0.6rem/1 var(--mono); letter-spacing: 0.08em; }
+#operator .panel-head .op-av::before { vertical-align: 0; }
+#operator .op-id { align-items: center; gap: 8px; line-height: 1; }
+#operator .panel-head .op-name { font: 400 0.6rem/1 var(--mono); letter-spacing: 0.08em; }
+#operator .panel-head .pronouns { font: 400 0.6rem/1 var(--mono); opacity: 0.7; }
+#operator .panel-head { gap: 8px; }
+#operator .panel-head .op-av, #operator .panel-head .op-name, #operator .panel-head .pronouns { font-size: 0.54rem; letter-spacing: 0.04em; }
+#operator .panel-head .op-av { margin-left: 8px; }
+#operator .op-id { gap: 6px; }
