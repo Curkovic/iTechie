@@ -863,3 +863,5 @@ p.tx-all a:hover { color: #fcee0a; }
 #operator .panel-head .op-av, #operator .panel-head .op-name, #operator .panel-head .pronouns { font-size: 0.54rem; letter-spacing: 0.04em; }
 #operator .panel-head .op-av { margin-left: 8px; }
 #operator .op-id { gap: 6px; }
+/* phones: Headlines header shows only "archive →" so the bar stays one line */
+@media (max-width: 620px) { .hl-hint { display: none; } }
