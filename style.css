@@ -119,7 +119,7 @@ a:hover { color: var(--yellow); }
 .ticker { margin-top: 8px; display: flex; align-items: center; overflow: hidden; font: 400 0.76rem var(--mono); }
 .ticker .tag { background: var(--red); color: #fff; font-weight: 500; padding: 6px 12px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.14em; }
 .ticker .track { overflow: hidden; white-space: nowrap; flex: 1; padding: 6px 0; color: var(--text); }
-.ticker .track span { display: inline-block; padding-left: 100%; animation: tick 90s linear infinite; }
+.ticker .track span { display: inline-block; padding-left: 100%; animation: tick 300s linear infinite; }   /* script.js sets the real duration from the text length */
 .ticker:hover .track span { animation-play-state: paused; }
 @keyframes tick { to { transform: translateX(-100%); } }
 
@@ -692,19 +692,19 @@ body.lb-open { overflow: hidden; }
 .wc-rim { fill: rgba(0, 240, 255, 0.03); stroke: var(--line-strong); stroke-width: 1; }
 .wc-ring { fill: none; stroke: var(--line); stroke-dasharray: 2 3; }
 .wc-tick { stroke: var(--line-strong); stroke-width: 1; } .wc-tick.major { stroke: var(--cyan); stroke-width: 1.6; }
-.wc-name { font: 700 8px var(--head-font); letter-spacing: 0.08em; fill: var(--muted); text-anchor: middle; }
+.wc-name { font: 700 9px "Rajdhani", sans-serif; letter-spacing: 0.1em; fill: var(--muted); text-anchor: middle; }   /* Rajdhani: has Š Ć (Orbitron is Latin-only) */
 .wc-name.on { fill: var(--bright); }
 .wc-gauge { fill: none; stroke: var(--c); stroke-width: 4; stroke-linecap: round; opacity: 0.9; }
 .wc-needle line { stroke: var(--c); stroke-width: 3; stroke-linecap: round; }
 .wc-needle path, .wc-needle circle { fill: var(--c); }
 .wc-big { font: 900 30px var(--head-font); fill: var(--bright); text-anchor: middle; }
 .wc-unit { font: 400 8px var(--mono); fill: var(--muted); text-anchor: middle; letter-spacing: 0.1em; }
-.wc-name-big { margin: 0; font: 900 1.6rem/1 var(--head-font); letter-spacing: 0.06em; color: var(--c); }
+.wc-name-big { margin: 0; font: 700 2rem/1 "Rajdhani", sans-serif; letter-spacing: 0.08em; color: var(--c); }
 .wc-note { margin: 4px 0 10px; font-size: 0.92rem; color: #a9b6bf; }
 .wc-stats { margin: 0; display: grid; gap: 4px; }
 .wc-stats div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 3px; }
 .wc-stats dt { font: 400 0.66rem var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
-.wc-stats dd { margin: 0; font: 400 0.76rem var(--mono); color: var(--bright); text-align: right; }
+.wc-stats dd { margin: 0; font: 400 0.76rem var(--mono); color: var(--bright); text-align: right; white-space: nowrap; }
 .wc-fc { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font: 400 0.62rem var(--mono); color: var(--muted); }
 .wc-fc-l { text-transform: uppercase; letter-spacing: 0.1em; }
 .wc-fc-r { text-align: right; color: var(--text); }

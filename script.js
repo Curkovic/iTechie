@@ -133,4 +133,11 @@
     };
     tickAv(); setInterval(tickAv, 60000);
   }
+
+  // Ticker: constant reading speed, however long the text gets (px per second)
+  var tk = document.querySelector(".ticker .track span");
+  if (tk) {
+    var setSpeed = function () { tk.style.animationDuration = Math.max(30, Math.round(tk.scrollWidth / 55)) + "s"; };
+    setSpeed(); window.addEventListener("resize", setSpeed);
+  }
 })();
