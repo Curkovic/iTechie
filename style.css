@@ -807,28 +807,34 @@ body.lb-open { overflow: hidden; }
 .tx-all{margin:.5rem 0 0;font-size:.8rem;text-align:right}
 .tx-all a{color:#00f0ff;text-decoration:none;font-family:"Fira Code",monospace}
 .tx-all a:hover{color:#fcee0a}
-.pt-head{display:flex;gap:1rem;align-items:center}
-.pt-head h1{margin:0;font-family:Rajdhani,sans-serif;font-size:1.8rem;letter-spacing:.04em;color:#fff}
-.pt-handle,.pt-stats{margin:.15rem 0;color:#8a96a3;font-family:"Fira Code",monospace;font-size:.8rem}
-.pt-stats b{color:#00f0ff}
-.pt-stats a{color:#00f0ff}
-.pt-av{flex:0 0 auto;width:42px;height:42px;border-radius:50%;border:1px solid #00f0ff;display:flex;align-items:center;justify-content:center;font-family:Rajdhani,sans-serif;font-weight:700;color:#00f0ff;background:rgba(0,240,255,.06);font-size:.95rem}
-.pt-av.big{width:64px;height:64px;font-size:1.4rem}
-.pt-tools label{display:flex;gap:.5rem;align-items:center;font-family:"Fira Code",monospace;color:#00f0ff}
-.pt-tools input{flex:1;background:transparent;border:0;border-bottom:1px solid rgba(0,240,255,.3);color:#e6edf3;font:inherit;padding:.35rem 0;outline:none}
-.pt-tools input:focus{border-bottom-color:#00f0ff}
-.pt-list{list-style:none;margin:0;padding:0}
-.pt-month{font-family:"Fira Code",monospace;font-size:.72rem;letter-spacing:.2em;color:#fcee0a;padding:.9rem 0 .4rem;border-bottom:1px dashed rgba(252,238,10,.25)}
-.pt-post{display:flex;gap:.8rem;padding:.9rem 0;border-bottom:1px solid rgba(0,240,255,.12);scroll-margin-top:1rem}
-.pt-post.pt-hl{background:rgba(0,240,255,.05);box-shadow:inset 3px 0 0 #00f0ff;padding-left:.6rem}
-.pt-main{min-width:0;flex:1}
-.pt-who{margin:0 0 .25rem;font-size:.85rem;color:#8a96a3}
-.pt-who b{color:#e6edf3;font-family:Rajdhani,sans-serif;font-size:1rem}
-.pt-time{color:#8a96a3;text-decoration:none}
-.pt-time:hover{color:#00f0ff;text-decoration:underline}
-.pt-body p{margin:.2rem 0 .5rem;color:#e6edf3;line-height:1.5;overflow-wrap:anywhere}
-.pt-none{padding:1rem 0}
-.pt-head,.pt-tools,.pt-feed{padding:1rem 1.2rem;margin-bottom:1rem}
-.pt-tools{padding:.6rem 1.2rem}
-.pt-feed{padding-top:.2rem}
-@media (max-width:600px){.pt-head,.pt-feed{padding:.8rem .9rem}.pt-head h1{font-size:1.5rem}}
+
+/* on this day: "also today" as a clean list (label on top, one event per line, years aligned) */
+.otd-also { display: block; }
+.otd-also .lab { display: block; margin-bottom: 4px; }
+.otd-also li:not(.lab) { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; }
+.otd-also li:not(.lab) a { display: flex; gap: 10px; align-items: baseline; }
+.otd-also time { flex: 0 0 2.6em; margin-right: 0; }
+/* "view all posts": small, left, under the posts */
+p.tx-all { text-align: left; margin: 2px 0 14px; font-size: 0.7rem; line-height: 1.4; }
+p.tx-all a { font: 400 0.7rem var(--mono, "Fira Code", monospace); letter-spacing: 0.08em; color: var(--cyan, #00f0ff); }
+p.tx-all a:hover { color: #fcee0a; }
+/* posts page v2: reuses homepage .panel + .tx look (no avatar) */
+.pt-search { display: flex; gap: 8px; align-items: center; margin: 4px 0 6px; font: 400 0.74rem var(--mono); color: var(--cyan); }
+.pt-search input { flex: 1; background: transparent; border: 0; border-bottom: 1px solid var(--line); color: var(--text); font: inherit; padding: 4px 0; outline: none; }
+.pt-search input:focus { border-bottom-color: var(--cyan); }
+.pt-list .pt-month { list-style: none; margin: 12px 0 2px; font: 400 0.62rem var(--mono); letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; }
+.pt-list .tx-item p { margin: 0 0 4px; }
+.pt-list .tx-item { scroll-margin-top: 16px; }
+.pt-list .tx-item time a { color: inherit; text-decoration: none; }
+.pt-list .tx-item time a:hover { color: var(--cyan); }
+.pt-list .tx-item.pt-p.pt-hl { border-left-color: var(--cyan); background: rgba(0, 240, 255, 0.04); }
+/* crumb "cd .. / return_to_root": smaller + blinking terminal cursor */
+.crumb { margin: 14px 0 22px; }
+.crumb a { font-size: 0.56rem; letter-spacing: 0.22em; gap: 9px; }
+.crumb a::after { content: ""; display: inline-block; width: 0.55em; height: 1.1em; margin-left: 2px; background: var(--cyan); vertical-align: -0.2em; animation: crumb-blink 1.06s steps(1) infinite; }
+@keyframes crumb-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .crumb a::after { animation: none; } }
+/* logo: same blinking terminal cursor as the crumb */
+.brand::after { content: ""; display: inline-block; width: 0.5em; height: 0.95em; margin-left: 4px; background: var(--cyan); vertical-align: -0.1em; animation: crumb-blink 1.06s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .brand::after { animation: none; } }
+.brand::after { width: 3px; margin-left: 5px; }
