@@ -838,3 +838,16 @@ p.tx-all a:hover { color: #fcee0a; }
 .brand::after { content: ""; display: inline-block; width: 0.5em; height: 0.95em; margin-left: 4px; background: var(--cyan); vertical-align: -0.1em; animation: crumb-blink 1.06s steps(1) infinite; }
 @media (prefers-reduced-motion: reduce) { .brand::after { animation: none; } }
 .brand::after { width: 3px; margin-left: 5px; }
+
+/* ---------- AI Eyes (street cam described by AI) (.ae-) ---------- */
+.ae-eye { width: 1.6em; height: 0.9em; margin-right: 10px; vertical-align: -0.12em; overflow: visible; }
+.ae-lid { fill: none; stroke: var(--cyan); stroke-width: 1.6; }
+.ae-iris circle { fill: none; stroke: var(--cyan); stroke-width: 1.4; }
+.ae-iris .ae-pupil { fill: var(--red); stroke: none; }
+.ae-iris { animation: ae-scan 7s ease-in-out infinite; }
+@keyframes ae-scan { 0%, 18% { transform: translateX(0); } 30%, 48% { transform: translateX(-6px); } 60%, 78% { transform: translateX(6px); } 90%, 100% { transform: translateX(0); } }
+.ae-rec { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--red); margin-right: 6px; vertical-align: 0.05em; animation: crumb-blink 1.6s steps(1) infinite; }
+.ae-meta { margin: 0 0 8px; font: 400 0.66rem var(--mono); letter-spacing: 0.06em; color: var(--muted); }
+.ae-text { margin: 0; padding-left: 10px; border-left: 2px solid var(--cyan); color: var(--text); line-height: 1.5; }
+.ae-cur { display: inline-block; width: 2px; height: 1em; margin-left: 4px; background: var(--cyan); vertical-align: -0.15em; animation: crumb-blink 1.06s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .ae-iris, .ae-rec, .ae-cur { animation: none; } }

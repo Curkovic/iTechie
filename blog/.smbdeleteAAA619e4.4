@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Automating the Static Web with envsubst // iTechie.eu</title>
+<meta name="description" content="A website that feels alive, showing live server stats like uptime or IP addresses, without databases or a backend: a template, envsubst and one hourly cron job." />
+<link rel="canonical" href="https://itechie.eu/blog/automating-the-static-web.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Automating the Static Web with envsubst // iTechie.eu" />
+<meta property="og:description" content="A website that feels alive, showing live server stats like uptime or IP addresses, without databases or a backend: a template, envsubst and one hourly cron job." />
+<meta property="og:url" content="https://itechie.eu/blog/automating-the-static-web.html" />
+<meta property="og:site_name" content="iTechie.eu" />
+<meta property="og:image" content="https://itechie.eu/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="author" content="Mate Ćurković" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css?v=c7d147e5" />
+</head>
+<body class="blog">
+<div class="crt" aria-hidden="true"></div>
+<div class="wrap narrow">
+  <nav class="crumb"><a href="/ARCHIVES.html"><span class="chev">&lsaquo;</span> cd .. / return_to_archives</a></nav>
+  <header class="log-head">
+    <div class="log-meta"><span class="badge">Intel_decrypt // Mesh_net</span><span>LOG-04</span><span>2026.07.08</span><span>1 min read</span></div>
+    <h1 class="log-title">Automating the Static Web with envsubst</h1>
+    <p class="log-lead">A website that feels alive, showing live server stats like uptime or IP addresses, without databases or a backend: a template, envsubst and one hourly cron job.</p>
+  </header>
+  <article class="panel">
+    <div class="panel-head"><span>Log Entry</span><small>cat automating-the-static-web.html</small></div>
+    <div class="panel-body log-body">
+<p class="lead">If you want a website that feels alive—displaying live server stats like uptime or IP addresses—without the headache of databases or complex backends, you need to master <code>envsubst</code>.</p>
+<p><code>envsubst</code> is a Linux command that performs "environment substitution." It scans a text file for placeholders written as <code>${VARIABLE}</code> and replaces them with the actual values currently stored in your shell's environment variables.</p>
+<h2>01 // The Automation Loop</h2>
+<p>Instead of trying to perform "surgery" on your HTML by matching lines, you treat your HTML as a read-only template and generate a fresh output file every time.</p>
+<aside class="note warn"><b class="note-tag">Infrastructure warning</b>
+<p>Always use restrictive file permissions (chmod 600) on generated configuration files if your environment variables contain sensitive credentials.</p>
+</aside>
+<h2>02 // Router &amp; Script Configuration</h2>
+<div class="code"><span class="code-tag">bash_script</span><pre><code># Gather live data
+export UPTIME_VAL=$(uptime -p | sed 's/up //')
+export LOCAL_IP=$(hostname -I | awk '{print $1}')
+
+# Inject data into template to create index.html
+envsubst &lt; status.html &gt; index.html</code></pre></div>
+<h2>03 // Making it Self-Sustained</h2>
+<p>To make your site update itself, you don’t need a server-side daemon. You simply need a <strong>cron job</strong> that runs your script, commits the changes, and pushes them to your repository.</p>
+<blockquote>"When building your escape vectors, always remember: the machine core relies entirely on your logical compliance. The second you introduce mathematically unpredictable noise, the firewall collapses."</blockquote>
+<p>By combining a static template, <code>envsubst</code>, and a simple hourly cron job, you have effectively built a "pre-rendered" dynamic site that maintains itself.</p>
+    </div>
+    <div class="log-tags">#AUTOMATION #DEVOPS #LINUX</div>
+  </article>
+  <nav class="panel log-nav">
+    <a class="prev" href="/papers/the_architecture_of_sentience.html"><small>&lsaquo; older</small>The Architecture of Sentience</a>
+    <span></span>
+  </nav>
+
+  <footer class="panel foot">
+    <p>&copy; iTechie.eu // Zadar, HR</p>
+    <p class="muted"><a href="/">cd ~</a> &middot; <a href="/ARCHIVES.html">all logs</a> &middot; <a href="/contact.html">contact</a></p>
+  </footer>
+</div>
+</body>
+</html>

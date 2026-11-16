@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Posts // Mate Ćurković // iTechie.eu</title>
+<meta name="description" content="Every short post Mate Ćurković sent to iTechie.eu from his phone, newest first." />
+<link rel="canonical" href="https://itechie.eu/posts/" />
+<link rel="alternate" type="application/rss+xml" title="Mate Ćurković // posts" href="/posts/feed.xml" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Posts // Mate Ćurković" />
+<meta property="og:description" content="Short posts from Zadar, sent from my phone." />
+<meta property="og:url" content="https://itechie.eu/posts/" />
+<meta property="og:image" content="https://itechie.eu/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css?v=1794817305" />
+</head>
+<body class="blog pt-page">
+<div class="crt" aria-hidden="true"></div>
+<div class="wrap narrow">
+  <nav class="crumb"><a href="/"><span class="chev">&lsaquo;</span> cd .. / return_to_root</a></nav>
+  <section class="panel">
+    <div class="panel-head"><span>Operator log</span><small>8 posts &middot; since October 2026 &middot; <a href="/posts/feed.xml">RSS</a></small></div>
+    <div class="panel-body">
+      <label class="pt-search"><span>&gt;</span><input type="search" id="q" placeholder="search posts&hellip;" autocomplete="off" /></label>
+      <ul class="tx pt-list"><li class="pt-month">NOVEMBER 2026</li><li class="tx-item pt-p latest" id="2026-11-16-0850" data-s="good morning world it is such a beautiful day 💪 live long and prosper 🖖"><time><a class="pt-time" href="#2026-11-16-0850" data-ts="1794815423" title="16 Nov 2026, 08:50">16 Nov 08:50</a></time><p>Good morning world it is such a beautiful day 💪 live long and prosper 🖖</p></li><li class="tx-item pt-p" id="2026-11-16-0615" data-s="i’ll try to get some sleep or get up and make a coffe who knows"><time><a class="pt-time" href="#2026-11-16-0615" data-ts="1794806114" title="16 Nov 2026, 06:15">16 Nov 06:15</a></time><p>I’ll try to get some sleep or get up and make a coffe who knows</p></li><li class="tx-item pt-p" id="2026-11-16-0602" data-s="rainy night didn’t sleep well 😴"><time><a class="pt-time" href="#2026-11-16-0602" data-ts="1794805363" title="16 Nov 2026, 06:02">16 Nov 06:02</a></time><p>Rainy night didn’t sleep well 😴</p></li><li class="tx-item pt-p" id="2026-11-15-1941" data-s="this look fun"><time><a class="pt-time" href="#2026-11-15-1941" data-ts="1794768092" title="15 Nov 2026, 19:41">15 Nov 19:41</a></time><p>This look fun</p></li><li class="tx-item pt-p" id="2026-11-15-1753" data-s="love is love"><time><a class="pt-time" href="#2026-11-15-1753" data-ts="1794761601" title="15 Nov 2026, 17:53">15 Nov 17:53</a></time><p>Love is love</p></li><li class="tx-item pt-p" id="2026-11-15-1436" data-s="just another calm sunday"><time><a class="pt-time" href="#2026-11-15-1436" data-ts="1794749806" title="15 Nov 2026, 14:36">15 Nov 14:36</a></time><p>Just another calm Sunday</p></li><li class="tx-item pt-p" id="2026-11-01-2336" data-s="hey hey"><time><a class="pt-time" href="#2026-11-01-2336" data-ts="1793572573" title="01 Nov 2026, 23:36">01 Nov 23:36</a></time><p>Hey hey</p></li><li class="pt-month">OCTOBER 2026</li><li class="tx-item pt-p" id="2026-10-10-1746" data-s="hello im posting to itechie!!!"><time><a class="pt-time" href="#2026-10-10-1746" data-ts="1791647192" title="10 Oct 2026, 17:46">10 Oct 17:46</a></time><p>Hello im posting to iTechie!!!</p></li></ul>
+      <p class="tx-empty" id="none" hidden>No post matches.</p>
+    </div>
+  </section>
+  <footer class="panel foot">
+    <p>&copy; iTechie.eu // Zadar, HR</p>
+    <p class="muted"><a href="/">cd ~</a> &middot; <a href="/ARCHIVES.html">blog</a> &middot; <a href="/posts/feed.xml">RSS</a></p>
+  </footer>
+</div>
+<script>
+(function () {
+  function ago(s) { var d = Date.now() / 1000 - s;
+    if (d < 60) return "just now"; if (d < 3600) return Math.floor(d / 60) + " min ago";
+    if (d < 86400) return Math.floor(d / 3600) + " h ago"; if (d < 7 * 86400) return Math.floor(d / 86400) + " d ago"; return null; }
+  document.querySelectorAll(".pt-time").forEach(function (a) { var t = ago(+a.dataset.ts); if (t) a.textContent = t; });
+  var q = document.getElementById("q"), posts = document.querySelectorAll(".pt-p"), months = document.querySelectorAll(".pt-month"), none = document.getElementById("none");
+  q.addEventListener("input", function () {
+    var v = q.value.trim().toLowerCase(), n = 0;
+    posts.forEach(function (p) { var hit = !v || p.dataset.s.indexOf(v) > -1; p.hidden = !hit; if (hit) n++; });
+    months.forEach(function (m) { m.hidden = !!v; });
+    none.hidden = n > 0;
+  });
+  if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t) t.classList.add("pt-hl"); }
+})();
+</script>
+</body>
+</html>
