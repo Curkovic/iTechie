@@ -865,3 +865,17 @@ p.tx-all a:hover { color: #fcee0a; }
 #operator .op-id { gap: 6px; }
 /* phones: Headlines header shows only "archive →" so the bar stays one line */
 @media (max-width: 620px) { .hl-hint { display: none; } }
+
+/* ---------- markdown posts (Apple Notes exports) (.md-) ---------- */
+.md-fig { margin: 22px 0; }
+.md-fig img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); }
+.md-fig figcaption { margin-top: 6px; font: 400 0.7rem var(--mono); color: var(--muted); }
+.md-check { list-style: none; margin-left: -1.2em; }
+.md-check::before { content: "[ ] "; font-family: var(--mono); color: var(--cyan); }
+.md-check.done::before { content: "[x] "; }
+.md-check.done { color: var(--muted); text-decoration: line-through; }
+.md-sub { margin-left: 1.4em; }
+.md-table { overflow-x: auto; margin: 18px 0; }
+.md-table table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+.md-table th, .md-table td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+.md-table th { font: 400 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); background: var(--head); }
