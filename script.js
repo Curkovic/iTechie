@@ -170,3 +170,12 @@
     t.scrollTo({ left: cards[i].offsetLeft - t.offsetLeft, behavior: "smooth" });
   }, 10000);
 })();
+
+// news photos that fail to load (missing, hotlink-blocked, deleted): swap for a styled "no signal" card instead of a broken-image icon
+(function () {
+  function bad(img) { var w = img.closest(".hl-img"); if (w) w.classList.add("hl-noimg", "hl-lost"); img.remove(); }
+  document.querySelectorAll(".hl-img img, .sn-img img").forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) bad(img);
+    else img.addEventListener("error", function () { bad(img); });
+  });
+})();
