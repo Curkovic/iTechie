@@ -203,8 +203,8 @@
 (function () {
   var logo = document.querySelector(".brand"); if (!logo) return;
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var WORDS = ["fjaka", "pomalo", "bura", "jugo", "maraschino", "šjor", "bonaca", "kužiš", "ćakula", "đir", "pjat",
-               "marenda", "škoj", "tovar", "borša", "kalelarga", "makijato", "di si"];
+  var WORDS = ["fjaka", "pomalo", "bura", "jugo", "maraschino", "sjor", "bonaca", "kuzis", "cakula", "dir", "pjat",
+               "marenda", "skoj", "tovar", "borsa", "kalelarga", "makijato", "di si"];
   var BASE = "iTechie.eu", last = "";
   logo.setAttribute("aria-label", BASE);
   var box0 = logo.getBoundingClientRect();
