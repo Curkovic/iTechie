@@ -1200,3 +1200,25 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 /* fix: with a long summary the main photo grew wider than its column and covered the text */
 .hl-edge .hl .hl-img { aspect-ratio: auto; width: 100%; height: 100%; min-height: 260px; min-width: 0; }
 .hl-edge .hl .hl-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* EU page: the briefing story */
+.eu-story-lead { margin: 0 0 18px; font: 700 1.6rem/1.25 "Rajdhani", sans-serif; color: var(--bright); max-width: 34ch; }
+.eu-story-cols { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.eu-story-text p { font-size: 1rem; line-height: 1.65; color: var(--text); margin: 0 0 14px; }
+.eu-story-text h3 { margin: 22px 0 8px; font: 700 0.8rem var(--head-font); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.eu-story-text i { color: var(--bright); }
+.eu-timeline { padding-left: 18px; border-left: 1px solid var(--line-strong); }
+.eu-tl-k { margin: 0 0 10px; font: 400 0.62rem var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.eu-timeline ol { list-style: none; margin: 0 0 22px; padding: 0; }
+.eu-timeline li { position: relative; padding: 0 0 14px; font-size: 0.9rem; line-height: 1.45; color: #a9b6bf; }
+.eu-timeline li::before { content: ""; position: absolute; left: -23px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 2px solid var(--yellow); }
+.eu-timeline li b { display: block; font: 500 0.72rem var(--mono); color: var(--yellow); letter-spacing: 0.06em; }
+.eu-src { list-style: none; margin: 0; padding: 0; }
+.eu-src li { padding: 4px 0; font-size: 0.82rem; } .eu-src a { color: var(--cyan); }
+@media (max-width: 860px) { .eu-story-cols { grid-template-columns: 1fr; } }
+.eu-src li::before { display: none; }
+/* EU page title with flag */
+.eu-title { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.eu-flag { width: 72px; height: 48px; flex: none; border: 1px solid var(--line-strong); }
+.eu-sub { margin: 4px 0 12px; font: 400 0.8rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); }
+@media (max-width: 620px) { .eu-flag { width: 54px; height: 36px; } }
