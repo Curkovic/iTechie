@@ -879,3 +879,113 @@ p.tx-all a:hover { color: #fcee0a; }
 .md-table table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
 .md-table th, .md-table td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
 .md-table th { font: 400 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); background: var(--head); }
+
+/* ---------- /weather/ page (.wp-) ---------- */
+.wp-now { display: grid; grid-template-columns: minmax(220px, 1fr) 2fr; gap: 24px; align-items: center; }
+.wp-big { display: flex; align-items: center; gap: 18px; }
+.wp-ico { width: 26px; height: 26px; fill: none; stroke: var(--cyan); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.wp-ico.sun, .wp-ico.psun { stroke: var(--yellow); }
+.wp-bigico { width: 84px; height: 84px; stroke-width: 1.2; }
+.wp-temp { margin: 0; font: 900 3.6rem/1 var(--head-font); color: var(--bright); }
+.wp-temp span { font-size: 0.4em; color: var(--muted); margin-left: 4px; vertical-align: top; }
+.wp-cond { margin: 6px 0 0; font: 400 0.8rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); }
+.wp-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px 18px; margin: 0; }
+.wp-stats div { border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.wp-stats dt { font: 400 0.6rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.wp-stats dd { margin: 2px 0 0; font: 400 0.95rem var(--mono); color: var(--bright); }
+.wp-wn { color: var(--green); font-size: 0.8em; }
+.wp-scroll { overflow-x: auto; }
+.wp-chart { display: block; width: 100%; min-width: 640px; height: auto; overflow: visible; }
+.wp-chart .wp-rain { fill: rgba(0, 240, 255, 0.18); }
+.wp-chart .wp-line { fill: none; stroke: var(--yellow); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.wp-chart .wp-dot { fill: var(--yellow); }
+.wp-chart .wp-t { font: 400 12px var(--mono); fill: var(--bright); text-anchor: middle; }
+.wp-chart .wp-h { font: 400 11px var(--mono); fill: var(--muted); text-anchor: middle; }
+.wp-chart .wp-ci { fill: none; stroke: var(--cyan); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.wp-chart .wp-ci.sun, .wp-chart .wp-ci.psun { stroke: var(--yellow); }
+.wp-legend { margin: 8px 0 0; font: 400 0.62rem var(--mono); color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.wp-legend i { display: inline-block; width: 14px; height: 8px; margin: 0 6px 0 14px; vertical-align: 0; }
+.wp-legend i:first-child { margin-left: 0; }
+.wp-legend .l { height: 2px; background: var(--yellow); vertical-align: 3px; }
+.wp-legend .b { background: rgba(0, 240, 255, 0.35); }
+.wp-cols { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items: start; }
+.wp-side { display: grid; gap: 18px; }
+.wp-cols .panel, .wp-side .panel { margin: 0; }
+.wp-days { list-style: none; margin: 0; padding: 0; }
+.wp-days li { display: grid; grid-template-columns: 82px 28px 1fr 34px 90px 34px 62px 78px; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); font: 400 0.82rem var(--mono); color: var(--text); }
+.wp-days small { display: block; font-size: 0.66rem; color: var(--muted); }
+.wp-day { color: var(--bright); }
+.wp-sky { color: var(--muted); font-size: 0.72rem; }
+.wp-lo { color: var(--muted); text-align: right; } .wp-hi { color: var(--bright); }
+.wp-range { position: relative; height: 4px; background: rgba(255, 255, 255, 0.06); border-radius: 2px; }
+.wp-range i { position: absolute; top: 0; height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--cyan), var(--yellow)); }
+.wp-rp { color: var(--cyan); text-align: right; } .wp-wd { text-align: right; }
+.wp-note { margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+@media (max-width: 860px) { .wp-now, .wp-cols { grid-template-columns: 1fr; } }
+@media (max-width: 620px) {
+  .wp-days li { grid-template-columns: 64px 24px 26px 1fr 26px 48px; }
+  .wp-days .wp-sky, .wp-days .wp-wd { display: none; }
+  .wp-temp { font-size: 2.8rem; } .wp-bigico { width: 60px; height: 60px; }
+
+}
+.wp-page .wrap > .panel, .wp-page .wp-cols { margin-bottom: 18px; }
+/* weather page: Daylight & Sea + Wind Compass side by side, bigger */
+.wp-duo { display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; margin-bottom: 18px; align-items: stretch; }
+.wp-duo .panel { margin: 0; }
+.wp-duo .sky-state { font-size: 1.7rem; }
+.wp-duo .sky-bar { height: 8px; margin: 14px 0 8px; }
+.wp-duo .sky-times { font-size: 0.85rem; }
+.wp-duo .rows { font-size: 1.05rem; row-gap: 12px; margin-top: 18px; }
+.wp-duo .wc { grid-template-columns: minmax(0, 290px) 1fr; gap: 26px; }
+.wp-duo .wc-name-big { font-size: 2.8rem; }
+.wp-duo .wc-note { font-size: 1.05rem; }
+.wp-duo .wc-stats { font-size: 1.05rem; }
+.wp-duo .wc-fc { font-size: 0.72rem; }
+@media (max-width: 960px) { .wp-duo { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .wp-duo .wc { grid-template-columns: 1fr; } .wp-duo .wc-dial { max-width: 300px; margin: 0 auto; } .wp-duo .wc-name-big { font-size: 2.2rem; } }
+.wp-duo .wc-stats dt, .wp-duo .wc-stats dd { font-size: 0.85rem; } .wp-duo .wc-stats dd { font-size: 1rem; }
+a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var(--cyan); border-color: var(--cyan); background: rgba(0, 240, 255, 0.08); }
+.tl-mood { text-transform: none; letter-spacing: 0.02em; color: var(--text); opacity: 0.85; }
+/* threat mood: own full-width row above the level + sensor chips */
+.tl-moodrow { flex: 0 0 100%; margin: 0 0 -4px; }
+.tl-moodrow .tl-label { font: 400 0.64rem var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.tl-moodrow .tl-mood { font: 400 0.74rem var(--mono); letter-spacing: 0.02em; text-transform: none; color: var(--text); opacity: 0.9; }
+/* Off-Planet: fact line + AI remark on crew change (.cn-) */
+.crew-note { margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+.cn-fact { font: 400 0.68rem var(--mono); letter-spacing: 0.06em; color: var(--muted); }
+.cn-ai { font: 400 0.95rem "Rajdhani", sans-serif; color: var(--text); font-style: italic; }
+/* /weather/: AI brief under "Now" */
+.wp-brief { margin: 0; padding: 14px 18px 16px; border-top: 1px solid var(--line); font: 500 1.1rem/1.5 "Rajdhani", sans-serif; color: var(--bright); }
+.wp-brief-tag { display: block; margin-bottom: 4px; font: 400 0.62rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+
+/* ---------- /launches/ page (.lp-) ---------- */
+.lp-page .wrap > .panel, .lp-cols { margin-bottom: 18px; }
+.lp-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px; align-items: start; }
+.lp-hero:not(:has(.lp-img)) { grid-template-columns: 1fr; }
+.lp-img { margin: 0; }
+.lp-img img { display: block; width: 100%; max-height: 380px; object-fit: cover; border: 1px solid var(--line); }
+.lp-img figcaption { margin-top: 4px; font: 400 0.6rem var(--mono); color: var(--muted); }
+.lp-name { margin: 0; font: 900 1.6rem/1.2 var(--head-font); color: var(--bright); letter-spacing: 0.04em; }
+.lp-sub { margin: 6px 0 0; font: 400 0.8rem var(--mono); color: var(--cyan); }
+.lp-cd.big { margin: 14px 0 6px; font: 900 2.2rem/1 var(--head-font); color: var(--yellow); letter-spacing: 0.06em; }
+.lp-rows { margin-top: 10px; }
+.lp-desc { margin: 0; padding: 0 18px 18px; font-size: 0.95rem; line-height: 1.55; color: #a9b6bf; }
+.lp-st { font: 400 0.7rem var(--mono); letter-spacing: 0.06em; color: var(--muted); }
+.lp-st.ok { color: var(--green); } .lp-st.warn { color: var(--yellow); } .lp-st.alert { color: var(--red); }
+.lp-cols { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items: start; }
+.lp-cols .panel { margin: 0; }
+.lp-list { list-style: none; margin: 0; padding: 0; }
+.lp-list li { display: grid; grid-template-columns: 150px 1fr 170px 110px; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.lp-list small { display: block; font: 400 0.66rem var(--mono); color: var(--muted); }
+.lp-when { font: 400 0.78rem var(--mono); color: var(--bright); }
+.lp-when .lp-cd { color: var(--yellow); }
+.lp-what b { font: 600 1rem "Rajdhani", sans-serif; color: var(--bright); }
+.lp-where { font-size: 0.85rem; color: var(--text); }
+.lp-list .lp-st { text-align: right; }
+.lp-k { margin: 16px 0 6px; font: 400 0.62rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.lp-prov { list-style: none; margin: 0; padding: 0; }
+.lp-prov li { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dashed var(--line); font-size: 0.9rem; }
+.lp-prov b { font: 400 0.85rem var(--mono); color: var(--cyan); }
+@media (max-width: 860px) { .lp-hero, .lp-cols { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .lp-list li { grid-template-columns: 1fr auto; } .lp-where { display: none; } .lp-cd.big { font-size: 1.7rem; } .lp-name { font-size: 1.3rem; } }
+@media (max-width: 620px) { .lp-list li { grid-template-columns: 1fr; gap: 3px; } .lp-list .lp-st { text-align: left; } .lp-when { display: flex; gap: 10px; align-items: baseline; } .lp-when .lp-cd { display: inline; } }
