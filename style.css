@@ -1277,3 +1277,4 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 @media (max-width: 620px) {
   .mission { white-space: normal; overflow: visible; text-overflow: clip; min-height: calc(1.55em * 3); line-height: 1.55; font-size: 0.74rem; }
 }
+.panel-head span.ghost:hover, span.ghost:hover { color: var(--muted); cursor: default; }   /* plain text, no hover effect */
