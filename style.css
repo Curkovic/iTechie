@@ -1252,3 +1252,12 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
   font: 400 0.58rem var(--mono); letter-spacing: 0.24em; color: var(--muted); opacity: 0.7; background: none; }
 .hl-img.hl-noimg::after { content: ""; position: absolute; top: 15px; right: calc(14px + 9ch + 10px); width: 6px; height: 6px; border-radius: 50%;
   background: var(--red); opacity: 0.8; animation: crumb-blink 1.6s steps(1) infinite; display: block; }
+.airbar .aq-label { display: none; }   /* strip without the "Hazard env" label */
+/* easter egg: the top edge of the header fills with yellow from sunrise to sunset in Zadar */
+.topbar { position: relative; }
+.daybar { position: absolute; top: 0; left: 0; height: 2px; width: 0; background: var(--yellow); pointer-events: none; transition: width 1s linear; }
+.tl-help { cursor: help; }
+/* missing photo: just the dark card, no "NO SIGNAL" text or dot */
+.hl-img.hl-noimg::before, .hl-img.hl-noimg::after { content: none; display: none; }
+.log-older a { align-items: baseline; } .log-older time { line-height: 1; }   /* date sits on the title baseline */
+#operator .panel-head > span:first-child { align-items: baseline; } #operator .panel-head .op-av { align-items: baseline; line-height: 1; } #operator .panel-head .op-av::before { align-self: center; position: relative; top: -1px; }   /* AVAILABLE on the OPERATOR baseline */

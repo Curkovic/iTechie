@@ -179,3 +179,62 @@
     else img.addEventListener("error", function () { bad(img); });
   });
 })();
+
+// easter egg: header top line = today's daylight progress in Zadar (sunrise -> sunset), empty at night
+(function () {
+  var bar = document.querySelector(".topbar"), sky = document.querySelector(".sky[data-rise][data-set]");
+  if (!bar || !sky) return;
+  var line = document.createElement("span"); line.className = "daybar"; line.setAttribute("aria-hidden", "true"); bar.appendChild(line);
+  var rise = +sky.dataset.rise, set = +sky.dataset.set, day = set - rise;
+  function tick() {
+    var now = Date.now() / 1000, p = 0;
+    if (day > 0 && now > rise && now < set) p = (now - rise) / day;
+    else if (day > 0 && now >= set) {   /* page left open past midnight: shift to the next day's times */
+      while (now > rise + 86400) { rise += 86400; set += 86400; }
+      if (now > rise && now < set) p = (now - rise) / day;
+    }
+    line.style.width = (p * 100).toFixed(2) + "%";
+    line.title = p > 0 ? "Daylight in Zadar: " + Math.round(p * 100) + "% of today's daylight gone" : "";
+  }
+  tick(); setInterval(tick, 60000);
+})();
+
+// logo easter egg: every 1-4 min the logo backspaces itself, types a Dalmatian word, then types itself back
+(function () {
+  var logo = document.querySelector(".brand"); if (!logo) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var WORDS = ["fjaka", "pomalo", "bura", "jugo", "maraschino", "šjor", "bonaca", "kužiš", "ćakula", "đir", "pjat",
+               "marenda", "škoj", "tovar", "borša", "kalelarga", "makijato", "di si"];
+  var BASE = "iTechie.eu", last = "";
+  logo.setAttribute("aria-label", BASE);
+  logo.style.minWidth = logo.getBoundingClientRect().width + "px";
+  logo.style.whiteSpace = "nowrap";
+  function render(t) {                       // keep ".eu" cyan while the real logo is typed
+    var cut = BASE.indexOf(".eu");
+    if (BASE.indexOf(t) === 0 && t.length > cut) {
+      logo.textContent = t.slice(0, cut);
+      var s = document.createElement("span"); s.textContent = t.slice(cut); logo.appendChild(s);
+    } else logo.textContent = t;
+  }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function key() { return 70 + Math.random() * 90; }            // human-ish typing speed
+  async function erase(t) { for (var i = t.length; i >= 0; i--) { render(t.slice(0, i)); await wait(45 + Math.random() * 40); } }
+  async function type(t) { for (var i = 1; i <= t.length; i++) { render(t.slice(0, i)); await wait(key()); } }
+  async function play() {
+    if (document.hidden) return schedule();
+    var w; do { w = WORDS[Math.floor(Math.random() * WORDS.length)]; } while (w === last); last = w;
+    await erase(BASE); await wait(350);
+    await type(w);     await wait(2400);
+    await erase(w);    await wait(300);
+    await type(BASE);
+    schedule();
+  }
+  function schedule() { setTimeout(play, 60000 + Math.random() * 180000); }
+  // secret trigger: open the page with #fjaka (or change the address to it) and it plays right away with "fjaka"
+  var busy = false;
+  async function now(word) { if (busy) return; busy = true; last = "";
+    await erase(BASE); await wait(350); await type(word); await wait(2400); await erase(word); await wait(300); await type(BASE); busy = false; }
+  function hash() { if (location.hash.toLowerCase() === "#fjaka") setTimeout(function () { now("fjaka"); }, 2000); }
+  window.addEventListener("hashchange", hash); hash();
+  schedule();
+})();
