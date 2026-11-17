@@ -1,89 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SECURE_MEMORY // DECRYPT_PROTOCOL</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --term-cyan: #00f0ff;
-            --term-black: #050508;
-            --term-panel: #0d0d14;
-            --term-line: rgba(0, 240, 255, 0.15);
-        }
-
-        body { background-color: var(--term-black); color: white; font-family: 'Rajdhani', sans-serif; min-height: 100vh; }
-        body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: linear-gradient(rgba(18, 16, 24, 0) 50%, rgba(0, 0, 0, 0.3) 50%); background-size: 100% 4px; opacity: 0.2; z-index: 1000; }
-
-        .card { perspective: 1000px; cursor: pointer; height: 100%; }
-        .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
-        .card.flipped .card-inner { transform: rotateY(180deg); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border: 1px solid var(--term-cyan); display: flex; align-items: center; justify-content: center; }
-        .card-back { transform: rotateY(180deg); background: var(--term-panel); overflow: hidden; }
-        .card-front { background: #1a1a24; color: var(--term-cyan); font-size: 1.5rem; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SECURE_MEMORY // DECRYPT_PROTOCOL</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:Rajdhani;font-weight:500;font-display:swap;src:url(/fonts/rajdhani-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Rajdhani;font-weight:700;font-display:swap;src:url(/fonts/rajdhani-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Fira Code";font-weight:400;font-display:swap;src:url(/fonts/fira-code-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Orbitron;font-weight:700;font-display:swap;src:url(/fonts/orbitron-latin-700-normal.woff2) format("woff2")}
+:root{--cyan:#00f0ff;--black:#050508;--panel:#0d0d14}
+*{box-sizing:border-box}
+body{margin:0;background:var(--black);color:#fff;font-family:Rajdhani,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1rem}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(18,16,24,0) 50%,rgba(0,0,0,.3) 50%);background-size:100% 4px;opacity:.2;z-index:1000}
+.crumb{width:100%;max-width:24rem;margin:14px 0 6px}
+.crumb a{display:inline-flex;align-items:center;gap:9px;font:700 .56rem Orbitron,Rajdhani,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#f2f7fa;opacity:.65;text-decoration:none;padding:3px 6px;transition:opacity .2s,background .2s}
+.crumb a:hover{opacity:1;background:rgba(0,240,255,.12)}
+.crumb .chev{color:var(--cyan);font-size:1.4em;line-height:0;transition:transform .2s}
+.crumb a:hover .chev{transform:translateX(-4px)}
+.crumb a::after{content:"";display:inline-block;width:.55em;height:1.1em;margin-left:2px;background:var(--cyan);vertical-align:-.2em;animation:crumb-blink 1.06s steps(1) infinite}
+@keyframes crumb-blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.crumb a::after{animation:none}}
+header{text-align:center;margin:1rem 0 2rem}
+h1{margin:0;font-size:1.875rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.2em}
+.mono{font-family:"Fira Code",monospace;font-size:.85rem;color:#a1a1aa;margin-top:.5rem}
+#grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;width:100%;max-width:24rem;aspect-ratio:3/4}
+.card{perspective:1000px;cursor:pointer;height:100%}
+.card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.flipped .card-inner{transform:rotateY(180deg)}
+.card-front,.card-back{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center}
+.card-back{transform:rotateY(180deg);background:var(--panel);overflow:hidden}
+.card-back img{width:100%;height:100%;object-fit:cover;display:block}
+.card-front{background:#1a1a24;color:var(--cyan);font-size:1.5rem;font-weight:700}
+.card.matched .card-back{box-shadow:0 0 12px rgba(0,240,255,.5)}
+#win{display:none;margin-top:1.5rem;text-align:center}
+#win.show{display:block}
+#win p{margin:0 0 .75rem;color:var(--cyan);font-size:1.25rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+button{font:inherit;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--cyan);border:1px solid var(--cyan);padding:.4rem 1.2rem;cursor:pointer}
+button:hover{background:rgba(0,240,255,.1)}
+footer{margin-top:auto;padding-top:2rem;text-align:center}
+</style>
 </head>
-<body class="p-4 flex flex-col items-center">
+<body>
+<nav class="crumb"><a href="/"><span class="chev">&lsaquo;</span> cd .. / return_to_root</a></nav>
+<header>
+  <h1>Mesh_Decrypt</h1>
+  <div id="score" class="mono">SCORE: 0 // MOVES: 0 // PAIRS_REMAINING: 6</div>
+</header>
 
-    <header class="mb-8 text-center mt-4">
-        <h1 class="text-3xl font-bold text-[var(--term-cyan)] uppercase tracking-[0.2em]">Mesh_Decrypt</h1>
-        <div id="score" class="font-mono text-sm mt-2 text-zinc-400">SCORE: 0 // PAIRS_REMAINING: 6</div>
-    </header>
+<div id="grid"></div>
 
-    <div id="grid" class="grid grid-cols-3 gap-3 max-w-sm w-full aspect-[3/4]"></div>
+<div id="win">
+  <p id="win-text">Decrypted</p>
+  <button id="again">Re-encrypt</button>
+</div>
 
-    <script>
-        const images = [
-            'https://itechie.eu/memo/1ca.jpeg', 'https://itechie.eu/memo/2ca.jpeg',
-            'https://itechie.eu/memo/3ca.jpeg', 'https://itechie.eu/memo/4ca.jpeg',
-            'https://itechie.eu/memo/5ca.jpeg', 'https://itechie.eu/memo/6ca.jpeg'
-        ];
+<footer class="mono">
+  Card images generated with Google Gemini.
+</footer>
 
-        // 6 images * 2 = 12 cards (3x4 grid)
-        const deck = [...images, ...images];
-        deck.sort(() => Math.random() - 0.5);
-        
-        let flipped = [], score = 0, lock = false, matchesFound = 0;
-        const grid = document.getElementById('grid');
-        
-        deck.forEach((img) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="card-inner">
-                    <div class="card-front">?</div>
-                    <div class="card-back"><img src="${img}" class="w-full h-full object-cover"></div>
-                </div>
-            `;
-            card.onclick = () => flip(card, img);
-            grid.appendChild(card);
-        });
+<script>
+(function () {
+  var images = ["1ca.jpeg","2ca.jpeg","3ca.jpeg","4ca.jpeg","5ca.jpeg","6ca.jpeg"];
+  var grid = document.getElementById("grid");
+  var scoreEl = document.getElementById("score");
+  var win = document.getElementById("win");
+  var flipped, score, moves, found, lock;
 
-        function flip(card, img) {
-            if (lock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
-            card.classList.add('flipped');
-            flipped.push({card, img});
-
-            if (flipped.length === 2) {
-                lock = true;
-                if (flipped[0].img === flipped[1].img) {
-                    score += 10;
-                    matchesFound++;
-                    flipped[0].card.classList.add('matched');
-                    flipped[1].card.classList.add('matched');
-                    document.getElementById('score').innerText = `SCORE: ${score} // PAIRS_REMAINING: ${6 - matchesFound}`;
-                    flipped = []; lock = false;
-                } else {
-                    setTimeout(() => {
-                        flipped.forEach(f => f.card.classList.remove('flipped'));
-                        flipped = []; lock = false;
-                    }, 1000);
-                }
-            }
-        }
-    </script>
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function render() {
+    scoreEl.textContent = "SCORE: " + score + " // MOVES: " + moves + " // PAIRS_REMAINING: " + (images.length - found);
+  }
+  function start() {
+    flipped = []; score = 0; moves = 0; found = 0; lock = false;
+    win.classList.remove("show");
+    grid.innerHTML = "";
+    shuffle(images.concat(images)).forEach(function (img) {
+      var card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = '<div class="card-inner"><div class="card-front">?</div>' +
+        '<div class="card-back"><img src="' + img + '" alt=""></div></div>';
+      card.onclick = function () { flip(card, img); };
+      grid.appendChild(card);
+    });
+    render();
+  }
+  function flip(card, img) {
+    if (lock || card.classList.contains("flipped")) return;
+    card.classList.add("flipped");
+    flipped.push({ card: card, img: img });
+    if (flipped.length < 2) return;
+    lock = true; moves++;
+    if (flipped[0].img === flipped[1].img) {
+      score += 10; found++;
+      flipped.forEach(function (f) { f.card.classList.add("matched"); });
+      flipped = []; lock = false; render();
+      if (found === images.length) {
+        document.getElementById("win-text").textContent = "Decrypted in " + moves + " moves";
+        win.classList.add("show");
+      }
+    } else {
+      render();
+      setTimeout(function () {
+        flipped.forEach(function (f) { f.card.classList.remove("flipped"); });
+        flipped = []; lock = false;
+      }, 1000);
+    }
+  }
+  document.getElementById("again").onclick = start;
+  start();
+})();
+</script>
 </body>
 </html>
