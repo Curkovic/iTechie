@@ -207,7 +207,10 @@
                "marenda", "škoj", "tovar", "borša", "kalelarga", "makijato", "di si"];
   var BASE = "iTechie.eu", last = "";
   logo.setAttribute("aria-label", BASE);
-  logo.style.minWidth = logo.getBoundingClientRect().width + "px";
+  var box0 = logo.getBoundingClientRect();
+  logo.style.minWidth = box0.width + "px";
+  logo.style.height = box0.height + "px";              // keep the header height fixed while letters change
+  logo.style.display = "inline-block"; logo.style.lineHeight = box0.height + "px";
   logo.style.whiteSpace = "nowrap";
   function render(t) {                       // keep ".eu" cyan while the real logo is typed
     var cut = BASE.indexOf(".eu");
@@ -237,4 +240,80 @@
   function hash() { if (location.hash.toLowerCase() === "#fjaka") setTimeout(function () { now("fjaka"); }, 2000); }
   window.addEventListener("hashchange", hash); hash();
   schedule();
+})();
+
+// mission line: typed once, then the terminal "talks": live facts, data reactions, time-of-day remarks (visitor's own clock),
+// random questions (movie, word of the day) and AI "thoughts". Decided in the browser; nothing is stored or sent.
+(function () {
+  var box = document.getElementById("mission"); if (!box) return;
+  var t = box.querySelector(".mission-t"), f = box.querySelector(".mission-f");
+  var c = {}; try { c = JSON.parse(box.dataset.facts || "{}"); } catch (x) {}
+  if (Array.isArray(c)) c = { facts: c };
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function timeLines() {
+    var d = new Date(), h = d.getHours(), wd = d.getDay(), now = pad(h) + ":" + pad(d.getMinutes()), L = [];
+    if (h >= 23 || h < 4) L.push("it's " + now + ". why are you still awake?", "night shift again? the terminal sees you.", "go to sleep, operator. the world will still be here.", "insomnia detected. hydrate. then sleep.");
+    else if (h < 7) L.push("early riser detected. respect, the city is still asleep.", "makijato first, apocalypse later. that is the protocol.", "the sea is quiet at this hour, and so is this terminal.");
+    else if (h < 10) L.push("good morning, operator. coffee status: hopefully already in your hand.", "new day, same terminal. let us see what the world broke overnight.");
+    else if (h >= 13 && h < 16) L.push("peak fjaka hours in Dalmatia. resistance is futile, just let it happen.", "post-lunch fjaka detected. productivity levels dropping across the coast.");
+    else if (h >= 19 && h < 23) L.push("evening watch has started. anything good to watch tonight, operator?", "golden hour is over. the lights of Zadar are coming on one by one.");
+    if (wd === 5 && h >= 16) L.push("weekend protocol engaged. all non-essential worries suspended until monday.");
+    if (wd === 1 && h < 12) L.push("it is monday morning. survive it, and the rest of the week is easy.");
+    if (wd === 0) L.push("it is sunday. even home servers deserve a little fjaka today.");
+    return L;
+  }
+  function dataLines() {
+    var L = [];
+    if (c.wind && c.wind.gust >= 50 && /bura/i.test(c.wind.name)) L.push("bura gusts " + c.wind.gust + " km/h. hold onto everything.");
+    else if (c.wind && c.wind.gust >= 45) L.push(c.wind.name + " is pushing " + c.wind.gust + " km/h gusts. hats off. literally.");
+    if (c.wind && /jugo/i.test(c.wind.name)) L.push("jugo blowing. headaches are not your fault today.");
+    if (c.rain) L.push("it is raining in Zadar. stay in, make a coffee and read the news.");
+    if (c.level && c.level[0] >= 3) L.push("level " + c.level[0] + ". check your 72-hour kit.");
+    if (c.level && c.level[0] === 1) L.push("all six sensors report calm. honestly, that is a little suspicious.");
+    if (c.launch) { var s = c.launch - Date.now() / 1000;
+      if (s > 0 && s < 6 * 3600) L.push("rocket leaves in " + Math.floor(s / 3600) + "h " + Math.floor(s % 3600 / 60) + "m. watch the sky.");
+      else if (s > 0 && s < 36 * 3600) L.push("next rocket in " + Math.round(s / 3600) + " hours. someone, somewhere, is nervous."); }
+    return L;
+  }
+  function randomLines() {
+    var L = [];
+    if (c.movie) L.push("have you watched " + c.movie + " yet? it is my latest recommendation for a reason.", "if you need something for tonight: " + c.movie + ". you are welcome.");
+    if (c.word) L.push("today's word is " + c.word[0] + ". can you say it? try it out loud: " + c.word[1] + ".", "word of the day: " + c.word[0] + ", which means " + c.word[2] + ". use it today.");
+    L.push("pomalo. whatever it is, it can wait until after the coffee.", "di si? still here, still watching the sky above Zadar.", "no cookies were harmed in the making of this site. none were even baked.", "this line was typed by a machine. probably. you will never know for sure.");
+    return L;
+  }
+  // one line at a time: mostly facts, then a mix; night-time remarks come up more often
+  var last = "";
+  function next() {
+    var night = new Date().getHours() >= 23 || new Date().getHours() < 4, r = Math.random(), pool;
+    var T = timeLines(), Dl = dataLines(), A = c.ai || [], R = randomLines(), F = (c.facts || []);
+    if (night && T.length && r < 0.35) pool = T;
+    else if (r < 0.40 && F.length) pool = F;
+    else if (r < 0.58 && Dl.length) pool = Dl;
+    else if (r < 0.75 && A.length) pool = A;
+    else if (r < 0.87 && T.length) pool = T;
+    else pool = R;
+    var s, n = 0; do { s = pick(pool); } while (s === last && ++n < 5); last = s; return s;
+  }
+  async function typeInto(el, s, base) { for (var i = 1; i <= s.length; i++) { el.textContent = s.slice(0, i); await wait(base + Math.random() * 40); } }
+  async function eraseFrom(el) { var s = el.textContent; for (var i = s.length; i >= 0; i--) { el.textContent = s.slice(0, i); await wait(18); } }
+  var MISSION = t.textContent;
+  f.remove();                                   // everything is typed into the one line now
+  (async function () {
+    if (calm) return;                           // reduced motion: the mission sentence just stays
+    t.textContent = ""; await wait(900);
+    await typeInto(t, MISSION, 28); await wait(6000);
+    var k = 0;
+    for (;;) {
+      if (document.hidden) { await wait(2000); continue; }
+      await eraseFrom(t); await wait(300);
+      var s = (++k % 12 === 0) ? MISSION : next();   // the mission sentence comes back now and then
+      await typeInto(t, s, 35);
+      await wait(15000);                        // each line stays 15 s
+    }
+  })();
 })();

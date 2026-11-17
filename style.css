@@ -1261,3 +1261,19 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 .hl-img.hl-noimg::before, .hl-img.hl-noimg::after { content: none; display: none; }
 .log-older a { align-items: baseline; } .log-older time { line-height: 1; }   /* date sits on the title baseline */
 #operator .panel-head > span:first-child { align-items: baseline; } #operator .panel-head .op-av { align-items: baseline; line-height: 1; } #operator .panel-head .op-av::before { align-self: center; position: relative; top: -1px; }   /* AVAILABLE on the OPERATOR baseline */
+/* mission line between the hazard strip and the blocks: plain terminal text, typed once on load */
+.mission { margin: 22px 2px 4px; font: 400 0.8rem var(--mono); letter-spacing: 0.04em; color: var(--muted); }
+.mission-p { color: var(--cyan); }
+.mission-t::after { content: ""; display: inline-block; width: 0.55em; height: 1em; margin-left: 3px; background: var(--cyan); vertical-align: -0.15em; animation: crumb-blink 1.06s steps(1) infinite; }
+/* mission line: cursor follows whatever is being typed last */
+.mission-t::after { content: none; }
+.mission-f { color: var(--text); }
+.mission-f::after { content: ""; display: inline-block; width: 0.55em; height: 1em; margin-left: 3px; background: var(--cyan); vertical-align: -0.15em; animation: crumb-blink 1.06s steps(1) infinite; }
+.mission-f { color: inherit; }   /* facts in the same grey as the sentence */
+/* mission line: always exactly one line, never pushes the layout; cursor after the text */
+.mission { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 1.6em; }
+.mission-t::after { content: ""; display: inline-block; width: 0.55em; height: 1em; margin-left: 3px; background: var(--cyan); vertical-align: -0.15em; animation: crumb-blink 1.06s steps(1) infinite; }
+/* phones: the typing line wraps instead of "…", with fixed room for 3 lines so the blocks below never jump */
+@media (max-width: 620px) {
+  .mission { white-space: normal; overflow: visible; text-overflow: clip; min-height: calc(1.55em * 3); line-height: 1.55; font-size: 0.74rem; }
+}
