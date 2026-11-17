@@ -317,3 +317,49 @@
     }
   })();
 })();
+
+// easter egg: click the version number -> the planes that are over Zadar right now fly across the screen (none = nothing happens)
+(function () {
+  var ver = document.querySelector(".ver"); if (!ver) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var flying = false;
+  ver.addEventListener("click", function () {
+    if (flying) return;
+    var cnt = document.querySelector(".atc-count b"), n = cnt ? parseInt(cnt.textContent, 10) || 0 : 0;
+    if (!n) return;                                                     // empty sky: nothing happens
+    var calls = [].map.call(document.querySelectorAll(".atc-list li > b"), function (b) { return b.textContent.trim(); });
+    flying = true; n = Math.min(n, 12);
+    for (var i = 0; i < n; i++) (function (i) {
+      setTimeout(function () {
+        var p = document.createElement("div"), rtl = Math.random() < 0.5, dur = 5 + Math.random() * 4;
+        p.className = "fly-plane" + (rtl ? " rtl" : "");
+        p.style.top = (8 + Math.random() * 78) + "vh";
+        p.style.animationDuration = dur + "s";
+        p.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>'
+                    + (calls[i] ? '<span>' + calls[i].replace(/[<>&]/g, "") + '</span>' : "");
+        document.body.appendChild(p);
+        setTimeout(function () { p.remove(); if (i === n - 1) flying = false; }, dur * 1000 + 200);
+      }, i * 700);
+    })(i);
+  });
+})();
+
+// easter egg: click the launch countdown -> a rocket lifts off from the bottom of the screen
+// (in the last hour before the real launch the screen shakes too)
+(function () {
+  var cd = document.querySelector(".countdown[data-t0]"); if (!cd) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var busy = false;
+  cd.addEventListener("click", function () {
+    if (busy) return; busy = true;
+    var left = Math.max(0, +cd.dataset.t0 - Date.now() / 1000);
+    var r = document.createElement("div"); r.className = "fly-rocket";
+    r.style.left = (20 + Math.random() * 60) + "vw";
+    r.innerHTML = '<svg viewBox="0 0 24 48" aria-hidden="true"><path class="body" d="M12 1c4 4 6 9 6 16v14H6V17C6 10 8 5 12 1z"/>'
+                + '<circle class="win" cx="12" cy="15" r="2.6"/><path class="fin" d="M6 24l-5 9v2l5-3zM18 24l5 9v2l-5-3z"/>'
+                + '<path class="flame" d="M7 31h10l-2 9-3 6-3-6z"/></svg><i class="smoke"></i>';
+    document.body.appendChild(r);
+    if (left > 0 && left < 3600) document.body.classList.add("lift-shake");    // real launch within the hour
+    setTimeout(function () { r.remove(); document.body.classList.remove("lift-shake"); busy = false; }, 4200);
+  });
+})();
