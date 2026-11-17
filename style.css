@@ -1049,3 +1049,47 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 .panel-head .hl-head-right > a { white-space: nowrap; }
 .panel-head .ghost .ghost-tag { color: inherit; }
 .ver { align-self: center; position: relative; top: 0.3rem; padding-bottom: 0; }   /* sit on the logo baseline (bar is shorter since the ghost line moved) */
+
+/* ---------- EU page: portal blocks ---------- */
+.eu-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0 0 20px; }
+.eu-stats div { padding: 14px 16px; background: var(--panel); border: 1px solid var(--line); border-top: 2px solid var(--cyan); }
+.eu-stats b { display: block; font: 900 2rem/1 "Rajdhani", sans-serif; color: var(--bright); }
+.eu-stats span { font: 400 0.62rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.eu-two { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; margin-bottom: 20px; align-items: stretch; }
+.eu-two .panel { margin: 0; }
+.eu-start { list-style: none; margin: 0; padding: 0; }
+.eu-start li { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.eu-step { font: 700 1.1rem var(--mono); color: var(--yellow); min-width: 2ch; }
+.eu-start b { font: 700 1.1rem "Rajdhani", sans-serif; color: var(--bright); }
+.eu-start a:hover b { color: var(--cyan); }
+.eu-start small { font: 400 0.66rem var(--mono); color: var(--muted); }
+.eu-start p { margin: 2px 0 0; font-size: 0.92rem; color: var(--text); }
+.eu-note { margin: 12px 0 0; font-size: 0.9rem; color: #a9b6bf; font-style: italic; }
+.eu-spot .panel-body { display: flex; flex-direction: column; justify-content: center; min-height: 220px; }
+.eu-spot-cat { margin: 0; font: 400 0.62rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.eu-spot-name { margin: 6px 0 0; font: 700 2rem/1.1 "Rajdhani", sans-serif; }
+.eu-spot-name a { color: var(--bright); } .eu-spot-name a:hover { color: var(--cyan); }
+.eu-spot-name .eu-cc { font-size: 0.7rem; vertical-align: 0.4em; color: var(--cyan); }
+.eu-spot-line { margin: 10px 0 14px; font-size: 1.05rem; color: var(--text); }
+.eu-again { background: none; border: 1px solid var(--line-strong); color: var(--cyan); font: 400 0.7rem var(--mono); letter-spacing: 0.08em; padding: 6px 12px; cursor: pointer; }
+.eu-again:hover { border-color: var(--cyan); }
+.eu-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.eu-why-c { padding-left: 12px; border-left: 2px solid var(--yellow); }
+.eu-why-c b { font: 700 1.05rem "Rajdhani", sans-serif; color: var(--bright); }
+.eu-why-c p { margin: 4px 0 0; font-size: 0.92rem; line-height: 1.45; color: #a9b6bf; }
+.eu-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.eu-tile { display: block; padding: 12px 14px; background: var(--panel-2); border: 1px solid var(--line); transition: border-color 0.2s; }
+.eu-tile:hover { border-color: var(--cyan); }
+.eu-tile b { display: block; font: 700 1.02rem "Rajdhani", sans-serif; color: var(--bright); }
+.eu-tile span { display: block; font: 400 0.66rem var(--mono); color: var(--muted); margin-top: 2px; }
+.eu-eff { display: inline-block; margin-top: 6px; font: 400 0.6rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.eu-eff.easy { color: var(--green); } .eu-eff.medium { color: var(--yellow); } .eu-eff.advanced { color: var(--red); } .eu-eff.social { color: var(--cyan); }
+.eu-legend2 { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; font: 400 0.66rem var(--mono); color: var(--muted); }
+.eu-legend2 .eu-eff { margin: 0; }
+.eu-ccs { display: flex; flex-wrap: wrap; gap: 8px; }
+.eu-ccchip { font: 400 0.8rem var(--mono); color: var(--text); padding: 5px 10px; border: 1px solid var(--line-strong); }
+.eu-ccchip b { color: var(--cyan); font-weight: 500; margin-right: 4px; }
+@media (max-width: 860px) { .eu-two { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .eu-stats { grid-template-columns: repeat(2, 1fr); } }
+.eu-page .wrap > .panel { margin-bottom: 20px; }
+.hl-more .hl-img img { object-position: center top; }   /* keep faces/tops of photos, crop from the bottom */
