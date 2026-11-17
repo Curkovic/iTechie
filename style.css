@@ -1229,3 +1229,12 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 .tl-main { flex: 0 0 300px; max-width: 300px; }
 .tl-why { white-space: normal; line-height: 1.4; font-size: 0.6rem; }
 @media (max-width: 900px) { .tl-main { flex-basis: 100%; max-width: none; } }
+/* phones / narrow screens: right column (news, quiz, sky…) first, left column (operator, weather…) after */
+@media (max-width: 900px) { .grid > main.col { order: -1; } }
+/* lightbox: close button always visible (pinned to the window), long text scrolls, image a bit smaller */
+.lb { overflow-y: auto; }
+.lb-close, .lb-box.tall .lb-close { position: fixed; top: 16px; right: 16px; z-index: 510; background: rgba(7, 8, 10, 0.85); }
+.lb-box img { max-height: 62vh; max-height: 62dvh; }
+.lb-box { max-height: none; margin: auto 0; }
+.lb-close[hidden] { display: none; }
+.lb-close, .lb-box.tall .lb-close { transform: none; }

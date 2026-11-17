@@ -102,9 +102,9 @@
     var ti = document.createElement("p"); ti.className = "lb-title";
     var de = document.createElement("p"); de.className = "lb-desc";
     var ln = document.createElement("a"); ln.className = "lb-link"; ln.target = "_blank"; ln.rel = "noopener noreferrer"; ln.textContent = "Full story on NASA.gov ↗";
-    box.appendChild(x); box.appendChild(im); box.appendChild(ti); box.appendChild(de); box.appendChild(ln); lb.appendChild(box);
+    x.hidden = true; document.body.appendChild(x); box.appendChild(im); box.appendChild(ti); box.appendChild(de); box.appendChild(ln); lb.appendChild(box);
     document.body.appendChild(lb);
-    var closeLb = function () { lb.hidden = true; document.body.classList.remove("lb-open"); if (iotd) iotd.focus(); };
+    var closeLb = function () { lb.hidden = true; x.hidden = true; document.body.classList.remove("lb-open"); if (iotd) iotd.focus(); };
     zooms.forEach(function (z) { z.addEventListener("click", function (ev) { iotd = z; open(ev); }); });
     function open(ev) {
       var big = iotd.getAttribute("data-big") || "";
@@ -117,7 +117,7 @@
       de.textContent = iotd.getAttribute("data-desc") || "";
       var l = iotd.getAttribute("data-link") || ""; if (l.indexOf("https://") === 0) { ln.href = l; ln.hidden = false; } else ln.hidden = true;
       ln.textContent = iotd.getAttribute("data-linktext") || "Full story on NASA.gov ↗";
-      lb.hidden = false; document.body.classList.add("lb-open"); x.focus();
+      lb.hidden = false; x.hidden = false; lb.scrollTop = 0; document.body.classList.add("lb-open"); x.focus();
     }
     x.addEventListener("click", closeLb);
     lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
