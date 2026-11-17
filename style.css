@@ -1302,3 +1302,9 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 @keyframes smoke { 0% { height: 0; } 100% { height: 60vh; opacity: 0; } }
 body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 @keyframes shake { 25% { transform: translate(1px, -1px); } 50% { transform: translate(-1px, 1px); } 75% { transform: translate(1px, 1px); } }
+
+/* Headlines + Zadar Node small cards: same overlay as Space News (scanlines + bottom fade) */
+.hl-more a::after {
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.22) 50%) 0 0 / 100% 3px,
+              linear-gradient(to bottom, rgba(7, 8, 10, 0.15) 0%, rgba(7, 8, 10, 0.75) 45%, rgba(7, 8, 10, 0.96) 100%);
+}
