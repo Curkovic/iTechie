@@ -91,9 +91,9 @@
     });
   });
 
-  // NASA image: click to view large (without JS the link opens the image itself)
-  var iotd = document.querySelector("a.iotd[data-big]");
-  if (iotd) {
+  // click-to-zoom lightbox: NASA image + recommendation poster (without JS the link opens the image itself)
+  var zooms = document.querySelectorAll("a.iotd[data-big], a.zoom[data-big], a.sn-open[data-big]"), iotd = zooms[0];
+  if (zooms.length) {
     var lb = document.createElement("div"); lb.className = "lb"; lb.hidden = true;
     lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
     var box = document.createElement("div"); box.className = "lb-box";
@@ -104,17 +104,21 @@
     var ln = document.createElement("a"); ln.className = "lb-link"; ln.target = "_blank"; ln.rel = "noopener noreferrer"; ln.textContent = "Full story on NASA.gov ↗";
     box.appendChild(x); box.appendChild(im); box.appendChild(ti); box.appendChild(de); box.appendChild(ln); lb.appendChild(box);
     document.body.appendChild(lb);
-    var closeLb = function () { lb.hidden = true; document.body.classList.remove("lb-open"); iotd.focus(); };
-    iotd.addEventListener("click", function (ev) {
+    var closeLb = function () { lb.hidden = true; document.body.classList.remove("lb-open"); if (iotd) iotd.focus(); };
+    zooms.forEach(function (z) { z.addEventListener("click", function (ev) { iotd = z; open(ev); }); });
+    function open(ev) {
       var big = iotd.getAttribute("data-big") || "";
       if (big.indexOf("https://") !== 0) return;            // fall back to normal link
       ev.preventDefault();
+      box.classList.remove("tall");
+      im.onload = function () { box.classList.toggle("tall", im.naturalHeight > im.naturalWidth * 1.1); };   /* posters: image left, text right */
       im.src = big; im.alt = iotd.getAttribute("data-title") || "";
       ti.textContent = iotd.getAttribute("data-title") || "";
       de.textContent = iotd.getAttribute("data-desc") || "";
       var l = iotd.getAttribute("data-link") || ""; if (l.indexOf("https://") === 0) { ln.href = l; ln.hidden = false; } else ln.hidden = true;
+      ln.textContent = iotd.getAttribute("data-linktext") || "Full story on NASA.gov ↗";
       lb.hidden = false; document.body.classList.add("lb-open"); x.focus();
-    });
+    }
     x.addEventListener("click", closeLb);
     lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLb(); });
     document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !lb.hidden) closeLb(); });
@@ -140,4 +144,29 @@
     var setSpeed = function () { tk.style.animationDuration = Math.max(30, Math.round(tk.scrollWidth / 55)) + "s"; };
     setSpeed(); window.addEventListener("resize", setSpeed);
   }
+})();
+
+// Space News slider: arrows + dots (the track itself scrolls/swipes natively)
+(function () {
+  var t = document.getElementById("sn-track"); if (!t) return;
+  var cards = t.children, dots = document.querySelectorAll(".sn-dots i");
+  function idx() { var w = cards[0].offsetWidth + 12; return Math.round(t.scrollLeft / w); }
+  function mark() { var i = idx(); dots.forEach(function (d, n) { d.classList.toggle("on", n === i); }); }
+  document.querySelectorAll(".sn-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var i = Math.max(0, Math.min(cards.length - 1, idx() + (+b.dataset.d)));
+      t.scrollTo({ left: cards[i].offsetLeft - t.offsetLeft, behavior: "smooth" });
+    });
+  });
+  t.addEventListener("scroll", function () { window.requestAnimationFrame(mark); }); mark();
+  // auto-slide every 10 s (loops); pauses on hover/touch, while the lightbox is open or the tab is hidden
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var hold = false, box = t.parentNode;
+  ["mouseenter", "touchstart", "focusin"].forEach(function (ev) { box.addEventListener(ev, function () { hold = true; }, { passive: true }); });
+  ["mouseleave", "focusout"].forEach(function (ev) { box.addEventListener(ev, function () { hold = false; }); });
+  setInterval(function () {
+    if (hold || document.hidden || document.body.classList.contains("lb-open")) return;
+    var i = (idx() + 1) % cards.length;
+    t.scrollTo({ left: cards[i].offsetLeft - t.offsetLeft, behavior: "smooth" });
+  }, 10000);
 })();
