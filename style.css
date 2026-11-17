@@ -989,3 +989,63 @@ a.wx { transition: border-color 0.2s, background 0.2s; } a.wx:hover { color: var
 @media (max-width: 860px) { .lp-hero, .lp-cols { grid-template-columns: 1fr; } }
 @media (max-width: 620px) { .lp-list li { grid-template-columns: 1fr auto; } .lp-where { display: none; } .lp-cd.big { font-size: 1.7rem; } .lp-name { font-size: 1.3rem; } }
 @media (max-width: 620px) { .lp-list li { grid-template-columns: 1fr; gap: 3px; } .lp-list .lp-st { text-align: left; } .lp-when { display: flex; gap: 10px; align-items: baseline; } .lp-when .lp-cd { display: inline; } }
+/* Space Launch block: title links to /launches/, AI brief under the rocket line */
+.panel-head .head-link { color: inherit; } .panel-head .head-link:hover { color: var(--yellow); }
+.launch-ai { margin-top: 8px !important; color: var(--text) !important; }
+/* Space Launch: the launch photo, blurred, as a backdrop (like My Latest Recommendation) */
+.sl-wrap { position: relative; margin: -16px -16px 0; padding: 16px 16px 12px; overflow: hidden; }
+.sl-wrap::before { content: ""; position: absolute; inset: -30px; z-index: 0; pointer-events: none;
+  background: var(--sl-bg, none) center / cover no-repeat; filter: blur(14px) saturate(1.2) brightness(0.3); }
+.sl-wrap::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.25) 50%) 0 0 / 100% 3px,
+              linear-gradient(to bottom, rgba(13, 16, 20, 0.15), rgba(13, 16, 20, 0.85)); }
+.sl-wrap > * { position: relative; z-index: 1; }
+.wm-egg .wm-hit { fill: transparent; } .wm-egg:hover .wm-label { fill: var(--yellow); }
+
+/* ---------- /quiz/ hub (.qh-) ---------- */
+.qh-page .wrap > .panel { margin-bottom: 18px; }
+.qh-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; }
+.qh-stats { display: flex; gap: 34px; }
+.qh-big { margin: 0; font: 900 2.2rem/1 var(--head-font); color: var(--bright); }
+.qh-big small { font-size: 0.45em; color: var(--muted); }
+.qh-k { margin: 6px 0 0; font: 400 0.62rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.qh-actions { text-align: right; }
+.qh-rand { display: inline-block; text-decoration: none; }
+.qh-note { margin: 8px 0 0; font: 400 0.62rem var(--mono); color: var(--muted); }
+.qh-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.qh-chip { background: transparent; border: 1px solid var(--line-strong); color: var(--text); font: 400 0.72rem var(--mono); letter-spacing: 0.06em; padding: 5px 10px; cursor: pointer; }
+.qh-chip b { color: var(--muted); font-weight: 400; margin-left: 4px; }
+.qh-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+.qh-chip.on { border-color: var(--cyan); color: var(--bg); background: var(--cyan); } .qh-chip.on b { color: var(--bg); }
+.qh-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.qh-grid .quiz-card[hidden] { display: none; }
+.qh-best { margin-left: 8px; font: 400 0.62rem var(--mono); color: var(--green); border: 1px solid currentColor; padding: 0 5px; vertical-align: 0.15em; }
+.qh-best.max { color: var(--yellow); }
+@media (max-width: 620px) { .qh-stats { gap: 20px; } .qh-big { font-size: 1.7rem; } .qh-actions { text-align: left; } }
+.panel-head small a.head-more { color: var(--muted); } .panel-head small a.head-more:hover { color: var(--cyan); }
+/* Sky above v2: smaller radar, richer rows (airline, route, speed, heading, climb) */
+.atc { grid-template-columns: minmax(0, 190px) 1fr; gap: 22px; }
+.atc-list li { grid-template-columns: 6.5em 1fr auto; gap: 1px 12px; padding: 7px 0; }
+.atc-list b { grid-row: span 3; color: var(--cyan); align-self: start; }
+.atc-list li.low b { color: var(--yellow); }
+.atc-list li span.atc-al { grid-column: 2; color: var(--bright); font-family: "Rajdhani", sans-serif; font-size: 1.05rem; }
+.atc-list li span.atc-alt { grid-column: 3; grid-row: 1; text-align: right; color: var(--text); }
+.atc-list li span.atc-rt { grid-column: 2 / 4; color: var(--text); font-size: 0.95em; }
+.atc-list li span.atc-mv { grid-column: 2 / 4; color: var(--muted); font-size: 0.88em; }
+.atc-list li.emerg { border-left: 2px solid var(--red); padding-left: 8px; }
+.atc-em { grid-column: 2 / 4; color: var(--red); font-weight: 700; letter-spacing: 0.06em; }
+.atc-last { margin: 0 0 6px; font: 400 0.8rem var(--mono); color: var(--text); }
+.atc-last small { display: block; color: var(--muted); font-size: 0.75em; letter-spacing: 0.1em; text-transform: uppercase; }
+.atc-last b { color: var(--cyan); font-weight: 500; margin-right: 6px; }
+@media (max-width: 620px) { .atc { grid-template-columns: 1fr; } .atc .radar { max-width: 220px; margin: 0 auto; } }
+.atc-count b { font: 700 2rem/1 "Rajdhani", sans-serif; }   /* Orbitron draws 0 as a boxed slash */
+/* ghost line (AI comment on a headline) now sits in the Headlines header, one line, cut with … */
+.hl-head-right { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.panel-head .ghost-head { min-width: 0; flex: 1 1 auto; }
+.panel-head .ghost-head p { display: none; }
+.panel-head .ghost { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60ch;
+  font: italic 400 0.68rem var(--mono); letter-spacing: 0.02em; text-transform: none; color: var(--muted); }
+.panel-head .ghost:hover { color: var(--cyan); }
+.panel-head .hl-head-right > a { white-space: nowrap; }
+.panel-head .ghost .ghost-tag { color: inherit; }
+.ver { align-self: center; position: relative; top: 0.3rem; padding-bottom: 0; }   /* sit on the logo baseline (bar is shorter since the ghost line moved) */

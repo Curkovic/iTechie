@@ -141,6 +141,11 @@
   function result() {
     state.started = false; drawProgress();
     var score = state.answers.filter(function (a) { return a && a.right; }).length, pct = score / data.length;
+    try {   /* best score per quiz, kept only in this browser (shown on /quiz/) */
+      var qn = (location.pathname.match(/(\d+)\.html$/) || [])[1];
+      if (qn) { var b = JSON.parse(localStorage.getItem("itq-best") || "{}");
+        if (!b[qn] || score > b[qn].s) { b[qn] = { s: score, t: data.length }; localStorage.setItem("itq-best", JSON.stringify(b)); } }
+    } catch (x) {}
     count.textContent = "RESULT";
     var card = el("div", "qz-card");
     card.appendChild(icon());
