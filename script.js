@@ -363,3 +363,13 @@
     setTimeout(function () { r.remove(); document.body.classList.remove("lift-shake"); busy = false; }, 4200);
   });
 })();
+
+// links to other sites open in a new tab (local links stay in the same tab)
+(function () {
+  [].forEach.call(document.querySelectorAll("a[href^='http']"), function (a) {
+    if (a.hostname && a.hostname !== location.hostname) {
+      a.target = "_blank";
+      if (!/noopener/.test(a.rel)) a.rel = (a.rel ? a.rel + " " : "") + "noopener";
+    }
+  });
+})();
