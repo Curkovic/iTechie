@@ -1376,3 +1376,11 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 /* weather page: frosted, semi-transparent panels so the live sky shows through */
 .wp-page .panel { background: rgba(10, 14, 20, 0.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .wp-page .panel-head { background: rgba(14, 26, 34, 0.7); }
+/* crew: ♀ was clipped on iPhone (only the circle showed) — give it its own box so nothing cuts it */
+.crew b { padding-bottom: 0.18em; }
+.crew .fem { display: inline-block; line-height: 1; font-size: 0.95em; vertical-align: 0.02em; font-family: "Apple Symbols", "Segoe UI Symbol", "DejaVu Sans", sans-serif; font-variant-emoji: text; }
+/* Off-Planet header on phones: the "10 people · ♀ 3 women (30% ☹︎)" line goes under the title, on one line */
+@media (max-width: 620px) {
+  #space .panel-head { flex-wrap: wrap; row-gap: 2px; }
+  #space .panel-head small { flex-basis: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
