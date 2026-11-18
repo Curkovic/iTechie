@@ -1308,3 +1308,36 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
   background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.22) 50%) 0 0 / 100% 3px,
               linear-gradient(to bottom, rgba(7, 8, 10, 0.15) 0%, rgba(7, 8, 10, 0.75) 45%, rgba(7, 8, 10, 0.96) 100%);
 }
+
+/* Launches page: Off-Planet crew stacked under the launch board */
+.lp-side { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.lp-side .panel { margin: 0; }
+
+/* What to watch? (/watch/): one title at a time, poster blurred behind, next button */
+.wt-body { position: relative; overflow: hidden; min-height: calc(100vh - 230px); display: flex; align-items: center; padding: 32px !important; }
+.wt-body::before { content: ""; position: absolute; inset: -40px; z-index: 0; background: var(--wt-bg, none) center / cover no-repeat;
+  filter: blur(26px) saturate(1.1) brightness(0.22); transition: background-image 0.3s; }
+.wt-body::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.22) 50%) 0 0 / 100% 3px; }
+.wt-item { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(180px, 320px) 1fr; gap: 32px; align-items: center; width: 100%; padding: 12px 0; }
+.js .wt-item { display: none; }
+.js .wt-item.on { display: grid; animation: wt-in 0.35s ease; }
+@keyframes wt-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+.wt-poster { display: block; aspect-ratio: 2 / 3; border: 1px solid var(--line-strong); background: var(--panel-2); overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); }
+.wt-poster img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wt-text p { margin: 0; }
+.wt-name { margin: 6px 0 4px; font: 700 clamp(1.8rem, 4vw, 3rem)/1.05 "Rajdhani", sans-serif; color: var(--bright); }
+.wt-text .pick-meta { font-size: 0.8rem; margin-top: 6px; }
+.wt-text .pick-genres { font-size: 1rem; margin-top: 4px; }
+.wt-desc { margin-top: 18px !important; max-width: 60ch; font-size: 1.05rem; line-height: 1.6; color: var(--text); }
+.wt-text .pick-links { margin-top: 18px !important; font-size: 0.75rem; }
+.wt-next { position: absolute; z-index: 2; right: 24px; bottom: 20px; padding: 8px 18px; background: rgba(7, 8, 10, 0.6); color: var(--cyan);
+  border: 1px solid var(--cyan); font: 700 0.72rem var(--head-font); letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
+.wt-next:hover { background: rgba(0, 240, 255, 0.14); }
+@media (max-width: 700px) {
+  .wt-body { padding: 18px 16px 70px !important; min-height: 0; }
+  .wt-item { grid-template-columns: 1fr; gap: 18px; }
+  .wt-poster { width: 62%; max-width: 260px; margin: 0 auto; }
+  .wt-next { left: 16px; right: 16px; bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .js .wt-item.on { animation: none; } }

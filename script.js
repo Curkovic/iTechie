@@ -17,7 +17,7 @@
   function tick() {
     clock.textContent = "ZADAR " + new Date().toLocaleTimeString("en-GB", { timeZone: "Europe/Zagreb" });
   }
-  tick(); clock.hidden = false; setInterval(tick, 1000);
+  if (clock) { tick(); clock.hidden = false; setInterval(tick, 1000); }   // not every page has the clock
 
   // "Last sync: 12 min ago" from the build timestamp
   var sync = document.getElementById("sync");
