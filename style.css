@@ -1447,3 +1447,15 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 }
 @media (max-width: 760px) { .ph-note { padding: 8px 16px; } }   /* phone: comment lines up with the text below */
 .ph-note { border-top-color: var(--line); }   /* thin line in the same colour as the panel outlines */
+
+/* Water Watch: red warning strip between the threat panel and the air strip (24 h per new Vodovod notice) */
+.ww { display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 8px 16px; font: 400 0.76rem/1.4 var(--mono);
+  color: var(--red); border-color: rgba(255, 0, 60, 0.45); background: rgba(255, 0, 60, 0.06); text-decoration: none; }
+.ww:hover { background: rgba(255, 0, 60, 0.12); color: var(--red); }
+.ww-ico { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+  animation: crumb-blink 1.6s steps(1) infinite; }
+.ww-tag { flex: none; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.ww-txt { flex: 1; min-width: 0; color: #ff6b85; }
+.ww-more, .ww-src { flex: none; color: var(--muted); font-size: 0.68rem; }
+@media (max-width: 620px) { .ww { flex-wrap: wrap; } .ww-txt { flex-basis: 100%; order: 3; } .ww-src { margin-left: auto; } }
+@media (prefers-reduced-motion: reduce) { .ww-ico { animation: none; } }
