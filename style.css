@@ -1384,3 +1384,5 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
   #space .panel-head { flex-wrap: wrap; row-gap: 2px; }
   #space .panel-head small { flex-basis: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
+/* header weather badge on phones: no wind icon/speed, so ZADAR + clock stay on one line ("16°C rain · jugo") */
+@media (max-width: 620px) { .wx-spd, .wx-ico.wx-wind { display: none; } }
