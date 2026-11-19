@@ -373,3 +373,26 @@
     }
   });
 })();
+
+// operator's pick: "signal fades in 13h 20m" countdown (block is removed by the build after 24 h)
+(function () {
+  var x = document.querySelector(".ph-exp[data-exp]"); if (!x) return;
+  function tick() {
+    var s = +x.dataset.exp - Date.now() / 1000;
+    if (s <= 0) { x.textContent = "signal fading"; return; }
+    var h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60);
+    x.textContent = "signal fades in " + (h ? h + "h " : "") + m + "m";
+  }
+  tick(); setInterval(tick, 60000);
+})();
+
+// operator's pick: on small screens the summary is folded; "read more" opens it (only shown if text is cut)
+(function () {
+  var s = document.getElementById("ph-sums"), b = document.querySelector(".ph-more"); if (!s || !b) return;
+  function check() { if (!s.classList.contains("open")) b.hidden = !(s.scrollHeight > s.clientHeight + 2); }
+  b.addEventListener("click", function () {
+    var open = s.classList.toggle("open");
+    b.innerHTML = open ? "show less &#9652;" : "read more &#9662;"; b.hidden = false;
+  });
+  check(); addEventListener("resize", check);
+})();
