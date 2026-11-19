@@ -1446,3 +1446,4 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
   .ph-when::before { content: none; }
 }
 @media (max-width: 760px) { .ph-note { padding: 8px 16px; } }   /* phone: comment lines up with the text below */
+.ph-note { border-top-color: var(--line); }   /* thin line in the same colour as the panel outlines */
