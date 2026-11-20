@@ -1459,3 +1459,4 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 .ww-more, .ww-src { flex: none; color: var(--muted); font-size: 0.68rem; }
 @media (max-width: 620px) { .ww { flex-wrap: wrap; } .ww-txt { flex-basis: 100%; order: 3; } .ww-src { margin-left: auto; } }
 @media (prefers-reduced-motion: reduce) { .ww-ico { animation: none; } }
+.otd-noimg .otd { grid-template-columns: 1fr; }   /* On This Day without a photo: text only, full width */
