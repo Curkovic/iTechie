@@ -1552,3 +1552,6 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 @keyframes lift3 { from { transform: translateY(0); } to { transform: translateY(-120vh); } }
 /* rocket egg v4: starts just below the screen and rises into view right away, then keeps accelerating */
 .fly-rocket { bottom: -85px; animation: lift3 3.4s cubic-bezier(.2, .15, .85, .6) forwards; }
+/* header AI lines (Headlines, Space News, Zadar Node): use all the free space next to the title, … only when it really doesn't fit */
+.panel-head .hl-head-right { flex: 1 1 auto; justify-content: flex-end; margin-left: 16px; }
+.panel-head .ghost { max-width: none; }
