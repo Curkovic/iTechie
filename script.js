@@ -46,7 +46,7 @@
       var diff = Math.round(t0 - Date.now() / 1000);
       if (diff >= 0) cd.textContent = "T-" + fmt(diff);
       else if (diff > -10800) cd.textContent = "T+" + fmt(-diff);
-      else cd.textContent = "";
+      else { var h = Math.floor(-diff / 3600); cd.textContent = h < 48 ? "launched " + h + "h ago" : ""; cd.classList.add("cd-done"); }
     };
     tickCd(); setInterval(tickCd, 1000);
   }
