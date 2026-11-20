@@ -1460,3 +1460,19 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 @media (max-width: 620px) { .ww { flex-wrap: wrap; } .ww-txt { flex-basis: 100%; order: 3; } .ww-src { margin-left: auto; } }
 @media (prefers-reduced-motion: reduce) { .ww-ico { animation: none; } }
 .otd-noimg .otd { grid-template-columns: 1fr; }   /* On This Day without a photo: text only, full width */
+
+/* Power Watch: amber strip (same shape as Water Watch) + outage table on the City page */
+.pw { color: #ffb020; border-color: rgba(255, 176, 32, 0.45); background: rgba(255, 176, 32, 0.06); }
+.pw:hover { color: #ffb020; background: rgba(255, 176, 32, 0.12); }
+.pw .ww-txt { color: #ffcf73; }
+.pw-ico { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; animation: crumb-blink 1.6s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .pw-ico { animation: none; } }
+.pw-list { list-style: none; margin: 0; padding: 0; }
+.pw-row { display: grid; grid-template-columns: 110px 1fr auto; gap: 14px; align-items: baseline; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+.pw-time { font: 400 0.8rem var(--mono); color: #ffb020; }
+.pw-where b { display: block; font-weight: 600; color: var(--bright); }
+.pw-where small { display: block; margin-top: 2px; font-size: 0.78rem; color: var(--muted); }
+.pw-type { font: 400 0.66rem var(--mono); text-transform: uppercase; letter-spacing: 0.1em; padding: 1px 6px; border: 1px solid var(--line-strong); color: var(--muted); }
+.pw-type.fault { color: var(--red); border-color: rgba(255, 0, 60, 0.45); }
+.pw-foot { margin: 10px 0 0; font-size: 0.72rem; }
+@media (max-width: 620px) { .pw-row { grid-template-columns: 1fr auto; } .pw-time { grid-column: 1 / -1; } }

@@ -135,28 +135,40 @@
               <td>NASA media, generally not copyrighted; credited and linked</td>
             </tr>
             <tr>
-              <td>Near-Earth asteroids</td>
-              <td><a href="https://api.nasa.gov/" rel="noopener">NASA NeoWs</a> (Near Earth Object Web Service)</td>
-              <td>Closest asteroid of the day, in the ticker (daily)</td>
-              <td>NASA open API</td>
-            </tr>
-            <tr>
-              <td>Global Peace Index</td>
-              <td><a href="https://www.visionofhumanity.org/" rel="noopener">Institute for Economics &amp; Peace</a>, retrieved via <a href="https://statbase.org/" rel="noopener">statbase.org</a></td>
-              <td>Peace index line in the ticker (twice a month)</td>
-              <td>© IEP, cited</td>
-            </tr>
-            <tr>
-              <td>Internet outages</td>
-              <td><a href="https://netblocks.org/" rel="noopener">NetBlocks</a> public feed</td>
-              <td>Outage line in the ticker (daily)</td>
-              <td>© NetBlocks, cited</td>
-            </tr>
-            <tr>
               <td>Headlines of the day</td>
               <td>RSS feeds of <a href="https://www.index.hr/" rel="noopener">Index.hr</a> (most read and latest), <a href="https://n1info.hr/" rel="noopener">N1 Hrvatska</a> and <a href="https://slobodnadalmacija.hr/" rel="noopener">Slobodna Dalmacija</a></td>
               <td>Headlines panel: four stories with title, thumbnail and link to the full article. The feeds take turns each day; within a feed, its own order (most read or newest) decides. No AI ranking. Sport is skipped. Titles and links (no images) are kept in the <a href="/news/">news archive</a>.</td>
               <td>© the publishers; title, image and link as published in their feeds</td>
+            </tr>
+            <tr>
+              <td>Water notices</td>
+              <td><a href="https://www.vodovod-zadar.hr/obavijesti" rel="noopener">Vodovod d.o.o. Zadar</a> public notices</td>
+              <td>Red WATER strip on the homepage: water cuts, pipe repairs and boil-water advice. A new notice shows for 24 hours, then disappears. The AI translates each notice into one English line; every strip links to the original.</td>
+              <td>&copy; Vodovod Zadar, linked</td>
+            </tr>
+            <tr>
+              <td>Power outages</td>
+              <td><a href="https://www.hep.hr/ods/bez-struje/19?dp=zadar" rel="noopener">HEP ODS</a> &ldquo;Bez struje&rdquo; (Elektra Zadar)</td>
+              <td>Amber POWER strip on the homepage (Zadar city, today and tomorrow, until each outage ends) and the full outage table on the City page. The AI writes the &ldquo;where&rdquo; line from HEP&rsquo;s note; the original note is shown below it.</td>
+              <td>&copy; HEP ODS, linked</td>
+            </tr>
+            <tr>
+              <td>Operator&rsquo;s pick</td>
+              <td>Articles I pick myself</td>
+              <td>The featured &ldquo;Intercepted&rdquo; block under the ticker, for 24 hours. The title, summary and short comment are written by AI from the article; the picture is the article&rsquo;s own featured image (its og:image), loaded from that site. Every pick links to the original.</td>
+              <td>&copy; the publisher; summary and link</td>
+            </tr>
+            <tr>
+              <td>What to watch?</td>
+              <td>My own Plex watchlist; descriptions from <a href="https://en.wikipedia.org/" rel="noopener">Wikipedia</a> via <a href="https://www.wikidata.org/" rel="noopener">Wikidata</a></td>
+              <td>The <a href="/watch/">/watch/</a> page: every title on my watchlist, newest first, with poster (from Plex/TMDB) and a short Wikipedia description.</td>
+              <td>Description: CC BY-SA 4.0; poster &copy; its owner</td>
+            </tr>
+            <tr>
+              <td>On this day, all events</td>
+              <td>Wikipedia &ldquo;On this day&rdquo; feed and the Wikipedia page-images API</td>
+              <td>The <a href="/today/">/today/</a> page: every event of the date, with the article&rsquo;s main picture where there is one.</td>
+              <td>Text CC BY-SA 4.0; images under their own Commons licences</td>
             </tr>
           </tbody>
         </table>
@@ -168,12 +180,15 @@
       <div class="panel-body prose">
         <p>Some lines on this site are written by an AI model. The models behind it vary. AI text can be wrong, so check the original sources before relying on it.</p>
         <ul class="plain">
-          <li><b>Rewritten from the sources above:</b> asteroid alert, peace index, blackout summary, and the headlines of the day: the AI only translates the four titles and summarises the main story's intro from the feed. It does not choose the stories. Every story links to the original Croatian article.</li>
+          <li><b>Rewritten from the sources above:</b> the headlines of the day: the AI only translates the four titles and summarises the main story&rsquo;s intro from the feed. It does not choose the stories. Every story links to the original Croatian article. The asteroid line uses no AI.</li>
           <li><b>Written from the model's own knowledge:</b> daily knowledge, dead tech (topic area: <a href="https://en.wikipedia.org/wiki/1990s_in_computing" rel="noopener">1990s in computing</a>), and the apocalypse skill of the week.</li>
           <li><b>City Hall:</b> the AI translates the City of Zadar&rsquo;s official notices into English (only new ones, usually once a day). It does not sort or pick them. If the translation fails, the previous block stays up.</li>
           <li><b>The line in the Headlines header:</b> twice a day the AI writes one short comment, in the site's cyberpunk voice, on one of the headlines of the day (they take turns; the AI does not choose). Hover it to see which headline; click it to read the original article.</li>
           <li><b>Threat level line, crew remark, launch brief and the daily weather report:</b> the AI writes them from the data shown next to them (threat sensors, the current crew, the launch listing, today's forecast), only when that data changes or once a day. It is told not to invent facts.</li>
           <li><b>The go&#8209;outside line</b> in the ticker is written by an AI model from the current weather.</li>
+          <li><b>Water and power notices:</b> the AI turns each new Vodovod or HEP notice into one short English line (once per notice). If it fails, the original Croatian text is shown.</li>
+          <li><b>Header lines:</b> the mission line under the header, the comment in the Space News header and the &ldquo;Zadar, translated&rdquo; line on Zadar Node are written by the AI from the data around them.</li>
+          <li><b>Operator&rsquo;s pick:</b> the summary and comment are written by AI; I choose the article.</li>
           <li><b>AI Eyes:</b> an AI model looks at a public live street camera in Zadar and describes the weather and how busy it is. Only the text is published, never the image.</li>
         </ul>
       </div>
@@ -190,7 +205,7 @@
           <li><b>Operator available / busy</b> is set by me.</li>
           <li><b>Node vitals</b> in the footer (CPU, memory, disks, temperature, traffic, uptime) describe the server that builds this site. No IP addresses or process names are published.</li>
           <li><b>Word of the Day</b> comes from my own hand-written list of Croatian words, examples and translations.</li>
-          <li><b>Quizzes</b> and the <b>72-hour survival check</b> are written by me with AI help. Your best quiz scores are kept only in your own browser and are never sent anywhere.</li>
+          <li><b>Quizzes</b> and the <b>72-hour survival check</b> are written by me with AI help. Your best quiz scores are kept only in your own browser, using its <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" rel="noopener">local storage</a>, and are never sent anywhere. Under EU rules this kind of browser storage may be treated like a cookie; it is the one thing this site stores on your device, and clearing your browser data removes it.</li>
           <li><b>Weather icons, the radar, the wind compass and the world map</b> are drawn by the site itself as simple graphics; only the data behind them comes from the sources above.</li>
         </ul>
       </div>
@@ -214,7 +229,7 @@
     <section class="panel">
       <div class="panel-head"><span>Hosting &amp; Privacy</span><small>what your browser talks to</small></div>
       <div class="panel-body prose">
-        <p>The site is static and hosted on <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>. No analytics, no cookies, no ads, no third-party scripts. Everything loads from this domain except the news thumbnails (national and local), the recommendation poster (from Plex; opened large, from TMDB), the NASA image and the On This Day picture (Wikimedia), which your browser loads directly from the news sites, Plex and NASA (without telling it which page you came from). GitHub, as the host, may keep standard server logs; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
+        <p>The site is static and hosted on <a href="https://pages.github.com/" rel="noopener">GitHub Pages</a>. No analytics, no cookies, no ads, no third-party scripts. Everything loads from this domain except some pictures: news and Space News thumbnails, the picture of my featured pick (from the article&rsquo;s own site), Plex/TMDB posters on the recommendation and <a href="/watch/">/watch/</a>, the NASA image and the On This Day pictures (Wikimedia). Your browser loads these directly from those sites (without telling it which page you came from). GitHub, as the host, may keep standard server logs; see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub Privacy Statement</a>.</p>
         <p>Spot a missing credit, or want your data removed or credited differently? <a href="mailto:m@itechie.eu?subject=Sources%20page">Tell me</a>.</p>
       </div>
     </section>
@@ -222,10 +237,10 @@
     <section class="panel" id="no-banners">
       <div class="panel-head"><span>No Banners Here</span><small>my take</small></div>
       <div class="panel-body prose">
-        <p><b>Why there&rsquo;s no cookie banner.</b> EU rules (the ePrivacy Directive and the GDPR) say a site must ask before it stores or reads anything on your device that isn&rsquo;t strictly needed, or before it uses your personal data for things like tracking and advertising. This site does none of that: no cookies, no local storage, no analytics, no fingerprinting, no ads, no third-party scripts. There is nothing to ask you about, so there is no banner.</p>
+        <p><b>Why there&rsquo;s no cookie banner.</b> EU rules (the ePrivacy Directive and the GDPR) say a site must ask before it stores or reads anything on your device that isn&rsquo;t strictly needed, or before it uses your personal data for things like tracking and advertising. This site does almost none of that: no cookies, no analytics, no fingerprinting, no ads, no third-party scripts. The one exception is your own quiz scores, kept in your browser&rsquo;s <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" rel="noopener">local storage</a> so you can beat them next time. That may count as a cookie under the rules, so here is your notice: it never leaves your device, nobody else can read it, and clearing your browser data deletes it. Nothing else to ask you about, so no banner.</p>
         <p><b>What I think of those rules.</b> I&rsquo;m not a fan of how these EU laws turned out in practice. The goal was privacy. What we got is millions of pop-ups nobody reads, &ldquo;Accept all&rdquo; buttons designed to be easier than &ldquo;Reject&rdquo;, and small sites copy-pasting legal templates while the big platforms carry on almost as before. A banner doesn&rsquo;t make a site private. Not collecting anything does.</p>
         <p>So instead of a banner, I simply don&rsquo;t track you. If a site needs a pop-up to tell you how many &ldquo;partners&rdquo; it shares your visit with, that tells you something too.</p>
-        <p class="note">The honest small print: GitHub, which hosts the site, keeps standard server logs. A few images (news thumbnails, the recommendation poster (from Plex; opened large, from TMDB), the NASA image) load straight from their own sites, which see your IP address like any image request. Links to other sites follow those sites&rsquo; rules. This section is my personal opinion, not legal advice.</p>
+        <p class="note">The honest small print: GitHub, which hosts the site, keeps standard server logs. A few images (news and Space News thumbnails, the featured pick&rsquo;s picture, Plex/TMDB posters, the NASA image, Wikimedia pictures) load straight from their own sites, which see your IP address like any image request. Links to other sites follow those sites&rsquo; rules. This section is my personal opinion, not legal advice.</p>
       </div>
     </section>
 
