@@ -1559,17 +1559,17 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 
 /* side strip: fixed on the left edge, desktop only — barcode tag + the daily AI transmission, read bottom to top */
 @font-face { font-family: "Libre Barcode 39"; font-weight: 400; font-display: swap; src: url("fonts/libre-barcode-39-latin-400-normal.woff2") format("woff2"); }
-.tx { display: none; }
+.txm { display: none; }
 @media (min-width: 1440px) {
-  .tx { display: flex; position: fixed; left: 14px; top: 50%; z-index: 5; pointer-events: none; align-items: center; gap: 14px;
+  .txm { display: flex; position: fixed; left: 14px; top: 50%; z-index: 5; pointer-events: none; align-items: center; gap: 14px;
     writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); opacity: 0.32; white-space: nowrap; }
-  .tx-bar { font: 400 2.1rem/1 "Libre Barcode 39", monospace; color: var(--cyan); }
-  .tx-line { font: 400 0.62rem var(--mono); letter-spacing: 0.22em; color: var(--muted); }
+  .txm-bar { font: 400 2.1rem/1 "Libre Barcode 39", monospace; color: var(--cyan); }
+  .txm-line { font: 400 0.62rem var(--mono); letter-spacing: 0.22em; color: var(--muted); }
 }
 /* side strip v2: all in the same grey, sitting just left of the blocks (not at the screen edge) */
 @media (min-width: 1440px) {
-  .tx { left: calc(50% - 580px - 46px); opacity: 0.55; }
-  .tx-bar { color: var(--muted); }
+  .txm { left: calc(50% - 580px - 46px); opacity: 0.55; }
+  .txm-bar { color: var(--muted); }
 }
-@media (min-width: 1440px) { .tx-bar { font-size: 1.5rem; } }   /* smaller barcode */
-@media (min-width: 1440px) { .tx-bar { font-family: var(--mono); font-size: 1.5rem; letter-spacing: 0.06em; } }   /* the tag as plain mono numbers (the look Mate liked), not bars */
+@media (min-width: 1440px) { .txm-bar { font-size: 1.5rem; } }   /* smaller barcode */
+@media (min-width: 1440px) { .txm-bar { font-family: var(--mono); font-size: 1.5rem; letter-spacing: 0.06em; } }   /* the tag as plain mono numbers (the look Mate liked), not bars */
