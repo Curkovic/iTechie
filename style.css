@@ -1572,3 +1572,4 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
   .tx-bar { color: var(--muted); }
 }
 @media (min-width: 1440px) { .tx-bar { font-size: 1.5rem; } }   /* smaller barcode */
+@media (min-width: 1440px) { .tx-bar { font-family: var(--mono); font-size: 1.5rem; letter-spacing: 0.06em; } }   /* the tag as plain mono numbers (the look Mate liked), not bars */
