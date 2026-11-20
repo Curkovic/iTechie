@@ -396,3 +396,18 @@
   });
   check(); addEventListener("resize", check);
 })();
+
+// operator's pick: mark the scroll box "end" when scrolled to the bottom (removes the fade hint)
+(function () {
+  var s = document.getElementById("ph-sums"); if (!s) return;
+  function upd() { s.classList.toggle("end", s.scrollTop + s.clientHeight >= s.scrollHeight - 2); }
+  s.addEventListener("scroll", upd, { passive: true });
+  var b = document.querySelector(".ph-more"); if (b) b.addEventListener("click", function () { s.scrollTop = 0; setTimeout(upd, 0); });
+})();
+
+// operator's pick v6: scroll box is always on; "end" = nothing more below (no fade). Checked on load and on scroll.
+(function () {
+  var s = document.getElementById("ph-sums"); if (!s) return;
+  function upd() { s.classList.toggle("end", s.scrollTop + s.clientHeight >= s.scrollHeight - 6); }
+  s.addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); upd();
+})();

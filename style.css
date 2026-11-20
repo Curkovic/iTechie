@@ -1476,3 +1476,71 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 .pw-type.fault { color: var(--red); border-color: rgba(255, 0, 60, 0.45); }
 .pw-foot { margin: 10px 0 0; font-size: 0.72rem; }
 @media (max-width: 620px) { .pw-row { grid-template-columns: 1fr auto; } .pw-time { grid-column: 1 / -1; } }
+/* pick v4: long summaries fold on every screen (4 lines + "read more"), white comment, more compact */
+.js .ph-sums:not(.open) { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.js .ph-sums:not(.open) .ph-sum + .ph-sum { display: none; }
+.ph-note, .ph-note b { color: var(--bright); }
+.ph-text { padding: 14px 20px; gap: 6px; }
+.ph-title { font-size: clamp(1.15rem, 1.9vw, 1.55rem); }
+.ph-sum { font-size: 0.92rem; line-height: 1.5; }
+.ph-img { min-height: 170px; }
+.ph-note { padding: 6px 12px; font-size: 0.7rem; }
+/* pick v5: source link at the end of the line */
+.ph-meta { justify-content: flex-start; }
+.ph-src { order: 3; margin-left: auto !important; }
+.ph-when { order: 2; flex-basis: auto !important; }
+.ph-when::before { content: none !important; }
+.ph-more { order: 1; }
+/* Space News: slightly shorter (340 -> 290 desktop, 280 -> 245 phone) */
+.sn-card, .sn-card a { min-height: 290px; }
+@media (max-width: 620px) { .sn-card, .sn-card a { min-height: 245px; } }
+/* pick: "read more" scrolls the summary inside the same 4-line box, so the block (and the photo) never grow */
+.ph-sums.open { display: block; max-height: calc(4 * 1.5 * 0.92rem); overflow-y: auto; padding-right: 8px; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--cyan) transparent; }
+.ph-sums.open::-webkit-scrollbar { width: 4px; }
+.ph-sums.open::-webkit-scrollbar-thumb { background: var(--cyan); }
+.ph-sums .ph-sum + .ph-sum { margin-top: 8px; }
+/* pick scroll box: classic always-visible scrollbar (Safari/Chrome hide thin "overlay" bars until you scroll) */
+.ph-sums.open { scrollbar-width: auto; scrollbar-color: auto; }
+@supports selector(::-webkit-scrollbar) { .ph-sums.open { scrollbar-width: initial; scrollbar-color: initial; } }
+.ph-sums.open::-webkit-scrollbar { width: 6px; -webkit-appearance: none; }
+.ph-sums.open::-webkit-scrollbar-track { background: rgba(0, 240, 255, 0.10); }
+.ph-sums.open::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 0; min-height: 24px; }
+/* pick scroll box: the bottom line fades while there is more to read (phones have no visible scrollbar) */
+.ph-sums.open:not(.end) { -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
+/* pick v6: no "read more" button — the summary is always a scroll box (4 lines tall), scrollbar + fade show there's more;
+   extra room at the bottom so the last line can scroll clear of the fade */
+.ph-more { display: none !important; }
+.ph-sums, .js .ph-sums:not(.open) { display: block; -webkit-line-clamp: unset; max-height: calc(4 * 1.5 * 0.92rem); overflow-y: auto;
+  padding-right: 8px; padding-bottom: 0.6em; overscroll-behavior: contain; }
+.js .ph-sums:not(.open) .ph-sum + .ph-sum { display: block; }
+.ph-sums::-webkit-scrollbar { width: 6px; -webkit-appearance: none; }
+.ph-sums::-webkit-scrollbar-track { background: rgba(0, 240, 255, 0.10); }
+.ph-sums::-webkit-scrollbar-thumb { background: var(--cyan); min-height: 24px; }
+.ph-sums:not(.end) { -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent); mask-image: linear-gradient(to bottom, #000 72%, transparent); }
+/* pick on phones: date, countdown and source on one line (smaller text; the date part shortens with … if the source name is long) */
+@media (max-width: 760px) {
+  .ph-meta { flex-wrap: nowrap; font-size: 0.62rem; column-gap: 10px; }
+  .ph-when { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ph-src { flex: none; white-space: nowrap; }
+}
+
+/* pick comment as a terminal line under the block (same look as the mission line), wraps if long; both lines more compact */
+.mission { margin: 12px 2px 2px; }
+.ph-cmt { margin: 10px 2px 0; white-space: normal; overflow: visible; min-height: 0; line-height: 1.5; }
+.ph-cmt-t::after { content: ""; display: inline-block; width: 0.55em; height: 1em; margin-left: 3px; background: var(--cyan); vertical-align: -0.15em; animation: crumb-blink 1.06s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) { .ph-cmt-t::after { animation: none; } }
+/* pick on phones: bigger scroll box (7 lines) and slightly larger text */
+@media (max-width: 760px) {
+  .ph-sum { font-size: 0.98rem; }
+  .ph-sums, .js .ph-sums:not(.open) { max-height: calc(7 * 1.5 * 0.98rem); }
+}
+.mission + .grid { margin-top: 10px; }   /* less empty space between the mission line and the blocks below */
+/* fix: on phones a long source name (zadarskilist.novilist.hr) widened the whole block past the screen */
+@media (max-width: 760px) {
+  .ph { grid-template-columns: minmax(0, 1fr); }
+  .ph-text, .ph-meta { min-width: 0; }
+  .ph-src { flex: 0 1 auto; min-width: 0; max-width: 48%; overflow: hidden; text-overflow: ellipsis; }
+}
+@media (max-width: 760px) { .ph-fade { display: none; } }   /* phones: no "signal fades" countdown */
+.ph-cmt-t::after { content: none; }   /* only the mission line keeps the blinking cursor */
