@@ -1623,3 +1623,7 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 .rg-src-h { margin: 0 0 6px; font: 400 0.68rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .rg-src ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .rg-src a { font: 400 0.78rem var(--mono); color: var(--cyan); }
+
+/* Damage Report line at the top of /rogue/ */
+.rg-dmg { margin: 0 0 16px; padding: 10px 12px; border-left: 2px solid var(--red); background: rgba(255,255,255,0.03); font: 400 0.86rem/1.5 var(--mono); color: var(--text); }
+.rg-dmg-h { display: block; margin-bottom: 4px; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
