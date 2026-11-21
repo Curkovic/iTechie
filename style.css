@@ -1575,3 +1575,6 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 @media (min-width: 1440px) { .txm-bar { font-family: var(--mono); font-size: 1.5rem; letter-spacing: 0.06em; } }   /* the tag as plain mono numbers (the look Mate liked), not bars */
 @media (max-width: 620px) { .hl-date { display: none; } }   /* phones: headline source line without the time, fits one line */
 .tx-item.latest { border-left-color: var(--yellow); } .tx-item.latest time { color: var(--yellow); }   /* newest post in yellow, red is for errors/offline */
+/* logo ".eu" = threat level light (1-2 cyan as before, 3 yellow, 4 orange, 5 red) */
+.brand.lvl-3 span { color: var(--yellow); } .brand.lvl-4 span { color: #ff7a00; } .brand.lvl-5 span { color: var(--red); }
+.brand span { transition: color 0.6s; }
