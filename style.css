@@ -1616,3 +1616,10 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 .rg-mini-text { margin: 12px 0 8px; font-size: 0.9rem; line-height: 1.5; color: var(--text);
   display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
 .rg-mini-go { font: 400 0.7rem var(--mono); color: var(--cyan); }
+@media (max-width: 620px) { .rg-col .panel-head small { display: none; } }   /* phones: column header just the title (date is in the byline) */
+/* Rogue AI Column: numbered points + sources block */
+.rg-li { padding-left: 1.4em; text-indent: -1.4em; }
+.rg-src { margin-top: 22px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.rg-src-h { margin: 0 0 6px; font: 400 0.68rem var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.rg-src ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.rg-src a { font: 400 0.78rem var(--mono); color: var(--cyan); }
