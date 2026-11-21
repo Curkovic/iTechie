@@ -1638,3 +1638,7 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 .dmg-h { margin: 0 0 4px; font-size: 0.6rem; padding: 2px 6px; }
 .dmg-t { font: 400 0.74rem/1.7 var(--mono); letter-spacing: 0.02em; opacity: 0.9; }
 @media (max-width: 640px) { .dmg-t { font-size: 0.74rem; } }
+
+/* WTF? page headings */
+.prose h2 { margin: 22px 0 8px; font: 500 0.72rem var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); }
+.prose h2:first-of-type { margin-top: 14px; }
