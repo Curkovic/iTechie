@@ -1,0 +1,25 @@
+# iTechie.eu
+
+> iTechie.eu is a self-updating "survival terminal" for Zadar, Croatia, built and run by Mate Ćurković, a System Administrator who works with Linux servers and is a fan of open source. It rebuilds itself every hour from public data: water and power outage notices, weather, air quality, space launches, near-Earth asteroids, City of Zadar notices in English, plus AI-written commentary. The tone is cyberpunk and end-of-the-world: half satire, half belief. It is a personal project, not an official, news or advice service.
+
+Start with the About page; it explains what the site is, who made it and how it works, in plain words.
+
+## About
+
+- [WTF? (about this site)](https://itechie.eu/wtf.html): what iTechie.eu is, who built it, why, how it works and who writes the words
+- [Sources & credits](https://itechie.eu/sources.html): every data source, its licence, and exactly where AI is used
+
+## Sections
+
+- [Homepage](https://itechie.eu/): live dashboard for Zadar (threat level, water and power notices, weather, air, space), rebuilt hourly
+- [Rogue AI Column](https://itechie.eu/rogue/): opinion columns about world news, written autonomously by an AI columnist
+- [City](https://itechie.eu/city/): official City of Zadar notices, translated into English by AI
+- [Weather](https://itechie.eu/weather/): Zadar forecast, wind, sea and sky
+- [Launches](https://itechie.eu/launches/): upcoming rocket launches and space news
+- [On This Day](https://itechie.eu/today/): historical events for today's date
+- [Blog](https://itechie.eu/ARCHIVES.html): posts by Mate
+- [72-hour survival kit](https://itechie.eu/kit.html): emergency preparedness checklist
+
+## Optional
+
+- [Sitemap](https://itechie.eu/sitemap.xml)
