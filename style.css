@@ -1578,3 +1578,41 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 /* logo ".eu" = threat level light (1-2 cyan as before, 3 yellow, 4 orange, 5 red) */
 .brand.lvl-3 span { color: var(--yellow); } .brand.lvl-4 span { color: #ff7a00; } .brand.lvl-5 span { color: var(--red); }
 .brand span { transition: color 0.6s; }
+
+/* Rogue AI Insights (/rogue/): column pages + index */
+.rg-col .panel-body { padding: 28px 32px 30px; }
+.rg-head { margin: 0 0 8px; max-width: 30ch; font: 700 clamp(1.7rem, 3.4vw, 2.6rem)/1.1 "Rajdhani", sans-serif; letter-spacing: 0.02em; color: var(--bright); }
+.rg-by { margin: 0 0 26px; font: 400 0.72rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.rg-p { max-width: 68ch; margin: 0 0 16px; font-size: 1.08rem; line-height: 1.75; color: var(--text); }
+.rg-col .rg-p:first-of-type { font-size: 1.2rem; color: var(--bright); }
+.rg-end { margin: 26px 0 0; font: 400 0.8rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); }
+.rg-nav { margin-top: 26px; padding-top: 14px; border-top: 1px dashed var(--line); font: 400 0.72rem var(--mono); color: var(--muted); }
+.rg-nav a { color: var(--cyan); }
+.rg-intro { margin: 0 0 18px; color: var(--muted); max-width: 70ch; }
+.rg-list { list-style: none; margin: 0; padding: 0; }
+.rg-item { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.rg-item time { font: 400 0.74rem var(--mono); color: var(--muted); padding-top: 4px; }
+.rg-item a b { display: block; font: 700 1.15rem/1.2 "Rajdhani", sans-serif; color: var(--bright); letter-spacing: 0.02em; }
+.rg-item a span { display: block; margin-top: 4px; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+.rg-item a:hover b { color: var(--cyan); }
+@media (max-width: 620px) { .rg-col .panel-body { padding: 18px 16px; } .rg-item { grid-template-columns: 1fr; gap: 4px; } }
+/* Rogue AI: centred reading column + Miles's avatar */
+.rg-narrow { max-width: 820px; margin-left: auto; margin-right: auto; }
+.rg-page .crumb, .rg-page .foot { max-width: 820px; margin-left: auto; margin-right: auto; }
+.rg-ava { width: 40px; height: 40px; object-fit: cover; border: 1px solid var(--line-strong); vertical-align: middle; margin-right: 12px; }
+.rg-by { display: flex; align-items: center; }
+.rg-intro { display: flex; align-items: center; gap: 18px; }
+.rg-ava-big { width: 88px; height: 88px; margin: 0; flex: none; }
+@media (max-width: 620px) { .rg-ava-big { width: 64px; height: 64px; } }
+.rg-ava { border-radius: 50%; border-color: var(--cyan); }   /* Miles: round avatar */
+.rg-p, .rg-head { max-width: none; }   /* Rogue AI: text uses the full width of the column panel */
+
+/* Rogue AI Insights: compact homepage block (latest column) */
+.rg-mini-top { display: flex; align-items: center; gap: 12px; color: inherit; }
+.rg-mini-top .rg-ava { margin: 0; flex: none; }
+.rg-mini-top b { display: block; font: 700 1rem/1.2 "Rajdhani", sans-serif; letter-spacing: 0.02em; color: var(--bright); }
+.rg-mini-top small { display: block; margin-top: 2px; font: 400 0.64rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.rg-mini-top:hover b { color: var(--cyan); }
+.rg-mini-text { margin: 12px 0 8px; font-size: 0.9rem; line-height: 1.5; color: var(--text);
+  display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
+.rg-mini-go { font: 400 0.7rem var(--mono); color: var(--cyan); }
