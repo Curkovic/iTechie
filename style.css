@@ -1573,3 +1573,5 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 }
 @media (min-width: 1440px) { .txm-bar { font-size: 1.5rem; } }   /* smaller barcode */
 @media (min-width: 1440px) { .txm-bar { font-family: var(--mono); font-size: 1.5rem; letter-spacing: 0.06em; } }   /* the tag as plain mono numbers (the look Mate liked), not bars */
+@media (max-width: 620px) { .hl-date { display: none; } }   /* phones: headline source line without the time, fits one line */
+.tx-item.latest { border-left-color: var(--yellow); } .tx-item.latest time { color: var(--yellow); }   /* newest post in yellow, red is for errors/offline */
