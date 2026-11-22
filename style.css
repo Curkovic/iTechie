@@ -1693,3 +1693,4 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 /* events page: today's AI line typed after the crumb cursor */
 .ev-crumb-ai { margin-left: 14px; font: 400 0.74rem/1.6 var(--mono); color: var(--text); opacity: 0.9; }
 @media (max-width: 760px) { .ev-crumb-ai { display: block; margin: 10px 0 0 6px; } }
+.ev-home + .mission { margin-top: 2px; } @media (max-width: 760px) { .mission { min-height: calc(1.55em * 2); } }
