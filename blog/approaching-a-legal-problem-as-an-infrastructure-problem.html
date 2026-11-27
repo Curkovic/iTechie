@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<title>Approaching a Legal Problem as an Infrastructure Problem // iTechie.eu</title>
+<meta name="description" content="GDPR, cookie banners and privacy policies: instead of adding plugins to manage the consequences, I asked how to build iTechie so most of them were never needed." />
+<link rel="canonical" href="https://itechie.eu/blog/approaching-a-legal-problem-as-an-infrastructure-problem.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Approaching a Legal Problem as an Infrastructure Problem // iTechie.eu" />
+<meta property="og:description" content="GDPR, cookie banners and privacy policies: instead of adding plugins to manage the consequences, I asked how to build iTechie so most of them were never needed." />
+<meta property="og:url" content="https://itechie.eu/blog/approaching-a-legal-problem-as-an-infrastructure-problem.html" />
+<meta property="og:site_name" content="iTechie.eu" />
+<meta property="og:image" content="https://itechie.eu/og.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="author" content="Mate Ćurković" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="/style.css?v=f0fc3730" />
+</head>
+<body class="blog">
+<div class="crt" aria-hidden="true"></div>
+<div class="wrap narrow">
+  <nav class="crumb"><a href="/ARCHIVES.html"><span class="chev">&lsaquo;</span> cd .. / return_to_archives</a></nav>
+  <header class="log-head">
+    <div class="log-meta"><span class="badge">Field_notes // System design &amp; privacy</span><span>LOG-08</span><span>2026.11.27</span><span>4 min read</span></div>
+    <h1 class="log-title">Approaching a Legal Problem as an Infrastructure Problem</h1>
+    <p class="log-lead">GDPR, cookie banners and privacy policies: instead of adding plugins to manage the consequences, I asked how to build iTechie so most of them were never needed.</p>
+  </header>
+  <article class="panel">
+    <div class="panel-head"><span>Log Entry</span><small>cat approaching-a-legal-problem-as-an-infrastructure-problem.html</small></div>
+    <div class="panel-body log-body">
+<p class="lead">When I started putting together iTechie, I eventually reached a question that most website owners probably encounter sooner or later. GDPR. Cookie consent. Privacy policies. Tracking disclosures.</p>
+<h2>01 // The initial question</h2>
+<p>My first instinct wasn't to look for a cookie consent plugin, download a privacy policy template or find a service that would handle compliance for me.</p>
+<p>It was much simpler:</p>
+<blockquote>How do I build this so I don't need any of that in the first place?</blockquote>
+<p>Not how to avoid responsibility, but how to avoid creating unnecessary responsibilities through the way the system is designed.</p>
+<p>That distinction matters.</p>
+<h2>02 // Question the architecture</h2>
+<p>A lot of websites collect information because the tools they use make collecting information easy.</p>
+<p>Analytics platforms track visitors. Advertising networks install cookies. Embedded services introduce third-party requests. Plugins communicate with external servers. Sometimes a website ends up processing information that its owner never consciously intended to collect.</p>
+<p>Then comes the familiar solution: add another plugin, another configuration page and another layer of complexity to manage all the things the original architecture introduced.</p>
+<p>I find that approach backwards. Before implementing a solution to a problem, I prefer to understand why the problem exists.</p>
+<ul>
+<li>If a website doesn't need behavioural analytics, why install a behavioural analytics platform?</li>
+<li>If there is no advertising business, why introduce advertising trackers?</li>
+<li>If a feature can work without storing information on a visitor's device, why introduce that dependency?</li>
+</ul>
+<p>Every external service is another dependency. Every dependency introduces additional behaviour, potential failure points and sometimes additional legal obligations.</p>
+<p>From an infrastructure perspective, <strong>removing unnecessary dependencies is usually a good starting point.</strong></p>
+<h2>03 // Less data, less responsibility</h2>
+<p>Privacy is often presented as something that needs to be added to a website. I see it differently.</p>
+<p><strong>The simplest way to protect information is not to collect it.</strong></p>
+<p>Data minimisation is already one of the fundamental principles of GDPR. Data protection by design and by default is also explicitly recognised in the regulation.</p>
+<p>In practical terms, this means questioning what information a system actually needs before deciding how to store, protect and process it.</p>
+<p>For a personal website, the answer might be surprisingly little. No user accounts. No behavioural profiling. No advertising infrastructure. No unnecessary third-party tracking. No collection of visitor preferences that serve no meaningful purpose.</p>
+<aside class="note warn"><b class="note-tag">Not an exemption</b>
+<p>That doesn't automatically make a website exempt from GDPR. Server logs, IP addresses, contact forms and external services can still involve personal data. But it does change the amount of information being processed and the complexity of the system responsible for handling it.</p>
+</aside>
+<p>There is a difference between securing a database full of information and designing a system that never needed that database.</p>
+<h2>04 // The cookie banner problem</h2>
+<p>Cookie banners have become almost synonymous with European websites.</p>
+<p>Visit a website and before reading a single sentence, you are frequently presented with a small legal negotiation. Accept all. Reject all. Manage preferences.</p>
+<p>Sometimes the preferences page has more configuration options than the website itself.</p>
+<p>But cookies aren't a mandatory component of publishing information on the internet. Some are technically necessary for a service to function. Others exist for analytics, advertising or tracking purposes. Their legal treatment differs.</p>
+<p>If a website doesn't use non-essential cookies or similar tracking technologies, it may not need a consent banner at all. That is a much cleaner outcome than installing a consent-management platform to manage technologies that the website didn't need.</p>
+<p>The objective isn't to find a clever way around consent. <strong>It is to avoid introducing unnecessary tracking in the first place.</strong></p>
+<h2>05 // Engineering before administration</h2>
+<p>This way of thinking isn't limited to privacy. It is the same principle I apply to infrastructure.</p>
+<ul>
+<li>I would rather automate a repetitive task than document how to perform it manually every morning.</li>
+<li>I would rather remove an unnecessary service than spend time monitoring and maintaining it.</li>
+<li>I would rather have fewer dependencies than build increasingly complicated systems to manage them.</li>
+<li>And I would rather understand what a system actually does than blindly trust a collection of plugins and services.</li>
+</ul>
+<p>There is a certain satisfaction in making something simpler by removing things rather than adding more.</p>
+<p>It isn't always possible. Sometimes external services are necessary, and sometimes legal obligations remain regardless of how carefully a system is designed. But it is worth asking the question before reaching for another tool.</p>
+<h2>06 // Conclusion: build the problem out</h2>
+<p>I don't consider GDPR an obstacle to building websites. Privacy protection is a legitimate requirement, and people should have control over their personal information.</p>
+<p>What I question is the habit of treating every requirement as an administrative task that can be solved with another plugin.</p>
+<p>Sometimes the better solution is architectural.</p>
+<p>If you don't collect unnecessary information, you have less information to protect. If you don't introduce unnecessary tracking, you have fewer tracking technologies to manage. If you don't depend on unnecessary external services, you have fewer systems to trust.</p>
+<p>It is not a universal exemption from regulation, nor should it be treated as one. It is simply a different starting point.</p>
+<p>Instead of asking how to comply with the consequences of a design decision, ask whether that decision needs to exist at all.</p>
+<blockquote>Sometimes the best compliance tool is a terminal, a good architecture diagram and the willingness to delete something.</blockquote>
+<p class="muted">Classification: Personal Infrastructure &middot; Author: Mate Ćurković &middot; Status: Ongoing experiment</p>
+<p class="muted">END OF TRANSMISSION.</p>
+    </div>
+    <div class="log-tags">#PRIVACY #GDPR #INFRASTRUCTURE #SELF_HOSTING</div>
+  </article>
+  <nav class="panel log-nav">
+    <a class="prev" href="/blog/the-pathological-spectrum-of-social-bandwidth.html"><small>&lsaquo; older</small>The Pathological Spectrum of Social Bandwidth</a>
+    <span></span>
+  </nav>
+
+  <footer class="panel foot">
+    <p>&copy; iTechie.eu // Zadar, HR</p>
+    <p class="muted"><a href="/">cd ~</a> &middot; <a href="/ARCHIVES.html">all logs</a> &middot; <a href="/contact.html">contact</a></p>
+  </footer>
+</div>
+</body>
+</html>
