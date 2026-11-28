@@ -1733,3 +1733,14 @@ body.lift-shake .wrap { animation: shake 0.12s linear 25; }
 .nw-hr { display: block; margin-top: 2px; font-size: 0.82rem; line-height: 1.35; color: var(--muted); }
 .nw-src { display: block; margin-top: 3px; font: 400 0.62rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); opacity: 0.8; }
 .nw-page .log-card .nw-hr { margin: 0; font-size: 0.9rem; line-height: 1.45; color: var(--muted); }
+
+/* /rogue/ archive: same layout as the other archives, in red */
+.rg-arch { --cyan: var(--red); }
+.rg-arch .log-lead .rg-ava { float: left; width: 56px; height: 56px; margin: 2px 16px 6px 0; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(255, 0, 60, 0.6), 0 0 12px rgba(255, 0, 60, 0.35); }
+.rg-arch .log-stats { clear: both; }
+.rg-arch .log-lead { display: flow-root; margin-bottom: 14px; } .rg-arch .log-lead .rg-ava { margin-bottom: 0; }
+.rg-arch .log-lead .rg-ava { float: right; margin: 0 0 8px 20px; }   /* portrait on the right, clear of the label bar */
+/* Night & Day: map fills the whole block, info line keeps its padding */
+#earth .panel-body { padding: 0; }
+#earth .wm { border: 0; }
+#earth .wm-info { margin: 0; padding: 10px 16px 12px; border-top: 1px solid var(--line); }
