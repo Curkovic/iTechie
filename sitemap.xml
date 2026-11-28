@@ -11,10 +11,10 @@
   <url><loc>https://itechie.eu/weather/</loc><lastmod>2026-11-28</lastmod><changefreq>hourly</changefreq><priority>0.7</priority></url>
   <url><loc>https://itechie.eu/launches/</loc><lastmod>2026-11-28</lastmod><changefreq>hourly</changefreq><priority>0.7</priority></url>
   <url><loc>https://itechie.eu/quiz/</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://itechie.eu/city/</loc><lastmod>2026-11-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://itechie.eu/city/</loc><lastmod>2026-11-28</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://itechie.eu/watch/</loc><lastmod>2026-11-27</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/today/</loc><lastmod>2026-11-28</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
-  <url><loc>https://itechie.eu/rogue/</loc><lastmod>2026-11-27</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://itechie.eu/rogue/</loc><lastmod>2026-11-28</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://itechie.eu/events/</loc><lastmod>2026-11-28</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://itechie.eu/picks/</loc><lastmod>2026-11-27</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/archive/whispers.html</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -45,7 +45,8 @@
   <url><loc>https://itechie.eu/quiz/18.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/quiz/19.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/quiz/20.html</loc><lastmod>2026-11-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://itechie.eu/rogue/2026-11-27-the-last-hospital-standing.html</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://itechie.eu/rogue/2026-11-28-one-hundred-percent-until-the-upgrade.html</loc><lastmod>2026-11-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://itechie.eu/rogue/2026-11-27-the-last-hospital-standing.html</loc><lastmod>2026-11-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/rogue/2026-11-26-the-small-bomb-is-a-big-idea.html</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/rogue/2026-11-25-the-word-they-could-not-say.html</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://itechie.eu/rogue/2026-11-21-the-deadline-was-friday-the-atmosphere-was-not-consulted.html</loc><lastmod>2026-11-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
